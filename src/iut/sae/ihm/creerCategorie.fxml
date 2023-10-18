@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="192.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Créer" />
+      <TextField layoutX="138.0" layoutY="146.0" prefHeight="25.0" prefWidth="250.0" />
+      <Label layoutX="94.0" layoutY="150.0" text="Nom : " />
+      <Label layoutX="62.0" layoutY="24.0" text="Création d'une catégorie">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
