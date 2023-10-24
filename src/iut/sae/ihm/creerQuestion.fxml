@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControleurCreeCategorie">
+	<children>
+		<Button fx:id="btnCreer" layoutX="192.0" layoutY="230.0" mnemonicParsing="false" onAction="#clicCreer" prefHeight="25.0" prefWidth="67.0" text="Créer" />
+		<TextField fx:id="idNom" layoutX="138.0" layoutY="146.0" onAction="#entreNom" prefHeight="25.0" prefWidth="250.0" />
+		<Label fx:id="idLabelNom" layoutX="94.0" layoutY="150.0" text="Nom : " />
+		<Label fx:id="idTitre" layoutX="64.0" layoutY="28.0" prefHeight="45.0" prefWidth="323.0" text="Création d'une question">
+			<font>
+				<Font size="30.0" />
+			</font>
+		</Label>
+	</children>
+</Pane>

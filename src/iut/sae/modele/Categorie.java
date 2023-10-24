@@ -30,4 +30,12 @@ public class Categorie {
         public String getLibelle() {
                 return this.titreCat;
         }
+        
+        /* non javadoc - @see java.lang.Object#toString() */
+        @Override
+        public String toString() {
+            return this.titreCat;
+        }
+        
+        
 }
