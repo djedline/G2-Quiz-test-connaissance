@@ -21,25 +21,6 @@ public class Client {
     private static Socket sock;
     
     /** 
-     * Méthode de test des sockets.
-     * @param args
-     */
-    public static void main(String[] args) {
-            try {
-                Scanner sc = new Scanner(System.in);
-                creerClient("10.2.3.19", 6666);
-                System.out.print("Saisissez un message : ");
-                String text = sc.nextLine();
-                envoyerMessage(text.getBytes());
-                String s = recevoirMessage();
-                System.out.println("Le client a reçu : " + s);
-                //fermerSocket();
-            } catch (Exception e) {
-                    e.printStackTrace();
-            }
-    }
-    
-    /** 
      * @param host l'adresse ou le nom du serveur
      * @param port le port du serveur
      * @throws IOException si la socket client ne peut être crée
@@ -77,8 +58,6 @@ public class Client {
             try {
                 System.out.println("RECEPTION DES DONNEES");
                 InputStream is = sock.getInputStream();
-                //System.out.println("Le client est : " + sock.getLocalSocketAddress());
-                //System.out.println("Le serveur est : " + sock.getRemoteSocketAddress());
                 do {
                     System.out.println("Le client a recu " + is.available() + " octets.");
                     Thread.sleep(2000);
@@ -103,9 +82,9 @@ public class Client {
     public static void fermerSocket() throws IOException {
             System.out.println("FERMETURE DU CLIENT");
             try {
-                    sock.close();
+                sock.close();
             } catch (IOException e) {
-                    throw new IOException("Impossible de fermer la Socket client.");
+                throw new IOException("Impossible de fermer la Socket client.");
             }
             
     }
