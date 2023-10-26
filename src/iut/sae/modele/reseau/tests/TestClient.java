@@ -6,6 +6,7 @@ package iut.sae.modele.reseau.tests;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 import iut.sae.modele.reseau.Client;
@@ -19,23 +20,37 @@ public class TestClient {
      * @param args
      */
     public static void main(String[] args) {
+        testerEcho();
+    }
+    
+    /** 
+     * Teste le fonctionnement d'un serveur Echo.
+     * @return true si le echo a fonctionné, false sinon
+     */
+    public static boolean testerEcho() { 
         try {
             Scanner sc = new Scanner(System.in);
             Client.creerClient("localhost", 6666);
             File f = new File("src/iut/sae/modele/reseau/tests/fich.txt");
             FileReader fr = new FileReader(f);
-            String s = "";
+            String envoye = "";
             while (fr.ready()) {
-                s += Character.toString(fr.read());
+                envoye += Character.toString(fr.read());
             }
-            Client.envoyerMessage(s.getBytes());
-            System.out.println("Le client a envoyé : " +  s);
+            Client.envoyerMessage(envoye.getBytes());
+            System.out.println("Le client a envoyé : " +  envoye);
             
-            s = Client.recevoirMessage();
-            System.out.println("Le client a reçu : " + s);
+            String recu = Client.recevoirMessage();
+            System.out.println("Le client a reçu : " + recu);
+            File f2 = new File("src/iut/sae/modele/reseau/tests/fich.txt");
+            FileWriter fw = new FileWriter(f2);
+            fw.append(recu);
+            
             Client.fermerSocket();
+            return envoye == recu;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
     
@@ -43,7 +58,6 @@ public class TestClient {
      * Teste le serveur echo
      */
     public static void testerAvecString() {
-        
         try {
             Scanner sc = new Scanner(System.in);
             Client.creerClient("localhost", 6666);
