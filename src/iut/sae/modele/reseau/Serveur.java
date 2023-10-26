@@ -3,7 +3,6 @@
  */
 package iut.sae.modele.reseau;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -26,8 +25,9 @@ public class Serveur {
 	/**
 	 * 
 	 * @param args
+	 * @throws InterruptedException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		preparerServeur();
 		accepterConnexion(); // bloquante : attend que le client se connecte
 		String reponse = "";
@@ -35,7 +35,7 @@ public class Serveur {
 			reponse = recevoirEtAnalyser();
 			envoyerReponse(reponse);
 		}
-		
+		Thread.sleep(5000);
 		System.out.println("FERMETURE DU SERVEUR");
 		try {
 			conn.close();

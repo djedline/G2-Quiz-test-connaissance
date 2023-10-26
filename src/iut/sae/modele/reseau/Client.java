@@ -27,13 +27,18 @@ public class Client {
     public static void main(String[] args) {
             try {
                 Scanner sc = new Scanner(System.in);
-                creerClient("10.2.3.19", 6666);
-                System.out.print("Saisissez un message : ");
-                String text = sc.nextLine();
-                envoyerMessage(text.getBytes());
-                String s = recevoirMessage();
-                System.out.println("Le client a reçu : " + s);
-                //fermerSocket();
+                creerClient("localhost", 6666);
+         
+                String text = "";
+                while(!text.equalsIgnoreCase("stop")) {
+                	System.out.print("Saisissez un message : ");
+                	text = sc.nextLine();
+                	envoyerMessage(text.getBytes());
+                    String s = recevoirMessage();
+                    System.out.println("Le client a reçu : " + s);
+                }
+                
+                fermerSocket();
             } catch (Exception e) {
                     e.printStackTrace();
             }
