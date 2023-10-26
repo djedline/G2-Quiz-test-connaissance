@@ -4,6 +4,9 @@
  */
 package iut.sae.modele.tests;
 
+import java.util.ArrayList;
+
+import iut.sae.modele.Categorie;
 import iut.sae.modele.Question;
 
 /** 
@@ -13,7 +16,9 @@ import iut.sae.modele.Question;
  */
 public class TestQuestion {
     
-         private static String libelle = "Quel question ?";
+         private static ArrayList<Question> listeQuestion = new ArrayList<>();
+         private static String[] listeLibelle = {"Quel question ?","   ",""};
+         private static Categorie nomCategorie = new Categorie("absurde");
          private static String propoJuste = "Bonne question ?";
          private static String[] propoFausse = {"J'ai pas la réponse","J'ai la réponse",
          "c'est quoi cette question ?"};
@@ -22,6 +27,7 @@ public class TestQuestion {
                  + " une bonne question";
          private static int diff = 2;
         
+         
          /** 
          * Test constructeur question
          */
@@ -29,8 +35,8 @@ public class TestQuestion {
             Question exempleQuestion;
             
             try {
-                exempleQuestion = new Question(libelle, propoJuste,
-                        propoFausse, feedback,diff);
+                listeQuestion.add(new Question(listeLibelle[0], nomCategorie, propoJuste,
+                        propoFausse, feedback,diff));
                 System.out.println("Test Ok");
             } catch (IllegalArgumentException erreur) {
                 System.out.println("erreur inattendu : la question est invalide ");
