@@ -35,7 +35,6 @@ public class Client {
                 	text = sc.nextLine();
                 	envoyerMessage(text.getBytes());
                     String s = recevoirMessage();
-                    System.out.println("Le client a reçu : " + s);
                 }
                 
                 fermerSocket();

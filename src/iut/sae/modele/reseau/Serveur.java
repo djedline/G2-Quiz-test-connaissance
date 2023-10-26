@@ -119,7 +119,7 @@ public class Serveur {
 			if (comm != null) {
 				OutputStream os = comm.getOutputStream();
 				os.write(rep.getBytes());
-				System.out.println("Le serveur a envoyé " + rep.getBytes());
+				System.out.println("Le serveur a envoyé " + rep);
 			}
 		} catch (Exception e) {
 			System.err.println("Impossible de répondre au client.");
