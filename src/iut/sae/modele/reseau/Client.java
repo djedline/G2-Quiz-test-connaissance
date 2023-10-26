@@ -27,7 +27,7 @@ public class Client {
     public static void main(String[] args) {
             try {
                 Scanner sc = new Scanner(System.in);
-                creerClient("localhost", 6666);
+                creerClient("127.0.0.1", 6666);
          
                 String text = "";
                 while(!text.equalsIgnoreCase("stop")) {
@@ -82,19 +82,22 @@ public class Client {
             try {
                 System.out.println("RECEPTION DES DONNEES");
                 InputStream is = sock.getInputStream();
-                do {
-                    System.out.println("Le client a recu " + is.available() + " octets.");
-                    Thread.sleep(2000);
-                } while (is.available() == 0);
+                boolean test = true;
+				while (test) {
+					if (is.available() != 0) {
+						System.out.println("Le serveur a recu : " + is.available() + " octets.");
+						test = false;
+					}
+				}
                 String s = "";
                 while (is.available() != 0) {
-                        s += is.read();
+                        s += Character.toString(is.read());
                 }
                 System.out.println("Le client a reçu : " + s);
                 return s;
             } catch (IOException e) {
                 throw new IOException("Impossible de recevoir le message du serveur.");
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 throw new InterruptedException("La connection a été interrompue");
             }
     }

@@ -35,7 +35,7 @@ public class Serveur {
 			reponse = recevoirEtAnalyser();
 			envoyerReponse(reponse);
 		}
-		Thread.sleep(5000);
+		
 		System.out.println("FERMETURE DU SERVEUR");
 		try {
 			conn.close();
@@ -53,6 +53,7 @@ public class Serveur {
 		System.out.println("CREATION DU SERVEUR");
 		try {
 			conn = new ServerSocket(6666);
+			System.out.println("La inet Adress : " + conn.getInetAddress());
 		} catch (IOException e) {
 			System.err.println("Impossible de créer la Socket serveur.");
 			e.printStackTrace();
@@ -66,6 +67,8 @@ public class Serveur {
 		System.out.println("ACCEPTATION");
 		try {
 			comm = conn.accept();
+			System.out.println("La inet Adress conn : " + conn.getInetAddress());
+			System.out.println("La inet Adress comm : " + comm.getInetAddress());
 		} catch (IOException e) {
 			System.err.println("Impossible d'accepter la connection.");
 			e.printStackTrace();
@@ -84,9 +87,12 @@ public class Serveur {
 		try {
 			if (comm != null) {
 				InputStream is = comm.getInputStream();
-				while (is.available() == 0) {
-					System.out.println("Le serveur a recu : " + is.available() + " octets.");
-					Thread.sleep(1000);
+				boolean test = true;
+				while (test) {
+					if (is.available() != 0) {
+						System.out.println("Le serveur a recu : " + is.available() + " octets.");
+						test = false;	
+					}
 				};
 				while (is.available() != 0) {
 					text += Character.toString(is.read());
@@ -113,20 +119,11 @@ public class Serveur {
 			if (comm != null) {
 				OutputStream os = comm.getOutputStream();
 				os.write(rep.getBytes());
-				System.out.println("Le serveur a envoyé " + rep);
+				System.out.println("Le serveur a envoyé " + rep.getBytes());
 			}
 		} catch (Exception e) {
 			System.err.println("Impossible de répondre au client.");
 			e.printStackTrace();
 		}
-		
-		/*
-		for(int i = 0 ; i < 5 ; i++) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}*/
 	}
 }
