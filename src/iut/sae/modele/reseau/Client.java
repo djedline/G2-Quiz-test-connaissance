@@ -28,9 +28,9 @@ public class Client {
     public static void creerClient(String host, int port) throws IOException{
             System.out.println("CREATION DU CLIENT");
             try {
-                    sock = new Socket(host, port);
+                sock = new Socket(host, port);
             } catch (IOException e) {
-                    throw new IOException("Impossible de créer la Socket client.");
+                throw new IOException("Impossible de créer la Socket client.");
             }
     }
     
