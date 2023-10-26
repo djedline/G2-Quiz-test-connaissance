@@ -52,9 +52,9 @@ public class Client {
     public static void creerClient(String host, int port) throws IOException{
             System.out.println("CREATION DU CLIENT");
             try {
-                    sock = new Socket(host, port);
+                sock = new Socket(host, port);
             } catch (IOException e) {
-                    throw new IOException("Impossible de créer la Socket client.");
+                throw new IOException("Impossible de créer la Socket client.");
             }
     }
     
@@ -82,8 +82,6 @@ public class Client {
             try {
                 System.out.println("RECEPTION DES DONNEES");
                 InputStream is = sock.getInputStream();
-                //System.out.println("Le client est : " + sock.getLocalSocketAddress());
-                //System.out.println("Le serveur est : " + sock.getRemoteSocketAddress());
                 do {
                     System.out.println("Le client a recu " + is.available() + " octets.");
                     Thread.sleep(2000);
@@ -108,9 +106,9 @@ public class Client {
     public static void fermerSocket() throws IOException {
             System.out.println("FERMETURE DU CLIENT");
             try {
-                    sock.close();
+                sock.close();
             } catch (IOException e) {
-                    throw new IOException("Impossible de fermer la Socket client.");
+                throw new IOException("Impossible de fermer la Socket client.");
             }
             
     }
