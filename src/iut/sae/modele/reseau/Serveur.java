@@ -87,12 +87,18 @@ public class Serveur {
 		try {
 			if (comm != null) {
 				InputStream is = comm.getInputStream();
+<<<<<<< Updated upstream
 				boolean test = true;
 				while (test) {
 					if (is.available() != 0) {
 						System.out.println("Le serveur a recu : " + is.available() + " octets.");
 						test = false;	
 					}
+=======
+				while (is.available() == 0) {
+					System.out.println("En attente...");
+					Thread.sleep(1000);
+>>>>>>> Stashed changes
 				};
 				while (is.available() != 0) {
 					text += Character.toString(is.read());

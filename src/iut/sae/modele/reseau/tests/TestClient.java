@@ -20,32 +20,40 @@ public class TestClient {
      * @param args
      */
     public static void main(String[] args) {
-        testerEcho();
+        testFichier();
     }
     
     /** 
      * Teste le fonctionnement d'un serveur Echo.
      * @return true si le echo a fonctionné, false sinon
      */
-    public static boolean testerEcho() { 
+    public static boolean testFichier() { 
         try {
             Scanner sc = new Scanner(System.in);
             Client.creerClient("localhost", 6666);
-            File f = new File("src/iut/sae/modele/reseau/tests/fich.txt");
+            
+            
+            File f = new File("iut/sae/modele/reseau/tests/fich.txt");
             FileReader fr = new FileReader(f);
             String envoye = "";
             while (fr.ready()) {
                 envoye += Character.toString(fr.read());
             }
+            
+            
             Client.envoyerMessage(envoye.getBytes());
             System.out.println("Le client a envoyé : " +  envoye);
             
+            
+            Thread.sleep(2000);
             String recu = Client.recevoirMessage();
             System.out.println("Le client a reçu : " + recu);
-            File f2 = new File("src/iut/sae/modele/reseau/tests/fich.txt");
+            
+            
+            File f2 = new File("iut/sae/modele/reseau/tests/fich2.txt");
+            f2.createNewFile();
             FileWriter fw = new FileWriter(f2);
             fw.append(recu);
-            
             Client.fermerSocket();
             return envoye == recu;
         } catch (Exception e) {

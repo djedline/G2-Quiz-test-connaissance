@@ -67,7 +67,7 @@ public class Client {
             try {
                 OutputStream os = sock.getOutputStream();
                 os.write(data);
-                System.out.println("Le client a envoyé : " + data.toString());
+                System.out.println("Le client a envoyé : " + Character.toChars(0));
             } catch (IOException e) {
                 throw new IOException("Impossible d'envoyer le message au serveur.");
             }
@@ -82,6 +82,7 @@ public class Client {
             try {
                 System.out.println("RECEPTION DES DONNEES");
                 InputStream is = sock.getInputStream();
+<<<<<<< Updated upstream
                 boolean test = true;
 				while (test) {
 					if (is.available() != 0) {
@@ -89,6 +90,12 @@ public class Client {
 						test = false;
 					}
 				}
+=======
+                do {
+                    System.out.println("En attente ...");
+                    Thread.sleep(2000);
+                } while (is.available() == 0);
+>>>>>>> Stashed changes
                 String s = "";
                 while (is.available() != 0) {
                         s += Character.toString(is.read());
