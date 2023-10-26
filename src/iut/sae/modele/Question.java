@@ -26,8 +26,7 @@ public class Question {
     /** explication de la réponse juste */
     private String feedback;
     
-    /** difficulté de la question entre 0 et 3 
-     * 0 tous les niveaux
+    /** difficulté de la question entre 1 et 3 
      * 1 niveau facile
      * 2 niveau moyen
      * 3 niveau difficile */
@@ -48,14 +47,14 @@ public class Question {
     public Question(String libelle, Categorie nomCategorie, String propositionJuste, String[] propositionFausse, String feedback,
             int difficulte) {
         super();
-        if(verifQuestion()) {
+       // if(verifQuestion()) {
             this.libelle = libelle;
             this.nomCategorie = nomCategorie;
             this.propositionJuste = propositionJuste;
             this.propositionFausse = propositionFausse;
             this.feedback = feedback;
             this.difficulte = difficulte;
-        } 
+       // } 
     }
 
     /**  */
@@ -66,7 +65,7 @@ public class Question {
     
     /** @return valeur de libelle */
     public String getLibelle() {
-        return libelle;
+        return this.libelle;
     }
 
     /** @param libelle nouvelle valeur de libelle 
@@ -97,8 +96,15 @@ public class Question {
     /** @param propositionJuste nouvelle valeur de propositionJuste 
      * @return false*/
     public boolean setPropositionJuste(String propositionJuste) {
-        this.propositionJuste = propositionJuste;
-        return false;
+        boolean propoJusteOk;
+        if (propositionJuste.isBlank()) {
+            propoJusteOk = false;
+        } else {
+            this.propositionJuste = propositionJuste;
+            propoJusteOk = true;
+        }
+        
+        return propoJusteOk;
     }
 
     /** @return valeur de propositionFausse */
@@ -122,20 +128,32 @@ public class Question {
     /** @param feedback nouvelle valeur de feedback  
      * @return false*/
     public boolean setFeedback(String feedback) {
-        this.feedback = feedback;
-        return false;
+        boolean feedBackOk;
+        if (feedback.isBlank()) {
+            feedBackOk = false;
+        } else {
+            this.feedback = feedback;
+            feedBackOk = true;
+        }
+        
+        return feedBackOk;
     }
 
     /** @return valeur de difficulte */
     public int getDifficulte() {
+        System.out.println(this.difficulte);
         return difficulte;
     }
 
     /** @param difficulte nouvelle valeur de difficulte  
      * @return false*/
     public boolean setDifficulte(int difficulte) {
-        this.difficulte = difficulte;
-        return false;
+        boolean difficulteOk;
+        difficulteOk = 1 <= difficulte && difficulte <= 3;
+        if(difficulteOk) {
+            this.difficulte = difficulte;
+        }
+        return difficulteOk;
     }
     
 }

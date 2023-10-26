@@ -1,0 +1,161 @@
+/*
+ * QuestionTest.java                                    24 oct. 2023
+ * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ */
+package iut.sae.modele.tests;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import iut.sae.modele.Categorie;
+import iut.sae.modele.Question;
+
+/** TODO comment class responsibility (SRP)
+ * @author djedline.boyer
+ *
+ */
+class QuestionTest {
+
+    private static ArrayList<Question> listeQuestion = new ArrayList<>();
+    static String libelle = "Quel question ?";
+    static Categorie nomCategorie = new Categorie("absurde");
+    static String propoJuste = "Bonne question ?";
+    static String[] propoFausse = {"J'ai pas la réponse","J'ai la réponse",
+    "c'est quoi cette question ?"};
+    static String feedback = "La réponse est 'Bonne question ?' car"
+            +"la reponse est compliqué et que c'est réellement" 
+            + " une bonne question";
+    static int diff = 2;
+    
+    /** TODO comment method role
+     * @throws java.lang.Exception
+     */
+    @BeforeAll
+    static void setUpBeforeClass() throws Exception {
+        listeQuestion.add(new Question(libelle, nomCategorie, propoJuste,
+                 propoFausse, feedback,diff));
+         
+    }
+
+    /** TODO comment method role
+     * @throws java.lang.Exception
+     */
+    @AfterAll
+    static void tearDownAfterClass() throws Exception {
+    }
+
+    /**
+     * Test method for {@link iut.sae.modele.Question#Question(java.lang.String, iut.sae.modele.Categorie, java.lang.String, java.lang.String[], java.lang.String, int)}.
+     */
+    @Test
+    void testQuestion() {
+        fail("Not yet implemented");
+    }
+
+    /**
+     * Test method for {@link iut.sae.modele.Question#getLibelle()}.
+     */
+    @Test
+    void testGetLibelle() {
+        assertEquals(listeQuestion.get(0).getLibelle(), "Exemple libelle");       
+    }
+
+    /**
+     * Test method for {@link iut.sae.modele.Question#setLibelle(java.lang.String)}.
+     */
+    @Test
+    void testSetLibelle() {
+        assertTrue(listeQuestion.get(0).setLibelle("Exemple libelle"));
+        assertFalse(listeQuestion.get(0).setLibelle(""));
+        assertFalse(listeQuestion.get(0).setLibelle("   "));
+    }
+
+    /**
+     * Test method for {@link iut.sae.modele.Question#nomCategorie()}.
+     */
+    @Test
+    void testNomCategorie() {
+        fail("Not yet implemented");
+    }
+
+    /**
+     * Test method for {@link iut.sae.modele.Question#getPropositionJuste()}.
+     */
+    @Test
+    void testGetPropositionJuste() {
+        assertEquals(listeQuestion.get(0).getPropositionJuste(), "Exemple proposition juste");
+    }
+
+    /**
+     * Test method for {@link iut.sae.modele.Question#setPropositionJuste(java.lang.String)}.
+     */
+    @Test
+    void testSetPropositionJuste() {
+        assertTrue(listeQuestion.get(0).setPropositionJuste("Exemple proposition juste"));
+        assertFalse(listeQuestion.get(0).setPropositionJuste(""));
+        assertFalse(listeQuestion.get(0).setPropositionJuste(" "));
+    }
+
+    /**
+     * Test method for {@link iut.sae.modele.Question#getPropositionFausse()}.
+     */
+    @Test
+    void testGetPropositionFausse() {
+        fail("Not yet implemented");
+    }
+
+    /**
+     * Test method for {@link iut.sae.modele.Question#setPropositionFausse(java.lang.String[])}.
+     */
+    @Test
+    void testSetPropositionFausse() {
+        fail("Not yet implemented");
+        
+    }
+
+    /**
+     * Test method for {@link iut.sae.modele.Question#getFeedback()}.
+     */
+    @Test
+    void testGetFeedback() {
+        assertEquals(listeQuestion.get(0).getFeedback(), "Exemple feedBack");
+    }
+
+    /**
+     * Test method for {@link iut.sae.modele.Question#setFeedback(java.lang.String)}.
+     */
+    @Test
+    void testSetFeedback() {
+        assertTrue(listeQuestion.get(0).setFeedback("Exemple feedBack"));
+        assertFalse(listeQuestion.get(0).setFeedback(""));
+        assertFalse(listeQuestion.get(0).setFeedback(" "));
+    }
+
+    /**
+     * Test method for {@link iut.sae.modele.Question#getDifficulte()}.
+     */
+    @Test
+    void testGetDifficulte() {
+        assertEquals(listeQuestion.get(0).getDifficulte(), 2);
+    }
+
+    /**
+     * Test method for {@link iut.sae.modele.Question#setDifficulte(int)}.
+     */
+    @Test
+    void testSetDifficulte() {
+        assertTrue(listeQuestion.get(0).setDifficulte(1));
+        assertTrue(listeQuestion.get(0).setDifficulte(3));
+        assertFalse(listeQuestion.get(0).setDifficulte(0));
+        assertFalse(listeQuestion.get(0).setDifficulte(4));
+    }
+
+}
