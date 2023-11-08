@@ -3,6 +3,9 @@
  */
 package iut.sae.modele.reseau;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -31,10 +34,9 @@ public class Serveur {
 		preparerServeur();
 		accepterConnexion(); // bloquante : attend que le client se connecte
 		String reponse = "";
-		while (!reponse.equalsIgnoreCase("stop")) {
-			reponse = recevoirEtAnalyser();
-			envoyerReponse(reponse);
-		}
+		
+		reponse = recevoirEtAnalyser();
+		envoyerReponse(reponse);
 		
 		System.out.println("FERMETURE DU SERVEUR");
 		try {
@@ -98,6 +100,23 @@ public class Serveur {
 					text += Character.toString(is.read());
 				}
 				System.out.println("Le serveur a reçu : " + text);
+				File aEcrire = new File("iut/sae/modele/reseau/tests/fichierRecu.txt");
+				System.out.println(aEcrire.getAbsolutePath());
+				if (!aEcrire.exists()) {
+					aEcrire.createNewFile();
+				}
+				FileWriter fw = new FileWriter(aEcrire);
+				fw.append(text);
+				fw.flush();
+				fw.close();
+				
+				FileReader fr = new FileReader(aEcrire);
+				String lu = "";
+				while(fr.ready()){
+		    		lu += Character.toString(fr.read());
+		    	}
+				fr.close();
+				System.out.println("le serveur a écrit : " + lu);
 			}
 		} catch (Exception e) {
 			System.err.println("Impossible de recevoir la requête.");
