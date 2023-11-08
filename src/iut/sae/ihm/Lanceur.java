@@ -10,13 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/** TODO comment class responsibility (SRP)
+/** Lanceur de l'application
  * @author tany.catalabailly
  *
  */
 public class Lanceur extends Application {
 
-    /** TODO comment method role
+    /**Programme principal
      * @param args
      */
     public static void main(String[] args) {

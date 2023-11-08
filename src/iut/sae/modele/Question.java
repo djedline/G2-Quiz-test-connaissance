@@ -5,7 +5,7 @@
 package iut.sae.modele;
 
 /**
- * Permet de créer des questions
+ * Classe permettant de créer des questions pour le quiz
  * @author djedline.boyer
  *
  */

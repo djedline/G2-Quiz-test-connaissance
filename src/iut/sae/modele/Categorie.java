@@ -5,7 +5,7 @@
 package iut.sae.modele;
 
 /** 
- * Classe permettant de créer une catégorie pour le quiz, 
+ * Classe permettant de créer des catégories pour le quiz
  * @author nael.briot
  */
 public class Categorie {

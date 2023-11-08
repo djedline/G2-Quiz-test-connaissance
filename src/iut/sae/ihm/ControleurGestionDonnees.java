@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-/** Affichage de la page pour la Gestion des Données
+/**Controleur de la page pour la Gestion des Données
  * @author nael.briot
  *
  */

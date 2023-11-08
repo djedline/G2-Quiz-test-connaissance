@@ -18,9 +18,8 @@ import org.junit.jupiter.api.Test;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Question;
 
-/** TODO comment class responsibility (SRP)
+/**Utilisation de la classe Question et test de ses méthodes
  * @author djedline.boyer
- *
  */
 class QuestionTest {
 
