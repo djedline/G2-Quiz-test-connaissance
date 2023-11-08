@@ -32,7 +32,6 @@ public class Question {
      * 3 niveau difficile */
     private int difficulte;
 
-    private static int nbTest = 0;
     //TODO private Categorie categorie
     
     /** 
@@ -70,9 +69,7 @@ public class Question {
         }
         questionOk = !libelle.isBlank() && nomCategorie != null 
                 && !propositionJuste.isBlank() && propOk && propositionFausse != null
-                && !feedback.isBlank() && 0 <= difficulte && difficulte <= 3;
-        System.out.println("Test " + nbTest + " : " + questionOk);
-        nbTest++;
+                && !feedback.isBlank() && 1 <= difficulte && difficulte <= 3;
         return questionOk;
     }
     
@@ -95,8 +92,8 @@ public class Question {
     }
 
     /** @return valeur de libelle */
-    public String getCategorie() {
-        return nomCategorie.getLibelle();
+    public Categorie getCategorie() {
+        return nomCategorie;
     }
     
     /** @param nouveau 
@@ -137,7 +134,7 @@ public class Question {
       */
    public boolean setPropositionFausse(String[] propositionFausse) {
         this.propositionFausse = propositionFausse;
-        boolean propOk = true;
+        boolean propOk = propositionFausse.length > 1;
         for (int index = 0; index < propositionFausse.length && propOk; index++) {
             propOk = !propositionFausse[index].isBlank();
         }
@@ -172,7 +169,7 @@ public class Question {
      * @return false*/
     public boolean setDifficulte(int difficulte) {
         boolean difficulteOk;
-        difficulteOk = 0 <= difficulte && difficulte <= 3;
+        difficulteOk = 1 <= difficulte && difficulte <= 3;
         if(difficulteOk) {
             this.difficulte = difficulte;
         }

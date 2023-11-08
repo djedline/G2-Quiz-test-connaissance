@@ -53,8 +53,9 @@ public class ControleurCreeCategorie {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("Le nom ne doit pas être vide.");
             messageErreur.show();
+            return null;
         }
-        return null;
+        
         
     }
     @FXML
