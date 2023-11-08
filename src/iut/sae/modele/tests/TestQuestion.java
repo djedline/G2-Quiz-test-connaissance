@@ -17,7 +17,7 @@ import iut.sae.modele.Question;
 public class TestQuestion {
     
          private static ArrayList<Question> listeQuestion = new ArrayList<>();
-         private static String[] listeLibelle = {"Quel question ?","   ",""};
+         private static String[] listeLibelle = {"Quelle question ?","   ",""};
          private static Categorie nomCategorie = new Categorie("absurde");
          private static String propoJuste = "Bonne question ?";
          private static String[] propoFausse = {"J'ai pas la réponse","J'ai la réponse",
@@ -27,13 +27,11 @@ public class TestQuestion {
                  + " une bonne question";
          private static int diff = 2;
         
-         
          /** 
          * Test constructeur question
          */
         public static void testQuestion() {
             Question exempleQuestion;
-            
             try {
                 listeQuestion.add(new Question(listeLibelle[0], nomCategorie, propoJuste,
                         propoFausse, feedback,diff));

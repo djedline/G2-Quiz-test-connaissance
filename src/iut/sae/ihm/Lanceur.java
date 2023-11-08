@@ -37,7 +37,7 @@ public class Lanceur extends Application {
 
         Parent parent = (Parent) loader.load();
 
-        ControleurCreeCategorie controllerRef = loader.getController();
+        // ControleurGestionDonnees controllerRef = loader.getController();
 
         Scene scene = new Scene(parent);
         primaryStage.setScene(scene);

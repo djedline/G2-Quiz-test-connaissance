@@ -10,8 +10,7 @@ import iut.sae.modele.Categorie;
 
 /**
  * Utilisation de la classe Catégorie et test de ses méthodes
- * @author INFO2 TPA1
- * @version 1.0
+ * @author nael.briot
  */
 public class TestCategorie {
          

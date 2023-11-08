@@ -5,11 +5,8 @@
 package iut.sae.ihm;
 
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import iut.sae.modele.Categorie;
+import iut.sae.modele.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -20,20 +17,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 /** TODO comment class responsibility (SRP)
- * @author nael.briot
+ * @author djedline.boyer
  *
  */
-public class ControleurCreeCategorie {
+public class ControleurCreeQuestion {
 
     @FXML
     private Pane idPane;
 
     @FXML
     private Label idTitre;
-
-    @FXML
-    private Button btnCreerCat;
     
+    @FXML
+    private Button btnCreer;
+
     @FXML
     private Button btnQuitter;
 
@@ -44,11 +41,11 @@ public class ControleurCreeCategorie {
     private Label idLabelNom;
 
     @FXML
-    Categorie clicCreer(ActionEvent event) {
+    Question clicCreer(ActionEvent event) {
         try {
-            Categorie nouvelleCategorie = new Categorie(idNom.getText());
-            System.out.println(nouvelleCategorie);
-            return nouvelleCategorie;
+            Question nouvelleQuestion = new Question(idNom.getText(), null, null, null, null, 0);
+            System.out.println(nouvelleQuestion);
+            return nouvelleQuestion;
         } catch (IllegalArgumentException exeption) {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("Le nom ne doit pas être vide.");
@@ -56,12 +53,6 @@ public class ControleurCreeCategorie {
         }
         return null;
         
-    }
-    @FXML
-    Categorie clicQuitter(ActionEvent event) throws Exception { 
-        File fxmlFile = new File("src/iut/sae/ihm/MenuGestionDonnees.fxml");
-        URL fxmlUrl = fxmlFile.toURI().toURL();
-            return null;
     }
 
    
