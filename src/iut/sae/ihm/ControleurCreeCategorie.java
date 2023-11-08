@@ -5,6 +5,10 @@
 package iut.sae.ihm;
 
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import iut.sae.modele.Categorie;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,8 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-/** TODO comment class responsibility (SRP)
- * @author djedline.boyer
+/**Controleur de la page pour la création de catégories
+ * @author nael.briot
  *
  */
 public class ControleurCreeCategorie {
@@ -28,7 +32,10 @@ public class ControleurCreeCategorie {
     private Label idTitre;
 
     @FXML
-    private Button btnCreer;
+    private Button btnCreerCat;
+    
+    @FXML
+    private Button btnQuitter;
 
     @FXML
     private TextField idNom;
@@ -50,6 +57,12 @@ public class ControleurCreeCategorie {
         }
         
         
+    }
+    @FXML
+    Categorie clicQuitter(ActionEvent event) throws Exception { 
+        File fxmlFile = new File("src/iut/sae/ihm/MenuGestionDonnees.fxml");
+        URL fxmlUrl = fxmlFile.toURI().toURL();
+            return null;
     }
 
    

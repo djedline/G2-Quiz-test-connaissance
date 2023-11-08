@@ -10,8 +10,7 @@ import iut.sae.modele.Categorie;
 
 /**
  * Utilisation de la classe Catégorie et test de ses méthodes
- * @author INFO2 TPA1
- * @version 1.0
+ * @author nael.briot
  */
 public class TestCategorie {
          
@@ -21,18 +20,37 @@ public class TestCategorie {
      public static void testConstructeur() {
          System.out.println("\nTest de la création d'une catégorie :\n"
                              + "-------------------------------------------\n");
+            
+             /**
+              * Test du constructeur en cas d'erreur imprévu du programme
+              */
              try {
                  Categorie nouvelleCategorie1 = new Categorie("Java"); 
                  System.out.println("Test 1 OK");
              } catch(IllegalArgumentException erreurProgramme) {
                  System.out.print("Le programme a eu une erreur");
              }
-                 
+             
+             /**
+              * Test du constructeur au cas où l'utilisateur rentre 
+              * un nom de catégorie vide
+              */   
              try {
                  Categorie nouvelleCategorie2 = new Categorie(""); 
                  System.out.println("Attention : aucune erreur n'a été renvoyé");
              } catch(IllegalArgumentException erreurLibelle) {
                  System.out.println("Test 2 OK");
+             }
+             
+             /**
+              * Test du constructeur au cas où l'utilisateur rentre 
+              * un nom de catégorie rempli d'espace
+              */
+             try {
+                 Categorie nouvelleCategorie3 = new Categorie("          "); 
+                 System.out.println("Attention : aucune erreur n'a été renvoyé");
+             } catch(IllegalArgumentException erreurLibelle) {
+                 System.out.println("Test 3 OK");
              }
      }
          

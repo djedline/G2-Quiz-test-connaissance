@@ -4,11 +4,13 @@ import iut.sae.modele.Categorie;
 import iut.sae.modele.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 
 /** TODO comment class responsibility (SRP)
@@ -24,7 +26,7 @@ public class ControleurCreerQuestion {
     private TextField txtRepJuste;
 
     @FXML
-    private ChoiceBox<String> choiceCategorie;
+    private ChoiceBox<Categorie> choiceCategorie;
 
     @FXML
     private Button btnAnnuler;
@@ -71,17 +73,19 @@ public class ControleurCreerQuestion {
         choiceDifficulte.getItems().add("Moyen");
         choiceDifficulte.getItems().add("Difficile");
         choiceDifficulte.setValue("Facile");
-        
-        choiceCategorie.getItems().add("test1");
-        choiceCategorie.getItems().add("test2");
-        choiceCategorie.getItems().add("test3");
-        choiceCategorie.setValue("test1");
+
+        Categorie[] listCat = {new Categorie("test1"),new Categorie("test1"),new Categorie("test1")};
+
+        for (Categorie laCat : listCat) {
+            choiceCategorie.getItems().add(laCat);
+        }
+        choiceCategorie.setValue(listCat[0]);
     }
-    
+
     @FXML
-    void creerQuestion(ActionEvent event) {
-        int laDifficulte = 0;
-        
+    Question creerQuestion(ActionEvent event) {
+        int laDifficulte;
+
         switch(choiceDifficulte.getValue()){
 
         case "Facile": 
@@ -102,8 +106,17 @@ public class ControleurCreerQuestion {
         }
         String[] lesRepFausse = {txtRepFausse1.getText(),txtRepFausse2.getText(), 
                 txtRepFausse3.getText(),txtRepFausse4.getText()};
-        Question nouvelleQuestion = new Question(txtIntitule.getText(), txtRepJuste.getText(),
-                lesRepFausse, txtFeedback.getText(), laDifficulte);
+        try {
+            Question nouvelleQuestion = new Question(txtIntitule.getText(), choiceCategorie.getValue(), txtRepJuste.getText(),
+                    lesRepFausse, txtFeedback.getText(), laDifficulte);
+            System.out.println(nouvelleQuestion);
+            return nouvelleQuestion;
+        } catch (IllegalArgumentException exeption) {
+            Alert messageErreur = new Alert(AlertType.ERROR);
+            messageErreur.setContentText("Le nom ne doit pas être vide.");
+            messageErreur.show();
+            return null;
+        }
     }
 
     @FXML
