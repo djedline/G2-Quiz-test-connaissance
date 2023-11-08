@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControleurCreeCategorie">
+	<children>
+		<Button fx:id="btnPageCat" layoutX="126.0" layoutY="76.0" mnemonicParsing="false" onAction="#clicPageCat" prefHeight="25.0" prefWidth="198.0" text="Créer des catégories" />
+		<Label fx:id="idTitre" layoutX="113.0" layoutY="25.0" prefHeight="45.0" prefWidth="323.0" text="Gérer les données">
+			<font>
+				<Font size="30.0" />
+			</font>
+		</Label>
+      <Button fx:id="btnQuitter" layoutX="126.0" layoutY="215.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="198.0" text="Annuler" />
+      <Button fx:id="btnPageQuest" layoutX="126.0" layoutY="111.0" mnemonicParsing="false" onAction="#clicPageQuest" prefHeight="25.0" prefWidth="198.0" text="Créer des questions" />
+      <Button fx:id="btnImpExp" layoutX="126.0" layoutY="146.0" mnemonicParsing="false" onAction="#clicImpExp" prefHeight="25.0" prefWidth="198.0" text="Importer / Exporter des Données" />
+      <Button fx:id="btnShareData" layoutX="126.0" layoutY="181.0" mnemonicParsing="false" onAction="#clicShareData" prefHeight="25.0" prefWidth="198.0" text="Partager les données" />
+	</children>
+</Pane>

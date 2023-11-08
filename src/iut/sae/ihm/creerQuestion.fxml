@@ -15,5 +15,6 @@
 				<Font size="30.0" />
 			</font>
 		</Label>
+      <Button fx:id="btnQuitter" layoutX="291.0" layoutY="230.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="67.0" text="Quitter" />
 	</children>
 </Pane>
