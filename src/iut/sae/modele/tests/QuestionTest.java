@@ -81,10 +81,10 @@ class QuestionTest {
         });
         
         assertThrows(IllegalArgumentException.class, () -> {listeQuestion.add(new Question(libelle, nomCategorie, propoJuste,
-                propoFausse,"",-1));
+                propoFausse,"",5));
         });
         
-        assertThrows(IllegalArgumentException.class, () -> {listeQuestion.add(new Question(" ", null, " ", tableauVide," ",3));
+        assertThrows(IllegalArgumentException.class, () -> {listeQuestion.add(new Question(" ", null, " ", tableauVide," ",0));
         });
         
         assertTrue(listeQuestion.add(new Question(libelle, nomCategorie, propoJuste,
@@ -159,7 +159,9 @@ class QuestionTest {
     @Test
     void testSetPropositionFausse() {
         String[] mauvaisePropFausse = {"a", "", "b" };
+        String[] vide = {};
         assertFalse(listeQuestion.get(0).setPropositionFausse(mauvaisePropFausse));
+        assertFalse(listeQuestion.get(0).setPropositionFausse(vide));
         assertTrue(listeQuestion.get(0).setPropositionFausse(propoFausse));
         
     }
@@ -195,9 +197,9 @@ class QuestionTest {
      */
     @Test
     void testSetDifficulte() {
-        assertTrue(listeQuestion.get(0).setDifficulte(0));
+        assertTrue(listeQuestion.get(0).setDifficulte(1));
         assertTrue(listeQuestion.get(0).setDifficulte(3));
-        assertFalse(listeQuestion.get(0).setDifficulte(-1));
+        assertFalse(listeQuestion.get(0).setDifficulte(0));
         assertFalse(listeQuestion.get(0).setDifficulte(4));
     }
 
