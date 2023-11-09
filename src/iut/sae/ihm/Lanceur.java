@@ -31,18 +31,18 @@ public class Lanceur extends Application {
         //controller.setValue("New value");
         //loader.setController(controller);
 
-        File fxmlFile = new File("src/iut/sae/ihm/creerQuestion.fxml");
+        File fxmlFile = new File("src/iut/sae/ihm/MenuPrincipal.fxml");
         URL fxmlUrl = fxmlFile.toURI().toURL();
         loader.setLocation(fxmlUrl);
 
         Parent parent = (Parent) loader.load();
 
-
-        ControleurCreerQuestion controllerRef = loader.getController();
-
+        ControleurMenuPrincipal controllerRef = loader.getController();
 
         Scene scene = new Scene(parent);
+        EchangeurDeVue.setSceneCourante(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
+        
     }
 }

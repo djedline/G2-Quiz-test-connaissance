@@ -6,12 +6,9 @@ import java.net.URL;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 /**Controleur de la page pour la Gestion des Données
  * @author nael.briot
@@ -42,10 +39,8 @@ public class ControleurGestionDonnees {
 
     @FXML
     void clicPageCat(ActionEvent event) throws Exception {
-        
         File fxmlFile = new File("src/iut/sae/ihm/creerCategorie.fxml");
         URL fxmlUrl = fxmlFile.toURI().toURL();
-        
     }
 
     @FXML
@@ -65,8 +60,9 @@ public class ControleurGestionDonnees {
     }
     
     @FXML
-    void clicQuitter(ActionEvent event) {
-
+    void clicQuitter(ActionEvent event) throws MalformedURLException {
+        File fxmlFile = new File("src/iut/sae/ihm/creerQuestion.fxml");
+        URL fxmlUrl = fxmlFile.toURI().toURL();
     }
 
 }
