@@ -5,17 +5,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControleurCreeCategorie">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.ControleurGestionDonnees">
 	<children>
-		<Button fx:id="btnPageCat" layoutX="125.0" layoutY="84.0" mnemonicParsing="false" onAction="#clicPageCat" prefHeight="30.0" prefWidth="200.0" text="Créer des catégories" />
-		<Label fx:id="idTitre" layoutX="95.0" layoutY="23.0" prefHeight="36.0" prefWidth="259.0" text="Gérer les données">
+		<Button fx:id="btnPageCat" layoutX="125.0" layoutY="99.0" mnemonicParsing="false" onAction="#clicPageCat" prefHeight="30.0" prefWidth="200.0" text="Créer des catégories" />
+		<Label fx:id="idTitre" alignment="CENTER" layoutX="95.0" layoutY="23.0" prefHeight="36.0" prefWidth="259.0" text="Gérer les données">
 			<font>
 				<Font size="30.0" />
 			</font>
 		</Label>
-      <Button fx:id="btnQuitter" layoutX="125.0" layoutY="252.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="30.0" prefWidth="200.0" text="Annuler" />
-      <Button fx:id="btnPageQuest" layoutX="125.0" layoutY="126.0" mnemonicParsing="false" onAction="#clicPageQuest" prefHeight="30.0" prefWidth="200.0" text="Créer des questions" />
-      <Button fx:id="btnImpExp" layoutX="125.0" layoutY="168.0" mnemonicParsing="false" onAction="#clicImpExp" prefHeight="30.0" prefWidth="200.0" text="Importer / Exporter des Données" />
-      <Button fx:id="btnShareData" layoutX="125.0" layoutY="210.0" mnemonicParsing="false" onAction="#clicShareData" prefHeight="30.0" prefWidth="200.0" text="Partager les données" />
+      <Button fx:id="btnQuitter" layoutX="125.0" layoutY="203.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="30.0" prefWidth="200.0" text="Annuler" />
+      <Button fx:id="btnPageQuest" layoutX="125.0" layoutY="151.0" mnemonicParsing="false" onAction="#clicPageQuest" prefHeight="30.0" prefWidth="200.0" text="Créer des questions" />
 	</children>
 </Pane>
