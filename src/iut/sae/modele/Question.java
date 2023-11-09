@@ -31,17 +31,18 @@ public class Question {
      * 2 niveau moyen
      * 3 niveau difficile */
     private int difficulte;
-
-    //TODO private Categorie categorie
     
     /** 
      * Crée une question
      * @param libelle libellé de la question
-     * @param nomCategorie nom de la catégorie
+     * @param nomCategorie la catégorie
      * @param propositionJuste réponse correcte à la question
      * @param propositionFausse ensemble de mauvaise réponse à la question
      * @param feedback explication de la réponse juste
-     * @param difficulte niveau de difficulté de la question entre 0 et 3 
+     * @param difficulte niveau de difficulté de la question entre 1 et 3 
+     *                   1 => facile
+     *                   2 => moyen
+     *                   3 => difficile
      * @throws IllegalArgumentException si les spécificité des questions sont fausse
      */
     public Question(String libelle, Categorie nomCategorie, String propositionJuste, String[] propositionFausse, String feedback,
@@ -55,7 +56,7 @@ public class Question {
             this.feedback = feedback;
             this.difficulte = difficulte;
        } else {
-           throw new IllegalArgumentException();
+           throw new IllegalArgumentException("Les arguments entrées sont incorrectes");
        }
     }
 
