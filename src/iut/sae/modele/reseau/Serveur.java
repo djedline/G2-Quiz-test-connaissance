@@ -3,6 +3,9 @@
  */
 package iut.sae.modele.reseau;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -31,11 +34,10 @@ public class Serveur {
 		preparerServeur();
 		accepterConnexion(); // bloquante : attend que le client se connecte
 		String reponse = "";
-		while (!reponse.equalsIgnoreCase("stop")) {
-			reponse = recevoirEtAnalyser();
-			envoyerReponse(reponse);
-		}
-		Thread.sleep(5000);
+		
+		reponse = recevoirEtAnalyser();
+		envoyerReponse(reponse);
+		
 		System.out.println("FERMETURE DU SERVEUR");
 		try {
 			conn.close();
@@ -53,6 +55,7 @@ public class Serveur {
 		System.out.println("CREATION DU SERVEUR");
 		try {
 			conn = new ServerSocket(6666);
+			System.out.println("La inet Adress : " + conn.getInetAddress());
 		} catch (IOException e) {
 			System.err.println("Impossible de créer la Socket serveur.");
 			e.printStackTrace();
@@ -66,6 +69,8 @@ public class Serveur {
 		System.out.println("ACCEPTATION");
 		try {
 			comm = conn.accept();
+			System.out.println("La inet Adress conn : " + conn.getInetAddress());
+			System.out.println("La inet Adress comm : " + comm.getInetAddress());
 		} catch (IOException e) {
 			System.err.println("Impossible d'accepter la connection.");
 			e.printStackTrace();
@@ -84,14 +89,34 @@ public class Serveur {
 		try {
 			if (comm != null) {
 				InputStream is = comm.getInputStream();
-				while (is.available() == 0) {
-					System.out.println("Le serveur a recu : " + is.available() + " octets.");
-					Thread.sleep(1000);
+				boolean test = true;
+				while (test) {
+					if (is.available() != 0) {
+						System.out.println("Le serveur a recu : " + is.available() + " octets.");
+						test = false;	
+					}
 				};
 				while (is.available() != 0) {
 					text += Character.toString(is.read());
 				}
 				System.out.println("Le serveur a reçu : " + text);
+				File aEcrire = new File("iut/sae/modele/reseau/tests/fichierRecu.txt");
+				System.out.println(aEcrire.getAbsolutePath());
+				if (!aEcrire.exists()) {
+					aEcrire.createNewFile();
+				}
+				FileWriter fw = new FileWriter(aEcrire);
+				fw.append(text);
+				fw.flush();
+				fw.close();
+				
+				FileReader fr = new FileReader(aEcrire);
+				String lu = "";
+				while(fr.ready()){
+		    		lu += Character.toString(fr.read());
+		    	}
+				fr.close();
+				System.out.println("le serveur a écrit : " + lu);
 			}
 		} catch (Exception e) {
 			System.err.println("Impossible de recevoir la requête.");
@@ -119,14 +144,5 @@ public class Serveur {
 			System.err.println("Impossible de répondre au client.");
 			e.printStackTrace();
 		}
-		
-		/*
-		for(int i = 0 ; i < 5 ; i++) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}*/
 	}
 }

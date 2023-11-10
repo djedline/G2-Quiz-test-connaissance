@@ -4,6 +4,8 @@
  */
 package iut.sae.modele.reseau;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -27,15 +29,18 @@ public class Client {
     public static void main(String[] args) {
             try {
                 Scanner sc = new Scanner(System.in);
-                creerClient("localhost", 6666);
+                creerClient("127.0.0.1", 6666);
          
-                String text = "";
-                while(!text.equalsIgnoreCase("stop")) {
-                	System.out.print("Saisissez un message : ");
-                	text = sc.nextLine();
-                	envoyerMessage(text.getBytes());
-                    String s = recevoirMessage();
-                    System.out.println("Le client a reçu : " + s);
+                String message = "";
+                File fichierATraiter;
+                String s = "";
+                
+                while(s.isEmpty()) {
+                	System.out.print("Saisissez le chemin absolu du fichier a envoyer : ");
+                	fichierATraiter = new File(sc.nextLine());
+                	message = contruireMessage(fichierATraiter);
+                	envoyerMessage(message.getBytes());
+                    s = recevoirMessage();
                 }
                 
                 fermerSocket();
@@ -56,6 +61,23 @@ public class Client {
             } catch (IOException e) {
                 throw new IOException("Impossible de créer la Socket client.");
             }
+    }
+    
+    /**
+     * Méthode qui crée le message a envoyer au serveur a partir d'un fichier
+     * @param aEnvoyer fichier que l'on va traiter pour etre envoyer sous 
+     * 					forme de chaine 
+     * @return renvoie une chaine avec le contenu du fichier
+     * @throws 
+     */
+    public static String contruireMessage(File aEnvoyer) throws IOException{
+    	System.out.println("Chemin : " + aEnvoyer.getAbsolutePath());
+    	FileReader fr = new FileReader(aEnvoyer);
+    	String message = "";
+    	while(fr.ready()){
+    		message += Character.toString(fr.read());
+    	}
+    	return message;
     }
     
     /**
@@ -82,19 +104,22 @@ public class Client {
             try {
                 System.out.println("RECEPTION DES DONNEES");
                 InputStream is = sock.getInputStream();
-                do {
-                    System.out.println("Le client a recu " + is.available() + " octets.");
-                    Thread.sleep(2000);
-                } while (is.available() == 0);
+                boolean test = true;
+				while (test) {
+					if (is.available() != 0) {
+						System.out.println("Le serveur a recu : " + is.available() + " octets.");
+						test = false;
+					}
+				}
                 String s = "";
                 while (is.available() != 0) {
-                        s += is.read();
+                        s += Character.toString(is.read());
                 }
                 System.out.println("Le client a reçu : " + s);
                 return s;
             } catch (IOException e) {
                 throw new IOException("Impossible de recevoir le message du serveur.");
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 throw new InterruptedException("La connection a été interrompue");
             }
     }
