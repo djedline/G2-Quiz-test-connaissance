@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import iut.sae.modele.Donnees;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,14 +40,13 @@ public class ControleurGestionDonnees {
 
     @FXML
     void clicPageCat(ActionEvent event) throws Exception {
-        File fxmlFile = new File("src/iut/sae/ihm/creerCategorie.fxml");
-        URL fxmlUrl = fxmlFile.toURI().toURL();
+        Donnees.numScenePrecedenteCategorie = EnsembleDesVues.VUE_GESTION_DONNEES;
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CATEGORIE);
     }
 
     @FXML
     void clicPageQuest(ActionEvent event) throws Exception {
-        File fxmlFile = new File("src/iut/sae/ihm/creerQuestion.fxml");
-        URL fxmlUrl = fxmlFile.toURI().toURL();
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_QUESTION);
     }
 
     @FXML
@@ -61,8 +61,7 @@ public class ControleurGestionDonnees {
     
     @FXML
     void clicQuitter(ActionEvent event) throws MalformedURLException {
-        File fxmlFile = new File("src/iut/sae/ihm/creerQuestion.fxml");
-        URL fxmlUrl = fxmlFile.toURI().toURL();
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);
     }
 
 }

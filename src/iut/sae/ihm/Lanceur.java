@@ -3,6 +3,8 @@ package iut.sae.ihm;
 import java.io.File;
 import java.net.URL;
 
+import iut.sae.modele.Categorie;
+import iut.sae.modele.Donnees;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,6 +26,7 @@ public class Lanceur extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Donnees.listeCategorie.add(new Categorie("Tous"));
         FXMLLoader loader = new FXMLLoader();
 
         //ControleurCreeCategorie controller = new ControleurCreeCategorie();
