@@ -5,7 +5,7 @@
 package iut.sae.modele;
 
 /**
- * Permet de créer des questions
+ * Classe permettant de créer des questions pour le quiz
  * @author djedline.boyer
  *
  */
@@ -26,8 +26,7 @@ public class Question {
     /** explication de la réponse juste */
     private String feedback;
     
-    /** difficulté de la question entre 0 et 3 
-     * 0 tous les niveaux
+    /** difficulté de la question entre 1 et 3 
      * 1 niveau facile
      * 2 niveau moyen
      * 3 niveau difficile */
@@ -48,25 +47,35 @@ public class Question {
     public Question(String libelle, Categorie nomCategorie, String propositionJuste, String[] propositionFausse, String feedback,
             int difficulte) {
         super();
-        if(verifQuestion()) {
+       if(verifQuestion(libelle, nomCategorie, propositionJuste, propositionFausse, feedback, difficulte)) {
             this.libelle = libelle;
             this.nomCategorie = nomCategorie;
             this.propositionJuste = propositionJuste;
             this.propositionFausse = propositionFausse;
             this.feedback = feedback;
             this.difficulte = difficulte;
-        } 
+       } else {
+           throw new IllegalArgumentException();
+       }
     }
 
-    /**  */
-    private static boolean verifQuestion() {
-        return false;
-        
+    /** Vérifie que les paramètres d'une question sont correctes */
+    private static boolean verifQuestion(String libelle, Categorie nomCategorie, String propositionJuste, String[] propositionFausse, String feedback,
+            int difficulte) {
+        boolean questionOk;
+        boolean propOk = true;
+        for (int index = 0; index < propositionFausse.length && propOk; index++) {
+            propOk = !propositionFausse[index].isBlank();
+        }
+        questionOk = !libelle.isBlank() && nomCategorie != null 
+                && !propositionJuste.isBlank() && propOk && propositionFausse != null
+                && !feedback.isBlank() && 1 <= difficulte && difficulte <= 3;
+        return questionOk;
     }
     
     /** @return valeur de libelle */
     public String getLibelle() {
-        return libelle;
+        return this.libelle;
     }
 
     /** @param libelle nouvelle valeur de libelle 
@@ -75,18 +84,27 @@ public class Question {
      */
     public boolean setLibelle(String libelle) {
         boolean nouvLibelOk;
-        if (libelle.isBlank()) {
-            nouvLibelOk = false;
-        } else {
+        nouvLibelOk = !libelle.isBlank();
+        if (nouvLibelOk) {
             this.libelle = libelle;
-            nouvLibelOk = true;
         }
         return nouvLibelOk;
     }
 
     /** @return valeur de libelle */
-    public String nomCategorie() {
-        return nomCategorie.getLibelle();
+    public Categorie getCategorie() {
+        return nomCategorie;
+    }
+    
+    /** @param nouveau 
+     * @return valeur de libelle */
+    public boolean setCategorie(Categorie nouveau) {
+        boolean nouvCategorie;
+        nouvCategorie = nouveau != null;
+        if (nouvCategorie) {
+            this.nomCategorie = nouveau;
+        }
+        return nouvCategorie;
     }
     
     /** @return valeur de propositionJuste */
@@ -95,15 +113,20 @@ public class Question {
     }
 
     /** @param propositionJuste nouvelle valeur de propositionJuste 
-     * @return false*/
+     * @return false
+     */
     public boolean setPropositionJuste(String propositionJuste) {
-        this.propositionJuste = propositionJuste;
-        return false;
+        boolean propoJusteOk = !propositionJuste.isBlank();
+        if (propoJusteOk) {
+            this.propositionJuste = propositionJuste;
+        }
+        
+        return propoJusteOk;
     }
 
     /** @return valeur de propositionFausse */
     public String[] getPropositionFausse() {
-        return propositionFausse;
+        return this.propositionFausse;
     }
 
     /** @param propositionFausse nouvelle valeur de propositionFausse
@@ -111,7 +134,14 @@ public class Question {
       */
    public boolean setPropositionFausse(String[] propositionFausse) {
         this.propositionFausse = propositionFausse;
-        return false;
+        boolean propOk = propositionFausse.length > 1;
+        for (int index = 0; index < propositionFausse.length && propOk; index++) {
+            propOk = !propositionFausse[index].isBlank();
+        }
+        if (propOk) {
+            this.propositionFausse = propositionFausse;
+        }
+        return propOk;
     }
 
     /** @return valeur de feedback */
@@ -122,20 +152,28 @@ public class Question {
     /** @param feedback nouvelle valeur de feedback  
      * @return false*/
     public boolean setFeedback(String feedback) {
-        this.feedback = feedback;
-        return false;
+        boolean feedBackOk = !feedback.isBlank();
+        if (feedBackOk) {
+            this.feedback = feedback;
+        }
+        return feedBackOk;
     }
 
     /** @return valeur de difficulte */
     public int getDifficulte() {
+        //System.out.println(this.difficulte);
         return difficulte;
     }
 
     /** @param difficulte nouvelle valeur de difficulte  
      * @return false*/
     public boolean setDifficulte(int difficulte) {
-        this.difficulte = difficulte;
-        return false;
+        boolean difficulteOk;
+        difficulteOk = 1 <= difficulte && difficulte <= 3;
+        if(difficulteOk) {
+            this.difficulte = difficulte;
+        }
+        return difficulteOk;
     }
     
 }

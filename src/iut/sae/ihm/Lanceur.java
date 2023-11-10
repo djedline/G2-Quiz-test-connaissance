@@ -10,13 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/** TODO comment class responsibility (SRP)
+/** Lanceur de l'application
  * @author tany.catalabailly
  *
  */
 public class Lanceur extends Application {
 
-    /** TODO comment method role
+    /**Programme principal
      * @param args
      */
     public static void main(String[] args) {
@@ -31,16 +31,18 @@ public class Lanceur extends Application {
         //controller.setValue("New value");
         //loader.setController(controller);
 
-        File fxmlFile = new File("src/iut/sae/ihm/creerCategorie.fxml");
+        File fxmlFile = new File("src/iut/sae/ihm/MenuPrincipal.fxml");
         URL fxmlUrl = fxmlFile.toURI().toURL();
         loader.setLocation(fxmlUrl);
 
         Parent parent = (Parent) loader.load();
 
-        ControleurCreeCategorie controllerRef = loader.getController();
+        ControleurMenuPrincipal controllerRef = loader.getController();
 
         Scene scene = new Scene(parent);
+        EchangeurDeVue.setSceneCourante(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
+        
     }
 }
