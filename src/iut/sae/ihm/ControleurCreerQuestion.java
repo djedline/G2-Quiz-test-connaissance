@@ -121,12 +121,12 @@ public class ControleurCreerQuestion {
 
     @FXML
     void ajouterCategorie(ActionEvent event) {
-
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CATEGORIE);
     }
 
     @FXML
     void annulerQuestion(ActionEvent event) {
-
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
     }
 
 }

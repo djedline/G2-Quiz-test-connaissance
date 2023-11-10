@@ -45,8 +45,7 @@ public class ControleurGestionDonnees {
 
     @FXML
     void clicPageQuest(ActionEvent event) throws Exception {
-        File fxmlFile = new File("src/iut/sae/ihm/creerQuestion.fxml");
-        URL fxmlUrl = fxmlFile.toURI().toURL();
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_QUESTION);
     }
 
     @FXML
@@ -61,8 +60,7 @@ public class ControleurGestionDonnees {
     
     @FXML
     void clicQuitter(ActionEvent event) throws MalformedURLException {
-        File fxmlFile = new File("src/iut/sae/ihm/creerQuestion.fxml");
-        URL fxmlUrl = fxmlFile.toURI().toURL();
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);
     }
 
 }

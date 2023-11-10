@@ -27,10 +27,6 @@ public class Lanceur extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
 
-        //ControleurCreeCategorie controller = new ControleurCreeCategorie();
-        //controller.setValue("New value");
-        //loader.setController(controller);
-
         File fxmlFile = new File("src/iut/sae/ihm/MenuPrincipal.fxml");
         URL fxmlUrl = fxmlFile.toURI().toURL();
         loader.setLocation(fxmlUrl);
