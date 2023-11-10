@@ -18,15 +18,17 @@ public class EnsembleDesVues {
     public static final int VUE_GESTION_DONNEES = 1;
     /** Code de la vue de la création des questions */
     public static final int VUE_QUESTION = 2;
-    /** Code de la vue de la création de catégories */
+    /** Code de la vue de la création des questions */
     public static final int VUE_CATEGORIE = 3;
+    /** Code de la vue de la création des questions */
+    public static final int VUE_QUESTIONNAIRE = 4;
     
     /** Tableau contenant les noms des fichiers fxml des différentes vues
      * de l'application. Il y a une correspondance entre l'indice de la case
      * du tableau et le code de la vue défini en tant que constante
      */
     private static final String[] NOM_DES_VUES =
-        { "MenuPrincipal.fxml", "MenuGestionDonnees.fxml", "creerQuestionnaire.fxml", "creerQuestion.fxml", "creerCategorie.fxml"};
+        { "MenuPrincipal.fxml", "MenuGestionDonnees.fxml", "creerQuestion.fxml", "creerCategorie.fxml",  "creerQuestionnaire.fxml",};
     /**
      * Renvoie le nom du fichier fxml contenant la vue dont le code est donné
      * en paramètre

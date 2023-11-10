@@ -1,6 +1,7 @@
 package iut.sae.ihm;
 
 import iut.sae.modele.Categorie;
+import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -74,16 +75,14 @@ public class ControleurCreerQuestion {
         choiceDifficulte.getItems().add("Difficile");
         choiceDifficulte.setValue("Facile");
 
-        Categorie[] listCat = {new Categorie("test1"),new Categorie("test1"),new Categorie("test1")};
-
-        for (Categorie laCat : listCat) {
-            choiceCategorie.getItems().add(laCat);
+        for(int i = 0; i < Donnees.listeCategorie.size(); i++) {
+            choiceCategorie.getItems().add(Donnees.listeCategorie.get(i));
         }
-        choiceCategorie.setValue(listCat[0]);
+        choiceCategorie.setValue(Donnees.listeCategorie.get(0));
     }
 
     @FXML
-    Question creerQuestion(ActionEvent event) {
+    void creerQuestion(ActionEvent event) {
         int laDifficulte;
 
         switch(choiceDifficulte.getValue()){
@@ -109,19 +108,22 @@ public class ControleurCreerQuestion {
         try {
             Question nouvelleQuestion = new Question(txtIntitule.getText(), choiceCategorie.getValue(), txtRepJuste.getText(),
                     lesRepFausse, txtFeedback.getText(), laDifficulte);
+            Donnees.listeQuestion.add(nouvelleQuestion);
             System.out.println(nouvelleQuestion);
-            return nouvelleQuestion;
+            txtIntitule.setText(null);
+            txtRepJuste.setText(null);
+            txtFeedback.setText(null);
         } catch (IllegalArgumentException exeption) {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("Le nom ne doit pas être vide.");
             messageErreur.show();
-            return null;
         }
     }
 
     @FXML
     void ajouterCategorie(ActionEvent event) {
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CATEGORIE);
+        Donnees.numScenePrecedenteCategorie = EnsembleDesVues.VUE_QUESTION;
+
     }
 
     @FXML

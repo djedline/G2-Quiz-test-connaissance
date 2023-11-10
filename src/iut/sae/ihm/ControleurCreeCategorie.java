@@ -6,10 +6,10 @@ package iut.sae.ihm;
 
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import iut.sae.modele.Categorie;
+import iut.sae.modele.Donnees;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -44,25 +44,22 @@ public class ControleurCreeCategorie {
     private Label idLabelNom;
 
     @FXML
-    Categorie clicCreer(ActionEvent event) {
+    void clicCreer(ActionEvent event) {
         try {
             Categorie nouvelleCategorie = new Categorie(idNom.getText());
+            Donnees.listeCategorie.add(nouvelleCategorie);
             System.out.println(nouvelleCategorie);
-            return nouvelleCategorie;
         } catch (IllegalArgumentException exeption) {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("Le nom ne doit pas être vide.");
             messageErreur.show();
-            return null;
         }
         
         
     }
     @FXML
-    Categorie clicQuitter(ActionEvent event) throws Exception { 
-        File fxmlFile = new File("src/iut/sae/ihm/MenuGestionDonnees.fxml");
-        URL fxmlUrl = fxmlFile.toURI().toURL();
-            return null;
+   void clicQuitter(ActionEvent event) throws Exception { 
+        EchangeurDeVue.echangerAvec(Donnees.numScenePrecedenteCategorie);
     }
 
    
