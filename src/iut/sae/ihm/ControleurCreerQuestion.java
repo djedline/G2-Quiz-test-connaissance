@@ -1,3 +1,8 @@
+/*
+ * ControleurCreerQuestion.java                                    24 Oct. 2023
+ * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ */
+
 package iut.sae.ihm;
 
 import iut.sae.modele.Categorie;
@@ -123,7 +128,7 @@ public class ControleurCreerQuestion {
     @FXML
     void ajouterCategorie(ActionEvent event) {
         Donnees.numScenePrecedenteCategorie = EnsembleDesVues.VUE_QUESTION;
-
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CATEGORIE);
     }
 
     @FXML

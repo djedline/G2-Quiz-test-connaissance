@@ -5,9 +5,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControleurCreeCategorie">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.ControleurQuestionnaire">
 	<children>
-		<Button fx:id="btnCreer" layoutX="78.0" layoutY="235.0" mnemonicParsing="false" onAction="#clicCreer" prefHeight="25.0" prefWidth="131.0" text="Valider" />
+		<Button fx:id="btnValider" layoutX="78.0" layoutY="235.0" mnemonicParsing="false" onAction="#clicValider" prefHeight="25.0" prefWidth="131.0" text="Valider" />
 		<TextField fx:id="idNom" layoutX="335.0" layoutY="177.0" onAction="#entreNom" prefHeight="25.0" prefWidth="76.0" />
 		<Label fx:id="idLabelNom" layoutX="28.0" layoutY="48.0" prefHeight="21.0" prefWidth="161.0" text="Choisir la difficulté :">
          <font>

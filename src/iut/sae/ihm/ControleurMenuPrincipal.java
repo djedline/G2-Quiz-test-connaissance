@@ -33,12 +33,17 @@ public class ControleurMenuPrincipal {
 
     @FXML
     void clicStart(ActionEvent event) throws Exception {
-         System.out.print("TODO");
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_QUESTIONNAIRE);
     }
 
     @FXML
     void clicGerer(ActionEvent event) throws Exception {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
     } 
+    @FXML
+    void clicDon(ActionEvent event)throws Exception {
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);
+    }
+
 
 }

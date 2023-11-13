@@ -7,12 +7,13 @@
 
 <Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.ControleurMenuPrincipal">
 	<children>
-		<Button fx:id="btnQuizStart" layoutX="11.0" layoutY="139.0" mnemonicParsing="false" onAction="#clicStart" prefHeight="30.0" prefWidth="200.0" text="Lancer le quiz" />
+		<Button fx:id="btnQuizStart" layoutX="135.0" layoutY="115.0" mnemonicParsing="false" onAction="#clicStart" prefHeight="30.0" prefWidth="184.0" text="Lancer le quiz" />
 		<Label fx:id="idTitre" alignment="CENTER" layoutX="63.0" layoutY="49.0" prefHeight="36.0" prefWidth="327.0" text="Quiz de connaissances" textAlignment="CENTER">
 			<font>
 				<Font size="30.0" />
 			</font>
 		</Label>
-      <Button fx:id="btnGestion" layoutX="241.0" layoutY="139.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicGerer" prefHeight="30.0" prefWidth="200.0" text="Gérer les données" />
+      <Button fx:id="btnGestion" layoutX="135.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicGerer" prefHeight="30.0" prefWidth="184.0" text="Gérer les données" />
+      <Button fx:id="btnDon" layoutX="135.0" layoutY="205.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicDon" prefHeight="30.0" prefWidth="184.0" text="Gérer l'échange des données" />
 	</children>
 </Pane>
