@@ -36,7 +36,7 @@ public class Donnees {
     /** Liste de Categorie */
     public static ArrayList<Question> listeQuestions = new ArrayList<>();
 
-    /** TODO comment field role (attribute, association) */
+    /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
     public static int numScenePrecedenteCategorie;
 
     /**
@@ -128,5 +128,31 @@ public class Donnees {
         for (Question q : listeQuestions) {
             System.out.println(" - " + q.getLibelle());
         }
+   }
+    
+   /** 
+    * Vérifie que la catégorie ajoutée n'est pas un double 
+    * @param aVerifier la catégorie que l'on souhaite vérifier
+    * @return true si la catégorie est un doublon, false sinon.
+    */
+    public static boolean verifDoubleCategorie(Categorie aVerifier) {
+    	boolean doubleOk = false;
+    	for (int i = 0; i < listeCategorie.size() && !doubleOk; i++) {
+    		doubleOk = listeCategorie.get(i).compareTo(aVerifier);
+    	}
+    	return doubleOk;
+    }
+    
+    /** 
+     * Vérifie que la question ajoutée n'est pas un double
+     * @param aVerifier la question que l'on souhaite vérifier
+     * @return true si la question est un doublon, false sinon
+     */
+    public static boolean verifDoubleQuestion(Question aVerifier) {
+    	boolean doubleOk = false;
+    	for (int i = 0; i < listeQuestions.size() && !doubleOk; i++) {
+    		doubleOk = listeQuestions.get(i).compareTo(aVerifier);
+    	}
+    	return doubleOk;
     }
 }

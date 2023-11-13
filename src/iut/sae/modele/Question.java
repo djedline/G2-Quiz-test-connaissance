@@ -79,6 +79,20 @@ public class Question implements Serializable {
         return questionOk;
     }
     
+    /** TODO comparer deux Questions */
+    public boolean compareTo(Question aComparer) {
+        boolean propOk = propositionFausse.length == aComparer.getPropositionFausse().length;
+        for (int index = 0; index < propositionFausse.length && propOk; index++) {
+            propOk = propositionFausse[index].toUpperCase().equals(aComparer.getPropositionFausse()[index].toUpperCase());
+        }
+    	return libelle.toUpperCase().equals(aComparer.getLibelle().toUpperCase())
+        && nomCategorie.compareTo(nomCategorie)
+        && propositionJuste.toUpperCase().equals(aComparer.getPropositionJuste().toUpperCase())
+        && propOk
+        && feedback.toUpperCase().equals(aComparer.feedback.toUpperCase())
+        && difficulte == aComparer.getDifficulte();
+    }
+    
     /** @return valeur de libelle */
     public String getLibelle() {
         return this.libelle;
