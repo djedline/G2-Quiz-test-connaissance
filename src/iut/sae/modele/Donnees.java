@@ -23,12 +23,12 @@ public class Donnees {
     /**
      * Le chemin dans lequel les questions sont sauvegardées.
      */
-    private static String CHEMIN_QUESTIONS = "donnees/questions.data";
+    private static File FICH_QUESTIONS = new File("donnees/questions.data");
 
     /**
-     * Le chemin dans lequel les données sont sauvegardées.
+     * Le chemin dans lequel les catégories sont sauvegardées.
      */
-    private static String CHEMIN_CATEGORIES = "donnees/categories.data";
+    private static File FICH_CATEGORIES = new File("donnees/categories.data");
 
     /** Liste de Categorie */
     public static ArrayList<Categorie> listeCategorie = new ArrayList<>();
@@ -46,8 +46,8 @@ public class Donnees {
      */
     public static boolean sauvegarder() {
         try {
-            creerSauvegarde(CHEMIN_CATEGORIES, listeCategorie);
-            creerSauvegarde(CHEMIN_QUESTIONS, listeQuestions);
+            creerSauvegarde(FICH_CATEGORIES, listeCategorie);
+            creerSauvegarde(FICH_QUESTIONS, listeQuestions);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -61,13 +61,12 @@ public class Donnees {
      * @param donneesAEcrire les données que l'on souhaite sauvegarder
      * @throws IOException si l'enregistrement est impossible
      */
-    private static void creerSauvegarde(String chemin, Object donneesAEcrire) throws IOException {
-        File f = new File(chemin);
-        if (!f.exists()) {
-            f.createNewFile();
+    private static void creerSauvegarde(File fichier, Object donneesAEcrire) throws IOException {
+        if (!fichier.exists()) {
+            fichier.createNewFile();
         }
 
-        ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream(chemin));
+        ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream(fichier));
         writer.writeObject(donneesAEcrire);
         writer.close();
     }
@@ -78,36 +77,56 @@ public class Donnees {
      * @return true si la sauvegarde a réussi, false sinon
      */
     public static boolean charger() {
+        boolean donneesChargees = true;
         try {
-            listeCategorie = (ArrayList<Categorie>) chargerSauvegarde(CHEMIN_CATEGORIES);
-            listeQuestions = (ArrayList<Question>) chargerSauvegarde(CHEMIN_QUESTIONS);
+            if (FICH_CATEGORIES.exists()) {
+                listeCategorie = (ArrayList<Categorie>) chargerSauvegarde(FICH_CATEGORIES);
+            }
+            if (FICH_QUESTIONS.exists()) {
+                listeQuestions = (ArrayList<Question>) chargerSauvegarde(FICH_QUESTIONS);
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            if (listeCategorie == null) {
-                listeCategorie = new ArrayList<Categorie>();
-                listeCategorie.add(new Categorie("Tous"));
-            }
-            if (listeQuestions == null) {
-                listeQuestions = new ArrayList<Question>();
-            }
-            return false;
+            donneesChargees = false;
         }
-        return true;
+        // Cas par défaut
+        if (listeCategorie == null) {
+            listeCategorie = new ArrayList<Categorie>();
+            listeCategorie.add(new Categorie("Tous"));
+            donneesChargees = false;
+        }
+        if (listeQuestions == null) {
+            listeQuestions = new ArrayList<Question>();
+            donneesChargees = false;
+        }
+        afficherDonnees();
+        return donneesChargees;
     }
 
     /**
      * Charge le fichier au chemin donné et renvoie la valeur stockée.
-     * @param chemin le chemin du fichier à ouvrir
+     * @param fichier le chemin du fichier à ouvrir
      * @return l'objet stocké
      * @throws FileNotFoundException si le fichier n'existe pas
      * @throws IOException si une erreur d'entrée / sortie se produit
      * @throws ClassNotFoundException s'il est impossible de convertir l'objet
      */
-    private static Object chargerSauvegarde(String chemin) throws FileNotFoundException, 
+    private static Object chargerSauvegarde(File fichier) throws FileNotFoundException, 
             IOException, ClassNotFoundException {
         try (ObjectInputStream readerCategories = new ObjectInputStream(
-                new FileInputStream(chemin))) {
+                new FileInputStream(fichier))) {
             return readerCategories.readObject();
+        }
+    }
+    
+    private static void afficherDonnees() {
+        System.out.println("CATEGORIES");
+        for (Categorie cat : listeCategorie) {
+            System.out.println(" - " + cat.getLibelle());
+        }
+        System.out.println("QUESTIONS");
+        for (Question q : listeQuestions) {
+            System.out.println(" - " + q.getLibelle());
         }
     }
 }
