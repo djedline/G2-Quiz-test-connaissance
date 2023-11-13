@@ -1,3 +1,8 @@
+/*
+ * ControleurCreerQuestion.java                                    24 Oct. 2023
+ * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ */
+
 package iut.sae.ihm;
 
 import iut.sae.modele.Categorie;
@@ -83,6 +88,9 @@ public class ControleurCreerQuestion {
         
     }
 
+    /** TODO comment method role
+     * @return repFausse Laou les réponses fausses
+     */
     public String[] tableauReponseFausse() {
     	ArrayList<String> listeIntermediaire = new ArrayList<>();
     	String[] repFausse;
@@ -166,7 +174,6 @@ public class ControleurCreerQuestion {
     void ajouterCategorie(ActionEvent event) {
     	Donnees.numScenePrecedenteCategorie = EnsembleDesVues.VUE_QUESTION;
     	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CATEGORIE);
-
     }
 
     @FXML
