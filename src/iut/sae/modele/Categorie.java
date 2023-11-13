@@ -31,6 +31,11 @@ public class Categorie {
                 return this.titreCat;
         }
         
+        /** TODO comparer deux Categories */
+        public boolean compareTo(Categorie aComparer) {
+        	return titreCat.toUpperCase().equals(aComparer.getLibelle().toUpperCase());
+        }
+        
         /* non javadoc - @see java.lang.Object#toString() */
         @Override
         public String toString() {

@@ -26,7 +26,7 @@ public class Lanceur extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Donnees.listeCategorie.add(new Categorie("Tous"));
+        Donnees.listeCategorie.add(new Categorie("General"));
         FXMLLoader loader = new FXMLLoader();
 
         File fxmlFile = new File("src/iut/sae/ihm/MenuPrincipal.fxml");

@@ -18,13 +18,32 @@ public class Donnees {
     /** Liste de Categorie */
     public static ArrayList <Question> listeQuestion = new ArrayList <>();
     
-    /** TODO comment field role (attribute, association) */
+    /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
     public static int numScenePrecedenteCategorie;
     
-    /** TODO comment method role
+   /** Verifie que la categorie ajouté n'est pas un double */
+    public static boolean verifDoubleCategorie(Categorie aVerifier) {
+    	boolean doubleOk = false;
+    	for (int i = 0; i < listeCategorie.size() && !doubleOk; i++) {
+    		doubleOk = listeCategorie.get(i).compareTo(aVerifier);
+    	}
+    	return doubleOk;
+    }
+    
+    /** Verifie que la categorie ajouté n'est pas un double */
+    public static boolean verifDoubleQuestion(Question aVerifier) {
+    	boolean doubleOk = false;
+    	for (int i = 0; i < listeQuestion.size() && !doubleOk; i++) {
+    		doubleOk = listeQuestion.get(i).compareTo(aVerifier);
+    	}
+    	return doubleOk;
+    }
+    
+    /** 
+     * Initialise les données
      * @param args
      */
     public static void main(System[] args) {
-        listeCategorie.add(new Categorie("Tous"));
+        listeCategorie.add(new Categorie("General"));
     }
 }
