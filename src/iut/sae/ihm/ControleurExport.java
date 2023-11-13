@@ -1,9 +1,8 @@
 /*
- * ControleurImport.java                                    13 nov. 2023
+ * ControleurExport.java                                    13 nov. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
-
-package iut.sae.ihm;
+package src.iut.sae.ihm;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +15,7 @@ import javafx.scene.layout.Pane;
  * @author nael.briot
  *
  */
-public class ControleurImport {
+public class ControleurExport {
 
     @FXML
     private Pane idPane;

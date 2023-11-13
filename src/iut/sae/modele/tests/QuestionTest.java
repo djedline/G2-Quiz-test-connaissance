@@ -2,7 +2,7 @@
  * QuestionTest.java                                    24 oct. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
-package iut.sae.modele.tests;
+package src.iut.sae.modele.tests;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,8 +17,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import iut.sae.modele.Categorie;
-import iut.sae.modele.Question;
+import src.iut.sae.modele.Categorie;
+import src.iut.sae.modele.Question;
 
 /**Utilisation de la classe Question et test de ses méthodes
  * @author djedline.boyer
@@ -54,7 +54,7 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link iut.sae.modele.Question#Question(java.lang.String, iut.sae.modele.Categorie, java.lang.String, java.lang.String[], java.lang.String, int)}.
+     * Test method for {@link src.iut.sae.modele.Question#Question(java.lang.String, src.iut.sae.modele.Categorie, java.lang.String, java.lang.String[], java.lang.String, int)}.
      */
     @Test
     void testQuestion() {
@@ -92,7 +92,7 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link iut.sae.modele.Question#getLibelle()}.
+     * Test method for {@link src.iut.sae.modele.Question#getLibelle()}.
      */
     @Test
     void testGetLibelle() {
@@ -100,7 +100,7 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link iut.sae.modele.Question#setLibelle(java.lang.String)}.
+     * Test method for {@link src.iut.sae.modele.Question#setLibelle(java.lang.String)}.
      */
     @Test
     void testSetLibelle() {
@@ -110,7 +110,7 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link iut.sae.modele.Question#getCategorie()}.
+     * Test method for {@link src.iut.sae.modele.Question#getCategorie()}.
      */
     @Test
     void testGetCategorie() {
@@ -118,7 +118,7 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link iut.sae.modele.Question#setCategorie()}.
+     * Test method for {@link src.iut.sae.modele.Question#setCategorie()}.
      */
     @Test
     void testSetCategorie() {
@@ -128,7 +128,7 @@ class QuestionTest {
     }
     
     /**
-     * Test method for {@link iut.sae.modele.Question#getPropositionJuste()}.
+     * Test method for {@link src.iut.sae.modele.Question#getPropositionJuste()}.
      */
     @Test
     void testGetPropositionJuste() {
@@ -136,7 +136,7 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link iut.sae.modele.Question#setPropositionJuste(java.lang.String)}.
+     * Test method for {@link src.iut.sae.modele.Question#setPropositionJuste(java.lang.String)}.
      */
     @Test
     void testSetPropositionJuste() {
@@ -146,7 +146,7 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link iut.sae.modele.Question#getPropositionFausse()}.
+     * Test method for {@link src.iut.sae.modele.Question#getPropositionFausse()}.
      */
     @Test
     void testGetPropositionFausse() {
@@ -154,7 +154,7 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link iut.sae.modele.Question#setPropositionFausse(java.lang.String[])}.
+     * Test method for {@link src.iut.sae.modele.Question#setPropositionFausse(java.lang.String[])}.
      */
     @Test
     void testSetPropositionFausse() {
@@ -167,7 +167,7 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link iut.sae.modele.Question#getFeedback()}.
+     * Test method for {@link src.iut.sae.modele.Question#getFeedback()}.
      */
     @Test
     void testGetFeedback() {
@@ -175,7 +175,7 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link iut.sae.modele.Question#setFeedback(java.lang.String)}.
+     * Test method for {@link src.iut.sae.modele.Question#setFeedback(java.lang.String)}.
      */
     @Test
     void testSetFeedback() {
@@ -185,7 +185,7 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link iut.sae.modele.Question#getDifficulte()}.
+     * Test method for {@link src.iut.sae.modele.Question#getDifficulte()}.
      */
     @Test
     void testGetDifficulte() {
@@ -193,7 +193,7 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link iut.sae.modele.Question#setDifficulte(int)}.
+     * Test method for {@link src.iut.sae.modele.Question#setDifficulte(int)}.
      */
     @Test
     void testSetDifficulte() {

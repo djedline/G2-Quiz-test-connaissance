@@ -3,12 +3,10 @@
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
 
-package iut.sae.ihm;
+package src.iut.sae.ihm;
 
-import iut.sae.modele.Categorie;
 import java.util.ArrayList;
-import iut.sae.modele.Donnees;
-import iut.sae.modele.Question;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +18,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
+import src.iut.sae.modele.Categorie;
+import src.iut.sae.modele.Donnees;
+import src.iut.sae.modele.Question;
 
 /** TODO comment class responsibility (SRP)
  * @author tany.catalabailly

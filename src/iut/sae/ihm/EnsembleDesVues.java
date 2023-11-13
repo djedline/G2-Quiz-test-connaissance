@@ -2,7 +2,7 @@
  * Gére la correspondance entre le code d'une vue (un entier) et le nom
  * du fichier fxml décrivant cette vue 05/23
  */
-package iut.sae.ihm;
+package src.iut.sae.ihm;
 /**
  * Classe outil qui établit la correspondance entre un code de vue (sous la
  * forme d'un entier) et le nom du fichier fxml contenant la vue associée

@@ -1,4 +1,4 @@
-package iut.sae.ihm;
+package src.iut.sae.ihm;
 
 import java.io.File;
 import java.net.URL;
