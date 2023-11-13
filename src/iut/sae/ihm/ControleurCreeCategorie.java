@@ -47,16 +47,22 @@ public class ControleurCreeCategorie {
     void clicCreer(ActionEvent event) {
         try {
             Categorie nouvelleCategorie = new Categorie(idNom.getText());
-            Donnees.listeCategorie.add(nouvelleCategorie);
-            System.out.println(nouvelleCategorie);
+            if (!Donnees.verifDoubleCategorie(nouvelleCategorie)) {
+                Donnees.listeCategorie.add(nouvelleCategorie);
+                System.out.println(nouvelleCategorie);
+            } else {
+            	Alert messageErreur = new Alert(AlertType.ERROR);
+                messageErreur.setContentText("La categorie existe déjà.");
+                messageErreur.show();
+            }
         } catch (IllegalArgumentException exeption) {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("Le nom ne doit pas être vide.");
             messageErreur.show();
         }
-        
-        
+        idNom.setText(null);
     }
+    
     @FXML
    void clicQuitter(ActionEvent event) throws Exception { 
         EchangeurDeVue.echangerAvec(Donnees.numScenePrecedenteCategorie);
