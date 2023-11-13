@@ -4,12 +4,17 @@
  */
 package iut.sae.modele;
 
+import java.io.Serializable;
+
 /** 
  * Classe permettant de créer des catégories pour le quiz
  * @author nael.briot
  */
-public class Categorie {
+public class Categorie implements Serializable {
         
+        /** Version de la classe catégorie (date et heure au format JJMMHHmm*/
+        private static final long serialVersionUID = 13110945L;
+    
         /** Attribut contenant le titre de la Catégorie */
         private String titreCat;
         

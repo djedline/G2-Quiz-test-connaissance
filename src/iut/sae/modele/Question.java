@@ -4,12 +4,17 @@
  */
 package iut.sae.modele;
 
+import java.io.Serializable;
+
 /**
  * Classe permettant de créer des questions pour le quiz
  * @author djedline.boyer
  *
  */
-public class Question {
+public class Question implements Serializable {
+    
+    /** Version de la classe question (date et heure au format JJMMHHmm*/
+    private static final long serialVersionUID = 13110945L;
     
     /** libellé de la question */
     private String libelle;

@@ -108,7 +108,7 @@ public class ControleurCreerQuestion {
         try {
             Question nouvelleQuestion = new Question(txtIntitule.getText(), choiceCategorie.getValue(), txtRepJuste.getText(),
                     lesRepFausse, txtFeedback.getText(), laDifficulte);
-            Donnees.listeQuestion.add(nouvelleQuestion);
+            Donnees.listeQuestions.add(nouvelleQuestion);
             System.out.println(nouvelleQuestion);
             txtIntitule.setText(null);
             txtRepJuste.setText(null);
