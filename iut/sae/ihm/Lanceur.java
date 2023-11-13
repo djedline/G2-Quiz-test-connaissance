@@ -29,7 +29,7 @@ public class Lanceur extends Application {
         Donnees.listeCategorie.add(new Categorie("General"));
         FXMLLoader loader = new FXMLLoader();
 
-        File fxmlFile = new File("src/iut/sae/ihm/MenuPrincipal.fxml");
+        File fxmlFile = new File("iut/sae/ihm/MenuPrincipal.fxml");
         URL fxmlUrl = fxmlFile.toURI().toURL();
         loader.setLocation(fxmlUrl);
 

@@ -4,6 +4,7 @@ import iut.sae.modele.Categorie;
 import java.util.ArrayList;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -76,11 +77,10 @@ public class ControleurCreerQuestion {
         choiceDifficulte.getItems().add("Moyen");
         choiceDifficulte.getItems().add("Difficile");
         choiceDifficulte.setValue("Facile");
+        
+        choiceCategorie.setItems(Donnees.listeCategorie);
 
-        for(int i = 0; i < Donnees.listeCategorie.size(); i++) {
-            choiceCategorie.getItems().add(Donnees.listeCategorie.get(i));
-        }
-        choiceCategorie.setValue(Donnees.listeCategorie.get(0));
+        
     }
 
     public String[] tableauReponseFausse() {
@@ -109,21 +109,7 @@ public class ControleurCreerQuestion {
     	
     }
     
-    /** TODO comment method role
-     * 
-     */
-    @FXML
-    void resetScene() {
-        choiceDifficulte.getItems().add("Facile");
-        choiceDifficulte.getItems().add("Moyen");
-        choiceDifficulte.getItems().add("Difficile");
-        choiceDifficulte.setValue("Facile");
-
-        for(int i = 0; i < Donnees.listeCategorie.size(); i++) {
-            choiceCategorie.getItems().add(Donnees.listeCategorie.get(i));
-        }
-        choiceCategorie.setValue(Donnees.listeCategorie.get(0));
-    }
+    
     
     
     @FXML
