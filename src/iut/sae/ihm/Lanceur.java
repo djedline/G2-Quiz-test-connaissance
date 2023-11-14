@@ -17,7 +17,7 @@ import iut.sae.modele.Donnees;
  */
 public class Lanceur extends Application {
 
-    private Stage stage;
+    private static Stage stage;
     
     private double decorationWidth;
     private double decorationHeight;
@@ -31,7 +31,7 @@ public class Lanceur extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-    	this.stage = primaryStage;
+    	stage = primaryStage;
     	
     	
         Donnees.listeCategorie.add(new Categorie("General"));
@@ -47,21 +47,14 @@ public class Lanceur extends Application {
 
         Scene scene = new Scene(parent);
         EchangeurDeVue.setSceneCourante(scene);
-        this.stage.setScene(scene);
-        this.stage.show();
-        double initialSceneWidth = this.stage.getWidth();
-        double initialSceneHeight = this.stage.getHeight();
-        this.decorationWidth = initialSceneWidth - scene.getWidth();
-        this.decorationHeight = initialSceneHeight - scene.getHeight();
+        stage.setScene(scene);
+        stage.show();
+        
         
     }
+     public static void resizeScene() {
+    	 stage.sizeToScene();
+     }
     
-    /** TODO comment method role
-     * @param width
-     * @param height
-     */
-    public void resizeScene(double width, double height) {
-        this.stage.setWidth(width + this.decorationWidth);
-        this.stage.setHeight(height + this.decorationHeight);
-    }
+    
 }
