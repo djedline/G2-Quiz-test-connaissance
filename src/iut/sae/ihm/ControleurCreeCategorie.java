@@ -49,6 +49,7 @@ public class ControleurCreeCategorie {
             Categorie nouvelleCategorie = new Categorie(idNom.getText());
             Donnees.listeCategorie.add(nouvelleCategorie);
             System.out.println(nouvelleCategorie);
+            System.out.println(Donnees.listeCategorie.get(1));
         } catch (IllegalArgumentException exeption) {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("Le nom ne doit pas être vide.");

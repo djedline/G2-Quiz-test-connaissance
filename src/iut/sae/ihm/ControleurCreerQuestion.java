@@ -1,5 +1,7 @@
 package iut.sae.ihm;
 
+import java.util.ArrayList;
+
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
@@ -64,6 +66,8 @@ public class ControleurCreerQuestion {
 
     @FXML
     private TextArea txtFeedback;
+    
+    private ArrayList<String> lesRepFausse;
 
     /** TODO comment method role
      * 
@@ -79,12 +83,13 @@ public class ControleurCreerQuestion {
             choiceCategorie.getItems().add(Donnees.listeCategorie.get(i));
         }
         choiceCategorie.setValue(Donnees.listeCategorie.get(0));
+        lesRepFausse = new ArrayList<>();
     }
 
     @FXML
     void creerQuestion(ActionEvent event) {
         int laDifficulte;
-
+        String[] faux;
         switch(choiceDifficulte.getValue()){
 
         case "Facile": 
@@ -98,16 +103,28 @@ public class ControleurCreerQuestion {
         case "Difficile":
             laDifficulte = 3;
             break;
-
         default:
             throw new IllegalArgumentException("Mauvaise valeur dans le choiceBox de difficulté");
 
         }
-        String[] lesRepFausse = {txtRepFausse1.getText(),txtRepFausse2.getText(), 
-                txtRepFausse3.getText(),txtRepFausse4.getText()};
+        lesRepFausse.add(txtRepFausse1.getText());
+        lesRepFausse.add(txtRepFausse2.getText());
+        lesRepFausse.add(txtRepFausse3.getText());
+        lesRepFausse.add(txtRepFausse4.getText());
+        
+        
         try {
+            for (int i = 0; i < 4; i++) {
+                if (lesRepFausse.get(i) == null) {
+                    lesRepFausse.remove(i);
+                }
+            }
+            faux = new String[lesRepFausse.size()];
+            for (int i = 0; i < 4; i++) {
+                faux[i] = lesRepFausse.get(i);
+            }
             Question nouvelleQuestion = new Question(txtIntitule.getText(), choiceCategorie.getValue(), txtRepJuste.getText(),
-                    lesRepFausse, txtFeedback.getText(), laDifficulte);
+                    faux, txtFeedback.getText(), laDifficulte);
             Donnees.listeQuestion.add(nouvelleQuestion);
             System.out.println(nouvelleQuestion);
             txtIntitule.setText(null);
