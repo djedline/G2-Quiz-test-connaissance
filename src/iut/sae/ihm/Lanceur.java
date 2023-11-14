@@ -3,6 +3,7 @@ package iut.sae.ihm;
 import java.io.File;
 import java.net.URL;
 
+import iut.sae.ihm.EchangeurDeVue;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import javafx.application.Application;
