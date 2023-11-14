@@ -11,11 +11,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Centralise les données de l'application.
  * 
+=======
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+/** TODO comment class responsibility (SRP)
+>>>>>>> main
  * @author djedline.boyer
  */
 public class Donnees {
@@ -31,10 +39,10 @@ public class Donnees {
     public static final File FICH_CATEGORIES = new File("donnees/categories.data");
 
     /** Liste de Categorie */
-    public static ArrayList<Categorie> listeCategorie;
-
-    /** Liste de Categorie */
-    public static ArrayList<Question> listeQuestions;
+    public static ObservableList <Categorie> listeCategorie = FXCollections.observableArrayList();
+    
+    /** Liste de Questions */
+    public static ObservableList <Question> listeQuestions = FXCollections.observableArrayList();
 
     /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
     public static int numScenePrecedenteCategorie;
@@ -80,11 +88,11 @@ public class Donnees {
         boolean donneesChargees = true;
         try {
             if (FICH_CATEGORIES.exists()) {
-                listeCategorie = (ArrayList<Categorie>) 
+                listeCategorie = (ObservableList<Categorie>) 
                         chargerSauvegarde(FICH_CATEGORIES);
             }
             if (FICH_QUESTIONS.exists()) {
-                listeQuestions = (ArrayList<Question>) 
+                listeQuestions = (ObservableList<Question>) 
                         chargerSauvegarde(FICH_QUESTIONS);
             }
         } catch (Exception e) {
@@ -93,12 +101,12 @@ public class Donnees {
         }
         // Cas par défaut
         if (listeCategorie == null) {
-            listeCategorie = new ArrayList<Categorie>();
+            listeCategorie = FXCollections.observableArrayList();
             listeCategorie.add(new Categorie("Général"));
             donneesChargees = false;
         }
         if (listeQuestions == null) {
-            listeQuestions = new ArrayList<Question>();
+            listeQuestions = FXCollections.observableArrayList();
             donneesChargees = false;
         }
         afficherDonnees();
@@ -132,11 +140,10 @@ public class Donnees {
         }
    }
     
-   /** 
-    * Vérifie que la catégorie ajoutée n'est pas un double 
-    * @param aVerifier la catégorie que l'on souhaite vérifier
-    * @return true si la catégorie est un doublon, false sinon.
-    */
+
+   /** Verifie que la categorie ajouté n'est pas un double 
+     * @param aVerifier la catégorie à analyser
+     * @return true si aVerifier est un doublon*/
     public static boolean verifDoubleCategorie(Categorie aVerifier) {
     	boolean doubleOk = false;
     	for (int i = 0; i < listeCategorie.size() && !doubleOk; i++) {
@@ -145,11 +152,9 @@ public class Donnees {
     	return doubleOk;
     }
     
-    /** 
-     * Vérifie que la question ajoutée n'est pas un double
-     * @param aVerifier la question que l'on souhaite vérifier
-     * @return true si la question est un doublon, false sinon
-     */
+    /** Verifie que la question ajouté n'est pas un double 
+     * @param aVerifier la question à analyser
+     * @return true si aVerifier est un doublon*/
     public static boolean verifDoubleQuestion(Question aVerifier) {
     	boolean doubleOk = false;
     	for (int i = 0; i < listeQuestions.size() && !doubleOk; i++) {
@@ -157,4 +162,5 @@ public class Donnees {
     	}
     	return doubleOk;
     }
+
 }
