@@ -4,9 +4,9 @@
  * Pas de droits d'auteur, pas de copyright ni de "copyleft"
  */
 
-package src.iut.sae.modele.tests;
+package iut.sae.modele.tests;
 
-import src.iut.sae.modele.Categorie;
+import iut.sae.modele.Categorie;
 
 /**
  * Utilisation de la classe Catégorie et test de ses méthodes

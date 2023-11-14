@@ -2,7 +2,7 @@
  * Question.java                                    17 oct. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
-package src.iut.sae.modele;
+package iut.sae.modele;
 
 /**
  * Classe permettant de créer des questions pour le quiz
@@ -74,7 +74,9 @@ public class Question {
         return questionOk;
     }
     
-    /** TODO comparer deux Questions */
+    /** TODO comparer deux Questions 
+     * @param aComparer 
+     * @return Vrai ou faux selon si les 2 Questions sont égales ou non*/
     public boolean compareTo(Question aComparer) {
         boolean propOk = propositionFausse.length == aComparer.getPropositionFausse().length;
         for (int index = 0; index < propositionFausse.length && propOk; index++) {

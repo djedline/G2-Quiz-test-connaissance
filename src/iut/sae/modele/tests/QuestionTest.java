@@ -2,7 +2,7 @@
  * QuestionTest.java                                    24 oct. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
-package src.iut.sae.modele.tests;
+package iut.sae.modele.tests;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,8 +17,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import src.iut.sae.modele.Categorie;
-import src.iut.sae.modele.Question;
+import iut.sae.modele.Categorie;
+import iut.sae.modele.Question;
 
 /**Utilisation de la classe Question et test de ses méthodes
  * @author djedline.boyer

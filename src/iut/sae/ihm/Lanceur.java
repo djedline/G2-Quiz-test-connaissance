@@ -1,4 +1,4 @@
-package src.iut.sae.ihm;
+package iut.sae.ihm;
 
 import java.io.File;
 import java.net.URL;
@@ -8,8 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import src.iut.sae.modele.Categorie;
-import src.iut.sae.modele.Donnees;
+import iut.sae.modele.Categorie;
+import iut.sae.modele.Donnees;
 
 /** Lanceur de l'application
  * @author tany.catalabailly
@@ -17,15 +17,14 @@ import src.iut.sae.modele.Donnees;
  */
 public class Lanceur extends Application {
 
+    private Stage stage;
+    
+    private double decorationWidth;
+    private double decorationHeight;
+    
     /**Programme principal
      * @param args
      */
-	
-	private Stage stage;
-	
-	private double decorationWidth;
-	private double decorationHeight;
-	
     public static void main(String[] args) {
         launch(args);
     }
@@ -57,6 +56,10 @@ public class Lanceur extends Application {
         
     }
     
+    /** TODO comment method role
+     * @param width
+     * @param height
+     */
     public void resizeScene(double width, double height) {
         this.stage.setWidth(width + this.decorationWidth);
         this.stage.setHeight(height + this.decorationHeight);

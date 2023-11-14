@@ -2,7 +2,7 @@
 /*
  * Gère l'échange entre les vues affichées par la scène de l'application 05/23
  */
-package src.iut.sae.ihm;
+package iut.sae.ihm;
 
 import java.io.IOException;
 import java.util.HashMap;

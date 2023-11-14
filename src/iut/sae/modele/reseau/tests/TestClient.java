@@ -2,14 +2,14 @@
  * TestClient.java                                    25 oct. 2023
  * IUT Rodez, info2 2022-2023, pas de copyright ni "copyleft"
  */
-package src.iut.sae.modele.reseau.tests;
+package iut.sae.modele.reseau.tests;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
 
-import src.iut.sae.modele.reseau.Client;
+import iut.sae.modele.reseau.Client;
 /** 
  * @author leila.baudroit
  */

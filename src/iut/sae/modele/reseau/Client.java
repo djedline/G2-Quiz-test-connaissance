@@ -2,7 +2,7 @@
  * ClientSocket.java                                    24 oct. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
-package src.iut.sae.modele.reseau;
+package iut.sae.modele.reseau;
 
 import java.io.File;
 import java.io.FileReader;

@@ -1,4 +1,4 @@
-package src.iut.sae.ihm;
+package iut.sae.ihm;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import src.iut.sae.modele.Donnees;
+import iut.sae.modele.Donnees;
 
 /**Controleur de la page pour la Gestion des Données
  * @author nael.briot

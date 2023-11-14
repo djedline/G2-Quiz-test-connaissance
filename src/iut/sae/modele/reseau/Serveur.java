@@ -1,7 +1,7 @@
 /* Serveur.java												16/10/2023
  * IUT Rodez, info2 2023-2024, pas de copyright ni de "copyleft"
  */
-package src.iut.sae.modele.reseau;
+package iut.sae.modele.reseau;
 
 import java.io.File;
 import java.io.FileReader;

@@ -2,7 +2,7 @@
  * Categorie.java                                    18 oct. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
-package src.iut.sae.modele;
+package iut.sae.modele;
 
 /** 
  * Classe permettant de créer des catégories pour le quiz
@@ -31,7 +31,9 @@ public class Categorie {
                 return this.titreCat;
         }
         
-        /** TODO comparer deux Categories */
+        /** TODO comparer deux Categories 
+         * @param aComparer 
+         * @return Vrai ou faux selon si les 2 catégories sont égales ou non*/
         public boolean compareTo(Categorie aComparer) {
         	return titreCat.toUpperCase().equals(aComparer.getLibelle().toUpperCase());
         }
