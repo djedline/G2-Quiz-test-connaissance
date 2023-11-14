@@ -179,7 +179,7 @@ public class ControleurCreerQuestion {
 
     @FXML
     void annulerQuestion(ActionEvent event) {
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_MENU_GESTION_DONNEES);
     }
 
 }
