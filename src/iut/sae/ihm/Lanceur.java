@@ -3,6 +3,7 @@ package iut.sae.ihm;
 import java.io.File;
 import java.net.URL;
 
+import iut.sae.ihm.ControleurMenuPrincipal;
 import iut.sae.ihm.EchangeurDeVue;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
@@ -18,6 +19,11 @@ import javafx.stage.Stage;
  */
 public class Lanceur extends Application {
 
+    private Stage stage;
+    
+    private double decorationWidth;
+    private double decorationHeight;
+    
     /**Programme principal
      * @param args
      */
@@ -27,6 +33,9 @@ public class Lanceur extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+    	this.stage = primaryStage;
+    	
+    	
         Donnees.listeCategorie.add(new Categorie("General"));
         FXMLLoader loader = new FXMLLoader();
 
@@ -36,12 +45,26 @@ public class Lanceur extends Application {
 
         Parent parent = (Parent) loader.load();
 
-        ControleurMenuPrincipal controllerRef = loader.getController();
+        ControleurMenuPrincipal controllerRef = 
+        		(ControleurMenuPrincipal) loader.getController();
 
         Scene scene = new Scene(parent);
         EchangeurDeVue.setSceneCourante(scene);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        this.stage.setScene(scene);
+        this.stage.show();
+        double initialSceneWidth = this.stage.getWidth();
+        double initialSceneHeight = this.stage.getHeight();
+        this.decorationWidth = initialSceneWidth - scene.getWidth();
+        this.decorationHeight = initialSceneHeight - scene.getHeight();
         
+    }
+    
+    /** TODO comment method role
+     * @param width
+     * @param height
+     */
+    public void resizeScene(double width, double height) {
+        this.stage.setWidth(width + this.decorationWidth);
+        this.stage.setHeight(height + this.decorationHeight);
     }
 }

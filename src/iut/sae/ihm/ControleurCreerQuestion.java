@@ -82,11 +82,10 @@ public class ControleurCreerQuestion {
         choiceDifficulte.getItems().add("Moyen");
         choiceDifficulte.getItems().add("Difficile");
         choiceDifficulte.setValue("Facile");
+        
+        choiceCategorie.setItems(Donnees.listeCategorie);
 
-        for(int i = 0; i < Donnees.listeCategorie.size(); i++) {
-            choiceCategorie.getItems().add(Donnees.listeCategorie.get(i));
-        }
-        choiceCategorie.setValue(Donnees.listeCategorie.get(0));
+        
     }
 
     /** TODO comment method role
@@ -118,21 +117,7 @@ public class ControleurCreerQuestion {
     	
     }
     
-    /** TODO comment method role
-     * 
-     */
-    @FXML
-    void resetScene() {
-        choiceDifficulte.getItems().add("Facile");
-        choiceDifficulte.getItems().add("Moyen");
-        choiceDifficulte.getItems().add("Difficile");
-        choiceDifficulte.setValue("Facile");
-
-        for(int i = 0; i < Donnees.listeCategorie.size(); i++) {
-            choiceCategorie.getItems().add(Donnees.listeCategorie.get(i));
-        }
-        choiceCategorie.setValue(Donnees.listeCategorie.get(0));
-    }
+    
     
     
     @FXML

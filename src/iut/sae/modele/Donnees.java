@@ -6,6 +6,9 @@ package iut.sae.modele;
 
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /** TODO comment class responsibility (SRP)
  * @author djedline.boyer
  *
@@ -13,15 +16,17 @@ import java.util.ArrayList;
 public class Donnees {
     
     /** Liste de Categorie */
-    public static ArrayList <Categorie> listeCategorie = new ArrayList <>();
+    public static ObservableList <Categorie> listeCategorie = FXCollections.observableArrayList();
     
     /** Liste de Categorie */
-    public static ArrayList <Question> listeQuestion = new ArrayList <>();
+    public static ObservableList <Question> listeQuestion = FXCollections.observableArrayList();
     
     /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
     public static int numScenePrecedenteCategorie;
     
-   /** Verifie que la categorie ajouté n'est pas un double */
+   /** Verifie que la categorie ajouté n'est pas un double 
+     * @param aVerifier la catégorie à analyser
+     * @return true si aVerifier est un doublon*/
     public static boolean verifDoubleCategorie(Categorie aVerifier) {
     	boolean doubleOk = false;
     	for (int i = 0; i < listeCategorie.size() && !doubleOk; i++) {
@@ -30,7 +35,9 @@ public class Donnees {
     	return doubleOk;
     }
     
-    /** Verifie que la categorie ajouté n'est pas un double */
+    /** Verifie que la question ajouté n'est pas un double 
+     * @param aVerifier la question à analyser
+     * @return true si aVerifier est un doublon*/
     public static boolean verifDoubleQuestion(Question aVerifier) {
     	boolean doubleOk = false;
     	for (int i = 0; i < listeQuestion.size() && !doubleOk; i++) {
