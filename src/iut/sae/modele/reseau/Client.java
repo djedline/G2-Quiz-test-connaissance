@@ -66,9 +66,9 @@ public class Client {
     /**
      * Méthode qui crée le message a envoyer au serveur a partir d'un fichier
      * @param aEnvoyer fichier que l'on va traiter pour etre envoyer sous 
-     * 					forme de chaine 
+     * forme de chaine 
      * @return renvoie une chaine avec le contenu du fichier
-     * @throws 
+     * @throws IOException si le message n'a pas pu être construit 
      */
     public static String contruireMessage(File aEnvoyer) throws IOException{
     	System.out.println("Chemin : " + aEnvoyer.getAbsolutePath());

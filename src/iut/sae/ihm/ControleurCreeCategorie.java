@@ -4,10 +4,6 @@
  */
 package iut.sae.ihm;
 
-
-import java.io.File;
-import java.net.URL;
-
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import javafx.event.ActionEvent;
@@ -47,17 +43,22 @@ public class ControleurCreeCategorie {
     void clicCreer(ActionEvent event) {
         try {
             Categorie nouvelleCategorie = new Categorie(idNom.getText());
-            Donnees.listeCategorie.add(nouvelleCategorie);
-            System.out.println(nouvelleCategorie);
-            System.out.println(Donnees.listeCategorie.get(1));
+            if (!Donnees.verifDoubleCategorie(nouvelleCategorie)) {
+                Donnees.listeCategorie.add(nouvelleCategorie);
+                System.out.println(nouvelleCategorie);
+            } else {
+            	Alert messageErreur = new Alert(AlertType.ERROR);
+                messageErreur.setContentText("La categorie existe déjà.");
+                messageErreur.show();
+            }
         } catch (IllegalArgumentException exeption) {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("Le nom ne doit pas être vide.");
             messageErreur.show();
         }
-        
-        
+        idNom.setText(null);
     }
+    
     @FXML
    void clicQuitter(ActionEvent event) throws Exception { 
         EchangeurDeVue.echangerAvec(Donnees.numScenePrecedenteCategorie);

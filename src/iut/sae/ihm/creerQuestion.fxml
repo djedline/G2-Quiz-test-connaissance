@@ -8,8 +8,8 @@
 <Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.ControleurCreerQuestion">
 	<children>
 		<Button fx:id="btnCreer" layoutX="80.0" layoutY="545.0" mnemonicParsing="false" onAction="#creerQuestion" prefHeight="25.0" prefWidth="131.0" text="Créer" />
-		<TextField fx:id="txtIntitule" layoutX="101.0" layoutY="131.0" prefHeight="30.0" prefWidth="340.0" />
-		<Label fx:id="idLabelNom" layoutX="25.0" layoutY="133.0" prefHeight="21.0" prefWidth="97.0" text="Intitulé : ">
+		<TextField fx:id="txtIntitule" layoutX="106.0" layoutY="131.0" prefHeight="30.0" prefWidth="335.0" />
+		<Label fx:id="idLabelNom" layoutX="25.0" layoutY="133.0" prefHeight="21.0" prefWidth="97.0" text="Question : ">
          <font>
             <Font size="17.0" />
          </font></Label>

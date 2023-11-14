@@ -1,10 +1,14 @@
+/*
+ * ControleurCreerQuestion.java                                    24 Oct. 2023
+ * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ */
+
 package iut.sae.ihm;
 
 import java.util.ArrayList;
 
-import iut.sae.modele.Categorie;
-import iut.sae.modele.Donnees;
-import iut.sae.modele.Question;
+
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -15,6 +19,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
+import iut.sae.modele.Categorie;
+import iut.sae.modele.Donnees;
+import iut.sae.modele.Question;
 
 /** TODO comment class responsibility (SRP)
  * @author tany.catalabailly
@@ -69,6 +76,7 @@ public class ControleurCreerQuestion {
     
     private ArrayList<String> lesRepFausse;
 
+    
     /** TODO comment method role
      * 
      */
@@ -78,14 +86,45 @@ public class ControleurCreerQuestion {
         choiceDifficulte.getItems().add("Moyen");
         choiceDifficulte.getItems().add("Difficile");
         choiceDifficulte.setValue("Facile");
+        
+        choiceCategorie.setItems(Donnees.listeCategorie);
 
-        for(int i = 0; i < Donnees.listeCategorie.size(); i++) {
-            choiceCategorie.getItems().add(Donnees.listeCategorie.get(i));
-        }
-        choiceCategorie.setValue(Donnees.listeCategorie.get(0));
-        lesRepFausse = new ArrayList<>();
+
+
     }
 
+    /** TODO comment method role
+     * @return repFausse Laou les réponses fausses
+     */
+    public String[] tableauReponseFausse() {
+    	ArrayList<String> listeIntermediaire = new ArrayList<>();
+    	String[] repFausse;
+    	if (txtRepFausse1.getText() == null || txtRepFausse1.getText().isBlank()) {
+    		throw new IllegalArgumentException();
+    	} else {
+    		listeIntermediaire.add(txtRepFausse1.getText());
+    	}
+    	if (txtRepFausse2.getText() != null && !txtRepFausse2.getText().isBlank()) {
+    		listeIntermediaire.add(txtRepFausse2.getText());
+    	}
+    	if (txtRepFausse3.getText() != null && !txtRepFausse3.getText().isBlank()) {
+    		listeIntermediaire.add(txtRepFausse3.getText());
+    	}
+    	if (txtRepFausse4.getText() != null && !txtRepFausse4.getText().isBlank()) {
+    		listeIntermediaire.add(txtRepFausse4.getText());
+    	}
+    	System.out.println(listeIntermediaire.size());
+    	System.out.println(txtRepFausse3.getText() != null);
+    	System.out.println(txtRepFausse3.getText().isBlank());
+    	repFausse = new String[listeIntermediaire.size()];
+    	repFausse = listeIntermediaire.toArray(repFausse);
+		return repFausse;
+    	
+    }
+    
+    
+    
+    
     @FXML
     void creerQuestion(ActionEvent event) {
         int laDifficulte;
@@ -107,40 +146,39 @@ public class ControleurCreerQuestion {
             throw new IllegalArgumentException("Mauvaise valeur dans le choiceBox de difficulté");
 
         }
-        lesRepFausse.add(txtRepFausse1.getText());
-        lesRepFausse.add(txtRepFausse2.getText());
-        lesRepFausse.add(txtRepFausse3.getText());
-        lesRepFausse.add(txtRepFausse4.getText());
-        
-        
+
         try {
-            for (int i = 0; i < 4; i++) {
-                if (lesRepFausse.get(i) == null) {
-                    lesRepFausse.remove(i);
-                }
-            }
-            faux = new String[lesRepFausse.size()];
-            for (int i = 0; i < 4; i++) {
-                faux[i] = lesRepFausse.get(i);
-            }
+        	System.out.println(txtRepFausse1.getText() == null);
             Question nouvelleQuestion = new Question(txtIntitule.getText(), choiceCategorie.getValue(), txtRepJuste.getText(),
-                    faux, txtFeedback.getText(), laDifficulte);
-            Donnees.listeQuestion.add(nouvelleQuestion);
-            System.out.println(nouvelleQuestion);
+            		tableauReponseFausse(), txtFeedback.getText(), laDifficulte);
+            
+            if (!Donnees.verifDoubleQuestion(nouvelleQuestion)) {
+            	Donnees.listeQuestion.add(nouvelleQuestion);
+                System.out.println(nouvelleQuestion);
+            } else {
+            	Alert messageErreur = new Alert(AlertType.ERROR);
+                messageErreur.setContentText("La Question existe déjà.");
+                messageErreur.show();
+            }
+            
             txtIntitule.setText(null);
             txtRepJuste.setText(null);
             txtFeedback.setText(null);
+            txtRepFausse1.setText(null);
+            txtRepFausse2.setText(null);
+            txtRepFausse3.setText(null);
+            txtRepFausse4.setText(null);
         } catch (IllegalArgumentException exeption) {
             Alert messageErreur = new Alert(AlertType.ERROR);
-            messageErreur.setContentText("Le nom ne doit pas être vide.");
+            messageErreur.setContentText("Certains champs sont vides");
             messageErreur.show();
         }
     }
 
     @FXML
     void ajouterCategorie(ActionEvent event) {
-        Donnees.numScenePrecedenteCategorie = EnsembleDesVues.VUE_QUESTION;
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CATEGORIE);
+    	Donnees.numScenePrecedenteCategorie = EnsembleDesVues.VUE_QUESTION;
+    	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CATEGORIE);
     }
 
     @FXML
