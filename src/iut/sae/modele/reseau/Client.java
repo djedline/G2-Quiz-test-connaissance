@@ -38,7 +38,7 @@ public class Client {
                 while(s.isEmpty()) {
                 	System.out.print("Saisissez le chemin absolu du fichier a envoyer : ");
                 	fichierATraiter = new File(sc.nextLine());
-                	message = contruireMessage(fichierATraiter);
+                	message = construireMessage(fichierATraiter);
                 	envoyerMessage(message.getBytes());
                     s = recevoirMessage();
                 }
@@ -70,7 +70,7 @@ public class Client {
      * @return renvoie une chaine avec le contenu du fichier
      * @throws IOException si le message n'a pas pu être construit 
      */
-    public static String contruireMessage(File aEnvoyer) throws IOException{
+    public static String construireMessage(File aEnvoyer) throws IOException{
     	System.out.println("Chemin : " + aEnvoyer.getAbsolutePath());
     	FileReader fr = new FileReader(aEnvoyer);
     	String message = "";

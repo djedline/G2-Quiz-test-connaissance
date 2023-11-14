@@ -4,12 +4,18 @@
  */
 package iut.sae.ihm;
 
+import java.io.File;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
+import javafx.scene.Node;
 
 /** TODO comment class responsibility (SRP)
  * @author nael.briot
@@ -35,6 +41,22 @@ public class ControleurExport {
     @FXML
     private Button btnValider;
 
+    private void choixFichier(Stage stage1) {
+       /* FileChooser fileChooser = new FileChooser();
+        // Ajout d'un filtre pour ne montrer que certains fichiers
+        ExtensionFilter extFilter = new ExtensionFilter("Fichiers texte(*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+        
+        stage1.getScene().getWindow();
+        //Afficher la boîte de dialogue de choix de fichier
+        //File fichierSelectionner = fileChooser.showOpenDialog();*/
+    }
+    
+    @FXML
+    void chercherFichier (ActionEvent event) {
+
+    }
+    
     @FXML
     void clicValider(ActionEvent event) {
         System.out.print("TODO");
