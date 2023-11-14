@@ -1,67 +1,40 @@
+/**
+ * Sample Skeleton for 'GestionDonnees.fxml' Controller Class
+ */
+
 package iut.sae.ihm;
 
-import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import iut.sae.modele.Donnees;
+import javafx.scene.control.TreeView;
 
-/**Controleur de la page pour la Gestion des Données
- * @author nael.briot
- *
- */
 public class ControleurGestionDonnees {
 
-    @FXML
-    private Pane idPane;
-    
-    @FXML
-    private Label idTitre;
-    
-    @FXML
-    private Button btnPageCat;
-    
-    @FXML
-    private Button btnPageQuest;
+    @FXML // ResourceBundle that was given to the FXMLLoader
+    private ResourceBundle resources;
+
+    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    private URL location;
+
+    @FXML // fx:id="btnAnnuler"
+    private Button btnAnnuler; // Value injected by FXMLLoader
+
+    @FXML // fx:id="treeViewData"
+    private TreeView<?> treeViewData; // Value injected by FXMLLoader
 
     @FXML
-    private Button btnImpExp;
-    
-    @FXML
-    private Button btnShareData;
-
-    @FXML
-    private Button btnQuitter;
-
-    @FXML
-    void clicPageCat(ActionEvent event) throws Exception {
-        Donnees.numScenePrecedenteCategorie = EnsembleDesVues.VUE_GESTION_DONNEES;
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CATEGORIE);
-    }
-
-    @FXML
-    void clicPageQuest(ActionEvent event) throws Exception {
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_QUESTION);
-    }
-
-    @FXML
-    void clicImpExp(ActionEvent event) {
+    void retourArriere(ActionEvent event) {
 
     }
 
-    @FXML
-    void clicShareData(ActionEvent event) {
+    @FXML // This method is called by the FXMLLoader when initialization is complete
+    void initialize() {
+        assert btnAnnuler != null : "fx:id=\"btnAnnuler\" was not injected: check your FXML file 'GestionDonnees.fxml'.";
+        assert treeViewData != null : "fx:id=\"treeViewData\" was not injected: check your FXML file 'GestionDonnees.fxml'.";
 
-    }
-    
-    @FXML
-    void clicQuitter(ActionEvent event) throws MalformedURLException {
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);
     }
 
 }
