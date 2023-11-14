@@ -20,6 +20,8 @@ import javafx.stage.WindowEvent;
  *
  */
 public class Lanceur extends Application {
+    
+    private static Stage primaryStage;
 
     /** Programme principal
      * @param args
@@ -31,6 +33,7 @@ public class Lanceur extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Donnees.charger();
+        Lanceur.primaryStage = primaryStage;
         FXMLLoader loader = new FXMLLoader();
 
         File fxmlFile = new File("src/iut/sae/ihm/MenuPrincipal.fxml");
@@ -57,6 +60,12 @@ public class Lanceur extends Application {
         EchangeurDeVue.setSceneCourante(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
-        
+    }
+    
+    /**
+     * Arrête le programme
+     */
+    public static void close() {
+        Lanceur.primaryStage.close();
     }
 }

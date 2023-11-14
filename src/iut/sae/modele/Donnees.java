@@ -23,18 +23,18 @@ public class Donnees {
     /**
      * Le chemin dans lequel les questions sont sauvegardées.
      */
-    private static File FICH_QUESTIONS = new File("donnees/questions.data");
+    public static final File FICH_QUESTIONS = new File("donnees/questions.data");
 
     /**
      * Le chemin dans lequel les catégories sont sauvegardées.
      */
-    private static File FICH_CATEGORIES = new File("donnees/categories.data");
+    public static final File FICH_CATEGORIES = new File("donnees/categories.data");
 
     /** Liste de Categorie */
-    public static ArrayList<Categorie> listeCategorie = new ArrayList<>();
+    public static ArrayList<Categorie> listeCategorie;
 
     /** Liste de Categorie */
-    public static ArrayList<Question> listeQuestions = new ArrayList<>();
+    public static ArrayList<Question> listeQuestions;
 
     /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
     public static int numScenePrecedenteCategorie;
@@ -80,10 +80,12 @@ public class Donnees {
         boolean donneesChargees = true;
         try {
             if (FICH_CATEGORIES.exists()) {
-                listeCategorie = (ArrayList<Categorie>) chargerSauvegarde(FICH_CATEGORIES);
+                listeCategorie = (ArrayList<Categorie>) 
+                        chargerSauvegarde(FICH_CATEGORIES);
             }
             if (FICH_QUESTIONS.exists()) {
-                listeQuestions = (ArrayList<Question>) chargerSauvegarde(FICH_QUESTIONS);
+                listeQuestions = (ArrayList<Question>) 
+                        chargerSauvegarde(FICH_QUESTIONS);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,7 +94,7 @@ public class Donnees {
         // Cas par défaut
         if (listeCategorie == null) {
             listeCategorie = new ArrayList<Categorie>();
-            listeCategorie.add(new Categorie("Tous"));
+            listeCategorie.add(new Categorie("Général"));
             donneesChargees = false;
         }
         if (listeQuestions == null) {
@@ -138,7 +140,7 @@ public class Donnees {
     public static boolean verifDoubleCategorie(Categorie aVerifier) {
     	boolean doubleOk = false;
     	for (int i = 0; i < listeCategorie.size() && !doubleOk; i++) {
-    		doubleOk = listeCategorie.get(i).compareTo(aVerifier);
+    		doubleOk = listeCategorie.get(i).equals(aVerifier);
     	}
     	return doubleOk;
     }
@@ -151,7 +153,7 @@ public class Donnees {
     public static boolean verifDoubleQuestion(Question aVerifier) {
     	boolean doubleOk = false;
     	for (int i = 0; i < listeQuestions.size() && !doubleOk; i++) {
-    		doubleOk = listeQuestions.get(i).compareTo(aVerifier);
+    		doubleOk = listeQuestions.get(i).equals(aVerifier);
     	}
     	return doubleOk;
     }

@@ -80,17 +80,25 @@ public class Question implements Serializable {
     }
     
     /** TODO comparer deux Questions */
-    public boolean compareTo(Question aComparer) {
-        boolean propOk = propositionFausse.length == aComparer.getPropositionFausse().length;
-        for (int index = 0; index < propositionFausse.length && propOk; index++) {
-            propOk = propositionFausse[index].toUpperCase().equals(aComparer.getPropositionFausse()[index].toUpperCase());
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
         }
-    	return libelle.toUpperCase().equals(aComparer.getLibelle().toUpperCase())
-        && nomCategorie.compareTo(nomCategorie)
-        && propositionJuste.toUpperCase().equals(aComparer.getPropositionJuste().toUpperCase())
-        && propOk
-        && feedback.toUpperCase().equals(aComparer.feedback.toUpperCase())
-        && difficulte == aComparer.getDifficulte();
+        if (o instanceof Question) {
+            Question aComparer = (Question) o;
+            boolean propOk = propositionFausse.length == aComparer.getPropositionFausse().length;
+            for (int index = 0; index < propositionFausse.length && propOk; index++) {
+                propOk = propositionFausse[index].toUpperCase().equals(aComparer.getPropositionFausse()[index].toUpperCase());
+            }
+            return libelle.toUpperCase().equals(aComparer.getLibelle().toUpperCase())
+            && nomCategorie.equals(nomCategorie)
+            && propositionJuste.toUpperCase().equals(aComparer.getPropositionJuste().toUpperCase())
+            && propOk
+            && feedback.toUpperCase().equals(aComparer.feedback.toUpperCase())
+            && difficulte == aComparer.getDifficulte();
+        } else {
+            return false;
+        }
     }
     
     /** @return valeur de libelle */

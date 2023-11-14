@@ -36,15 +36,24 @@ public class Categorie implements Serializable {
                 return this.titreCat;
         }
         
-        /** TODO comparer deux Categories */
-        public boolean compareTo(Categorie aComparer) {
-        	return titreCat.toUpperCase().equals(aComparer.getLibelle().toUpperCase());
-        }
-        
         /* non javadoc - @see java.lang.Object#toString() */
         @Override
         public String toString() {
             return this.titreCat;
+        }
+        
+        @Override
+        public boolean equals(Object o) {
+            if (o == this) {
+                return true;
+            }
+            if (o instanceof Categorie) {
+                Categorie converti = (Categorie) o;
+                return this.titreCat.toUpperCase().equals(
+                        converti.getLibelle().toUpperCase());
+            } else {
+                return false;
+            }
         }
         
         
