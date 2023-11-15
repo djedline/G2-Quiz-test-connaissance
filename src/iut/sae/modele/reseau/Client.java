@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Scanner;
+import iut.sae.modele.reseau.Cryptage;
 
 /** 
  * Représente le client dans les échanges de données via le réseau.
@@ -89,6 +90,7 @@ public class Client {
             try {
                 OutputStream os = sock.getOutputStream();
                 os.write(data);
+             // chiffrer(data);
                 System.out.println("Le client a envoyé : " + data.toString());
             } catch (IOException e) {
                 throw new IOException("Impossible d'envoyer le message au serveur.");
