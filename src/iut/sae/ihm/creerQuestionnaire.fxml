@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.ControleurQuestionnaire">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.ControleurCreerQuestionnaire">
 	<children>
 		<Button fx:id="btnValider" layoutX="78.0" layoutY="235.0" mnemonicParsing="false" onAction="#clicValider" prefHeight="25.0" prefWidth="131.0" text="Valider" />
 		<Label fx:id="idLabelNom" layoutX="28.0" layoutY="48.0" prefHeight="21.0" prefWidth="161.0" text="Choisir la difficulté :">
@@ -23,13 +23,13 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <MenuButton layoutX="211.0" layoutY="112.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0">
+      <MenuButton fx:id="idCategorie" layoutX="211.0" layoutY="112.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-      <MenuButton layoutX="211.0" layoutY="46.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0">
+      <MenuButton fx:id="idDifficulte" layoutX="211.0" layoutY="46.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0">
          <items>
             <MenuItem mnemonicParsing="false" text="Action 1" />
             <MenuItem mnemonicParsing="false" text="Action 2" />

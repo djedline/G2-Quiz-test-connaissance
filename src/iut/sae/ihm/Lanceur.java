@@ -21,9 +21,6 @@ public class Lanceur extends Application {
 
     private static Stage stage;
     
-    private double decorationWidth;
-    private double decorationHeight;
-    
     /**Programme principal
      * @param args
      */

@@ -1,6 +1,6 @@
 /*
  * ClientSocket.java                                    24 oct. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.modele.reseau;
 
