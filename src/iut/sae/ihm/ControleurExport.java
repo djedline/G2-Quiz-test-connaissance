@@ -5,7 +5,10 @@
 package iut.sae.ihm;
 
 import java.io.File;
+import java.io.IOException;
 
+import iut.sae.ihm.testFile;
+import iut.sae.modele.reseau.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -37,6 +40,9 @@ public class ControleurExport {
 
     @FXML
     private Label idLabelNom;
+    
+    @FXML
+    private Label FichierAExporter;
 
     @FXML
     private Button btnValider;
@@ -50,16 +56,31 @@ public class ControleurExport {
         stage1.getScene().getWindow();
         //Afficher la boîte de dialogue de choix de fichier
         //File fichierSelectionner = fileChooser.showOpenDialog();*/
+        testFile.main(null);
     }
     
     @FXML
     void chercherFichier (ActionEvent event) {
-
+        System.out.print("TODO");
     }
     
     @FXML
     void clicValider(ActionEvent event) {
-        System.out.print("TODO");
+        String message;
+        String s;
+        s ="";
+        message ="";
+        File fichierATraiter;
+        fichierATraiter = new File(FichierAExporter.getText());
+        try {
+            message = Client.construireMessage(fichierATraiter);
+            Client.envoyerMessage(message.getBytes());
+            s = Client.recevoirMessage();
+            Client.fermerSocket();
+        } catch (IOException | InterruptedException e) {
+            System.out.println("Problème avec le fichier");
+            e.printStackTrace();
+        }
     }
 
     @FXML
