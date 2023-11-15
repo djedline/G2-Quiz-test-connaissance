@@ -4,11 +4,14 @@ import java.io.File;
 import java.net.URL;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import iut.sae.modele.Categorie;
+import javafx.stage.WindowEvent;
 import iut.sae.modele.Donnees;
 
 /** Lanceur de l'application
@@ -16,13 +19,11 @@ import iut.sae.modele.Donnees;
  *
  */
 public class Lanceur extends Application {
-
+    
     private static Stage stage;
     
-    private double decorationWidth;
-    private double decorationHeight;
-    
-    /**Programme principal
+    /**
+     * Programme principal
      * @param args
      */
     public static void main(String[] args) {
@@ -31,10 +32,9 @@ public class Lanceur extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-    	stage = primaryStage;
-    	
-    	
-        Donnees.listeCategorie.add(new Categorie("General"));
+        Donnees.charger();
+        Lanceur.stage = primaryStage;
+
         FXMLLoader loader = new FXMLLoader();
 
         File fxmlFile = new File("src/iut/sae/ihm/MenuPrincipal.fxml");
@@ -45,17 +45,33 @@ public class Lanceur extends Application {
 
         ControleurMenuPrincipal controllerRef = loader.getController();
 
+        // Lance la sauvegarde lorsqu'on appuie sur la croix
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent arg0) {
+                if (!Donnees.sauvegarder()) {
+                    new Alert(AlertType.WARNING, 
+                            "Impossible de sauvegarder les données ! "
+                            + "Vos données seront perdues...");
+                }
+            }
+        });
+        
         Scene scene = new Scene(parent);
         EchangeurDeVue.setSceneCourante(scene);
-        stage.setScene(scene);
-        stage.show();
-        
-        
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    /**
+     * Arrête le programme
+     */
+    public static void close() {
+        Lanceur.stage.close();
     }
     
      /** 
-     * Permet de redimentionner la scène
-     */
+      * Redimensionne la scène.
+      */
     public static void resizeScene() {
     	 stage.sizeToScene();
      }

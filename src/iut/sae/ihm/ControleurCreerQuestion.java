@@ -113,9 +113,6 @@ public class ControleurCreerQuestion {
     	if (txtRepFausse4.getText() != null && !txtRepFausse4.getText().isBlank()) {
     		listeIntermediaire.add(txtRepFausse4.getText());
     	}
-    	System.out.println(listeIntermediaire.size());
-    	System.out.println(txtRepFausse3.getText() != null);
-    	System.out.println(txtRepFausse3.getText().isBlank());
     	repFausse = new String[listeIntermediaire.size()];
     	repFausse = listeIntermediaire.toArray(repFausse);
 		return repFausse;
@@ -153,7 +150,7 @@ public class ControleurCreerQuestion {
             		tableauReponseFausse(), txtFeedback.getText(), laDifficulte);
             
             if (!Donnees.verifDoubleQuestion(nouvelleQuestion)) {
-            	Donnees.listeQuestion.add(nouvelleQuestion);
+            	Donnees.listeQuestions.add(nouvelleQuestion);
                 System.out.println(nouvelleQuestion);
             } else {
             	Alert messageErreur = new Alert(AlertType.ERROR);
