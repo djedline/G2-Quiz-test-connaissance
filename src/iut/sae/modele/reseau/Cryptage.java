@@ -13,13 +13,14 @@ import java.lang.Math;
 public class Cryptage {
     
     private final static int TAILLE_ENSEMBLE = Character.MAX_CODE_POINT;
-//    private final static int TAILLE_ENSEMBLE = 350;
+    
+    private final static double MAX_LONGUEUR_CLE = 100.0;
     
     /** TODO comment method role
      * @param args
      */
     public static void main(String[] args) {
-        String message = "Coucou";
+        String message = "Baby shark tudududu baby shark tudududu";
         System.out.println("Message : " + message);
         String cle = genereCle();
         
@@ -34,12 +35,12 @@ public class Cryptage {
     public static String genereCle() {
         String laCle="";
         int nombreAlea; 
-        final int LONGUEUR_CLE = 10;
+        final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE);
         
-        for(int i = 0 ; i < LONGUEUR_CLE ; i++) {
+        for(int i = 0 ; laCle.length() < LONGUEUR_CLE ; i++) {
             nombreAlea = (int)(TAILLE_ENSEMBLE * Math.random());
-            System.out.println("Tirage : " + nombreAlea);
-            if(Character.isValidCodePoint(nombreAlea)) {
+            if(Character.isValidCodePoint(nombreAlea) 
+            		&& Character.toString(nombreAlea).length() == 1) {
                 laCle += Character.toString(nombreAlea);
             }
         }
