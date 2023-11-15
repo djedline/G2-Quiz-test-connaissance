@@ -5,12 +5,13 @@ package iut.sae.modele.reseau;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import iut.sae.modele.reseau.Cryptage;
 
 /**
  * Classe qui représente le serveur lors d'un échange d'information
@@ -19,8 +20,11 @@ import java.net.Socket;
  */
 public class Serveur {
 	
+	private static final File FICHIER_A_ENVOYER = 
+			new File("src/iut/sae/modele/fichEnvoi.txt");
+	
 	/** socket de connexion lors du démarrage du client et serveur */
-	static ServerSocket conn;
+	public static ServerSocket conn;
 	
 	/** socket qui permet la communication entre le serveur et le client */
 	static Socket comm;
@@ -83,7 +87,7 @@ public class Serveur {
 	 * @return text : la reponse a la requete
 	 */
 	public static String recevoirEtAnalyser() {
-		String text = "";
+		String recu = "";
 		
 		System.out.println("RECEPTION DE LA REPONSE");
 		try {
@@ -92,29 +96,26 @@ public class Serveur {
 				boolean test = true;
 				while (test) {
 					if (is.available() != 0) {
-						System.out.println("Le serveur a recu : " + is.available() + " octets.");
+						System.out.println("En attente...");
 						test = false;	
 					}
 				};
 				while (is.available() != 0) {
-					text += Character.toString(is.read());
+					recu += Character.toString(is.read());
 				}
-				System.out.println("Le serveur a reçu : " + text);
-				File aEcrire = new File("iut/sae/modele/reseau/tests/fichierRecu.txt");
-				System.out.println(aEcrire.getAbsolutePath());
-				if (!aEcrire.exists()) {
-					aEcrire.createNewFile();
-				}
-				FileWriter fw = new FileWriter(aEcrire);
-				fw.append(text);
-				fw.flush();
-				fw.close();
+				System.out.println("Le serveur a reçu la clé : " + recu);
 				
-				FileReader fr = new FileReader(aEcrire);
+				System.out.println(FICHIER_A_ENVOYER.getAbsolutePath());
+				if (!FICHIER_A_ENVOYER.exists()) {
+					FICHIER_A_ENVOYER.createNewFile();
+				}
+				
+				FileReader fr = new FileReader(FICHIER_A_ENVOYER);
 				String lu = "";
 				while(fr.ready()){
 		    		lu += Character.toString(fr.read());
 		    	}
+				lu = Cryptage.chiffrer(lu, recu);
 				fr.close();
 				System.out.println("le serveur a écrit : " + lu);
 			}
@@ -123,7 +124,7 @@ public class Serveur {
 			e.printStackTrace();
 		}
 		
-		return text;
+		return recu;
 	}
 	
 	/**

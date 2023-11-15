@@ -38,7 +38,7 @@ public class ControleurMenuPrincipal {
 
     @FXML
     void clicGerer(ActionEvent event) throws Exception {
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_MENU_GESTION_DONNEES);
     } 
     @FXML
     void clicDon(ActionEvent event)throws Exception {

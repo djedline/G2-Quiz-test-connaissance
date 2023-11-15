@@ -62,7 +62,6 @@ public class Lanceur extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    
     /**
      * Arrête le programme
      */

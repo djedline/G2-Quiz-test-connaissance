@@ -7,6 +7,7 @@ package iut.sae.ihm;
 
 import java.util.ArrayList;
 
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -72,6 +73,8 @@ public class ControleurCreerQuestion {
 
     @FXML
     private TextArea txtFeedback;
+    
+    private ArrayList<String> lesRepFausse;
 
     
     /** TODO comment method role
@@ -86,7 +89,8 @@ public class ControleurCreerQuestion {
         
         choiceCategorie.setItems(Donnees.listeCategorie);
 
-        
+
+
     }
 
     /** TODO comment method role
@@ -121,7 +125,7 @@ public class ControleurCreerQuestion {
     @FXML
     void creerQuestion(ActionEvent event) {
         int laDifficulte;
-
+        String[] faux;
         switch(choiceDifficulte.getValue()){
 
         case "Facile": 
@@ -135,12 +139,11 @@ public class ControleurCreerQuestion {
         case "Difficile":
             laDifficulte = 3;
             break;
-
         default:
             throw new IllegalArgumentException("Mauvaise valeur dans le choiceBox de difficulté");
 
         }
-        
+
         try {
         	System.out.println(txtRepFausse1.getText() == null);
             Question nouvelleQuestion = new Question(txtIntitule.getText(), choiceCategorie.getValue(), txtRepJuste.getText(),
@@ -154,6 +157,7 @@ public class ControleurCreerQuestion {
                 messageErreur.setContentText("La Question existe déjà.");
                 messageErreur.show();
             }
+            
             txtIntitule.setText(null);
             txtRepJuste.setText(null);
             txtFeedback.setText(null);
@@ -176,7 +180,7 @@ public class ControleurCreerQuestion {
 
     @FXML
     void annulerQuestion(ActionEvent event) {
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_MENU_GESTION_DONNEES);
     }
 
 }
