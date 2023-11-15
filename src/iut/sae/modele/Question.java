@@ -4,12 +4,17 @@
  */
 package iut.sae.modele;
 
+import java.io.Serializable;
+
 /**
  * Classe permettant de créer des questions pour le quiz
  * @author djedline.boyer
  *
  */
-public class Question {
+public class Question implements Serializable {
+    
+    /** Version de la classe question (date et heure au format JJMMHHmm*/
+    private static final long serialVersionUID = 13110945L;
     
     /** libellé de la question */
     private String libelle;
@@ -74,20 +79,26 @@ public class Question {
         return questionOk;
     }
     
-    /** TODO comparer deux Questions 
-     * @param aComparer 
-     * @return Vrai ou faux selon si les 2 Questions sont égales ou non*/
-    public boolean compareTo(Question aComparer) {
-        boolean propOk = propositionFausse.length == aComparer.getPropositionFausse().length;
-        for (int index = 0; index < propositionFausse.length && propOk; index++) {
-            propOk = propositionFausse[index].toUpperCase().equals(aComparer.getPropositionFausse()[index].toUpperCase());
+    /** TODO comparer deux Questions */
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
         }
-    	return libelle.toUpperCase().equals(aComparer.getLibelle().toUpperCase())
-        && nomCategorie.compareTo(nomCategorie)
-        && propositionJuste.toUpperCase().equals(aComparer.getPropositionJuste().toUpperCase())
-        && propOk
-        && feedback.toUpperCase().equals(aComparer.feedback.toUpperCase())
-        && difficulte == aComparer.getDifficulte();
+        if (o instanceof Question) {
+            Question aComparer = (Question) o;
+            boolean propOk = propositionFausse.length == aComparer.getPropositionFausse().length;
+            for (int index = 0; index < propositionFausse.length && propOk; index++) {
+                propOk = propositionFausse[index].toUpperCase().equals(aComparer.getPropositionFausse()[index].toUpperCase());
+            }
+            return libelle.toUpperCase().equals(aComparer.getLibelle().toUpperCase())
+            && nomCategorie.equals(nomCategorie)
+            && propositionJuste.toUpperCase().equals(aComparer.getPropositionJuste().toUpperCase())
+            && propOk
+            && feedback.toUpperCase().equals(aComparer.feedback.toUpperCase())
+            && difficulte == aComparer.getDifficulte();
+        } else {
+            return false;
+        }
     }
     
     /** @return valeur de libelle */

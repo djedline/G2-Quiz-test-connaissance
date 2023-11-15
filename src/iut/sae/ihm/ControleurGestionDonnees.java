@@ -22,6 +22,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
+/** 
+ * Controleur de la scène MenuGestionDonnees
+ * @author djedline.boyer
+ *
+ */
 public class ControleurGestionDonnees {
 
     @FXML // ResourceBundle that was given to the FXMLLoader
