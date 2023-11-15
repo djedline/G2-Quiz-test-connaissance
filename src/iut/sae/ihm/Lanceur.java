@@ -52,8 +52,9 @@ public class Lanceur extends Application {
         
         
     }
+    
      /** 
-     * Méthode pour changer la taille de la fenetre
+     * Permet de redimentionner la scène
      */
     public static void resizeScene() {
     	 stage.sizeToScene();

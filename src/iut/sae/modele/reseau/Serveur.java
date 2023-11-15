@@ -20,7 +20,7 @@ import java.net.Socket;
 public class Serveur {
 	
 	/** socket de connexion lors du démarrage du client et serveur */
-	static ServerSocket conn;
+	public static ServerSocket conn;
 	
 	/** socket qui permet la communication entre le serveur et le client */
 	static Socket comm;
