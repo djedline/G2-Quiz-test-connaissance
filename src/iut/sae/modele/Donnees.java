@@ -86,26 +86,34 @@ public class Donnees {
      */
     public static boolean charger() {
         boolean donneesChargees = true;
+        System.out.println("Fichier existe ? " + (FICH_CATEGORIES.exists() 
+                && FICH_QUESTIONS.exists()));
         try {
             if (FICH_CATEGORIES.exists()) {
                 listeCategorie = (ObservableList<Categorie>) 
                         chargerSauvegarde(FICH_CATEGORIES);
+            } else {
+                FICH_CATEGORIES.createNewFile();
             }
             if (FICH_QUESTIONS.exists()) {
                 listeQuestions = (ObservableList<Question>) 
                         chargerSauvegarde(FICH_QUESTIONS);
+            } else {
+                FICH_CATEGORIES.createNewFile();
             }
         } catch (Exception e) {
             e.printStackTrace();
             donneesChargees = false;
         }
         // Cas par défaut
-        if (listeCategorie == null) {
+        if (listeCategorie == null || listeCategorie.size() == 0) {
+            System.out.println("Cas par défaut : création d'une catégorie");
             listeCategorie = FXCollections.observableArrayList();
             listeCategorie.add(new Categorie("Général"));
             donneesChargees = false;
         }
         if (listeQuestions == null) {
+            System.out.println("Cas par défaut : création de la liste de questions");
             listeQuestions = FXCollections.observableArrayList();
             donneesChargees = false;
         }
@@ -130,11 +138,11 @@ public class Donnees {
     }
     
     private static void afficherDonnees() {
-        System.out.println("CATEGORIES");
+        System.out.println("CATEGORIES : ");
         for (Categorie cat : listeCategorie) {
             System.out.println(" - " + cat.getLibelle());
         }
-        System.out.println("QUESTIONS");
+        System.out.println("QUESTIONS : ");
         for (Question q : listeQuestions) {
             System.out.println(" - " + q.getLibelle());
         }

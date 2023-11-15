@@ -10,7 +10,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import iut.sae.ihm.Lanceur;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
@@ -39,8 +38,8 @@ class DonneesTest {
         lancementAppli();
 
         // vérification de l'existence de Général au démarrage
-        assertEquals(Donnees.listeCategorie.size(), 1);
-        assertEquals(Donnees.listeCategorie.get(0).getLibelle(), "Général");
+        assertEquals(1, Donnees.listeCategorie.size());
+        assertEquals("Général", Donnees.listeCategorie.get(0).getLibelle());
 
         fermetureAppli();
 
