@@ -60,7 +60,7 @@ public class ControleurGestionDonnees {
         }
         
         for (TreeItem<String> leTreeItem : listeTreeItem) {
-        	for (Question laQuestion : Donnees.listeQuestion) {
+        	for (Question laQuestion : Donnees.listeQuestions) {
         		Categorie cat = new Categorie("erreur");
         		for (Categorie laCategorie : Donnees.listeCategorie) {
         			if (leTreeItem.getValue()==laCategorie.toString()) {
