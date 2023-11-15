@@ -34,10 +34,10 @@ class QuestionnaireTest {
 		Donnees.listeCategorie.add(categorieSansQuestion);
 		Donnees.listeCategorie.add(categorieAvecQuestion);
 		
-		Donnees.listeQuestion.add(question1);
-		Donnees.listeQuestion.add(question2);
-		Donnees.listeQuestion.add(question3);
-		Donnees.listeQuestion.add(question4);
+		Donnees.listeQuestions.add(question1);
+		Donnees.listeQuestions.add(question2);
+		Donnees.listeQuestions.add(question3);
+		Donnees.listeQuestions.add(question4);
 	}
 
 	@Test
@@ -54,7 +54,7 @@ class QuestionnaireTest {
 	void testQuestionnaireIntStringInt() {
 		assertThrows(IllegalArgumentException.class, () -> {new Questionnaire(1,"sansQuestion",5);});
 		Question question5 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
-		Donnees.listeQuestion.add(question5);
+		Donnees.listeQuestions.add(question5);
 		try {
 			new Questionnaire(1,"avecQuestion");
 		} catch(IllegalArgumentException e) {

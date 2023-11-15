@@ -8,20 +8,32 @@ import iut.sae.ihm.EchangeurDeVue;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+
+import javafx.stage.WindowEvent;
+import iut.sae.modele.Donnees;
+
 
 /** Lanceur de l'application
  * @author tany.catalabailly
  *
  */
 public class Lanceur extends Application {
-
-    private static Stage stage;
     
+    private static Stage stage;
+
+
     /**Programme principal
+=======
+    /**
+     * Programme principal
+>>>>>>> feb7362e8abfc73faabe3e18051f753e74576d10
      * @param args
      */
     public static void main(String[] args) {
@@ -30,10 +42,9 @@ public class Lanceur extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-    	stage = primaryStage;
-    	
-    	
-        Donnees.listeCategorie.add(new Categorie("General"));
+        Donnees.charger();
+        Lanceur.stage = primaryStage;
+
         FXMLLoader loader = new FXMLLoader();
 
         File fxmlFile = new File("src/iut/sae/ihm/MenuPrincipal.fxml");
@@ -42,17 +53,41 @@ public class Lanceur extends Application {
 
         Parent parent = (Parent) loader.load();
 
+
         ControleurMenuPrincipal controllerRef = 
         		(ControleurMenuPrincipal) loader.getController();
 
+        //ControleurMenuPrincipal controllerRef = loader.getController();
+
+
+        // Lance la sauvegarde lorsqu'on appuie sur la croix
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent arg0) {
+                if (!Donnees.sauvegarder()) {
+                    new Alert(AlertType.WARNING, 
+                            "Impossible de sauvegarder les données ! "
+                            + "Vos données seront perdues...");
+                }
+            }
+        });
+        
         Scene scene = new Scene(parent);
         EchangeurDeVue.setSceneCourante(scene);
-        stage.setScene(scene);
-        stage.show();
-        
-        
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
-     public static void resizeScene() {
+    /**
+     * Arrête le programme
+     */
+    public static void close() {
+        Lanceur.stage.close();
+    }
+    
+     /** 
+      * Redimensionne la scène.
+      */
+    public static void resizeScene() {
     	 stage.sizeToScene();
      }
     
