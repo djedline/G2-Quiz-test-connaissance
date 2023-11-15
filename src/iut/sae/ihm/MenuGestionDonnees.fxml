@@ -24,7 +24,7 @@
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="btnGererDonnees" layoutX="125.0" layoutY="190.0" mnemonicParsing="false" onAction="#clicGererDonnees" prefHeight="30.0" prefWidth="200.0" text="Gérer les données">
+      <Button fx:id="btnGererDonnees" layoutX="125.0" layoutY="190.0" mnemonicParsing="false" onAction="#clicGererDonnees" prefHeight="30.0" prefWidth="200.0" text="Modifier les données">
          <font>
             <Font size="15.0" />
          </font>

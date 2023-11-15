@@ -18,10 +18,7 @@ import iut.sae.modele.Donnees;
 public class Lanceur extends Application {
 
     private static Stage stage;
-    
-    private double decorationWidth;
-    private double decorationHeight;
-    
+
     /**Programme principal
      * @param args
      */
@@ -43,7 +40,7 @@ public class Lanceur extends Application {
 
         Parent parent = (Parent) loader.load();
 
-        ControleurMenuPrincipal controllerRef = loader.getController();
+        //ControleurMenuPrincipal controllerRef = loader.getController();
 
         Scene scene = new Scene(parent);
         EchangeurDeVue.setSceneCourante(scene);

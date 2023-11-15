@@ -54,7 +54,7 @@ public class ControleurMenuGestionDonnees {
 
     @FXML
     void clicGererDonnees(ActionEvent event) {
-    	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_QUESTION);
+    	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
     }
     
     
