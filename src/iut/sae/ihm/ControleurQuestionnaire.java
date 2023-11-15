@@ -1,4 +1,4 @@
-package src.iut.sae.ihm;
+package iut.sae.ihm;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

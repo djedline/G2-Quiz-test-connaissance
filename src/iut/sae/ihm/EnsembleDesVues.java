@@ -2,7 +2,7 @@
  * Gére la correspondance entre le code d'une vue (un entier) et le nom
  * du fichier fxml décrivant cette vue 05/23
  */
-package src.iut.sae.ihm;
+package iut.sae.ihm;
 /**
  * Classe outil qui établit la correspondance entre un code de vue (sous la
  * forme d'un entier) et le nom du fichier fxml contenant la vue associée
@@ -14,8 +14,8 @@ package src.iut.sae.ihm;
 public class EnsembleDesVues {
     /** Code de la vue principale */
     public static final int VUE_PRINCIPALE = 0;
-    /** Code de la vue de la gestion des données */
-    public static final int VUE_GESTION_DONNEES = 1;
+    /** Code de la vue du menu de la gestion des données */
+    public static final int VUE_MENU_GESTION_DONNEES = 1;
     /** Code de la vue de la création des questions */
     public static final int VUE_QUESTION = 2;
     /** Code de la vue de la création des catégories */
@@ -28,13 +28,17 @@ public class EnsembleDesVues {
     public static final int VUE_IMPORT = 6;
     /** Code de la vue pour l'exportation de données */
     public static final int VUE_EXPORT = 7;
+    /** Code de la vue pour gerer les donnees*/
+    public static final int VUE_GESTION_DONNEES = 8;
     
     /** Tableau contenant les noms des fichiers fxml des différentes vues
      * de l'application. Il y a une correspondance entre l'indice de la case
      * du tableau et le code de la vue défini en tant que constante
      */
     private static final String[] NOM_DES_VUES =
-        { "MenuPrincipal.fxml", "MenuGestionDonnees.fxml", "creerQuestion.fxml", "creerCategorie.fxml",  "creerQuestionnaire.fxml", "MenuGestionImpExp.fxml", "ImportDonnees.fxml", "ExportDonnees.fxml",};
+        { "MenuPrincipal.fxml", "MenuGestionDonnees.fxml", "creerQuestion.fxml",
+          "creerCategorie.fxml",  "creerQuestionnaire.fxml", "MenuGestionImpExp.fxml", 
+          "ImportDonnees.fxml", "ExportDonnees.fxml", "GestionDonnees"};
     /**
      * Renvoie le nom du fichier fxml contenant la vue dont le code est donné
      * en paramètre

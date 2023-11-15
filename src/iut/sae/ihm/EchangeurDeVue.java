@@ -2,7 +2,7 @@
 /*
  * Gère l'échange entre les vues affichées par la scène de l'application 05/23
  */
-package src.iut.sae.ihm;
+package iut.sae.ihm;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -53,6 +53,7 @@ public class EchangeurDeVue {
                 cache.put(codeVue, racine);
             }
             sceneCourante.setRoot(racine);
+            Lanceur.resizeScene();
             //Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());
         } catch(IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue

@@ -2,14 +2,19 @@
  * Categorie.java                                    18 oct. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
-package src.iut.sae.modele;
+package iut.sae.modele;
+
+import java.io.Serializable;
 
 /** 
  * Classe permettant de créer des catégories pour le quiz
  * @author nael.briot
  */
-public class Categorie {
+public class Categorie implements Serializable {
         
+        /** Version de la classe catégorie (date et heure au format JJMMHHmm*/
+        private static final long serialVersionUID = 13110945L;
+    
         /** Attribut contenant le titre de la Catégorie */
         private String titreCat;
         
@@ -31,15 +36,24 @@ public class Categorie {
                 return this.titreCat;
         }
         
-        /** TODO comparer deux Categories */
-        public boolean compareTo(Categorie aComparer) {
-        	return titreCat.toUpperCase().equals(aComparer.getLibelle().toUpperCase());
-        }
-        
         /* non javadoc - @see java.lang.Object#toString() */
         @Override
         public String toString() {
             return this.titreCat;
+        }
+        
+        @Override
+        public boolean equals(Object o) {
+            if (o == this) {
+                return true;
+            }
+            if (o instanceof Categorie) {
+                Categorie converti = (Categorie) o;
+                return this.titreCat.toUpperCase().equals(
+                        converti.getLibelle().toUpperCase());
+            } else {
+                return false;
+            }
         }
         
         
