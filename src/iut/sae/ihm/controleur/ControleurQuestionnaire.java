@@ -1,9 +1,4 @@
-/*
- * ControleurImport.java                                    13 nov. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
- */
-
-package iut.sae.ihm;
+package iut.sae.ihm.controleur;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,19 +11,22 @@ import javafx.scene.layout.Pane;
  * @author nael.briot
  *
  */
-public class ControleurImport {
+public class ControleurQuestionnaire {
 
     @FXML
     private Pane idPane;
-
-    @FXML
-    private Label idTitre;
 
     @FXML
     private TextField idNom;
 
     @FXML
     private Button btnQuitter;
+
+    @FXML
+    private Label idLabelNom2;
+
+    @FXML
+    private Label idLabelNom1;
 
     @FXML
     private Label idLabelNom;
@@ -42,8 +40,13 @@ public class ControleurImport {
     }
 
     @FXML
+    void entreNom(ActionEvent event) {
+
+    }
+
+    @FXML
     void clicQuitter(ActionEvent event) {
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);
     }
 
 }

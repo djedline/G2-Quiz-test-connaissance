@@ -3,7 +3,7 @@
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
 
-package iut.sae.ihm;
+package iut.sae.ihm.controleur;
 
 import java.util.ArrayList;
 
