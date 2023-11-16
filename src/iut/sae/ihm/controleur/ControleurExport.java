@@ -2,12 +2,12 @@
  * ControleurExport.java                                    13 nov. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
-package iut.sae.ihm;
+package iut.sae.ihm.controleur;
 
 import java.io.File;
 import java.io.IOException;
 
-import iut.sae.ihm.testFile;
+import iut.sae.ihm.controleur.testFile;
 import iut.sae.modele.reseau.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,21 +66,7 @@ public class ControleurExport {
     
     @FXML
     void clicValider(ActionEvent event) {
-        String message;
-        String s;
-        s ="";
-        message ="";
-        File fichierATraiter;
-        fichierATraiter = new File(FichierAExporter.getText());
-        try {
-            message = Client.construireMessage(fichierATraiter);
-            Client.envoyerMessage(message.getBytes());
-            s = Client.recevoirMessage();
-            Client.fermerSocket();
-        } catch (IOException | InterruptedException e) {
-            System.out.println("Problème avec le fichier");
-            e.printStackTrace();
-        }
+     
     }
 
     @FXML

@@ -96,7 +96,6 @@ public class Client {
      * Saisie le message reçu dans un fichier.
      * @param fichRecu le fichier dans lequel écrire
      * @param cle la clé de décryptage
-     * 
      * @return le message reçu
      * @throws InterruptedException
      * @throws IOException

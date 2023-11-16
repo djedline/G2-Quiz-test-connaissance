@@ -1,10 +1,10 @@
-package iut.sae.ihm;
+package iut.sae.ihm.controleur;
 
 import java.io.File;
 import java.net.URL;
 
-import iut.sae.ihm.ControleurMenuPrincipal;
-import iut.sae.ihm.EchangeurDeVue;
+import iut.sae.ihm.controleur.ControleurMenuPrincipal;
+import iut.sae.ihm.controleur.EchangeurDeVue;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import javafx.application.Application;
@@ -28,12 +28,8 @@ public class Lanceur extends Application {
     
     private static Stage stage;
 
-
-    /**Programme principal
-=======
     /**
      * Programme principal
->>>>>>> feb7362e8abfc73faabe3e18051f753e74576d10
      * @param args
      */
     public static void main(String[] args) {

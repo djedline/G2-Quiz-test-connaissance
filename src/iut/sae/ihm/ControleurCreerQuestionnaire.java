@@ -1,4 +1,4 @@
-package iut.sae.ihm;
+package iut.sae.ihm.controleur;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
