@@ -37,7 +37,7 @@ public class Client {
     public static void main(String[] args) {
         try {
             Scanner sc = new Scanner(System.in);
-            creerClient("10.2.3.17", 6666);
+            creerClient("10.2.6.31", 6666);
 
             String cle = "";
             String recu = "";
@@ -114,7 +114,7 @@ public class Client {
                     test = false;
                 }
             }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-16"));
             while (reader.ready()) {
                 recu += Character.toString(reader.read());
             }
