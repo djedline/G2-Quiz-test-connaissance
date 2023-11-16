@@ -14,7 +14,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Button fx:id="btnAnnuler" layoutX="125.0" layoutY="252.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Annuler">
+      <Button fx:id="btnAnnuler" layoutX="125.0" layoutY="252.0" mnemonicParsing="false" onAction="#retourArriere" prefHeight="30.0" prefWidth="200.0" text="Annuler">
          <font>
             <Font size="15.0" />
          </font>

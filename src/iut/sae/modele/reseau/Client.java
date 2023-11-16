@@ -1,16 +1,19 @@
 /*
  * ClientSocket.java                                    24 oct. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.modele.reseau;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Scanner;
+
+import iut.sae.modele.reseau.Cryptage;
 
 /** 
  * Représente le client dans les échanges de données via le réseau.
@@ -21,6 +24,9 @@ public class Client {
      * La Socket client utilisée pour échanger.
      */
     private static Socket sock;
+    
+    private static final File FICHIER_RECEPTION = 
+    		new File("/src/iut/sae/modele/reseau/fichierRecu.txt");
 
     /** 
      * Méthode de test des sockets.
@@ -31,16 +37,14 @@ public class Client {
             Scanner sc = new Scanner(System.in);
             creerClient("127.0.0.1", 6666);
 
-            String message = "";
-            File fichierATraiter;
-            String s = "";
+            String cle = "";
+            String recu = "";
 
-            while(s.isEmpty()) {
-                System.out.print("Saisissez le chemin absolu du fichier a envoyer : ");
-                fichierATraiter = new File(sc.nextLine());
-                message = construireMessage(fichierATraiter);
-                envoyerMessage(message.getBytes());
-                s = recevoirMessage();
+            while(recu.isEmpty()) {
+                System.out.print("Génération et envoi de la clé");
+                cle = construireMessage();
+                envoyerMessage(cle.getBytes());
+                recu = recevoirMessage(FICHIER_RECEPTION, cle);
             }
 
             fermerSocket();
@@ -64,20 +68,12 @@ public class Client {
     }
 
     /**
-     * Méthode qui crée le message a envoyer au serveur a partir d'un fichier
-     * @param aEnvoyer fichier que l'on va traiter pour etre envoyer sous 
-     * forme de chaine 
-     * @return renvoie une chaine avec le contenu du fichier
+     * Méthode qui crée la clé a envoyer au serveur a partir d'un fichier
+     * @return renvoie une chaine avec la clé à envoyer
      * @throws IOException si le message n'a pas pu être construit 
      */
-    public static String construireMessage(File aEnvoyer) throws IOException{
-        System.out.println("Chemin : " + aEnvoyer.getAbsolutePath());
-        FileReader fr = new FileReader(aEnvoyer);
-        String message = "";
-        while(fr.ready()){
-            message += Character.toString(fr.read());
-        }
-        return message;
+    public static String construireMessage() throws IOException{
+        return Cryptage.genereCle();
     }
 
     /**
@@ -85,22 +81,25 @@ public class Client {
      * @throws IOException si les données ne sont pas envoyées. 
      */
     public static void envoyerMessage(byte[] data) throws IOException {
-        System.out.println("ENVOI DES DONNEES");
-        try {
-            OutputStream os = sock.getOutputStream();
-            os.write(data);
-            System.out.println("Le client a envoyé : " + data.toString());
-        } catch (IOException e) {
-            throw new IOException("Impossible d'envoyer le message au serveur.");
-        }
+            System.out.println("ENVOI DES DONNEES");
+            try {
+                OutputStream os = sock.getOutputStream();
+                os.write(data);
+                System.out.println("Le client a envoyé : " + data.toString());
+            } catch (IOException e) {
+                throw new IOException("Impossible d'envoyer le message au serveur.");
+            }
     }
 
     /** 
+     * Saisie le message reçu dans un fichier.
+     * @param fichRecu 
+     * @param cle 
      * @return le message reçu
      * @throws InterruptedException
      * @throws IOException 
      */
-    public static String recevoirMessage() throws InterruptedException, IOException {
+    public static String recevoirMessage(File fichRecu, String cle) throws InterruptedException, IOException {
         try {
             System.out.println("RECEPTION DES DONNEES");
             InputStream is = sock.getInputStream();
@@ -111,12 +110,22 @@ public class Client {
                     test = false;
                 }
             }
-            String s = "";
+            String recu = "";
             while (is.available() != 0) {
-                s += Character.toString(is.read());
+                recu += Character.toString(is.read());
             }
-            System.out.println("Le client a reçu : " + s);
-            return s;
+
+            if (!fichRecu.exists()) {
+            	fichRecu.createNewFile();
+            }
+            Cryptage.dechiffrer(recu, recu);
+			FileWriter fw = new FileWriter(fichRecu);
+			fw.append(recu);
+			fw.flush();
+			fw.close();
+			
+            System.out.println("Le client a reçu : " + recu);
+            return recu;
         } catch (IOException e) {
             throw new IOException("Impossible de recevoir le message du serveur.");
         } catch (Exception e) {

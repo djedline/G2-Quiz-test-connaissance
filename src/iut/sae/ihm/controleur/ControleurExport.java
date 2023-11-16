@@ -66,21 +66,7 @@ public class ControleurExport {
     
     @FXML
     void clicValider(ActionEvent event) {
-        String message;
-        String s;
-        s ="";
-        message ="";
-        File fichierATraiter;
-        fichierATraiter = new File(FichierAExporter.getText());
-        try {
-            message = Client.construireMessage(fichierATraiter);
-            Client.envoyerMessage(message.getBytes());
-            s = Client.recevoirMessage();
-            Client.fermerSocket();
-        } catch (IOException | InterruptedException e) {
-            System.out.println("Problème avec le fichier");
-            e.printStackTrace();
-        }
+     
     }
 
     @FXML

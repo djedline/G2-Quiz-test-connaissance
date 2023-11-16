@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="325.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="questionPoser" alignment="CENTER" layoutX="177.0" layoutY="34.0" prefHeight="19.0" prefWidth="106.0" text="**Question**">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="reponse1" layoutX="90.0" layoutY="92.0" mnemonicParsing="false" text="**Reponse 1**" />
+      <RadioButton fx:id="reponse2" layoutX="90.0" layoutY="123.0" mnemonicParsing="false" text="**Reponse 2**" />
+      <RadioButton fx:id="reponse3" layoutX="90.0" layoutY="157.0" mnemonicParsing="false" text="**Reponse 3  (potentiel)**" />
+      <RadioButton fx:id="reponse4" layoutX="90.0" layoutY="187.0" mnemonicParsing="false" text="**Reponse 4 (potentiel)**" />
+      <RadioButton fx:id="reponse5" layoutX="90.0" layoutY="217.0" mnemonicParsing="false" text="**Reponse 5 (potentiel)**" />
+      <Button fx:id="passerQuestion" layoutX="101.0" layoutY="263.0" mnemonicParsing="false" onAction="#questionSuivante" prefHeight="30.0" prefWidth="106.0" text="Passer">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="validerReponse1" layoutX="255.0" layoutY="263.0" mnemonicParsing="false" onAction="#questionSuivante" prefHeight="30.0" prefWidth="106.0" text="Valider">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

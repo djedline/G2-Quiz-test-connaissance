@@ -52,7 +52,7 @@ public class ControleurServeur {
     
     @FXML
     void clicValider(ActionEvent event) {
-        String message;
+       /* String message;
         String s;
         s ="";
         message ="";
@@ -66,7 +66,7 @@ public class ControleurServeur {
         } catch (IOException | InterruptedException e) {
             System.out.println("Problème avec le fichier");
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML

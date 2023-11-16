@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
@@ -11,16 +12,22 @@ import javafx.scene.layout.Pane;
  * @author nael.briot
  *
  */
-public class ControleurQuestionnaire {
+public class ControleurCreerQuestionnaire {
 
     @FXML
     private Pane idPane;
 
     @FXML
-    private TextField idNom;
+    private MenuButton idDifficulte;
+
+    @FXML
+    private MenuButton idNbQuestion;
 
     @FXML
     private Button btnQuitter;
+
+    @FXML
+    private MenuButton idCategorie;
 
     @FXML
     private Label idLabelNom2;
