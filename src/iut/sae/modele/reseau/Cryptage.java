@@ -12,8 +12,8 @@ import java.lang.Math;
  */
 public class Cryptage {
     
-    //private final static int TAILLE_ENSEMBLE = Character.MAX_CODE_POINT;
-    private final static int TAILLE_ENSEMBLE = 350;
+    private final static int TAILLE_ENSEMBLE = Character.MAX_CODE_POINT;
+    //private final static int TAILLE_ENSEMBLE = 350;
     
     private final static double MAX_LONGUEUR_CLE = 100.0;
     
@@ -21,7 +21,7 @@ public class Cryptage {
      * @param args
      */
     public static void main(String[] args) {
-        String message = "Recette du riz soufflé";
+        String message = "Лорем ипсум долор сит амет, долоре иудицабит ет сеа, вис долоре цонституам ат, ест дебет алияуип еа. Про убияуе сусципит ет, нонумы инсоленс при те. Вим ех фастидии аппетере реформиданс, еним идяуе инани меи ех. Сеа но иусто регионе реформиданс, ерудити молестие витуператорибус те вим. Нам ут сумо дисцере, лаборес диссентиет ест ин.Лорем ипсум долор сит амет, долоре иудицабит ет сеа, вис долоре цонституам ат, ест дебет алияуип еа. Про убияуе сусципит ет, нонумы инсоленс при те. Вим ех фастидии аппетере реформиданс, еним идяуе инани меи ех. Сеа но иусто регионе реформиданс, ерудити молестие витуператорибус те вим. Нам ут сумо дисцере, лаборес диссентиет ест ин.";
         System.out.println("Message : " + message);
         String cle = genereCle();
         
@@ -30,7 +30,8 @@ public class Cryptage {
         dechiffrer(crypte, cle);
     }
     
-    /** TODO comment method role
+    /** 
+     * Génère la clé
      * @return laCle
      */
     public static String genereCle() {
@@ -66,6 +67,7 @@ public class Cryptage {
             }
             int charCrypte = (codeLettre + codeCle) % TAILLE_ENSEMBLE;
             msgCrypte += Character.toString(charCrypte);
+            System.out.println("CodePoint : " + charCrypte + " = " + Character.toString(charCrypte));
         }
         System.out.println("Message crypté : " + msgCrypte);
         return msgCrypte;
