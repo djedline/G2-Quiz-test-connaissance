@@ -5,6 +5,7 @@
 package iut.sae.modele.reseau;
 
 import java.lang.Math;
+import java.nio.charset.Charset;
 
 /** TODO comment class responsibility (SRP)
  * @author nael.briot
@@ -15,6 +16,8 @@ public class Cryptage {
     private final static int TAILLE_ENSEMBLE = Character.MAX_CODE_POINT;
     
     private final static double MAX_LONGUEUR_CLE = 100.0;
+    
+    private final static Charset CHARSET = Charset.forName("UTF-16");
     
     /** TODO comment method role
      * @param args
