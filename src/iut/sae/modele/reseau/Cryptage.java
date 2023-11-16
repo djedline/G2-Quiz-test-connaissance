@@ -12,7 +12,8 @@ import java.lang.Math;
  */
 public class Cryptage {
     
-    private final static int TAILLE_ENSEMBLE = Character.MAX_CODE_POINT;
+    //private final static int TAILLE_ENSEMBLE = Character.MAX_CODE_POINT;
+    private final static int TAILLE_ENSEMBLE = 350;
     
     private final static double MAX_LONGUEUR_CLE = 100.0;
     
@@ -20,7 +21,7 @@ public class Cryptage {
      * @param args
      */
     public static void main(String[] args) {
-        String message = "Baby shark tudududu baby shark tudududu";
+        String message = "Recette du riz soufflé";
         System.out.println("Message : " + message);
         String cle = genereCle();
         

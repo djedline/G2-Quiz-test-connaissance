@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 import iut.sae.modele.reseau.Cryptage;
 
-/** 
+/**
  * Représente le client dans les échanges de données via le réseau.
  */
 public class Client {
@@ -24,12 +24,12 @@ public class Client {
      * La Socket client utilisée pour échanger.
      */
     private static Socket sock;
-    
-    private static final File FICHIER_RECEPTION = 
-    		new File("/src/iut/sae/modele/reseau/fichierRecu.txt");
 
-    /** 
+    private static final File FICHIER_RECEPTION = new File("/src/iut/sae/modele/reseau/fichierRecu.txt");
+
+    /**
      * Méthode de test des sockets.
+     * 
      * @param args
      */
     public static void main(String[] args) {
@@ -40,7 +40,7 @@ public class Client {
             String cle = "";
             String recu = "";
 
-            while(recu.isEmpty()) {
+            while (recu.isEmpty()) {
                 System.out.print("Génération et envoi de la clé");
                 cle = construireMessage();
                 envoyerMessage(cle.getBytes());
@@ -53,12 +53,12 @@ public class Client {
         }
     }
 
-    /** 
+    /**
      * @param host l'adresse ou le nom du serveur
      * @param port le port du serveur
      * @throws IOException si la socket client ne peut être crée
      */
-    public static void creerClient(String host, int port) throws IOException{
+    public static void creerClient(String host, int port) throws IOException {
         System.out.println("CREATION DU CLIENT");
         try {
             sock = new Socket(host, port);
@@ -69,33 +69,36 @@ public class Client {
 
     /**
      * Méthode qui crée la clé a envoyer au serveur a partir d'un fichier
+     * 
      * @return renvoie une chaine avec la clé à envoyer
-     * @throws IOException si le message n'a pas pu être construit 
+     * @throws IOException si le message n'a pas pu être construit
      */
-    public static String construireMessage() throws IOException{
+    public static String construireMessage() throws IOException {
         return Cryptage.genereCle();
     }
 
     /**
      * @param data les données à envoyer
-     * @throws IOException si les données ne sont pas envoyées. 
+     * @throws IOException si les données ne sont pas envoyées.
      */
     public static void envoyerMessage(byte[] data) throws IOException {
-            System.out.println("ENVOI DES DONNEES");
-            try {
-                OutputStream os = sock.getOutputStream();
-                os.write(data);
-                System.out.println("Le client a envoyé : " + data.toString());
-            } catch (IOException e) {
-                throw new IOException("Impossible d'envoyer le message au serveur.");
-            }
+        System.out.println("ENVOI DES DONNEES");
+        try {
+            OutputStream os = sock.getOutputStream();
+            os.write(data);
+            System.out.println("Le client a envoyé : " + data.toString());
+        } catch (IOException e) {
+            throw new IOException("Impossible d'envoyer le message au serveur.");
+        }
     }
 
-    /** 
+    /**
      * Saisie le message reçu dans un fichier.
+     * @param fichRecu le fichier dans lequel écrire
+     * @param cle la clé de décryptage
      * @return le message reçu
      * @throws InterruptedException
-     * @throws IOException 
+     * @throws IOException
      */
     public static String recevoirMessage(File fichRecu, String cle) throws InterruptedException, IOException {
         try {
@@ -114,14 +117,14 @@ public class Client {
             }
 
             if (!fichRecu.exists()) {
-            	fichRecu.createNewFile();
+                fichRecu.createNewFile();
             }
             Cryptage.dechiffrer(recu, recu);
-			FileWriter fw = new FileWriter(fichRecu);
-			fw.append(recu);
-			fw.flush();
-			fw.close();
-			
+            FileWriter fw = new FileWriter(fichRecu);
+            fw.append(recu);
+            fw.flush();
+            fw.close();
+
             System.out.println("Le client a reçu : " + recu);
             return recu;
         } catch (IOException e) {
@@ -133,6 +136,7 @@ public class Client {
 
     /**
      * Ferme la socket courante.
+     * 
      * @throws IOException si la socket ne peut être fermée
      */
     public static void fermerSocket() throws IOException {

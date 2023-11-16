@@ -21,6 +21,8 @@ public class Questionnaire {
 	
 	/**
 	 * Constructeur sans nombre de question
+	 * @param nivDifficulte 
+	 * @param categorie 
 	 */
 	public Questionnaire(int nivDifficulte, String categorie) {
 		
@@ -50,6 +52,9 @@ public class Questionnaire {
 	
 	/**
 	 * Constructeur avec nombre de question
+	 * @param nivDifficulte 
+	 * @param categorie 
+	 * @param nbQuestion 
 	 */
 	public Questionnaire(int nivDifficulte, String categorie, int nbQuestion) {
 		

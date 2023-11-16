@@ -2,7 +2,7 @@
  * Sample Skeleton for 'GestionDonnees.fxml' Controller Class
  */
 
-package iut.sae.ihm;
+package iut.sae.ihm.controleur;
 
 import java.net.URL;
 import java.util.ArrayList;
