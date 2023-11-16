@@ -93,6 +93,8 @@ public class Client {
 
     /** 
      * Saisie le message reçu dans un fichier.
+     * @param fichRecu 
+     * @param cle 
      * @return le message reçu
      * @throws InterruptedException
      * @throws IOException 
