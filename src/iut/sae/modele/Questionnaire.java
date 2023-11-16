@@ -4,6 +4,10 @@
 package iut.sae.modele;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javafx.collections.ObservableList;
+
 import static iut.sae.modele.Donnees.getQuestionOfCategorie;
 
 /**
@@ -26,6 +30,7 @@ public class Questionnaire {
 		
 		ArrayList<Question> listeQuestionOfCategorie = 
 				getQuestionOfCategorie(categorie);
+		
 	
 		ArrayList<Question> listeQuestionCategorieEtDifficulte 
 		= new ArrayList<Question>();
@@ -94,6 +99,7 @@ public class Questionnaire {
 		}
 	}
 	
+	
 	/**
 	 * methode permettant de rajouter une réponse a une question par rapport 
 	 * a sa place dans la liste
@@ -128,7 +134,7 @@ public class Questionnaire {
 	 * @return la liste des Questions du questionnaire
 	 */
 	public ArrayList<Question> getListeQuestion() {
-		return listeQuestion;
+		return (ArrayList<Question>) listeQuestion;
 	}
 
 	/**

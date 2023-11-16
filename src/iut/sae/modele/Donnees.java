@@ -24,7 +24,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /** TODO comment class responsibility (SRP)
->>>>>>> main
  * @author djedline.boyer
  */
 public class Donnees {
@@ -181,10 +180,14 @@ public class Donnees {
      */
     public static ArrayList<Question> getQuestionOfCategorie(String categorie) {
     	ArrayList<Question> res = new ArrayList<Question>();
-    	for( Question laQuestion : listeQuestions ) {
-    		if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
-    			res.add(laQuestion);
-    		}
+    	if (categorie.equals("General")) {
+    		res = (ArrayList<Question>)listeQuestions;
+    	}else{
+    		for( Question laQuestion : listeQuestions ) {
+        		if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
+        			res.add(laQuestion);
+        		}
+        	}
     	}
 		return res;
     }
