@@ -4,11 +4,13 @@
  */
 package iut.sae.modele.reseau;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Scanner;
@@ -26,7 +28,7 @@ public class Client {
     private static Socket sock;
     
     private static final File FICHIER_RECEPTION = 
-    		new File("/src/iut/sae/modele/reseau/fichierRecu.txt");
+    		new File("src/iut/sae/modele/reseau/tests/fichierRecu.txt");
 
     /** 
      * Méthode de test des sockets.
@@ -35,7 +37,7 @@ public class Client {
     public static void main(String[] args) {
         try {
             Scanner sc = new Scanner(System.in);
-            creerClient("127.0.0.1", 6666);
+            creerClient("10.2.3.17", 6666);
 
             String cle = "";
             String recu = "";
@@ -43,6 +45,7 @@ public class Client {
             while(recu.isEmpty()) {
                 System.out.print("Génération et envoi de la clé");
                 cle = construireMessage();
+                System.out.println("Le client a envoyé : " + cle);
                 envoyerMessage(cle.getBytes());
                 recu = recevoirMessage(FICHIER_RECEPTION, cle);
             }
@@ -100,6 +103,7 @@ public class Client {
      * @throws IOException 
      */
     public static String recevoirMessage(File fichRecu, String cle) throws InterruptedException, IOException {
+        String recu = "";
         try {
             System.out.println("RECEPTION DES DONNEES");
             InputStream is = sock.getInputStream();
@@ -110,24 +114,32 @@ public class Client {
                     test = false;
                 }
             }
-            String recu = "";
-            while (is.available() != 0) {
-                recu += Character.toString(is.read());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            while (reader.ready()) {
+                recu += Character.toString(reader.read());
             }
-
+            System.out.println("Recu par le client : " + recu);
+            
             if (!fichRecu.exists()) {
-            	fichRecu.createNewFile();
+                fichRecu.createNewFile();
             }
-            Cryptage.dechiffrer(recu, recu);
-			FileWriter fw = new FileWriter(fichRecu);
-			fw.append(recu);
-			fw.flush();
-			fw.close();
+            recu = Cryptage.dechiffrer(recu, cle);
+        } catch (IOException e) {
+            System.err.println("C'est la réception le problème.");
+            e.printStackTrace();
+        }
+        
+        try {
+            FileWriter fw = new FileWriter(fichRecu);
+            fw.append(recu);
+            fw.flush();
+            fw.close();
 			
             System.out.println("Le client a reçu : " + recu);
             return recu;
         } catch (IOException e) {
-            throw new IOException("Impossible de recevoir le message du serveur.");
+            e.printStackTrace();
+            throw new IOException("C'est le fichier le problème.");
         } catch (Exception e) {
             throw new InterruptedException("La connection a été interrompue");
         }
