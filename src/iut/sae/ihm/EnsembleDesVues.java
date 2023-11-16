@@ -38,7 +38,7 @@ public class EnsembleDesVues {
     private static final String[] NOM_DES_VUES =
         { "MenuPrincipal.fxml", "MenuGestionDonnees.fxml", "creerQuestion.fxml",
           "creerCategorie.fxml",  "creerQuestionnaire.fxml", "MenuGestionImpExp.fxml", 
-          "ImportDonnees.fxml", "ExportDonnees.fxml", "GestionDonnees"};
+          "ImportDonnees.fxml", "ExportDonnees.fxml", "GestionDonnees.fxml"};
     /**
      * Renvoie le nom du fichier fxml contenant la vue dont le code est donné
      * en paramètre

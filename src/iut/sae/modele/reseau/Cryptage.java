@@ -20,7 +20,7 @@ public class Cryptage {
      * @param args
      */
     public static void main(String[] args) {
-        String message = "Baby shark tudududu baby shark tudududu";
+        String message = "Recette du riz soufflé";
         System.out.println("Message : " + message);
         String cle = genereCle();
         
