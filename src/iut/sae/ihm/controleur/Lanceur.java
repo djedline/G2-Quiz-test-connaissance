@@ -43,7 +43,7 @@ public class Lanceur extends Application {
 
         FXMLLoader loader = new FXMLLoader();
 
-        File fxmlFile = new File("src/iut/sae/ihm/MenuPrincipal.fxml");
+        File fxmlFile = new File("src/iut/sae/ihm/view/MenuPrincipal.fxml");
         URL fxmlUrl = fxmlFile.toURI().toURL();
         loader.setLocation(fxmlUrl);
 
