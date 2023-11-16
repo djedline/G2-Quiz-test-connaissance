@@ -31,6 +31,8 @@ public class EchangeurDeVue {
     public static void setSceneCourante(Scene nouvelleScene) {
         sceneCourante = nouvelleScene;
     }
+    
+    
 
     /** TODO comment method role
      * @param codeVue
@@ -42,16 +44,13 @@ public class EchangeurDeVue {
         }
         try {
             Parent racine; // recevra le conteneur racine de la vue à afficher
-            if (cache.containsKey(codeVue)) {
+	
+            racine = FXMLLoader.load(
+            		EchangeurDeVue.class.getResource(EnsembleDesVues.getNomVue(codeVue)));
+            // ajout de la vue à la table cache
+            
+            cache.put(codeVue, racine);
 
-                racine = cache.get(codeVue);
-            } else {
-
-                racine = FXMLLoader.load(
-                        EchangeurDeVue.class.getResource(EnsembleDesVues.getNomVue(codeVue)));
-                // ajout de la vue à la table cache
-                cache.put(codeVue, racine);
-            }
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
             //Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());

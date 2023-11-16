@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -160,15 +161,55 @@ public class Donnees {
     	return doubleOk;
     }
     
-    /** Verifie que la question ajouté n'est pas un double 
+    /** 
+     * Verifie que la question ajouté n'est pas un double 
      * @param aVerifier la question à analyser
-     * @return true si aVerifier est un doublon*/
+     * @return true si aVerifier est un doublon
+     */
     public static boolean verifDoubleQuestion(Question aVerifier) {
     	boolean doubleOk = false;
     	for (int i = 0; i < listeQuestions.size() && !doubleOk; i++) {
     		doubleOk = listeQuestions.get(i).equals(aVerifier);
     	}
     	return doubleOk;
+    }
+    
+    /**
+     * Recherche et renvoie la liste de toutes les questions d'une categorie
+     * @param categorie le nom de la categorie
+     * @return res la liste des questions de categorie
+     */
+    public static ArrayList<Question> getQuestionOfCategorie(String categorie) {
+    	ArrayList<Question> res = new ArrayList<Question>();
+    	for( Question laQuestion : listeQuestions ) {
+    		if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
+    			res.add(laQuestion);
+    		}
+    	}
+		return res;
+    }
+    
+    /**
+     * Recherche et renvoie la liste de toutes les questions d'une difficulte
+     * @param difficulte le numero de la difficulte
+     * @return res la liste des questions de difficulte
+     */
+    public static ArrayList<Question> getQuestionOfDifficulte(int difficulte) {
+    	ArrayList<Question> res = new ArrayList<Question>();
+    	for( Question laQuestion : listeQuestions ) {
+    		if (laQuestion.getDifficulte() == difficulte) {
+    			res.add(laQuestion);
+    		}
+    	}
+		return res;
+    }
+    
+    /** 
+     * Initialise les données
+     * @param args
+     */
+    public static void main(System[] args) {
+        listeCategorie.add(new Categorie("General"));
     }
 
 }

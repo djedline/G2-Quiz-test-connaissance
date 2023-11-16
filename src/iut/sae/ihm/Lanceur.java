@@ -3,6 +3,10 @@ package iut.sae.ihm;
 import java.io.File;
 import java.net.URL;
 
+import iut.sae.ihm.ControleurMenuPrincipal;
+import iut.sae.ihm.EchangeurDeVue;
+import iut.sae.modele.Categorie;
+import iut.sae.modele.Donnees;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +15,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+
 import javafx.stage.WindowEvent;
 import iut.sae.modele.Donnees;
+
 
 /** Lanceur de l'application
  * @author tany.catalabailly
@@ -21,9 +27,13 @@ import iut.sae.modele.Donnees;
 public class Lanceur extends Application {
     
     private static Stage stage;
-    
+
+
+    /**Programme principal
+=======
     /**
      * Programme principal
+>>>>>>> feb7362e8abfc73faabe3e18051f753e74576d10
      * @param args
      */
     public static void main(String[] args) {
@@ -43,7 +53,12 @@ public class Lanceur extends Application {
 
         Parent parent = (Parent) loader.load();
 
-        ControleurMenuPrincipal controllerRef = loader.getController();
+
+        ControleurMenuPrincipal controllerRef = 
+        		(ControleurMenuPrincipal) loader.getController();
+
+        //ControleurMenuPrincipal controllerRef = loader.getController();
+
 
         // Lance la sauvegarde lorsqu'on appuie sur la croix
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
