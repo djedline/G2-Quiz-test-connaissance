@@ -11,9 +11,10 @@ import java.lang.Math;
  *
  */
 public class Cryptage {
-    
+
     // private final static int TAILLE_ENSEMBLE = Character.MAX_CODE_POINT;
     private final static int TAILLE_ENSEMBLE = 350;
+
     private final static double MAX_LONGUEUR_CLE = 100.0;
     
     /** TODO comment method role
