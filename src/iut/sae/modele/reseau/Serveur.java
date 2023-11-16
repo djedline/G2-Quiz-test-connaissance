@@ -112,7 +112,7 @@ public class Serveur {
                 
                 // lis la clé en UTF-8
                 BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(comm.getInputStream(), "UTF8"));
+                        new InputStreamReader(comm.getInputStream(), "UTF-16"));
                 while (reader.ready()) {
                     cle += Character.toString(reader.read());
                 }
@@ -151,7 +151,7 @@ public class Serveur {
         try {
             if (comm != null) {
                 OutputStream os = comm.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-16"));
                 writer.write(rep);
                 System.out.println("Le serveur a envoyé " + rep);
                 writer.flush();
