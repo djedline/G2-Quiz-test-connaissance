@@ -15,76 +15,80 @@ import iut.sae.modele.Questionnaire;
 
 /**
  * Test Unitaire de la Classe Questionnaire.java dans "iut.sae.modele"
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, leo.cheikh-boukal
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ *              leo.cheikh-boukal
  */
 class QuestionnaireTest {
-	
-	public static Categorie categorieSansQuestion = new Categorie("sansQuestion");
-	public static Categorie categorieAvecQuestion = new Categorie("AvecQuestion");
-	public static String[] reponseFausse = {"non","non"};
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-		
-		Question question1 = new Question("La question 1 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
-		Question question2 = new Question("La question 2 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
-		Question question3 = new Question("La question 3 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
-		Question question4 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
-		
-		Donnees.listeCategorie.add(categorieSansQuestion);
-		Donnees.listeCategorie.add(categorieAvecQuestion);
-		
-		Donnees.listeQuestions.add(question1);
-		Donnees.listeQuestions.add(question2);
-		Donnees.listeQuestions.add(question3);
-		Donnees.listeQuestions.add(question4);
-	}
+    public static Categorie categorieSansQuestion = new Categorie("sansQuestion");
+    public static Categorie categorieAvecQuestion = new Categorie("avecQuestion");
+    public static String[] reponseFausse = {"non","non"};
 
-	@Test
-	void testQuestionnaireIntString() {
-		assertThrows(IllegalArgumentException.class, () -> {new Questionnaire(1,"sansQuestion");});
-		try {
-			new Questionnaire(1,"avecQuestion");
-		} catch(IllegalArgumentException e) {
-			fail("Renvoie une erreur alors qu'il ne devrait pas");
-		}
-	}
+    @BeforeAll
+    static void setUpBeforeClass() throws Exception {
 
-	@Test
-	void testQuestionnaireIntStringInt() {
-		assertThrows(IllegalArgumentException.class, () -> {new Questionnaire(1,"sansQuestion",5);});
-		Question question5 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
-		Donnees.listeQuestions.add(question5);
-		try {
-			new Questionnaire(1,"avecQuestion");
-		} catch(IllegalArgumentException e) {
-			fail("Renvoie une erreur alors qu'il ne devrait pas");
-		}
-	}
+        Question question1 = new Question("La question 1 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
+        Question question2 = new Question("La question 2 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
+        Question question3 = new Question("La question 3 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
+        Question question4 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
 
-	@Test
-	void testStockerReponse() {
-		fail("Not yet implemented");
-	}
+        Donnees.listeCategorie.add(categorieSansQuestion);
+        Donnees.listeCategorie.add(categorieAvecQuestion);
 
-	@Test
-	void testLeTauxDeReussite() {
-		fail("Not yet implemented");
-	}
+        Donnees.listeQuestions.add(question1);
+        Donnees.listeQuestions.add(question2);
+        Donnees.listeQuestions.add(question3);
+        Donnees.listeQuestions.add(question4);
+        
+        System.out.println(Donnees.listeQuestions.toString());
+        System.out.println(Donnees.listeQuestions.size());
+    }
 
-	@Test
-	void testGetQuestion() {
-		fail("Not yet implemented");
-	}
+    @Test
+    void testQuestionnaireIntString() {
+        assertThrows(IllegalArgumentException.class, () -> {new Questionnaire(1,"sansQuestion");});
+        try {
+            new Questionnaire(1,"avecQuestion");
+        } catch(IllegalArgumentException e) {
+            fail("Renvoie une erreur alors qu'il ne devrait pas");
+        }
+    }
 
-	@Test
-	void testGetListeQuestion() {
-		fail("Not yet implemented");
-	}
+    @Test
+    void testQuestionnaireIntStringInt() {
+        assertThrows(IllegalArgumentException.class, () -> {new Questionnaire(1,"sansQuestion",5);});
+        Question question5 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
+        Donnees.listeQuestions.add(question5);
+        try {
+            new Questionnaire(1,"avecQuestion",5);
+        } catch(IllegalArgumentException e) {
+            fail("Renvoie une erreur alors qu'il ne devrait pas");
+        }
+    }
 
-	@Test
-	void testGetListeReponseDonnee() {
-		fail("Not yet implemented");
-	}
+    @Test
+    void testStockerReponse() {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    void testLeTauxDeReussite() {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    void testGetQuestion() {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    void testGetListeQuestion() {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    void testGetListeReponseDonnee() {
+        fail("Not yet implemented");
+    }
 
 }
