@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Utilise le format CSV avec la structure : Catégorie, Niveau, Libellé, Vrai,
@@ -17,6 +19,8 @@ public class ImportExport {
 
 	public static final char DELIMITEUR = ';';
 	public static final String NEW_LINE = "/n";
+	public static final String[] NOM_COLONNE = {"Catégorie", "Niveau", "Libellé",
+			"Vrai", "Faux1", "Faux2", "Faux3", "Faux4", "Feedback"};
 
 	public static void exporter(String chemin) throws IOException {
 		File aEcrire = new File(chemin);
@@ -33,7 +37,7 @@ public class ImportExport {
 		aEcrire.createNewFile();
 
 		FileWriter fw = new FileWriter(aEcrire);
-		for (Question q : Donnees.listeQuestion) {
+		for (Question q : Donnees.listeQuestions) {
 			fw.write(exporterQuestion(q));
 		}
 		fw.close();
@@ -67,7 +71,7 @@ public class ImportExport {
 		if (!aImporter.exists()) {
 			throw new IOException("Ce fichier ne peut être lu car il n'existe pas");
 		}
-		if (aImporter.canRead()) {
+		if (!aImporter.canRead()) {
 			throw new IOException("Vous ne disposez pas des droits pour lire ce fichier.");
 		}
 		if (aImporter.isDirectory()) {
@@ -87,23 +91,17 @@ public class ImportExport {
 	}
 
 	private static void importerLigne(String ligne, int noLigne) throws FichierMalFormeException {
-		String[] colonnes = ligne.split(";");
-		if (colonnes.length != 9) {
-			throw new FichierMalFormeException("Nombre de colonnes insuffisant. "
-					+ "Vérifiez la structure.");
-		}
+		String[] colonnes = decouper(ligne);
 
 		// vérification que la difficulté est bien un nombre entre 1 et 3
 		int diff = 0; // soit modifié soit erreur
 		try {
 			diff = Integer.parseInt(colonnes[1]);
 			if (diff < 1 || diff > 3) {
-				throw new FichierMalFormeException(
-						"Difficulté hors des bornes (1, 2 ou 3) à la ligne " + noLigne);
+				throw new FichierMalFormeException("Difficulté hors des bornes (1, 2 ou 3) à la ligne " + noLigne);
 			}
 		} catch (Exception e) {
-			throw new FichierMalFormeException(
-					"La difficulté n'est pas un champ numérique à la ligne " + noLigne);
+			throw new FichierMalFormeException("La difficulté n'est pas un champ numérique à la ligne " + noLigne);
 		}
 
 		// ajoute la catégorie si n'existe pas déjà
@@ -118,19 +116,49 @@ public class ImportExport {
 			bonneCategorie = new Categorie(catImportee);
 			Donnees.listeCategorie.add(bonneCategorie);
 		}
-		
+
 		// générer le tableau de réponses fausses
-		String[] fausses = new String[] {
-				colonnes[5],
-				colonnes[6],
-				colonnes[7],
-				colonnes[8]
-		};
-		
-		
-		Question questionGeneree = new Question(colonnes[2], bonneCategorie, 
-				colonnes[3], fausses, colonnes[8], diff);
-		Donnees.listeQuestion.add(questionGeneree);
+		ArrayList<String> repFausses = new ArrayList<>();
+		for (int i = 5 ; i < 9 ; i++) {
+			if (colonnes[i].isBlank()) {
+				repFausses.add(colonnes[i]);
+			}
+		}
+		// récupérer un array
+		String[] fausses = new String[repFausses.size()];
+		fausses = repFausses.toArray(fausses);
+		System.out.println("Nombre de rep fausses : " + fausses.length);
+		Question questionGeneree = new Question(colonnes[2], bonneCategorie, colonnes[3], fausses, colonnes[8], diff);
+		Donnees.listeQuestions.add(questionGeneree);
 	}
 
+	public static String[] decouper(String ligne) throws FichierMalFormeException {
+
+		String[] valeurs = new String[9];
+		for (int i = 0 ; i < valeurs.length ; i++){
+			valeurs[i] = "";
+		}
+
+		int colonneARemplir = 0;
+		boolean guillemetsOuverts = false;
+		for (int c = 0; c < ligne.length(); c++) {
+			char ch = ligne.charAt(c);
+			if (ch == '"') {
+				guillemetsOuverts = !guillemetsOuverts;
+			} else if (ch == DELIMITEUR && !guillemetsOuverts) {
+				colonneARemplir++;
+			} else {
+				valeurs[colonneARemplir] += ch;
+			}
+		}
+		if (colonneARemplir != 8) {
+			throw new FichierMalFormeException("Nombre de colonnes invalides : " 
+					+ (colonneARemplir + 1));
+		} else {
+			for (int i = 0 ; i < valeurs.length ; i++){
+				System.out.println(NOM_COLONNE[i] + " : " + valeurs[i]);
+			}
+			return valeurs;
+		}
+	}
 }

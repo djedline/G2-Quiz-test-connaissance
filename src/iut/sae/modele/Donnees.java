@@ -138,7 +138,7 @@ public class Donnees {
         }
     }
     
-    private static void afficherDonnees() {
+    public static void afficherDonnees() {
         System.out.println("CATEGORIES : ");
         for (Categorie cat : listeCategorie) {
             System.out.println(" - " + cat.getLibelle());
