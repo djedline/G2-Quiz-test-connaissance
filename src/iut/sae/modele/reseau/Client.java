@@ -40,7 +40,7 @@ public class Client {
     public static void main(String[] args) {
         try {
             Scanner sc = new Scanner(System.in);
-            creerClient("10.2.6.31", 6666);
+            creerClient("10.2.14.31", 6666);
 
             String cle = "";
             String recu = "";
