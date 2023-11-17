@@ -5,6 +5,8 @@
 
 package iut.sae.ihm.controleur;
 
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

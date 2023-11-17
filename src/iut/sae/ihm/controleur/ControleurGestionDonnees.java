@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
@@ -82,7 +86,9 @@ public class ControleurGestionDonnees {
         // Définissez un gestionnaire pour gérer les événements de sélection du TreeView
         treeViewData.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                System.out.println("Élément sélectionné : " + newValue.getValue());
+                System.out.println("Élément sélectionné : " + newValue.getValue()); 
+                JOptionPane.showMessageDialog(null, "Message informatif", "Information", JOptionPane.INFORMATION_MESSAGE);
+                
             }
         });
     }

@@ -114,15 +114,32 @@ public class Questionnaire {
                     "Tentative d'insertion d'une reponse a une place "
                     + "inexistante");
         }
+        
+        if(reponseDonnee == null) {
+            throw new IllegalArgumentException(
+                    "Tentative d'insertion d'une reponse a une place "
+                    + "inexistante");
+        }
         this.listeReponseDonnee.set(i, reponseDonnee);
     }
 
     /**
      * methode qui permet d'obtenir le taux de reussite du questionnaire
+     * en pourcentage
      * @return tauxDeReussite taux de reussite du questionnaire apres rendu
      */
     public double leTauxDeReussite() {
-        return 0.0; // Bouchon
+        int nbQuestion = listeQuestion.size();
+        int nbReponseJuste = 0;
+        double res = 0.0;
+        
+        for (int i = 0; i < nbQuestion; i++) {
+            if (listeQuestion.get(i).getPropositionJuste().equals(listeReponseDonnee.get(i))) {
+                nbReponseJuste ++;
+            }
+        }
+        res = (nbReponseJuste/nbQuestion)*100;
+        return res; 
     }
 
     /**
@@ -132,7 +149,12 @@ public class Questionnaire {
      * @return laQuestion la question a l'indice i
      */
     public Question getQuestion(int i) {
-        return null; // Bouchon
+        if(i < 0 || i >= listeQuestion.size()) {
+            throw new IllegalArgumentException(
+                    "Tentative d'insertion d'une reponse a une place "
+                    + "inexistante");
+        }
+        return listeQuestion.get(i);
     }
 
 

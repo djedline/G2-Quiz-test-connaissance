@@ -5,6 +5,8 @@ package iut.sae.modele.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -23,15 +25,15 @@ class QuestionnaireTest {
     public static Categorie categorieSansQuestion = new Categorie("sansQuestion");
     public static Categorie categorieAvecQuestion = new Categorie("avecQuestion");
     public static String[] reponseFausse = {"non","non"};
-    public static Questionnaire leQuestionnaire;
+    public static Questionnaire leQuestionnaire1;
+    public static Questionnaire leQuestionnaire2;
+    public static Question question1 = new Question("La question 1 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
+    public static Question question2 = new Question("La question 2 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
+    public static Question question3 = new Question("La question 3 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
+    public static Question question4 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
 
     @BeforeAll
     static void setUpBeforeClass() throws Exception {
-
-        Question question1 = new Question("La question 1 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
-        Question question2 = new Question("La question 2 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
-        Question question3 = new Question("La question 3 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
-        Question question4 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
 
         Donnees.listeCategorie.add(categorieSansQuestion);
         Donnees.listeCategorie.add(categorieAvecQuestion);
@@ -44,7 +46,8 @@ class QuestionnaireTest {
         System.out.println(Donnees.listeQuestions.toString());
         System.out.println(Donnees.listeQuestions.size());
         
-        leQuestionnaire = new Questionnaire(1,"avecQuestion");
+        leQuestionnaire1 = new Questionnaire(1,"avecQuestion");
+        leQuestionnaire2 = new Questionnaire(1,"avecQuestion");
     }
 
     @Test
@@ -71,32 +74,51 @@ class QuestionnaireTest {
 
     @Test
     void testStockerReponse() {
-        leQuestionnaire.stockerReponse(0, "la reponse 1");
-        assertNotEquals(leQuestionnaire.getListeReponseDonnee().get(0), "");
-        assertEquals(leQuestionnaire.getListeReponseDonnee().get(0), "la reponse 1");
+        leQuestionnaire1.stockerReponse(0, "la reponse 1");
+        assertNotEquals(leQuestionnaire1.getListeReponseDonnee().get(0), "");
+        assertEquals(leQuestionnaire1.getListeReponseDonnee().get(0), "la reponse 1");
         
-        assertThrows(IllegalArgumentException.class, () -> {leQuestionnaire.stockerReponse(-1, "la reponse ?");});
+        assertThrows(IllegalArgumentException.class, () -> {leQuestionnaire1.stockerReponse(-1, "la reponse ?");});
+        assertThrows(IllegalArgumentException.class, () -> {leQuestionnaire1.stockerReponse(1, null);});
         
     }
 
     @Test
     void testLeTauxDeReussite() {
-        fail("Not yet implemented");
+        assertEquals(leQuestionnaire1.leTauxDeReussite(), 0.0);
+        leQuestionnaire1.stockerReponse(0, "oui");
+        
+        assertEquals(leQuestionnaire1.leTauxDeReussite(), (1/4)*100.0);
+        leQuestionnaire1.stockerReponse(1, "oui");
+        leQuestionnaire1.stockerReponse(2, "oui");
+        leQuestionnaire1.stockerReponse(3, "oui");
+        assertEquals(leQuestionnaire1.leTauxDeReussite(), 100.0);
     }
 
     @Test
     void testGetQuestion() {
-        fail("Not yet implemented");
+        assertThrows(IllegalArgumentException.class, () -> {leQuestionnaire1.getQuestion(-1);});
+        assertEquals(leQuestionnaire1.getQuestion(1), question2);
     }
 
     @Test
     void testGetListeQuestion() {
-        fail("Not yet implemented");
+        ArrayList<Question> listeTest = new ArrayList<>();
+        listeTest.add(question1);
+        listeTest.add(question2);
+        listeTest.add(question3);
+        listeTest.add(question4);
+        
+        assertTrue(leQuestionnaire1.getListeQuestion().containsAll(listeTest));
     }
 
     @Test
     void testGetListeReponseDonnee() {
-        fail("Not yet implemented");
+        ArrayList<String> listeTest = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            listeTest.add("");
+        }
+        assertTrue(leQuestionnaire2.getListeReponseDonnee().containsAll(listeTest));
     }
 
 }
