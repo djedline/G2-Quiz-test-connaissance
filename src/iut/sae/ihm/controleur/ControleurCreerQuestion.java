@@ -20,6 +20,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
@@ -147,6 +149,9 @@ public class ControleurCreerQuestion {
 
         try {
         	System.out.println(txtRepFausse1.getText() == null);
+        	if (txtFeedback.getText() == null) {
+        	    txtFeedback.setText(""); 
+        	}
             Question nouvelleQuestion = new Question(txtIntitule.getText(), choiceCategorie.getValue(), txtRepJuste.getText(),
             		tableauReponseFausse(), txtFeedback.getText(), laDifficulte);
             

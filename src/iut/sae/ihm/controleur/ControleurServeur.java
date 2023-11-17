@@ -7,6 +7,8 @@ package iut.sae.ihm.controleur;
 import java.io.File;
 import java.io.IOException;
 
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.reseau.Client;
 import iut.sae.modele.reseau.Serveur;
 import javafx.event.ActionEvent;
@@ -43,17 +45,22 @@ public class ControleurServeur {
     private Label FichierAExporter;
 
     @FXML
-    private Button btnValider;
+    private Button btnDemarrer;
+    
+    boolean allumageOk = false;
     
     @FXML
     void clicDemarrer(ActionEvent event) {
-        String message;
-        String s;
-        s ="";
-        message ="";
-        File fichierATraiter;
-        fichierATraiter = new File(FichierAExporter.getText());
-        System.out.println(Serveur.preparerServeur());
+        if (!allumageOk) {
+        adresseIPServeur.setText(Serveur.preparerServeur());
+        btnDemarrer.setText("Eteindre");
+        allumageOk = true;
+        } else {
+            Serveur.fermetureServeur();
+            allumageOk = false;
+            btnDemarrer.setText("Demarrer");
+            adresseIPServeur.setText("");
+        }
         /*try {
             message = Client.construireMessage(fichierATraiter);
             Client.envoyerMessage(message.getBytes());

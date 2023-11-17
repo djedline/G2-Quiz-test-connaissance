@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 
 import iut.sae.ihm.controleur.testFile;
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.reseau.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,6 +71,7 @@ public class ControleurPartager {
      
     }
 
+    
     @FXML
     void clicQuitter(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);

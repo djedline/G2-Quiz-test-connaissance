@@ -14,10 +14,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
-
-import iut.sae.modele.reseau.Cryptage;
-
+import java.net.UnknownHostException;
+import java.net.InetAddress;
+import java.nio.charset.Charset;
 /**
  * Classe qui représente le serveur lors d'un échange d'information
  * 
@@ -63,16 +62,32 @@ public class Serveur {
      * prépare le serveur en démarrant la socket conn
      * @return l'adresse inet
      */
-    public static ServerSocket preparerServeur() {
+    public static String preparerServeur() {
         System.out.println("CREATION DU SERVEUR");
         try {
+            InetAddress ip = InetAddress.getLocalHost();
             conn = new ServerSocket(6666);
-            System.out.println("La inet Adress : " + conn.getInetAddress());
+            return ip.getHostAddress();
+        } catch (UnknownHostException e) {
+            System.err.println("Impossible de trouver l'ip");
+            e.printStackTrace();
         } catch (IOException e) {
             System.err.println("Impossible de créer la Socket serveur.");
             e.printStackTrace();
         }
-        return conn;
+        return "";
+    }
+    
+    /** 
+     * Ferme le serveur
+     */
+    public static void fermetureServeur() {
+        try {
+            conn.close();
+        } catch (IOException e) {
+            System.err.println("Impossible de fermer la socket serveur.");
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -114,7 +129,7 @@ public class Serveur {
                 
                 // lis la clé en UTF-8
                 BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(comm.getInputStream(), "UTF8"));
+                        new InputStreamReader(comm.getInputStream(), "UTF-8"));
                 while (reader.ready()) {
                     cle += Character.toString(reader.read());
                 }
@@ -125,7 +140,7 @@ public class Serveur {
                     FICHIER_A_ENVOYER.createNewFile();
                 }
 
-                FileReader fr = new FileReader(FICHIER_A_ENVOYER);
+                FileReader fr = new FileReader(FICHIER_A_ENVOYER, Charset.forName("UTF-8"));
                 while (fr.ready()) {
                     fichLu += Character.toString(fr.read());
                 }

@@ -2,11 +2,13 @@
 /*
  * Gère l'échange entre les vues affichées par la scène de l'application 05/23
  */
-package iut.sae.ihm.controleur;
+package iut.sae.ihm.view;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import iut.sae.ihm.controleur.Lanceur;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
