@@ -16,15 +16,9 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+
 /**
  * Centralise les données de l'application.
- * 
-=======
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-/** TODO comment class responsibility (SRP)
->>>>>>> main
  * @author djedline.boyer
  */
 public class Donnees {
@@ -41,7 +35,7 @@ public class Donnees {
 
     /** Liste de Categorie */
     public static ObservableList <Categorie> listeCategorie = FXCollections.observableArrayList();
-    
+
     /** Liste de Questions */
     public static ObservableList <Question> listeQuestions = FXCollections.observableArrayList();
 
@@ -131,13 +125,13 @@ public class Donnees {
      * @throws ClassNotFoundException s'il est impossible de convertir l'objet
      */
     private static Object chargerSauvegarde(File fichier) throws FileNotFoundException, 
-            IOException, ClassNotFoundException {
+    IOException, ClassNotFoundException {
         try (ObjectInputStream readerCategories = new ObjectInputStream(
                 new FileInputStream(fichier))) {
             return readerCategories.readObject();
         }
     }
-    
+
     private static void afficherDonnees() {
         System.out.println("CATEGORIES : ");
         for (Categorie cat : listeCategorie) {
@@ -147,63 +141,67 @@ public class Donnees {
         for (Question q : listeQuestions) {
             System.out.println(" - " + q.getLibelle());
         }
-   }
-    
+    }
 
-   /** Verifie que la categorie ajouté n'est pas un double 
+
+    /** Verifie que la categorie ajouté n'est pas un double 
      * @param aVerifier la catégorie à analyser
      * @return true si aVerifier est un doublon*/
     public static boolean verifDoubleCategorie(Categorie aVerifier) {
-    	boolean doubleOk = false;
-    	for (int i = 0; i < listeCategorie.size() && !doubleOk; i++) {
-    		doubleOk = listeCategorie.get(i).equals(aVerifier);
-    	}
-    	return doubleOk;
+        boolean doubleOk = false;
+        for (int i = 0; i < listeCategorie.size() && !doubleOk; i++) {
+            doubleOk = listeCategorie.get(i).equals(aVerifier);
+        }
+        return doubleOk;
     }
-    
+
     /** 
      * Verifie que la question ajouté n'est pas un double 
      * @param aVerifier la question à analyser
      * @return true si aVerifier est un doublon
      */
     public static boolean verifDoubleQuestion(Question aVerifier) {
-    	boolean doubleOk = false;
-    	for (int i = 0; i < listeQuestions.size() && !doubleOk; i++) {
-    		doubleOk = listeQuestions.get(i).equals(aVerifier);
-    	}
-    	return doubleOk;
+        boolean doubleOk = false;
+        for (int i = 0; i < listeQuestions.size() && !doubleOk; i++) {
+            doubleOk = listeQuestions.get(i).equals(aVerifier);
+        }
+        return doubleOk;
     }
-    
+
     /**
      * Recherche et renvoie la liste de toutes les questions d'une categorie
      * @param categorie le nom de la categorie
      * @return res la liste des questions de categorie
      */
     public static ArrayList<Question> getQuestionOfCategorie(String categorie) {
-    	ArrayList<Question> res = new ArrayList<Question>();
-    	for( Question laQuestion : listeQuestions ) {
-    		if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
-    			res.add(laQuestion);
-    		}
-    	}
-		return res;
+        ArrayList<Question> res = new ArrayList<Question>();
+        if (categorie.equals("General")) {
+            res = (ArrayList<Question>) listeQuestions;
+        }else{
+            for( Question laQuestion : listeQuestions ) {
+                if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
+                    res.add(laQuestion);
+                }
+            }
+        }
+        return res;
     }
-    
+
     /**
      * Recherche et renvoie la liste de toutes les questions d'une difficulte
      * @param difficulte le numero de la difficulte
      * @return res la liste des questions de difficulte
      */
     public static ArrayList<Question> getQuestionOfDifficulte(int difficulte) {
-    	ArrayList<Question> res = new ArrayList<Question>();
-    	for( Question laQuestion : listeQuestions ) {
-    		if (laQuestion.getDifficulte() == difficulte) {
-    			res.add(laQuestion);
-    		}
-    	}
-		return res;
+        ArrayList<Question> res = new ArrayList<Question>();
+        for( Question laQuestion : listeQuestions ) {
+            if (laQuestion.getDifficulte() == difficulte) {
+                res.add(laQuestion);
+            }
+        }
+        return res;
     }
-    
+
     /** 
      * Initialise les données
      * @param args

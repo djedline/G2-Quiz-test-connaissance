@@ -5,6 +5,7 @@
 package iut.sae.modele.reseau;
 
 import java.lang.Math;
+import java.nio.charset.Charset;
 
 /** 
  * Classe qui permet le cryptage d'un message  grâce à la génération
@@ -21,7 +22,7 @@ public class Cryptage {
     private final static double MIN_LONGUEUR_CLE = 3.0;
     
     /** 
-     * Programme Principal
+     * Programme Principal3
      * @param args
      */
     public static void main(String[] args) {

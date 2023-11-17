@@ -14,10 +14,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 import java.nio.charset.Charset;
-
-import iut.sae.modele.reseau.Cryptage;
 
 /**
  * Classe qui représente le serveur lors d'un échange d'information
