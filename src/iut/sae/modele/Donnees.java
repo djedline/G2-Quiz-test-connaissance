@@ -16,15 +16,11 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- * Centralise les données de l'application.
- * 
-=======
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /** TODO comment class responsibility (SRP)
->>>>>>> main
  * @author djedline.boyer
  */
 public class Donnees {
@@ -91,14 +87,12 @@ public class Donnees {
                 && FICH_QUESTIONS.exists()));
         try {
             if (FICH_CATEGORIES.exists()) {
-                listeCategorie = (ObservableList<Categorie>) 
-                        chargerSauvegarde(FICH_CATEGORIES);
+                listeCategorie = (ObservableList<Categorie>)chargerSauvegarde(FICH_CATEGORIES);
             } else {
                 FICH_CATEGORIES.createNewFile();
             }
             if (FICH_QUESTIONS.exists()) {
-                listeQuestions = (ObservableList<Question>) 
-                        chargerSauvegarde(FICH_QUESTIONS);
+                listeQuestions = (ObservableList<Question>) chargerSauvegarde(FICH_QUESTIONS);
             } else {
                 FICH_CATEGORIES.createNewFile();
             }

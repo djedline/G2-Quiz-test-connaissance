@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 import iut.sae.modele.reseau.Client;
+import iut.sae.modele.reseau.Serveur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,29 +37,24 @@ public class ControleurServeur {
     private Button btnQuitter;
 
     @FXML
-    private Label idLabelNom;
+    private Label adresseIPServeur;
     
     @FXML
     private Label FichierAExporter;
 
     @FXML
     private Button btnValider;
-
     
     @FXML
-    void chercherFichier (ActionEvent event) {
-        System.out.print("TODO");
-    }
-    
-    @FXML
-    void clicValider(ActionEvent event) {
-       /* String message;
+    void clicDemarrer(ActionEvent event) {
+        String message;
         String s;
         s ="";
         message ="";
         File fichierATraiter;
         fichierATraiter = new File(FichierAExporter.getText());
-        try {
+        System.out.println(Serveur.preparerServeur());
+        /*try {
             message = Client.construireMessage(fichierATraiter);
             Client.envoyerMessage(message.getBytes());
             s = Client.recevoirMessage();

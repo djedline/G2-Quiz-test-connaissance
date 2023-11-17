@@ -61,8 +61,9 @@ public class Serveur {
 
     /**
      * prépare le serveur en démarrant la socket conn
+     * @return l'adresse inet
      */
-    public static void preparerServeur() {
+    public static ServerSocket preparerServeur() {
         System.out.println("CREATION DU SERVEUR");
         try {
             conn = new ServerSocket(6666);
@@ -71,6 +72,7 @@ public class Serveur {
             System.err.println("Impossible de créer la Socket serveur.");
             e.printStackTrace();
         }
+        return conn;
     }
 
     /**
