@@ -5,6 +5,7 @@
 package iut.sae.modele.reseau;
 
 import java.lang.Math;
+import java.nio.charset.Charset;
 
 /** TODO comment class responsibility (SRP)
  * @author nael.briot
@@ -12,15 +13,17 @@ import java.lang.Math;
  */
 public class Cryptage {
 
-    private final static int TAILLE_ENSEMBLE = Character.MAX_CODE_POINT;
+    private final static int TAILLE_ENSEMBLE = 880;
 
     private final static double MAX_LONGUEUR_CLE = 100.0;
+    
+    private final static Charset CHARSET = Charset.forName("UTF-16");
     
     /** TODO comment method role
      * @param args
      */
     public static void main(String[] args) {
-        String message = "Лорем ипсум долор сит амет, долоре иудицабит ет сеа, вис долоре цонституам ат, ест дебет алияуип еа. Про убияуе сусципит ет, нонумы инсоленс при те. Вим ех фастидии аппетере реформиданс, еним идяуе инани меи ех. Сеа но иусто регионе реформиданс, ерудити молестие витуператорибус те вим. Нам ут сумо дисцере, лаборес диссентиет ест ин.Лорем ипсум долор сит амет, долоре иудицабит ет сеа, вис долоре цонституам ат, ест дебет алияуип еа. Про убияуе сусципит ет, нонумы инсоленс при те. Вим ех фастидии аппетере реформиданс, еним идяуе инани меи ех. Сеа но иусто регионе реформиданс, ерудити молестие витуператорибус те вим. Нам ут сумо дисцере, лаборес диссентиет ест ин.";
+        String message = "Le cryptage c'est compliqué.";
         System.out.println("Message : " + message);
         String cle = genereCle();
         
