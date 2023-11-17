@@ -6,9 +6,11 @@ package iut.sae.modele.reseau;
 
 import java.lang.Math;
 
-/** TODO comment class responsibility (SRP)
+/** 
+ * Classe qui permet le cryptage d'un message  grâce à la génération
+ * d'une clé puis le décryptage de ce même message
  * @author nael.briot
- *
+ * @version 1.0
  */
 public class Cryptage {
 
@@ -16,7 +18,10 @@ public class Cryptage {
 
     private final static double MAX_LONGUEUR_CLE = 100.0;
     
-    /** TODO comment method role
+    private final static double MIN_LONGUEUR_CLE = 3.0;
+    
+    /** 
+     * Programme Principal
      * @param args
      */
     public static void main(String[] args) {
@@ -24,19 +29,18 @@ public class Cryptage {
         System.out.println("Message : " + message);
         String cle = genereCle();
         
-        
         String crypte = chiffrer(message, cle);
         dechiffrer(crypte, cle);
     }
     
     /** 
-     * Génère la clé
-     * @return laCle
+     * Méthode qui permet de Générer la clé de cryptage
+     * @return laCle la clé de cryptage
      */
     public static String genereCle() {
         String laCle="";
         int nombreAlea; 
-        final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE);
+        final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE - MIN_LONGUEUR_CLE)+ (int)MIN_LONGUEUR_CLE;
         
         for(int i = 0 ; laCle.length() < LONGUEUR_CLE ; i++) {
             nombreAlea = (int)(TAILLE_ENSEMBLE * Math.random());
@@ -49,10 +53,11 @@ public class Cryptage {
         return laCle;
         }
     
-    /** TODO comment method role
-     * @param aChiffrer 
-     * @param cle
-     * @return contenuCrypte le contenu du fichier crypté
+    /** 
+     * Méthode qui permet de crypter un message
+     * @param aChiffrer le message a crypter
+     * @param cle la clé de cryptage
+     * @return msgCrypte le message crypté grâce à la clé
      */
     public static String chiffrer(String aChiffrer, String cle) {
         String msgCrypte = "";
@@ -66,17 +71,16 @@ public class Cryptage {
             }
             int charCrypte = (codeLettre + codeCle) % TAILLE_ENSEMBLE;
             msgCrypte += Character.toString(charCrypte);
-            System.out.println("CodePoint : " + charCrypte + " = " + Character.toString(charCrypte));
         }
         System.out.println("Message crypté : " + msgCrypte);
         return msgCrypte;
     }
     
     /** 
-     * Déchiffrement.
-     * @param aDechiffrer
-     * @param cle
-     * @return un message déchiffré.
+     * Méthode qui permet de décrypter un message
+     * @param aDechiffrer le message a décrypter
+     * @param cle la clé de cryptage
+     * @return msgDecrypte le message décrypté
      */
     public static String dechiffrer(String aDechiffrer, String cle) {
         String msgDecrypte = "";
