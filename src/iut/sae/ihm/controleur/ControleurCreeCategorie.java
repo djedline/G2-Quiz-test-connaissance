@@ -4,6 +4,7 @@
  */
 package iut.sae.ihm.controleur;
 
+import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import javafx.event.ActionEvent;

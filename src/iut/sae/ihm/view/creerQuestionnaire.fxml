@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.ControleurCreerQuestionnaire">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurCreerQuestionnaire">
 	<children>
 		<Button fx:id="btnValider" layoutX="78.0" layoutY="235.0" mnemonicParsing="false" onAction="#clicValider" prefHeight="25.0" prefWidth="131.0" text="Valider" />
 		<Label fx:id="idLabelNom" layoutX="28.0" layoutY="48.0" prefHeight="21.0" prefWidth="161.0" text="Choisir la difficulté :">
