@@ -14,9 +14,11 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+
 import java.net.UnknownHostException;
 import java.net.InetAddress;
 import java.nio.charset.Charset;
+
 /**
  * Classe qui représente le serveur lors d'un échange d'information
  * 
