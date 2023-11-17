@@ -3,6 +3,8 @@ package iut.sae.ihm.controleur;
 import java.io.File;
 import java.net.URL;
 
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

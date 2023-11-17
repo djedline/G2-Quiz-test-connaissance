@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
