@@ -2,7 +2,7 @@
  * Gére la correspondance entre le code d'une vue (un entier) et le nom
  * du fichier fxml décrivant cette vue 05/23
  */
-package iut.sae.ihm;
+package iut.sae.ihm.view;
 /**
  * Classe outil qui établit la correspondance entre un code de vue (sous la
  * forme d'un entier) et le nom du fichier fxml contenant la vue associée
@@ -38,7 +38,7 @@ public class EnsembleDesVues {
     private static final String[] NOM_DES_VUES =
         { "MenuPrincipal.fxml", "MenuGestionDonnees.fxml", "creerQuestion.fxml",
           "creerCategorie.fxml",  "creerQuestionnaire.fxml", "MenuGestionImpExp.fxml", 
-          "ImportDonnees.fxml", "ExportDonnees.fxml", "GestionDonnees"};
+          "ImportDonnees.fxml", "ExportDonnees.fxml", "GestionDonnees.fxml"};
     /**
      * Renvoie le nom du fichier fxml contenant la vue dont le code est donné
      * en paramètre

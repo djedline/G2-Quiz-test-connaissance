@@ -2,11 +2,13 @@
 /*
  * Gère l'échange entre les vues affichées par la scène de l'application 05/23
  */
-package iut.sae.ihm;
+package iut.sae.ihm.view;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import iut.sae.ihm.controleur.Lanceur;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +33,8 @@ public class EchangeurDeVue {
     public static void setSceneCourante(Scene nouvelleScene) {
         sceneCourante = nouvelleScene;
     }
+    
+    
 
     /** TODO comment method role
      * @param codeVue
@@ -42,16 +46,13 @@ public class EchangeurDeVue {
         }
         try {
             Parent racine; // recevra le conteneur racine de la vue à afficher
-            if (cache.containsKey(codeVue)) {
+	
+            racine = FXMLLoader.load(
+            		EchangeurDeVue.class.getResource(EnsembleDesVues.getNomVue(codeVue)));
+            // ajout de la vue à la table cache
+            
+            cache.put(codeVue, racine);
 
-                racine = cache.get(codeVue);
-            } else {
-
-                racine = FXMLLoader.load(
-                        EchangeurDeVue.class.getResource(EnsembleDesVues.getNomVue(codeVue)));
-                // ajout de la vue à la table cache
-                cache.put(codeVue, racine);
-            }
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
             //Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());

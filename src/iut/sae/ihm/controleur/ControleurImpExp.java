@@ -3,8 +3,10 @@
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
 
-package iut.sae.ihm;
+package iut.sae.ihm.controleur;
 
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

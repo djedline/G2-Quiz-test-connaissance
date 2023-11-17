@@ -1,4 +1,4 @@
-package iut.sae.ihm;
+package iut.sae.ihm.controleur;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
 
 /**Controleur de la page pour la Gestion des Données
@@ -54,7 +56,7 @@ public class ControleurMenuGestionDonnees {
 
     @FXML
     void clicGererDonnees(ActionEvent event) {
-    	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_QUESTION);
+    	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
     }
     
     

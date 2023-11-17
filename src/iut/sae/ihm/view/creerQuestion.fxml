@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.ControleurCreerQuestion">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurCreerQuestion">
 	<children>
 		<Button fx:id="btnCreer" layoutX="80.0" layoutY="545.0" mnemonicParsing="false" onAction="#creerQuestion" prefHeight="25.0" prefWidth="131.0" text="Créer" />
 		<TextField fx:id="txtIntitule" layoutX="106.0" layoutY="131.0" prefHeight="30.0" prefWidth="335.0" />
@@ -44,7 +44,7 @@
       </Label>
       <TextField fx:id="txtRepJuste" layoutX="161.0" layoutY="248.0" prefHeight="30.0" prefWidth="280.0" />
       <TextField fx:id="txtRepFausse1" layoutX="171.0" layoutY="287.0" prefHeight="30.0" prefWidth="270.0" />
-      <Button fx:id="btnAnnuler" layoutX="239.0" layoutY="545.0" mnemonicParsing="false" onAction="#annulerQuestion" prefHeight="25.0" prefWidth="131.0" text="Annuler" />
+      
       <Label layoutX="25.0" layoutY="328.0" prefHeight="26.0" prefWidth="131.0" text="Réponse fausse : ">
          <font>
             <Font size="17.0" />
@@ -69,6 +69,7 @@
             <Font size="17.0" />
          </font>
       </Label>
+      <Button fx:id="btnAnnuler" layoutX="239.0" layoutY="545.0" mnemonicParsing="false" onAction="#annulerQuestion" prefHeight="25.0" prefWidth="131.0" text="Annuler" />
 
 	</children>
 </Pane>

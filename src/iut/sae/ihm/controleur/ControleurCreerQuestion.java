@@ -3,22 +3,25 @@
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
 
-package iut.sae.ihm;
+package iut.sae.ihm.controleur;
 
 import java.util.ArrayList;
+
 
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
@@ -113,9 +116,6 @@ public class ControleurCreerQuestion {
     	if (txtRepFausse4.getText() != null && !txtRepFausse4.getText().isBlank()) {
     		listeIntermediaire.add(txtRepFausse4.getText());
     	}
-    	System.out.println(listeIntermediaire.size());
-    	System.out.println(txtRepFausse3.getText() != null);
-    	System.out.println(txtRepFausse3.getText().isBlank());
     	repFausse = new String[listeIntermediaire.size()];
     	repFausse = listeIntermediaire.toArray(repFausse);
 		return repFausse;
@@ -153,7 +153,7 @@ public class ControleurCreerQuestion {
             		tableauReponseFausse(), txtFeedback.getText(), laDifficulte);
             
             if (!Donnees.verifDoubleQuestion(nouvelleQuestion)) {
-            	Donnees.listeQuestion.add(nouvelleQuestion);
+            	Donnees.listeQuestions.add(nouvelleQuestion);
                 System.out.println(nouvelleQuestion);
             } else {
             	Alert messageErreur = new Alert(AlertType.ERROR);

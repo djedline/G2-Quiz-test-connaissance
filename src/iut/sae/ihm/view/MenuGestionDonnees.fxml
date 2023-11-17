@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.ControleurMenuGestionDonnees">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurMenuGestionDonnees">
 	<children>
 		<Button fx:id="btnPageCat" layoutX="125.0" layoutY="84.0" mnemonicParsing="false" onAction="#clicPageCat" prefHeight="30.0" prefWidth="200.0" text="Créer des catégories">
          <font>
@@ -24,7 +24,7 @@
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="btnGererDonnees" layoutX="125.0" layoutY="190.0" mnemonicParsing="false" onAction="#clicGererDonnees" prefHeight="30.0" prefWidth="200.0" text="Gérer les données">
+      <Button fx:id="btnGererDonnees" layoutX="125.0" layoutY="190.0" mnemonicParsing="false" onAction="#clicGererDonnees" prefHeight="30.0" prefWidth="200.0" text="Modifier les données">
          <font>
             <Font size="15.0" />
          </font>

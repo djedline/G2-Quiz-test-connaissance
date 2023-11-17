@@ -12,9 +12,9 @@ import java.nio.charset.Charset;
  *
  */
 public class Cryptage {
-    
-    private final static int TAILLE_ENSEMBLE = Character.MAX_CODE_POINT;
-    
+
+    private final static int TAILLE_ENSEMBLE = 880;
+
     private final static double MAX_LONGUEUR_CLE = 100.0;
     
     private final static Charset CHARSET = Charset.forName("UTF-16");
@@ -23,7 +23,7 @@ public class Cryptage {
      * @param args
      */
     public static void main(String[] args) {
-        String message = "Baby shark tudududu baby shark tudududu";
+        String message = "Le cryptage c'est compliqué.";
         System.out.println("Message : " + message);
         String cle = genereCle();
         
@@ -32,7 +32,8 @@ public class Cryptage {
         dechiffrer(crypte, cle);
     }
     
-    /** TODO comment method role
+    /** 
+     * Génère la clé
      * @return laCle
      */
     public static String genereCle() {
@@ -68,6 +69,7 @@ public class Cryptage {
             }
             int charCrypte = (codeLettre + codeCle) % TAILLE_ENSEMBLE;
             msgCrypte += Character.toString(charCrypte);
+            System.out.println("CodePoint : " + charCrypte + " = " + Character.toString(charCrypte));
         }
         System.out.println("Message crypté : " + msgCrypte);
         return msgCrypte;

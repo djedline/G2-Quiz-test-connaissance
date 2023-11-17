@@ -2,8 +2,9 @@
  * ControleurCreeCategorie.java                                    18 oct. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
-package iut.sae.ihm;
+package iut.sae.ihm.controleur;
 
+import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import javafx.event.ActionEvent;
