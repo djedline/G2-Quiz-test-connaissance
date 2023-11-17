@@ -109,7 +109,12 @@ public class Questionnaire {
      * @param reponseDonnee reponse a mettre dans la liste
      */
     public void stockerReponse(int i, String reponseDonnee) {
-        // TODO 
+        if(i < 0 || i >= listeReponseDonnee.size()) {
+            throw new IllegalArgumentException(
+                    "Tentative d'insertion d'une reponse a une place "
+                    + "inexistante");
+        }
+        this.listeReponseDonnee.set(i, reponseDonnee);
     }
 
     /**

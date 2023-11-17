@@ -23,6 +23,7 @@ class QuestionnaireTest {
     public static Categorie categorieSansQuestion = new Categorie("sansQuestion");
     public static Categorie categorieAvecQuestion = new Categorie("avecQuestion");
     public static String[] reponseFausse = {"non","non"};
+    public static Questionnaire leQuestionnaire;
 
     @BeforeAll
     static void setUpBeforeClass() throws Exception {
@@ -42,6 +43,8 @@ class QuestionnaireTest {
         
         System.out.println(Donnees.listeQuestions.toString());
         System.out.println(Donnees.listeQuestions.size());
+        
+        leQuestionnaire = new Questionnaire(1,"avecQuestion");
     }
 
     @Test
@@ -68,7 +71,12 @@ class QuestionnaireTest {
 
     @Test
     void testStockerReponse() {
-        fail("Not yet implemented");
+        leQuestionnaire.stockerReponse(0, "la reponse 1");
+        assertNotEquals(leQuestionnaire.getListeReponseDonnee().get(0), "");
+        assertEquals(leQuestionnaire.getListeReponseDonnee().get(0), "la reponse 1");
+        
+        assertThrows(IllegalArgumentException.class, () -> {leQuestionnaire.stockerReponse(-1, "la reponse ?");});
+        
     }
 
     @Test

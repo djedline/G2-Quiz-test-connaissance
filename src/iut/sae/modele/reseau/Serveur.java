@@ -15,6 +15,7 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.nio.charset.Charset;
 
 import iut.sae.modele.reseau.Cryptage;
 
@@ -112,7 +113,7 @@ public class Serveur {
                 
                 // lis la clé en UTF-8
                 BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(comm.getInputStream(), "UTF8"));
+                        new InputStreamReader(comm.getInputStream(), "UTF-8"));
                 while (reader.ready()) {
                     cle += Character.toString(reader.read());
                 }
@@ -123,7 +124,7 @@ public class Serveur {
                     FICHIER_A_ENVOYER.createNewFile();
                 }
 
-                FileReader fr = new FileReader(FICHIER_A_ENVOYER);
+                FileReader fr = new FileReader(FICHIER_A_ENVOYER, Charset.forName("UTF-8"));
                 while (fr.ready()) {
                     fichLu += Character.toString(fr.read());
                 }
