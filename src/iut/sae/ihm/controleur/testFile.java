@@ -22,7 +22,7 @@ public class testFile extends Application {
     public void start(Stage primaryStage) {
         FileChooser fileChooser = new FileChooser();
         // Ajout d'un filtre pour ne montrer que certains fichiers
-        ExtensionFilter extFilter = new ExtensionFilter("Fichiers texte(*.txt)", "*.txt");
+        ExtensionFilter extFilter = new ExtensionFilter("Fichiers texte(*.csv)", "*.csv");
         fileChooser.setTitle("Choisir un fichier");
         fileChooser.getExtensionFilters().add(extFilter);
         //Afficher la boîte de dialogue de choix de fichier

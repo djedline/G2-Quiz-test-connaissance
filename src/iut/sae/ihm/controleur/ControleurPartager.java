@@ -50,15 +50,14 @@ public class ControleurPartager {
     private Button btnValider;
 
     private void choixFichier(Stage stage1) {
-       /* FileChooser fileChooser = new FileChooser();
+        /*FileChooser fileChooser = new FileChooser();
         // Ajout d'un filtre pour ne montrer que certains fichiers
-        ExtensionFilter extFilter = new ExtensionFilter("Fichiers texte(*.txt)", "*.txt");
+        ExtensionFilter extFilter = new ExtensionFilter("Fichiers texte(*.csv)", "*.csv");
+        fileChooser.setTitle("Choisir un fichier");
         fileChooser.getExtensionFilters().add(extFilter);
-        
-        stage1.getScene().getWindow();
         //Afficher la boîte de dialogue de choix de fichier
-        //File fichierSelectionner = fileChooser.showOpenDialog();*/
-        testFile.main(null);
+        File fichierSelectionner = fileChooser.showOpenDialog(stage1);
+        testFile.main(null);*/
     }
     
     @FXML
@@ -68,7 +67,7 @@ public class ControleurPartager {
     
     @FXML
     void clicValider(ActionEvent event) {
-     
+        testFile.launch(testFile.class);
     }
 
     
