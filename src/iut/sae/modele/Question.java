@@ -204,4 +204,9 @@ public class Question implements Serializable {
         return difficulteOk;
     }
     
+    @Override
+    public String toString() {
+		return libelle;
+    }
+    
 }

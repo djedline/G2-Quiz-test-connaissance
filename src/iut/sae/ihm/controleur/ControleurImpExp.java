@@ -5,6 +5,8 @@
 
 package iut.sae.ihm.controleur;
 
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -50,8 +52,14 @@ public class ControleurImpExp {
 
     @FXML
     void clicPartDon(ActionEvent event) {
-        System.out.print("TODO");
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PARTAGER);
     }
+    
+    @FXML
+    void infoServeur(ActionEvent event) {
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_SERVEUR);
+    }
+    
     @FXML
     void clicQuitter(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);

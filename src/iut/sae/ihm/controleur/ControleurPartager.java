@@ -26,7 +26,7 @@ import javafx.scene.Node;
  * @author nael.briot
  *
  */
-public class ControleurExport {
+public class ControleurPartager {
 
     @FXML
     private Pane idPane;
@@ -68,9 +68,10 @@ public class ControleurExport {
     
     @FXML
     void clicValider(ActionEvent event) {
-
+     
     }
 
+    
     @FXML
     void clicQuitter(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);

@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
 
 /**Controleur de la page pour la Gestion des Données

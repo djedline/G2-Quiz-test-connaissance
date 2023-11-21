@@ -16,11 +16,17 @@ import java.util.ArrayList;
  */
 public class ImportExport {
 
+	/** TODO comment field role (attribute, association) */
 	public static final char DELIMITEUR = ';';
+	/** TODO comment field role (attribute, association) */
 	public static final String NEW_LINE = "/n";
 	public static final String[] NOM_COLONNE = {"Catégorie", "Niveau", "Libellé",
 			"Vrai", "Faux1", "Faux2", "Faux3", "Faux4", "Feedback"};
 
+	/** TODO comment method role
+	 * @param chemin
+	 * @throws IOException
+	 */
 	public static void exporter(String chemin) throws IOException {
 		File aEcrire = new File(chemin);
 
@@ -64,6 +70,10 @@ public class ImportExport {
 		return s.toString();
 	}
 
+	/** TODO comment method role
+	 * @param chemin
+	 * @throws IOException
+	 */
 	public static void importer(String chemin) throws IOException {
 		File aImporter = new File(chemin);
 
