@@ -30,6 +30,10 @@ public class EnsembleDesVues {
     public static final int VUE_EXPORT = 7;
     /** Code de la vue pour gerer les donnees*/
     public static final int VUE_GESTION_DONNEES = 8;
+    /** Code de la vue pour gerer les donnees*/
+    public static final int VUE_PARTAGER = 9;
+    /** Code de la vue pour gerer les donnees*/
+    public static final int VUE_SERVEUR = 10;
     
     /** Tableau contenant les noms des fichiers fxml des différentes vues
      * de l'application. Il y a une correspondance entre l'indice de la case
@@ -38,7 +42,7 @@ public class EnsembleDesVues {
     private static final String[] NOM_DES_VUES =
         { "MenuPrincipal.fxml", "MenuGestionDonnees.fxml", "creerQuestion.fxml",
           "creerCategorie.fxml",  "creerQuestionnaire.fxml", "MenuGestionImpExp.fxml", 
-          "ImportDonnees.fxml", "ExportDonnees.fxml", "GestionDonnees.fxml"};
+          "ImportDonnees.fxml", "ExportDonnees.fxml", "GestionDonnees.fxml", "Partager.fxml", "Serveur.fxml"};
     /**
      * Renvoie le nom du fichier fxml contenant la vue dont le code est donné
      * en paramètre

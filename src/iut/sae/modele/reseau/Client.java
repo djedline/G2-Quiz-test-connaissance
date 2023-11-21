@@ -7,7 +7,6 @@ package iut.sae.modele.reseau;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,8 +18,12 @@ import java.util.Scanner;
 
 import iut.sae.modele.reseau.Cryptage;
 
-/**
+/*
  * Représente le client dans les échanges de données via le réseau.
+ */
+/** TODO comment class responsibility (SRP)
+ * @author djedline.boyer
+ *
  */
 public class Client {
 
@@ -40,11 +43,9 @@ public class Client {
     public static void main(String[] args) {
         try {
             Scanner sc = new Scanner(System.in);
-            creerClient("10.2.6.31", 6666);
-
-            String cle = "";
-            String recu = "";
-
+            creerClient("10.2.14.31", 6666);
+			String cle = "";
+			String recu = "";
             while (recu.isEmpty()) {
                 System.out.print("Génération et envoi de la clé");
                 cle = construireMessage();
@@ -52,12 +53,11 @@ public class Client {
                 envoyerMessage(cle.getBytes());
                 recu = recevoirMessage(FICHIER_RECEPTION, cle);
             }
-
-            fermerSocket();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+			fermerSocket();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
     /**
      * @param host l'adresse ou le nom du serveur
@@ -162,6 +162,5 @@ public class Client {
         } catch (IOException e) {
             throw new IOException("Impossible de fermer la Socket client.");
         }
-
     }
 }
