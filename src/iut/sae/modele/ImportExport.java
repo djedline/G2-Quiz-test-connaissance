@@ -12,20 +12,25 @@ import java.util.ArrayList;
  * Faux1, Faux2, Faux3, Faux4, Feedback Les réponses optionnelles ne sont pas
  * omises, juste vides.
  * 
- * @author baudr
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
  */
 public class ImportExport {
 
-	/** TODO comment field role (attribute, association) */
+	/** Délimiteur utilisé pour séparer les colonnes */
 	public static final char DELIMITEUR = ';';
-	/** TODO comment field role (attribute, association) */
+	/** Retour à la ligne séparant les lignes */
 	public static final String NEW_LINE = "/n";
-	public static final String[] NOM_COLONNE = {"Catégorie", "Niveau", "Libellé",
-			"Vrai", "Faux1", "Faux2", "Faux3", "Faux4", "Feedback"};
 
-	/** TODO comment method role
-	 * @param chemin
-	 * @throws IOException
+	/** Ordre des champs dans les fichiers CSV */
+	public static final String[] NOM_COLONNE = { "Catégorie", "Niveau", "Libellé", "Vrai", "Faux1", "Faux2", "Faux3",
+			"Faux4", "Feedback" };
+
+	/**
+	 * Envoie l'ensemble des questions de l'application dans un fichier
+	 * 
+	 * @param chemin le chemin du fichier d'exportation
+	 * @throws IOException s'il est impossible d'écrire les données
 	 */
 	public static void exporter(String chemin) throws IOException {
 		File aEcrire = new File(chemin);
@@ -70,9 +75,11 @@ public class ImportExport {
 		return s.toString();
 	}
 
-	/** TODO comment method role
-	 * @param chemin
-	 * @throws IOException
+	/**
+	 * Récupère l'ensemble des questions contenues dans un fichier CSV.
+	 * 
+	 * @param chemin le chemin du fichier à importer
+	 * @throws IOException s'il est impossible de l'importer
 	 */
 	public static void importer(String chemin) throws IOException {
 		File aImporter = new File(chemin);
@@ -86,10 +93,12 @@ public class ImportExport {
 		if (aImporter.isDirectory()) {
 			throw new IOException("Impossible de lire un dossier. Indiquez un fichier.");
 		}
-
+		
 		BufferedReader bf = new BufferedReader(new FileReader(aImporter));
-		int noLigne = 1; // s'adressant à des non-informaticiens, on préfèrera commencer à 1 comme sur
-							// Excel
+		
+		/* indice pour les messages d'erreur. Commence à 1 par soucis de lisibilité
+		 * pour l'utilisateur */
+		int noLigne = 1;
 		while (bf.ready()) {
 			String ligne = bf.readLine();
 			if (noLigne != 1) {
@@ -110,43 +119,59 @@ public class ImportExport {
 				throw new FichierMalFormeException("Difficulté hors des bornes (1, 2 ou 3) à la ligne " + noLigne);
 			}
 		} catch (Exception e) {
-			throw new FichierMalFormeException("La difficulté n'est pas un champ numérique à la ligne " + noLigne);
+			// TODO en attente de la réponse de Mme Servieres
+			diff = 2;
+			//throw new FichierMalFormeException("La difficulté n'est pas un champ numérique à la ligne " + noLigne);
 		}
+		
+		System.out.println("WAIT");
 
-		// ajoute la catégorie si n'existe pas déjà
-		String catImportee = colonnes[0];
-		Categorie bonneCategorie = null;
-		for (Categorie cat : Donnees.listeCategorie) {
-			if (cat.getLibelle().equalsIgnoreCase(catImportee)) {
-				bonneCategorie = cat;
-			}
-		}
-		if (bonneCategorie == null) {
-			bonneCategorie = new Categorie(catImportee);
-			Donnees.listeCategorie.add(bonneCategorie);
-		}
+		Categorie categorie = analyserCategorieImport(colonnes[0]);
 
 		// générer le tableau de réponses fausses
 		ArrayList<String> repFausses = new ArrayList<>();
-		for (int i = 5 ; i < 9 ; i++) {
+		for (int i = 5; i < 9; i++) {
 			if (!colonnes[i].isBlank()) {
 				repFausses.add(colonnes[i]);
-				System.out.println("On rajoute : " + colonnes[i] + " dans le "
-						+ "tableau.");
+				System.out.println("On rajoute : " + colonnes[i] + " dans le " + "tableau.");
 			}
 		}
-		// récupérer un array
+		// récupérer un array de réponses fausses
 		String[] fausses = new String[repFausses.size()];
 		fausses = repFausses.toArray(fausses);
 		System.out.println("Nombre de rep fausses : " + fausses.length);
-		Question questionGeneree = new Question(colonnes[2], bonneCategorie, colonnes[3], fausses, colonnes[8], diff);
+		Question questionGeneree = new Question(colonnes[2], categorie, colonnes[3], fausses, colonnes[8], diff);
 		Donnees.listeQuestions.add(questionGeneree);
 	}
 
-	public static String[] decouper(String ligne) throws FichierMalFormeException {
+	private static Categorie analyserCategorieImport(String catImportee) {
+		catImportee = catImportee.strip();
+		// ajoute la catégorie si elle existe
+		Categorie bonneCategorie = null;
+		for (Categorie cat : Donnees.listeCategorie) {
+			if (cat.getLibelle().equalsIgnoreCase(catImportee)) {
+				return cat;
+			}
+		}
 
+		// si vide, ajout à la catégorie par défaut
+		if (catImportee.isBlank()) {
+			for (Categorie catExistante : Donnees.listeCategorie) {
+				if (catExistante.getLibelle().equals(Donnees.NOM_CATEGORIE_DEFAUT)) {
+					return catExistante;
+				}
+			}
+		}
+		
+		// création de la nouvelle catégorie
+		bonneCategorie = new Categorie(catImportee);
+		Donnees.listeCategorie.add(bonneCategorie);
+		return bonneCategorie;
+	}
+
+	public static String[] decouper(String ligne) throws FichierMalFormeException {
 		String[] valeurs = new String[9];
-		for (int i = 0 ; i < valeurs.length ; i++){
+		for (int i = 0; i < valeurs.length; i++) {
 			valeurs[i] = "";
 		}
 
@@ -163,10 +188,9 @@ public class ImportExport {
 			}
 		}
 		if (colonneARemplir != 8) {
-			throw new FichierMalFormeException("Nombre de colonnes invalides : " 
-					+ (colonneARemplir + 1));
+			throw new FichierMalFormeException("Nombre de colonnes invalides : " + (colonneARemplir + 1));
 		} else {
-			for (int i = 0 ; i < valeurs.length ; i++){
+			for (int i = 0; i < valeurs.length; i++) {
 				System.out.println(NOM_COLONNE[i] + " : " + valeurs[i]);
 			}
 			return valeurs;
