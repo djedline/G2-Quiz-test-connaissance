@@ -3,9 +3,8 @@ package iut.sae.ihm.controleur;
 import java.io.File;
 import java.net.URL;
 
-import iut.sae.ihm.controleur.ControleurMenuPrincipal;
+
 import iut.sae.ihm.view.EchangeurDeVue;
-import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -17,7 +16,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 import javafx.stage.WindowEvent;
-import iut.sae.modele.Donnees;
 
 
 /** Lanceur de l'application

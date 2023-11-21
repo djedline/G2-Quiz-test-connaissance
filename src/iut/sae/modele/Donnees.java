@@ -34,13 +34,16 @@ public class Donnees {
     public static final File FICH_CATEGORIES = new File("donnees/categories.data");
 
     /** Liste de Categorie */
-    public static ObservableList <Categorie> listeCategorie = FXCollections.observableArrayList();
+    public static ObservableList<Categorie> listeCategorie = FXCollections.observableArrayList();
 
     /** Liste de Questions */
-    public static ObservableList <Question> listeQuestions = FXCollections.observableArrayList();
+    public static ObservableList<Question> listeQuestions = FXCollections.observableArrayList();
 
     /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
     public static int numScenePrecedenteCategorie;
+    
+    /** Le questionnaire généré avant son  */
+    public static Questionnaire QuestionnaireGénéré;
 
     /**
      * Sauvegarde la base de questions et de catégories.
