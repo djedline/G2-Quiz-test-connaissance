@@ -80,15 +80,17 @@ public class ControleurGestionDonnees {
 
 		for (TreeItem<CustomBtn> leTreeItem : listeTreeItem) {
 			for (Question laQuestion : Donnees.listeQuestions) {
+				
 				Categorie cat = new Categorie("erreur");
 				for (Categorie laCategorie : Donnees.listeCategorie) {
 					if (leTreeItem.getValue().getString()==laCategorie.toString()) {
 						cat = laCategorie;
 					}
 				}
-				if (laQuestion.getCategorie().toString()==cat.toString()) {
+				System.out.println(laQuestion.getCategorie().toString()==cat.toString());
+				System.out.println(laQuestion.getCategorie() + " "+  cat);
+				if (cat.toString().equals(laQuestion.getCategorie().toString())) {
 					MenuButton btnModifierQuestion = new MenuButton("Gérer");
-					System.out.println("test clique");
 					MenuItem menuItemModifier = new MenuItem("Modifier"); 
 				    MenuItem menuItemSuprimer = new MenuItem("Suprimer");
 				    btnModifierQuestion.getItems().add(menuItemModifier);
