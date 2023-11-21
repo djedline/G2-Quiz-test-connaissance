@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Utilise le format CSV avec la structure : Catégorie, Niveau, Libellé, Vrai,
@@ -120,8 +119,10 @@ public class ImportExport {
 		// générer le tableau de réponses fausses
 		ArrayList<String> repFausses = new ArrayList<>();
 		for (int i = 5 ; i < 9 ; i++) {
-			if (colonnes[i].isBlank()) {
+			if (!colonnes[i].isBlank()) {
 				repFausses.add(colonnes[i]);
+				System.out.println("On rajoute : " + colonnes[i] + " dans le "
+						+ "tableau.");
 			}
 		}
 		// récupérer un array

@@ -212,4 +212,9 @@ public class Donnees {
         listeCategorie.add(new Categorie("General"));
     }
 
+	public static void effacerSauvegarde() {
+		FICH_CATEGORIES.delete();
+		FICH_QUESTIONS.delete();
+	}
+
 }

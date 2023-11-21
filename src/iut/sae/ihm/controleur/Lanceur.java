@@ -4,7 +4,6 @@ import java.io.File;
 import java.net.URL;
 
 import iut.sae.ihm.controleur.ControleurMenuPrincipal;
-import iut.sae.ihm.controleur.EchangeurDeVue;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import javafx.application.Application;

@@ -11,7 +11,9 @@ class ImportExportTest {
 
 	@Test
 	void test() {
+		Donnees.effacerSauvegarde();
 		try {
+			Donnees.effacerSauvegarde();
 			ImportExport.importer("src/iut/sae/modele/tests/questionsbasiques.csv");
 			Donnees.afficherDonnees();
 		} catch (IOException e) {
