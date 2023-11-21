@@ -149,6 +149,9 @@ public class ControleurCreerQuestion {
 
         try {
         	System.out.println(txtRepFausse1.getText() == null);
+        	if (txtFeedback.getText() == null) {
+        	    txtFeedback.setText(""); 
+        	}
             Question nouvelleQuestion = new Question(txtIntitule.getText(), choiceCategorie.getValue(), txtRepJuste.getText(),
             		tableauReponseFausse(), txtFeedback.getText(), laDifficulte);
             

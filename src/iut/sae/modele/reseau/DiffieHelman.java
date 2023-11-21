@@ -6,9 +6,8 @@ package iut.sae.modele.reseau;
 
 /** TODO comment class responsibility (SRP)
  * @author nael.briot
- *
+ * @version 1.0
  */
 public class DiffieHelman {
-    
     
 }

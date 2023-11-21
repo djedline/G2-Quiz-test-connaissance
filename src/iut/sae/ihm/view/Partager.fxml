@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurPartager">
+	<children>
+		<Button fx:id="btnValider" layoutX="77.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicValider" prefHeight="25.0" prefWidth="131.0" text="Valider" />
+		<Label fx:id="idLabelNom" alignment="CENTER" layoutY="114.0" prefHeight="25.0" prefWidth="164.0" text="Adresse IP Serveur  :" />
+		<Label fx:id="idTitre" alignment="CENTER" layoutX="134.0" layoutY="55.0" prefHeight="55.0" prefWidth="164.0" text="Partager">
+			<font>
+				<Font size="30.0" />
+			</font>
+		</Label>
+      <Button fx:id="btnQuitter" layoutX="241.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="131.0" text="Retour" />
+      <Label fx:id="FichierAExporter" layoutX="164.0" layoutY="117.0" prefHeight="17.0" prefWidth="188.0" style="-fx-border-color: black;" />
+      <Label fx:id="idLabelNom1" alignment="CENTER" layoutY="146.0" prefHeight="25.0" prefWidth="164.0" text="Choisir fichier :" />
+      <ChoiceBox layoutX="164.0" layoutY="146.0" prefHeight="25.0" prefWidth="188.0" />
+	</children>
+</Pane>
