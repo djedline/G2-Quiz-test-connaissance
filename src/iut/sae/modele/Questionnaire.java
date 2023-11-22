@@ -41,7 +41,9 @@ public class Questionnaire {
         }
 
         if (listeQuestionCategorieEtDifficulte.size() == 0) {
-            throw new IllegalArgumentException("La liste de question est vide");
+            throw new IllegalArgumentException(
+                    "La liste de question de cette categorie et difficulte "
+                    + "est vide");
         }
 
         listeQuestion = listeQuestionCategorieEtDifficulte;
@@ -75,8 +77,8 @@ public class Questionnaire {
         int tailleListe = listeQuestionCategorieEtDifficulte.size();
 
         if (tailleListe < nbQuestion) {
-            throw new IllegalArgumentException("La liste de question "
-                    + "ne contient pas assez de question");
+            throw new IllegalArgumentException("Attention, La liste de question"
+                    + " ne contient pas assez de question");
         }
         if (tailleListe == nbQuestion) {
             listeQuestion = listeQuestionCategorieEtDifficulte;
@@ -117,8 +119,7 @@ public class Questionnaire {
         
         if(reponseDonnee == null) {
             throw new IllegalArgumentException(
-                    "Tentative d'insertion d'une reponse a une place "
-                    + "inexistante");
+                    "Tentative d'insertion d'une reponse null");
         }
         this.listeReponseDonnee.set(i, reponseDonnee);
     }
