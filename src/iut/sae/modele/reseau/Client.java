@@ -21,6 +21,10 @@ import iut.sae.modele.reseau.Cryptage;
 /*
  * Représente le client dans les échanges de données via le réseau.
  */
+/** TODO comment class responsibility (SRP)
+ * @author djedline.boyer
+ *
+ */
 public class Client {
 
     /**

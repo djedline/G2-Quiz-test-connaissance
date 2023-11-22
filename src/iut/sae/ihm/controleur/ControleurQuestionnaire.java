@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.RadioButton;
 
 /**
@@ -82,7 +81,7 @@ public class ControleurQuestionnaire {
     
     /**
      * Méthode permettant le changement de l'affichage pour afficher la question
-     * suivante
+     * suivante du questionnaire
      */
     public static void chargerQuestionSuivante() {
         numQuestion ++;
@@ -97,24 +96,72 @@ public class ControleurQuestionnaire {
                 listeReponses.add(element);
             }
             listeReponses = melangerReponses(listeReponses);
-            
+            idQuestion.setText(laQuestionSuivante.getLibelle());
+            chargerReponses(listeReponses); 
         }
     }
     
-    /** TODO comment method role
+
+
+    /** 
+     * Change le texte des radiobutton pour afficher les reponses de la question
+     * et rendre les radio
      * @param listeReponses
-     * @return
+     */
+    private static void chargerReponses(ArrayList<String> listeReponses) {
+       // je change l'affichage des reponses 
+       int i = 0;
+       for(;i<listeReponses.size(); i++) {
+           if (!listeRadioButton.get(i).isVisible()) {
+               listeRadioButton.get(i).setVisible(true); 
+           }
+           listeRadioButton.get(i).setText(listeReponses.get(i));
+       } 
+       
+       // si il y a moins de 5 reponses, je rend le reste des radio button invisible
+       if ( i < 4 ) {
+           for (;i<listeRadioButton.size(); i++) {
+               listeRadioButton.get(i).setVisible(false); 
+           }
+       }
+        
+    }
+
+    /** 
+     * Melange les réponses pour afficher les reponses dans un ordre différent
+     * @param listeReponses
+     * @return res liste de reponses melanger
      */
     private static ArrayList<String> melangerReponses(ArrayList<String> listeReponses) {
-        // TODO Auto-generated method stub
-        return listeReponses;
+        ArrayList<String> res = new ArrayList<String>();
+        int i = 1;
+        
+        while (i <= listeReponses.size()) {
+            int n = (int)(Math.random() * listeReponses.size());
+            String laReponse = listeReponses.get(n);
+            if (!res.contains(laReponse)) {
+                res.add(laReponse);
+                i++;
+            }
+        }
+        return res;
     }
 
     /**
-     * Méthode permettant d'enregistrer la réponse choisi 
+     * Méthode permettant d'enregistrer la réponse choisi et le stocke dans la 
+     * liste des reponses du questionnaire
      */
     public static void validerReponse() {
-        //TODO
+        String reponseChoisi = "";
+        
+        for (RadioButton leBouton : listeRadioButton) {
+            if(leBouton.isSelected()) {
+                reponseChoisi = leBouton.getText();
+            }
+        }
+        
+        Donnees.QuestionnaireGénéré.stockerReponse(numQuestion, reponseChoisi);
+        
     }
 
 }

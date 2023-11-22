@@ -52,8 +52,14 @@ public class ControleurImpExp {
 
     @FXML
     void clicPartDon(ActionEvent event) {
-        System.out.print("TODO");
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PARTAGER);
     }
+    
+    @FXML
+    void infoServeur(ActionEvent event) {
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_SERVEUR);
+    }
+    
     @FXML
     void clicQuitter(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);

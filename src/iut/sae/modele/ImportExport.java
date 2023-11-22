@@ -15,9 +15,15 @@ import java.io.IOException;
  */
 public class ImportExport {
 
+	/** TODO comment field role (attribute, association) */
 	public static final char DELIMITEUR = ';';
+	/** TODO comment field role (attribute, association) */
 	public static final String NEW_LINE = "/n";
 
+	/** TODO comment method role
+	 * @param chemin
+	 * @throws IOException
+	 */
 	public static void exporter(String chemin) throws IOException {
 		File aEcrire = new File(chemin);
 
@@ -33,7 +39,7 @@ public class ImportExport {
 		aEcrire.createNewFile();
 
 		FileWriter fw = new FileWriter(aEcrire);
-		for (Question q : Donnees.listeQuestion) {
+		for (Question q : Donnees.listeQuestions) {
 			fw.write(exporterQuestion(q));
 		}
 		fw.close();
@@ -61,6 +67,10 @@ public class ImportExport {
 		return s.toString();
 	}
 
+	/** TODO comment method role
+	 * @param chemin
+	 * @throws IOException
+	 */
 	public static void importer(String chemin) throws IOException {
 		File aImporter = new File(chemin);
 
@@ -130,7 +140,7 @@ public class ImportExport {
 		
 		Question questionGeneree = new Question(colonnes[2], bonneCategorie, 
 				colonnes[3], fausses, colonnes[8], diff);
-		Donnees.listeQuestion.add(questionGeneree);
+		Donnees.listeQuestions.add(questionGeneree);
 	}
 
 }
