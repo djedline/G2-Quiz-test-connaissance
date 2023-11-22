@@ -11,19 +11,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.util.ArrayList;
 
 /**
  * Centralise les données de l'application.
- * 
-=======
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-/** TODO comment class responsibility (SRP)
->>>>>>> main
  * @author djedline.boyer
  */
 public class Donnees {
@@ -39,13 +30,16 @@ public class Donnees {
     public static final File FICH_CATEGORIES = new File("donnees/categories.data");
 
     /** Liste de Categorie */
-    public static ObservableList <Categorie> listeCategorie = FXCollections.observableArrayList();
+    public static ArrayList <Categorie> listeCategorie;
     
     /** Liste de Questions */
-    public static ObservableList <Question> listeQuestions = FXCollections.observableArrayList();
+    public static ArrayList <Question> listeQuestions;
 
     /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
     public static int numScenePrecedenteCategorie;
+    
+    /** Le questionnaire généré avant son  */
+    public static Questionnaire QuestionnaireGénéré;
 
     /**
      * Sauvegarde la base de questions et de catégories.
@@ -90,13 +84,13 @@ public class Donnees {
                 && FICH_QUESTIONS.exists()));
         try {
             if (FICH_CATEGORIES.exists()) {
-                listeCategorie = (ObservableList<Categorie>) 
+                listeCategorie = (ArrayList<Categorie>) 
                         chargerSauvegarde(FICH_CATEGORIES);
             } else {
                 FICH_CATEGORIES.createNewFile();
             }
             if (FICH_QUESTIONS.exists()) {
-                listeQuestions = (ObservableList<Question>) 
+                listeQuestions = (ArrayList<Question>) 
                         chargerSauvegarde(FICH_QUESTIONS);
             } else {
                 FICH_CATEGORIES.createNewFile();
@@ -108,13 +102,13 @@ public class Donnees {
         // Cas par défaut
         if (listeCategorie == null || listeCategorie.size() == 0) {
             System.out.println("Cas par défaut : création d'une catégorie");
-            listeCategorie = FXCollections.observableArrayList();
+            listeCategorie = new ArrayList<>();
             listeCategorie.add(new Categorie("Général"));
             donneesChargees = false;
         }
         if (listeQuestions == null) {
             System.out.println("Cas par défaut : création de la liste de questions");
-            listeQuestions = FXCollections.observableArrayList();
+            listeQuestions = new ArrayList<>();
             donneesChargees = false;
         }
         afficherDonnees();
@@ -130,13 +124,13 @@ public class Donnees {
      * @throws ClassNotFoundException s'il est impossible de convertir l'objet
      */
     private static Object chargerSauvegarde(File fichier) throws FileNotFoundException, 
-            IOException, ClassNotFoundException {
+    IOException, ClassNotFoundException {
         try (ObjectInputStream readerCategories = new ObjectInputStream(
                 new FileInputStream(fichier))) {
             return readerCategories.readObject();
         }
     }
-    
+
     private static void afficherDonnees() {
         System.out.println("CATEGORIES : ");
         for (Categorie cat : listeCategorie) {
@@ -146,29 +140,73 @@ public class Donnees {
         for (Question q : listeQuestions) {
             System.out.println(" - " + q.getLibelle());
         }
-   }
-    
+    }
 
-   /** Verifie que la categorie ajouté n'est pas un double 
+
+    /** Verifie que la categorie ajouté n'est pas un double 
      * @param aVerifier la catégorie à analyser
      * @return true si aVerifier est un doublon*/
     public static boolean verifDoubleCategorie(Categorie aVerifier) {
-    	boolean doubleOk = false;
-    	for (int i = 0; i < listeCategorie.size() && !doubleOk; i++) {
-    		doubleOk = listeCategorie.get(i).equals(aVerifier);
-    	}
-    	return doubleOk;
+        boolean doubleOk = false;
+        for (int i = 0; i < listeCategorie.size() && !doubleOk; i++) {
+            doubleOk = listeCategorie.get(i).equals(aVerifier);
+        }
+        return doubleOk;
     }
-    
-    /** Verifie que la question ajouté n'est pas un double 
+
+    /** 
+     * Verifie que la question ajouté n'est pas un double 
      * @param aVerifier la question à analyser
-     * @return true si aVerifier est un doublon*/
+     * @return true si aVerifier est un doublon
+     */
     public static boolean verifDoubleQuestion(Question aVerifier) {
-    	boolean doubleOk = false;
-    	for (int i = 0; i < listeQuestions.size() && !doubleOk; i++) {
-    		doubleOk = listeQuestions.get(i).equals(aVerifier);
-    	}
-    	return doubleOk;
+        boolean doubleOk = false;
+        for (int i = 0; i < listeQuestions.size() && !doubleOk; i++) {
+            doubleOk = listeQuestions.get(i).equals(aVerifier);
+        }
+        return doubleOk;
+    }
+
+    /**
+     * Recherche et renvoie la liste de toutes les questions d'une categorie
+     * @param categorie le nom de la categorie
+     * @return res la liste des questions de categorie
+     */
+    public static ArrayList<Question> getQuestionOfCategorie(String categorie) {
+        ArrayList<Question> res = new ArrayList<Question>();
+        if (categorie.equals("General")) {
+            res = (ArrayList<Question>) listeQuestions;
+        }else{
+            for( Question laQuestion : listeQuestions ) {
+                if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
+                    res.add(laQuestion);
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Recherche et renvoie la liste de toutes les questions d'une difficulte
+     * @param difficulte le numero de la difficulte
+     * @return res la liste des questions de difficulte
+     */
+    public static ArrayList<Question> getQuestionOfDifficulte(int difficulte) {
+        ArrayList<Question> res = new ArrayList<Question>();
+        for( Question laQuestion : listeQuestions ) {
+            if (laQuestion.getDifficulte() == difficulte) {
+                res.add(laQuestion);
+            }
+        }
+        return res;
+    }
+
+    /** 
+     * Initialise les données
+     * @param args
+     */
+    public static void main(System[] args) {
+        listeCategorie.add(new Categorie("General"));
     }
 
 }
