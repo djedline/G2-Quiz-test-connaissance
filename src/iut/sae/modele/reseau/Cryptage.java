@@ -15,7 +15,8 @@ import java.nio.charset.Charset;
  */
 public class Cryptage {
 
-    private final static int TAILLE_ENSEMBLE = 880;
+    /** La taille maximale de l'ensemble de caractères */
+    public final static int TAILLE_ENSEMBLE = 880;
 
     private final static double MAX_LONGUEUR_CLE = 100.0;
     
