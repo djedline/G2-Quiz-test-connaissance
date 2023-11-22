@@ -17,13 +17,15 @@ public class Cryptage {
 
     /** La taille maximale de l'ensemble de caractères */
     public final static int TAILLE_ENSEMBLE = 880;
-
+    
+    /** La longueur max de la clé */
     private final static double MAX_LONGUEUR_CLE = 100.0;
     
+    /** La longueur min de la clé */
     private final static double MIN_LONGUEUR_CLE = 3.0;
     
     /** 
-     * Programme Principal3
+     * Programme Principal
      * @param args
      */
     public static void main(String[] args) {
