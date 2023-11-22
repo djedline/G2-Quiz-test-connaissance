@@ -23,6 +23,7 @@ class DonneesTest {
 
     /**
      * Crée les fixtures de test.
+     * ATTENTION ces tests réunitialise les sauvegardes.
      * 
      * @throws java.lang.Exception
      */
@@ -84,11 +85,18 @@ class DonneesTest {
     void lancementAppli() {
         Donnees.charger();
     }
-
+    
+    /**
+     * Réplique les actions de sauvegarde à la 
+     */
     void fermetureAppli() {
         Donnees.sauvegarder();
     }
     
+    /**
+     * Réplique la création d'une catégorie depuis l'IHM
+     * @param nom le nom de la catégorie
+     */
     void creerCategorie(String nom) {
         Categorie nouvelleCategorie = new Categorie(nom);
         if (!Donnees.verifDoubleCategorie(nouvelleCategorie)) {
@@ -96,6 +104,10 @@ class DonneesTest {
         }
     }
 
+    /**
+     * Réplique la création d'une question depuis l'IHM
+     * @param cat la catégorie de la question
+     */
     void creerQuestion(Categorie cat) {
         Question nouvelleQuestion = new Question("Intitulé", cat, "Juste", new String[] { "Faux" }, "Feedback", 1);
 

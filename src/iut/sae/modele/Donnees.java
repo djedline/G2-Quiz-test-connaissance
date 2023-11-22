@@ -13,11 +13,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-
-
 /**
  * Centralise les données de l'application.
  * @author djedline.boyer
@@ -35,10 +30,10 @@ public class Donnees {
     public static final File FICH_CATEGORIES = new File("donnees/categories.data");
 
     /** Liste de Categorie */
-    public static ObservableList <Categorie> listeCategorie = FXCollections.observableArrayList();
-
+    public static ArrayList <Categorie> listeCategorie;
+    
     /** Liste de Questions */
-    public static ObservableList <Question> listeQuestions = FXCollections.observableArrayList();
+    public static ArrayList <Question> listeQuestions;
 
     /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
     public static int numScenePrecedenteCategorie;
@@ -86,12 +81,14 @@ public class Donnees {
                 && FICH_QUESTIONS.exists()));
         try {
             if (FICH_CATEGORIES.exists()) {
-                listeCategorie = (ObservableList<Categorie>)chargerSauvegarde(FICH_CATEGORIES);
+                listeCategorie = (ArrayList<Categorie>) 
+                        chargerSauvegarde(FICH_CATEGORIES);
             } else {
                 FICH_CATEGORIES.createNewFile();
             }
             if (FICH_QUESTIONS.exists()) {
-                listeQuestions = (ObservableList<Question>) chargerSauvegarde(FICH_QUESTIONS);
+                listeQuestions = (ArrayList<Question>) 
+                        chargerSauvegarde(FICH_QUESTIONS);
             } else {
                 FICH_CATEGORIES.createNewFile();
             }
@@ -102,13 +99,13 @@ public class Donnees {
         // Cas par défaut
         if (listeCategorie == null || listeCategorie.size() == 0) {
             System.out.println("Cas par défaut : création d'une catégorie");
-            listeCategorie = FXCollections.observableArrayList();
+            listeCategorie = new ArrayList<>();
             listeCategorie.add(new Categorie("Général"));
             donneesChargees = false;
         }
         if (listeQuestions == null) {
             System.out.println("Cas par défaut : création de la liste de questions");
-            listeQuestions = FXCollections.observableArrayList();
+            listeQuestions = new ArrayList<>();
             donneesChargees = false;
         }
         afficherDonnees();
