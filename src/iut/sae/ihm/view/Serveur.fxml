@@ -9,12 +9,12 @@
 	<children>
 		<Button fx:id="btnDemarrer" layoutX="77.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicDemarrer" prefHeight="25.0" prefWidth="131.0" text="Demarrer" />
 		<Label fx:id="idLabelNom" alignment="CENTER" layoutX="7.0" layoutY="136.0" prefHeight="25.0" prefWidth="164.0" text="Adresse IP Serveur  :" />
-		<Label fx:id="idTitre" alignment="CENTER" layoutX="134.0" layoutY="55.0" prefHeight="55.0" prefWidth="164.0" text="Serveur">
+		<Label fx:id="idTitre" alignment="CENTER" layoutX="74.0" layoutY="57.0" prefHeight="55.0" prefWidth="303.0" text="Connection serveur">
 			<font>
 				<Font size="30.0" />
 			</font>
 		</Label>
       <Button fx:id="btnQuitter" layoutX="241.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="131.0" text="Retour" />
-      <Label fx:id="adresseIPServeur" layoutX="159.0" layoutY="139.0" prefHeight="17.0" prefWidth="188.0" style="-fx-border-color: black;" />
+      <TextField fx:id="adresseIpServeur" layoutX="151.0" layoutY="134.0" onAction="#verifIp" prefHeight="25.0" prefWidth="177.0" />
 	</children>
 </Pane>

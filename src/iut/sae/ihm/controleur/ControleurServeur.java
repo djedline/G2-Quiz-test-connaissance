@@ -49,6 +49,8 @@ public class ControleurServeur {
     
     boolean allumageOk = false;
     
+    
+    
     @FXML
     void clicDemarrer(ActionEvent event) {
         if (!allumageOk) {

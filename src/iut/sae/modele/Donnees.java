@@ -37,6 +37,9 @@ public class Donnees {
 
     /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
     public static int numScenePrecedenteCategorie;
+    
+    /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
+    public static File fichierAPartager;
 
     /**
      * Sauvegarde la base de questions et de catégories.

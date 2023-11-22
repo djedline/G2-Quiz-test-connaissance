@@ -43,7 +43,7 @@ public class Client {
     public static void main(String[] args) {
         try {
             Scanner sc = new Scanner(System.in);
-            creerClient("10.2.14.31", 6666);
+            creerLiaisonServeur("10.2.14.31", 6666);
 			String cle = "";
 			String recu = "";
             while (recu.isEmpty()) {
@@ -64,7 +64,7 @@ public class Client {
      * @param port le port du serveur
      * @throws IOException si la socket client ne peut être crée
      */
-    public static void creerClient(String host, int port) throws IOException {
+    public static void creerLiaisonServeur(String host, int port) throws IOException {
         System.out.println("CREATION DU CLIENT");
         try {
             sock = new Socket(host, port);
