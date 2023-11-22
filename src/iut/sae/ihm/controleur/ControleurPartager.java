@@ -6,14 +6,19 @@ package iut.sae.ihm.controleur;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import iut.sae.ihm.controleur.testFile;
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
+import iut.sae.ihm.view.testFile;
+import iut.sae.modele.Donnees;
 import iut.sae.modele.reseau.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -28,46 +33,70 @@ import javafx.scene.Node;
  */
 public class ControleurPartager {
 
+    
     @FXML
-    private Pane idPane;
-
-    @FXML
-    private Label idTitre;
-
-    @FXML
-    private TextField idNom;
+    private TextField adresseIpServeur;
 
     @FXML
     private Button btnQuitter;
-
-    @FXML
-    private Label idLabelNom;
     
     @FXML
-    private Label FichierAExporter;
+    private ChoiceBox<String> choixFichier;
 
     @FXML
     private Button btnValider;
+    
+    private File fichierChoisit;
 
-    private void choixFichier(Stage stage1) {
-        /*FileChooser fileChooser = new FileChooser();
-        // Ajout d'un filtre pour ne montrer que certains fichiers
-        ExtensionFilter extFilter = new ExtensionFilter("Fichiers texte(*.csv)", "*.csv");
-        fileChooser.setTitle("Choisir un fichier");
-        fileChooser.getExtensionFilters().add(extFilter);
-        //Afficher la boîte de dialogue de choix de fichier
-        File fichierSelectionner = fileChooser.showOpenDialog(stage1);
-        testFile.main(null);*/
+   /** 
+     * Initialise la liste déroulante
+     */
+    @FXML
+    void initialize() {
+        String chemineDossier = "src/fichiers_sauvegarde_partage/fichier_csv_stock";
+        File dossier = new File(chemineDossier);
+        File[] listeFichier = dossier.listFiles();
+        //System.out.println(listeFichier.toString());
+        System.out.println(dossier.isDirectory());
+        if (listeFichier == null) {
+            choixFichier.getItems().add("-- Pas de fichier --");
+            choixFichier.setValue("-- Pas de fichier --");
+        } else {
+            choixFichier.getItems().add("-- selectionner un Fichier --");
+            for (File fichier : listeFichier) {
+                choixFichier.getItems().add(fichier.getName());
+                System.out.println(fichier);
+            }
+            choixFichier.setValue("-- selectionner un Fichier --");
+        }
+       /* */
+        
+    }
+   
+    
+    @FXML
+    void verifIp (ActionEvent event) {
+        //(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?) pour que le nombre soit de 0 à 255
+        Pattern motif = Pattern.compile("^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]"
+                                       + "?).){3}(25[0-5]|2[0-4][0-9]|[0-1]?"
+                                       + "[0-9][0-9]?)$");
+        //Matcher correct = motif.matcher(adresseIpServeur);
+        System.out.print("TODO");
     }
     
     @FXML
-    void chercherFichier (ActionEvent event) {
+    void choixEffectuer (ActionEvent event) {
         System.out.print("TODO");
     }
     
     @FXML
     void clicValider(ActionEvent event) {
-        testFile.launch(testFile.class);
+       /* if () {
+            System.out.print("TODO");
+        } else {
+            System.out.print("TODO");
+        }*/
+
     }
 
     

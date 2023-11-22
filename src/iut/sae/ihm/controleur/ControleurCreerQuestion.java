@@ -92,8 +92,6 @@ public class ControleurCreerQuestion {
         
         choiceCategorie.setItems(Donnees.listeCategorie);
 
-
-
     }
 
     /** TODO comment method role
