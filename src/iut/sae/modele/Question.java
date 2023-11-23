@@ -75,7 +75,7 @@ public class Question implements Serializable {
         }
         questionOk = !libelle.isBlank() && nomCategorie != null 
                 && !propositionJuste.isBlank() && propOk && propositionFausse != null
-                && !feedback.isBlank() && 1 <= difficulte && difficulte <= 3;
+                && feedback != null && 1 <= difficulte && difficulte <= 3;
         return questionOk;
     }
     

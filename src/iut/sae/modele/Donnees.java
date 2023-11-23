@@ -28,12 +28,17 @@ public class Donnees {
      * Le chemin dans lequel les catégories sont sauvegardées.
      */
     public static final File FICH_CATEGORIES = new File("donnees/categories.data");
-
+    
+    /**
+     * Le nom de la catégorie par défaut existante.
+     */
+    public static final String NOM_CATEGORIE_DEFAUT = "Général";
+    
     /** Liste de Categorie */
-    public static ArrayList <Categorie> listeCategorie;
+    public static ArrayList <Categorie> listeCategorie = new ArrayList<>();
     
     /** Liste de Questions */
-    public static ArrayList <Question> listeQuestions;
+    public static ArrayList <Question> listeQuestions = new ArrayList<>();
 
     /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
     public static int numScenePrecedenteCategorie;
@@ -102,13 +107,11 @@ public class Donnees {
         // Cas par défaut
         if (listeCategorie == null || listeCategorie.size() == 0) {
             System.out.println("Cas par défaut : création d'une catégorie");
-            listeCategorie = new ArrayList<>();
-            listeCategorie.add(new Categorie("Général"));
+            listeCategorie.add(new Categorie(NOM_CATEGORIE_DEFAUT));
             donneesChargees = false;
         }
         if (listeQuestions == null) {
-            System.out.println("Cas par défaut : création de la liste de questions");
-            listeQuestions = new ArrayList<>();
+            System.out.println("Cas par défaut : liste par défaut créee");
             donneesChargees = false;
         }
         afficherDonnees();
@@ -130,8 +133,8 @@ public class Donnees {
             return readerCategories.readObject();
         }
     }
-
-    private static void afficherDonnees() {
+    
+    public static void afficherDonnees() {
         System.out.println("CATEGORIES : ");
         for (Categorie cat : listeCategorie) {
             System.out.println(" - " + cat.getLibelle());
@@ -208,5 +211,22 @@ public class Donnees {
     public static void main(System[] args) {
         listeCategorie.add(new Categorie("General"));
     }
+
+    /**
+     * Vide les fichiers de sauvegarde.
+     */
+	public static void effacerSauvegarde() {
+		FICH_CATEGORIES.delete();
+		FICH_QUESTIONS.delete();
+	}
+	
+    /**
+     * Vide les fichiers de sauvegarde.
+     */
+	public static void reinitialiserDonnees() {
+		listeCategorie = new ArrayList<>();
+		listeCategorie.add(new Categorie(NOM_CATEGORIE_DEFAUT));
+		listeQuestions = new ArrayList<>();
+	}
 
 }

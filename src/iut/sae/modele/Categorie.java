@@ -24,7 +24,7 @@ public class Categorie implements Serializable {
      * @throws IllegalArgumentException si le titre est vide
      */
     public Categorie(String libelle) {
-        this.titreCat = libelle;
+        this.titreCat = libelle.strip();
         if (libelle.isBlank()){
             throw new IllegalArgumentException("le libellé n'est pas valide");
         }
