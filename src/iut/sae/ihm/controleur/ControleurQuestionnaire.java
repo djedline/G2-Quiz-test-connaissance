@@ -5,6 +5,8 @@ package iut.sae.ihm.controleur;
 
 import java.util.ArrayList;
 
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
 import javafx.event.ActionEvent;
@@ -12,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 
 /**
  * Classe controlleur de la vue "Questionnaire.fxml"
@@ -26,7 +29,7 @@ public class ControleurQuestionnaire {
     /** Numéro de la question affiché */
     public int numQuestion;
     
-    /** List des boutons radio */
+    /** Liste des boutons radio */
     public ArrayList<RadioButton> listeRadioButton = new ArrayList<>();
     
     @FXML
@@ -64,6 +67,11 @@ public class ControleurQuestionnaire {
         listeRadioButton.add(idReponse3);
         listeRadioButton.add(idReponse4);
         listeRadioButton.add(idReponse5);
+       
+        //je crée un Toggle pour empecher de selectionner tous les radiobutton
+        ToggleGroup groupe = new ToggleGroup();
+        groupe.getToggles().addAll(listeRadioButton);
+        
         chargerQuestionSuivante();
         
     }
@@ -84,9 +92,11 @@ public class ControleurQuestionnaire {
      * suivante du questionnaire
      */
     public void chargerQuestionSuivante() {
+        reinitialiserRadioButton();
         numQuestion ++;
         if (numQuestion >= nbQuestion ) {
-            // TODO : Charger Vue du resultat du questionnaire
+            //TODO : Stub
+            EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);
         } else {
             Question laQuestionSuivante =
                     Donnees.QuestionnaireGénéré.getQuestion(numQuestion);
@@ -102,6 +112,17 @@ public class ControleurQuestionnaire {
     }
     
 
+
+    /** 
+     * Methode qui desélectionne tout les radiobuttons
+     */
+    private void reinitialiserRadioButton() {
+        for (RadioButton leBouton : listeRadioButton) {
+            if(leBouton.isSelected()) {
+                leBouton.setSelected(false);
+            }
+        } 
+    }
 
     /** 
      * Change le texte des radiobutton pour afficher les reponses de la question

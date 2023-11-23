@@ -92,6 +92,7 @@ public class ControleurCreerQuestionnaire {
             Questionnaire leQuestionnaire = 
                     new Questionnaire(laDifficulte,idCategorie.getValue().getLibelle(),Integer.parseInt(idNbQuestion.getValue()));
             Donnees.QuestionnaireGénéré = leQuestionnaire;
+            EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_QUESTIONNAIRE);
             
         } catch (IllegalArgumentException erreur) {
             Alert messageErreur = new Alert(AlertType.ERROR);

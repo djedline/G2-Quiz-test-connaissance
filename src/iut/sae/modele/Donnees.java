@@ -174,7 +174,7 @@ public class Donnees {
      */
     public static ArrayList<Question> getQuestionOfCategorie(String categorie) {
         ArrayList<Question> res = new ArrayList<Question>();
-        if (categorie.equals("General")) {
+        if (categorie.equals(Donnees.listeCategorie.get(0).getLibelle())) {
             res = (ArrayList<Question>) listeQuestions;
         }else{
             for( Question laQuestion : listeQuestions ) {
