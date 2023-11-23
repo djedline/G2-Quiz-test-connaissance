@@ -35,7 +35,7 @@ public class ControleurMenuPrincipal {
 
     @FXML
     void clicStart(ActionEvent event) throws Exception {
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_QUESTIONNAIRE);
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CREER_QUESTIONNAIRE);
     }
 
     @FXML

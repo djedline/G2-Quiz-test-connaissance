@@ -6,10 +6,6 @@
 package iut.sae.ihm.controleur;
 
 import java.util.ArrayList;
-
-
-
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

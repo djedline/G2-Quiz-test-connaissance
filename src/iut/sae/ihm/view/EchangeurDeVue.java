@@ -7,7 +7,6 @@ package iut.sae.ihm.view;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import iut.sae.ihm.controleur.Lanceur;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -59,6 +58,7 @@ public class EchangeurDeVue {
         } catch(IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println("Echec du chargement de la vue de code " + codeVue);
+            erreur.printStackTrace();
         }
     }
 }

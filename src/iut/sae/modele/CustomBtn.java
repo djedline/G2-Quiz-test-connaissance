@@ -6,6 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.HBox;
 
+/** TODO comment class responsibility (SRP)
+ * @author leo.cheikh-boukal
+ *
+ */
 public class CustomBtn extends HBox {
 
     private Label boxText;
@@ -20,6 +24,10 @@ public class CustomBtn extends HBox {
         this.setAlignment(Pos.CENTER_LEFT);
     }
 
+    /** TODO comment initial state
+     * @param txt
+     * @param bt
+     */
     public CustomBtn(Label txt, MenuButton bt) {
         super(5);
 
@@ -30,6 +38,9 @@ public class CustomBtn extends HBox {
         this.setAlignment(Pos.CENTER_LEFT);
     }
     
+    /** TODO comment method role
+     * @return le string
+     */
     public String getString() {
     	return this.boxText.getText();
     }
