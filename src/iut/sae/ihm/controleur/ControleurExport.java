@@ -24,10 +24,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
- * TODO comment class responsibility (SRP)
+ * Classe controleur permettant de gérer l'exportation de données
  * 
- * @author nael.briot
- *
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurExport {
 
@@ -43,8 +44,11 @@ public class ControleurExport {
 	@FXML
 	private Button btnQuitter;
 
-	@FXML
-	private Label idLabelNom;
+    @FXML
+    private Label idLabelNom;
+
+    @FXML
+    private Label FichierAExporter;
 
 	@FXML
 	private TextField fichierAExporter;

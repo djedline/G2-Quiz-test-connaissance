@@ -10,9 +10,9 @@ import java.util.ArrayList;
 /**
  * Utilise le format CSV (séparateur ";", encodage UTF-8) 
  * avec la structure indiquée par {@code #NOM_COLONNE}
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
+ * @version 1.0
  */
 public class ImportExport {
 
@@ -21,6 +21,7 @@ public class ImportExport {
 	/** Retour à la ligne séparant les lignes */
 	public static final char NEW_LINE = '\n';
 
+	/** Symbole pour définir une chaine de caractères */
 	public static final char GUILLEMET = '"';
 
 	/** Ordre des champs dans les fichiers CSV */
@@ -75,8 +76,8 @@ public class ImportExport {
 		s.append(q.getPropositionJuste());
 		s.append(DELIMITEUR);
 		for (int i = 0; i < 4; i++) {
-			if (i < q.getPropositionFausse().length) {
-				s.append(q.getPropositionFausse()[i]);
+			if (i < q.getPropositionFausse().size()) {
+				s.append(q.getPropositionFausse().get(i));
 			}
 			s.append(DELIMITEUR);
 		}
@@ -186,6 +187,13 @@ public class ImportExport {
 		return bonneCategorie;
 	}
 
+	/** 
+	 * Méthode qui prend en argument une ligne et la découpe pour récupérer
+	 * les valeurs comprises dans celle ci
+	 * @param ligne la ligne à découper
+	 * @return valeurs l'ensemble des valeurs découpées sur la ligne
+	 * @throws FichierMalFormeException si la ligne n'existe pas
+	 */
 	public static String[] decouper(String ligne) throws FichierMalFormeException {
 		int NB_COLONNES = NOM_COLONNE.length;
 		

@@ -24,10 +24,18 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
+<<<<<<< HEAD
  * TODO comment class responsibility (SRP)
  * 
  * @author nael.briot
  *
+=======
+ * Classe controleur de la page Import
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
+>>>>>>> d3097ed296850ec71a3380c1d358433be2826e96
  */
 public class ControleurImport {
 
