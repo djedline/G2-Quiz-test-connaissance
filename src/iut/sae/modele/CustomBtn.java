@@ -1,3 +1,8 @@
+/*
+ * CustomBtn.java                                    21 nov. 2023
+ * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ */
+
 package iut.sae.modele;
 
 import javafx.geometry.Pos;
@@ -46,6 +51,10 @@ public class CustomBtn extends HBox {
         this.setAlignment(Pos.CENTER_LEFT);
     }
     
+    /** TODO comment initial state
+     * @param lacat
+     * @param bt
+     */
     public CustomBtn(Categorie lacat, MenuButton bt) {
         super(5);
 
@@ -65,10 +74,18 @@ public class CustomBtn extends HBox {
     	return this.boxText.getText();
     }
     
+    /** 
+     * Méthode qui permet de récupérer la catégorie enregistré
+     * @return la catégorie enregistré
+     */
     public Categorie getCategorie() {
     	return this.laCategorie;
     }
     
+    /** 
+     * Méthode qui permet de récupérer la question enregistré
+     * @return la question enregistré
+     */
     public Question getQuestion() {
     	return this.laQuestion;
     }

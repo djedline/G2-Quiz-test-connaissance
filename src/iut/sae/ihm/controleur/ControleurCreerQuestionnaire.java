@@ -1,3 +1,8 @@
+/*
+ * ControleurCreerQuestionnaire.java                      13 nov. 2023
+ * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ */
+
 package iut.sae.ihm.controleur;
 
 import iut.sae.ihm.view.EchangeurDeVue;
@@ -12,10 +17,11 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 
-/** 
+/**
  * Classe controleur permettant de gérer la création du questionnaire
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
- * leo.cheikh-boukal
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
  * @version 1.0
  */
 public class ControleurCreerQuestionnaire {
@@ -47,8 +53,8 @@ public class ControleurCreerQuestionnaire {
     @FXML
     private Button btnValider;
 
-    
-    /** TODO comment method role
+    /**
+     * TODO comment method role
      * 
      */
     @FXML
@@ -56,21 +62,20 @@ public class ControleurCreerQuestionnaire {
         idDifficulte.getItems().add(new MenuItem("Facile"));
         idDifficulte.getItems().add(new MenuItem("Moyen"));
         idDifficulte.getItems().add(new MenuItem("Difficile"));
-        
+
         idNbQuestion.getItems().add(new MenuItem("5"));
         idNbQuestion.getItems().add(new MenuItem("10"));
         idNbQuestion.getItems().add(new MenuItem("20"));
-        
+
         for (Categorie element : Donnees.listeCategorie) {
-                idCategorie.getItems().add(new MenuItem(element.getLibelle()));
+            idCategorie.getItems().add(new MenuItem(element.getLibelle()));
         }
 
-
     }
+
     @FXML
     void clicValider(ActionEvent event) {
-        
-        
+
         System.out.print("TODO");
     }
 

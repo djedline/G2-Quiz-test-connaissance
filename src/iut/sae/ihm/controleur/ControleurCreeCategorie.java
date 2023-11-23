@@ -18,8 +18,9 @@ import javafx.scene.layout.Pane;
 
 /**
  * Controleur de la page pour la création de catégories
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
- * leo.cheikh-boukal 
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
  * @version 1.0
  */
 public class ControleurCreeCategorie {
@@ -32,7 +33,7 @@ public class ControleurCreeCategorie {
 
     @FXML
     private Button btnCreerCat;
-    
+
     @FXML
     private Button btnQuitter;
 
@@ -50,7 +51,7 @@ public class ControleurCreeCategorie {
                 Donnees.listeCategorie.add(nouvelleCategorie);
                 System.out.println(nouvelleCategorie);
             } else {
-            	Alert messageErreur = new Alert(AlertType.ERROR);
+                Alert messageErreur = new Alert(AlertType.ERROR);
                 messageErreur.setContentText("La categorie existe déjà.");
                 messageErreur.show();
             }
@@ -61,11 +62,10 @@ public class ControleurCreeCategorie {
         }
         idNom.setText(null);
     }
-    
+
     @FXML
-   void clicQuitter(ActionEvent event) throws Exception { 
+    void clicQuitter(ActionEvent event) throws Exception {
         EchangeurDeVue.echangerAvec(Donnees.numScenePrecedenteCategorie);
     }
 
-   
 }
