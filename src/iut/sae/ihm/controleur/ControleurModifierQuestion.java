@@ -127,19 +127,16 @@ public class ControleurModifierQuestion {
 	public String[] tableauReponseFausse() {
 		ArrayList<String> listeIntermediaire = new ArrayList<>();
 		String[] repFausse;
-		if (txtRepFausse1.getText() == null || txtRepFausse1.getText().isBlank()) {
+		boolean repFausseNbValide = false;
+		
+		for (TextField laZoneTexte:lesTxtFaux) {
+			if (laZoneTexte.getText() != null && !laZoneTexte.getText().isBlank()) {
+				listeIntermediaire.add(laZoneTexte.getText());
+				repFausseNbValide = true;
+			}
+		}
+		if (!repFausseNbValide) {
 			throw new IllegalArgumentException();
-		} else {
-			listeIntermediaire.add(txtRepFausse1.getText());
-		}
-		if (txtRepFausse2.getText() != null && !txtRepFausse2.getText().isBlank()) {
-			listeIntermediaire.add(txtRepFausse2.getText());
-		}
-		if (txtRepFausse3.getText() != null && !txtRepFausse3.getText().isBlank()) {
-			listeIntermediaire.add(txtRepFausse3.getText());
-		}
-		if (txtRepFausse4.getText() != null && !txtRepFausse4.getText().isBlank()) {
-			listeIntermediaire.add(txtRepFausse4.getText());
 		}
 		repFausse = new String[listeIntermediaire.size()];
 		repFausse = listeIntermediaire.toArray(repFausse);
@@ -211,7 +208,7 @@ public class ControleurModifierQuestion {
 
 	@FXML
 	void annulerQuestion(ActionEvent event) {
-		EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_MENU_GESTION_DONNEES);
+		EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
 	}
 
 }
