@@ -39,7 +39,7 @@ public class ControleurServeur {
     private Button btnQuitter;
 
     @FXML
-    private Label adresseIPServeur;
+    private Label adresseIpServeur;
     
     @FXML
     private Label FichierAExporter;
@@ -53,15 +53,19 @@ public class ControleurServeur {
     
     @FXML
     void clicDemarrer(ActionEvent event) {
+        System.out.println(allumageOk);
+        System.out.println(!allumageOk);
         if (!allumageOk) {
-        adresseIPServeur.setText(Serveur.preparerServeur());
-        btnDemarrer.setText("Eteindre");
-        allumageOk = true;
+            System.out.println("Salut");
+            adresseIpServeur.setText(Serveur.preparerServeur());
+            btnDemarrer.setText("Eteindre");
+            allumageOk = true;
         } else {
+            System.out.println("Au revoir");
             Serveur.fermetureServeur();
             allumageOk = false;
             btnDemarrer.setText("Demarrer");
-            adresseIPServeur.setText("");
+            adresseIpServeur.setText("");
         }
         /*try {
             message = Client.construireMessage(fichierATraiter);

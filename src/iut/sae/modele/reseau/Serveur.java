@@ -67,6 +67,7 @@ public class Serveur {
     public static String preparerServeur() {
         System.out.println("CREATION DU SERVEUR");
         try {
+            
             InetAddress ip = InetAddress.getLocalHost();
             conn = new ServerSocket(6666);
             return ip.getHostAddress();

@@ -15,6 +15,6 @@
 			</font>
 		</Label>
       <Button fx:id="btnQuitter" layoutX="241.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="131.0" text="Retour" />
-      <TextField fx:id="adresseIpServeur" layoutX="151.0" layoutY="134.0" onAction="#verifIp" prefHeight="25.0" prefWidth="177.0" />
+      <Label fx:id="adresseIpServeur" layoutX="157.0" layoutY="138.0" prefHeight="17.0" prefWidth="203.0" style="-fx-border-color: black;" text=" " />
 	</children>
 </Pane>

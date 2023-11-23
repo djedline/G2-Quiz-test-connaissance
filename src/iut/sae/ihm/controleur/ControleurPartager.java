@@ -52,28 +52,9 @@ public class ControleurPartager {
     private Button btnValider;
     
     @FXML
-    private Label adresseIPServeur;
-    
-    @FXML
     private Button btnDemarrer;
     
     boolean allumageOk = false;
-    
-    @FXML
-    void clicDemarrer(ActionEvent event) {
-        if (!allumageOk) {
-        adresseIPServeur.setText(Serveur.preparerServeur());
-        btnDemarrer.setText("Eteindre");
-        allumageOk = true;
-        } else {
-            Serveur.fermetureServeur();
-            allumageOk = false;
-            btnDemarrer.setText("Demarrer");
-            adresseIPServeur.setText("");
-        }
-    
-    }
-    
     
     private String chemineDossier;
     private File dossier;
