@@ -145,13 +145,11 @@ public class ImportExport {
             for (int i = 5; i < 9; i++) {
                 if (!colonnes[i].isBlank()) {
                     repFausses.add(colonnes[i]);
-                    // System.out.println("On rajoute : " + colonnes[i] + " dans le " + "tableau.");
                 }
             }
             // récupérer un array de réponses fausses
             String[] fausses = new String[repFausses.size()];
             fausses = repFausses.toArray(fausses);
-            // System.out.println("Nombre de rep fausses : " + fausses.length);
             Question questionGeneree = new Question(colonnes[2], categorie, colonnes[3], fausses, colonnes[8], diff);
             Donnees.listeQuestions.add(questionGeneree);
         }
@@ -238,10 +236,6 @@ public class ImportExport {
                 }
             }
         }
-        /*
-         * for (int i = 0; i < valeurs.length; i++) { System.out.println(NOM_COLONNE[i]
-         * + " : " + valeurs[i]); }
-         */
         return valeurs;
     }
 }
