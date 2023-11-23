@@ -13,10 +13,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-/** 
- * Classe controleur permettant de gérer la page de gestion d'échange des données
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
- * leo.cheikh-boukal
+/**
+ * Classe controleur permettant de gérer la page de gestion d'échange des
+ * données
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
  * @version 1.0
  */
 public class ControleurEchangeDonnes {
@@ -56,12 +58,12 @@ public class ControleurEchangeDonnes {
     void clicPartDon(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PARTAGER);
     }
-    
+
     @FXML
     void infoServeur(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_SERVEUR);
     }
-    
+
     @FXML
     void clicQuitter(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);

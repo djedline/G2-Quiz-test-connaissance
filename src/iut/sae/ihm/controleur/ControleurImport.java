@@ -14,9 +14,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-/** TODO comment class responsibility (SRP)
- * @author nael.briot
- *
+/**
+ * Classe controleur de la page Import
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurImport {
 

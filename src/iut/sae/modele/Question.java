@@ -191,8 +191,8 @@ public class Question implements Serializable {
 		
 	}
 	
-	/*
-	 * 
+	/** 
+	 * Méthode qui permet de vider le contenu de la proposition fausse
 	 */
 	public void viderPropositionFausse() {
 		this.propositionFausse.clear();

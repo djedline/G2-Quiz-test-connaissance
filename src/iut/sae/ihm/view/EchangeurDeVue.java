@@ -97,7 +97,7 @@ public class EchangeurDeVue {
     }
     
     /** TODO comment method role
-     * @param codeVue
+     * @param laQuestion 
      */
     public static void echangerAvec(Question laQuestion) {
         if (sceneCourante == null) {

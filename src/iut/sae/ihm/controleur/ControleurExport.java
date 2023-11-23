@@ -22,10 +22,11 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-/** 
+/**
  * Classe controleur permettant de gérer l'exportation de données
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
- * leo.cheikh-boukal
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
  * @version 1.0
  */
 public class ControleurExport {
@@ -44,7 +45,7 @@ public class ControleurExport {
 
     @FXML
     private Label idLabelNom;
-    
+
     @FXML
     private Label FichierAExporter;
 
@@ -52,22 +53,23 @@ public class ControleurExport {
     private Button btnValider;
 
     private void choixFichier(Stage stage1) {
-       /* FileChooser fileChooser = new FileChooser();
-        // Ajout d'un filtre pour ne montrer que certains fichiers
-        ExtensionFilter extFilter = new ExtensionFilter("Fichiers texte(*.txt)", "*.txt");
-        fileChooser.getExtensionFilters().add(extFilter);
-        
-        stage1.getScene().getWindow();
-        //Afficher la boîte de dialogue de choix de fichier
-        //File fichierSelectionner = fileChooser.showOpenDialog();*/
+        /*
+         * FileChooser fileChooser = new FileChooser(); // Ajout d'un filtre pour ne
+         * montrer que certains fichiers ExtensionFilter extFilter = new
+         * ExtensionFilter("Fichiers texte(*.txt)", "*.txt");
+         * fileChooser.getExtensionFilters().add(extFilter);
+         * 
+         * stage1.getScene().getWindow(); //Afficher la boîte de dialogue de choix de
+         * fichier //File fichierSelectionner = fileChooser.showOpenDialog();
+         */
         testFile.main(null);
     }
-    
+
     @FXML
-    void chercherFichier (ActionEvent event) {
+    void chercherFichier(ActionEvent event) {
         System.out.print("TODO");
     }
-    
+
     @FXML
     void clicValider(ActionEvent event) {
 
