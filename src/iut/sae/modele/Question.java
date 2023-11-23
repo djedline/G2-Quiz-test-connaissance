@@ -14,8 +14,9 @@ import java.util.ArrayList;
  */
 public class Question implements Serializable {
 
+
 	/** Version de la classe question (date et heure au format JJMMHHmm*/
-	private static final long serialVersionUID = 13110945L;
+	private static final long serialVersionUID = 13110945L;  
 
 	/** libellé de la question */
 	private String libelle;
