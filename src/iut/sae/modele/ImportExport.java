@@ -56,8 +56,8 @@ public class ImportExport {
 		s.append(q.getPropositionJuste());
 		s.append(DELIMITEUR);
 		for (int i = 0; i < 4; i++) {
-			if (i < q.getPropositionFausse().length) {
-				s.append(q.getPropositionFausse()[i]);
+			if (i < q.getPropositionFausse().size()) {
+				s.append(q.getPropositionFausse().get(i));
 			}
 			s.append(DELIMITEUR);
 		}

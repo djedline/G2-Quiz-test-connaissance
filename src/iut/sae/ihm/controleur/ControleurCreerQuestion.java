@@ -93,7 +93,7 @@ public class ControleurCreerQuestion {
         for (Categorie element : Donnees.listeCategorie) {
         	choiceCategorie.getItems().add(element);
         }
-
+        choiceCategorie.setValue(Donnees.listeCategorie.getFirst());
 
     }
 

@@ -13,6 +13,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import javax.swing.text.LayoutQueue;
+
 /**
  * Centralise les données de l'application.
  * @author djedline.boyer
@@ -150,6 +152,17 @@ public class Donnees {
         }
         return doubleOk;
     }
+    
+    /** Verifie que la categorie ajouté n'est pas un double 
+     * @param aVerifier la catégorie à analyser
+     * @return true si aVerifier est un doublon*/
+    public static boolean verifNomCategorie(String aVerifier) {
+        boolean doubleOk = false;
+        for (int i = 0; i < listeCategorie.size() && !doubleOk; i++) {
+            doubleOk = listeCategorie.get(i).toString().equals(aVerifier);
+        }
+        return doubleOk;
+    }
 
     /** 
      * Verifie que la question ajouté n'est pas un double 
@@ -163,7 +176,7 @@ public class Donnees {
         }
         return doubleOk;
     }
-
+    
     /**
      * Recherche et renvoie la liste de toutes les questions d'une categorie
      * @param categorie le nom de la categorie
@@ -198,6 +211,49 @@ public class Donnees {
         return res;
     }
 
+    /**
+     * Suprime la question mis en parametre
+     * @param laQuestion
+     * @return true si ça marche, false sinon
+     */
+    public static boolean suprimerQuestion(Question laQuestion) {
+		if (listeQuestions.contains(laQuestion)){
+			listeQuestions.remove(laQuestion);
+			return true;
+		}
+    	return false;	
+    }
+    
+    /**
+     * Surpime la categorie mis en parametre
+     * @param laCategorie
+     * @return true si ça marche, false sinon
+     */
+    public static boolean suprimerCategorie(Categorie laCategorie) {
+    	if (!isCategorieVide(laCategorie)) {
+    		for (Question laQuestion : getQuestionOfCategorie(laCategorie.toString())) {
+    			suprimerQuestion(laQuestion);
+    		}
+    	}
+		if (listeCategorie.contains(laCategorie)){
+			listeCategorie.remove(laCategorie);
+			return true;
+		}
+    	return false;
+    	
+    }
+    
+    public static boolean isCategorieVide(Categorie laCategorie) {
+		for (Question laQuestion : listeQuestions) {
+			if (laQuestion.getCategorie().equals(laCategorie)) {
+				return false;
+			}
+		}
+    	
+    	return true;
+    	
+    }
+    
     /** 
      * Initialise les données
      * @param args

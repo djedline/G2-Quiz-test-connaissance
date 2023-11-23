@@ -5,6 +5,7 @@
 package iut.sae.modele;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Classe permettant de créer des questions pour le quiz
@@ -12,201 +13,225 @@ import java.io.Serializable;
  *
  */
 public class Question implements Serializable {
-    
-    /** Version de la classe question (date et heure au format JJMMHHmm*/
-    private static final long serialVersionUID = 13110945L;
-    
-    /** libellé de la question */
-    private String libelle;
-    
-    /** réponse correcte à la question */
-    private Categorie nomCategorie;
-    
-    /** réponse correcte à la question */
-    private String propositionJuste;
-    
-    /** ensemble de mauvaise réponse à la question */
-    private String[] propositionFausse;
-    
-    /** explication de la réponse juste */
-    private String feedback;
-    
-    /** difficulté de la question entre 1 et 3 
-     * 1 niveau facile
-     * 2 niveau moyen
-     * 3 niveau difficile */
-    private int difficulte;
-    
-    /** 
-     * Crée une question
-     * @param libelle libellé de la question
-     * @param nomCategorie la catégorie
-     * @param propositionJuste réponse correcte à la question
-     * @param propositionFausse ensemble de mauvaise réponse à la question
-     * @param feedback explication de la réponse juste
-     * @param difficulte niveau de difficulté de la question entre 1 et 3 
-     *                   1 => facile
-     *                   2 => moyen
-     *                   3 => difficile
-     * @throws IllegalArgumentException si les spécificité des questions sont fausse
-     */
-    public Question(String libelle, Categorie nomCategorie, String propositionJuste, String[] propositionFausse, String feedback,
-            int difficulte) {
-        super();
-       if(verifQuestion(libelle, nomCategorie, propositionJuste, propositionFausse, feedback, difficulte)) {
-            this.libelle = libelle;
-            this.nomCategorie = nomCategorie;
-            this.propositionJuste = propositionJuste;
-            this.propositionFausse = propositionFausse;
-            this.feedback = feedback;
-            this.difficulte = difficulte;
-       } else {
-           throw new IllegalArgumentException("Les arguments entrées sont incorrectes");
-       }
-    }
 
-    /** Vérifie que les paramètres d'une question sont correctes */
-    private static boolean verifQuestion(String libelle, Categorie nomCategorie, String propositionJuste, String[] propositionFausse, String feedback,
-            int difficulte) {
-        boolean questionOk;
-        boolean propOk = true;
-        for (int index = 0; index < propositionFausse.length && propOk; index++) {
-            propOk = !propositionFausse[index].isBlank();
-        }
-        questionOk = !libelle.isBlank() && nomCategorie != null 
-                && !propositionJuste.isBlank() && propOk && propositionFausse != null
-                && !feedback.isBlank() && 1 <= difficulte && difficulte <= 3;
-        return questionOk;
-    }
-    
-    /** TODO comparer deux Questions */
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (o instanceof Question) {
-            Question aComparer = (Question) o;
-            boolean propOk = propositionFausse.length == aComparer.getPropositionFausse().length;
-            for (int index = 0; index < propositionFausse.length && propOk; index++) {
-                propOk = propositionFausse[index].toUpperCase().equals(aComparer.getPropositionFausse()[index].toUpperCase());
-            }
-            return libelle.toUpperCase().equals(aComparer.getLibelle().toUpperCase())
-            && nomCategorie.equals(nomCategorie)
-            && propositionJuste.toUpperCase().equals(aComparer.getPropositionJuste().toUpperCase())
-            && propOk
-            && feedback.toUpperCase().equals(aComparer.feedback.toUpperCase())
-            && difficulte == aComparer.getDifficulte();
-        } else {
-            return false;
-        }
-    }
-    
-    /** @return valeur de libelle */
-    public String getLibelle() {
-        return this.libelle;
-    }
+	/** Version de la classe question (date et heure au format JJMMHHmm*/
+	private static final long serialVersionUID = 13110945L;
 
-    /** @param libelle nouvelle valeur de libelle 
-     * @return false si le libellé n'a pas pu être modifié
-     *         true sinon
-     */
-    public boolean setLibelle(String libelle) {
-        boolean nouvLibelOk;
-        nouvLibelOk = !libelle.isBlank();
-        if (nouvLibelOk) {
-            this.libelle = libelle;
-        }
-        return nouvLibelOk;
-    }
+	/** libellé de la question */
+	private String libelle;
 
-    /** @return valeur de libelle */
-    public Categorie getCategorie() {
-        return nomCategorie;
-    }
-    
-    /** @param nouveau 
-     * @return valeur de libelle */
-    public boolean setCategorie(Categorie nouveau) {
-        boolean nouvCategorie;
-        nouvCategorie = nouveau != null;
-        if (nouvCategorie) {
-            this.nomCategorie = nouveau;
-        }
-        return nouvCategorie;
-    }
-    
-    /** @return valeur de propositionJuste */
-    public String getPropositionJuste() {
-        return propositionJuste;
-    }
+	/** réponse correcte à la question */
+	private Categorie nomCategorie;
 
-    /** @param propositionJuste nouvelle valeur de propositionJuste 
-     * @return false
-     */
-    public boolean setPropositionJuste(String propositionJuste) {
-        boolean propoJusteOk = !propositionJuste.isBlank();
-        if (propoJusteOk) {
-            this.propositionJuste = propositionJuste;
-        }
-        
-        return propoJusteOk;
-    }
+	/** réponse correcte à la question */
+	private String propositionJuste;
 
-    /** @return valeur de propositionFausse */
-    public String[] getPropositionFausse() {
-        return this.propositionFausse;
-    }
+	/** ensemble de mauvaise réponse à la question */
+	private ArrayList<String> propositionFausse = new ArrayList<String>();
 
-    /** @param propositionFausse nouvelle valeur de propositionFausse
-      * @return false
-      */
-   public boolean setPropositionFausse(String[] propositionFausse) {
-        this.propositionFausse = propositionFausse;
-        boolean propOk = propositionFausse.length > 1;
-        for (int index = 0; index < propositionFausse.length && propOk; index++) {
-            propOk = !propositionFausse[index].isBlank();
-        }
-        if (propOk) {
-            this.propositionFausse = propositionFausse;
-        }
-        return propOk;
-    }
+	/** explication de la réponse juste */
+	private String feedback;
 
-    /** @return valeur de feedback */
-    public String getFeedback() {
-        return feedback;
-    }
+	/** difficulté de la question entre 1 et 3 
+	 * 1 niveau facile
+	 * 2 niveau moyen
+	 * 3 niveau difficile */
+	private int difficulte;
 
-    /** @param feedback nouvelle valeur de feedback  
-     * @return false*/
-    public boolean setFeedback(String feedback) {
-        boolean feedBackOk = !feedback.isBlank();
-        if (feedBackOk) {
-            this.feedback = feedback;
-        }
-        return feedBackOk;
-    }
+	/** 
+	 * Crée une question
+	 * @param libelle libellé de la question
+	 * @param nomCategorie la catégorie
+	 * @param propositionJuste réponse correcte à la question
+	 * @param propositionFausse ensemble de mauvaise réponse à la question
+	 * @param feedback explication de la réponse juste
+	 * @param difficulte niveau de difficulté de la question entre 1 et 3 
+	 *                   1 => facile
+	 *                   2 => moyen
+	 *                   3 => difficile
+	 * @throws IllegalArgumentException si les spécificité des questions sont fausse
+	 */
+	public Question(String libelle, Categorie nomCategorie, String propositionJuste, String[] propositionFausse, String feedback,
+			int difficulte) {
+		super();
+		if(verifQuestion(libelle, nomCategorie, propositionJuste, propositionFausse, feedback, difficulte)) {
+			this.libelle = libelle;
+			this.nomCategorie = nomCategorie;
+			this.propositionJuste = propositionJuste;
+			for (String element : propositionFausse) {
+				this.propositionFausse.add(element);
+			}
+			this.feedback = feedback;
+			this.difficulte = difficulte;
+		} else {
+			throw new IllegalArgumentException("Les arguments entrées sont incorrectes");
+		}
+	}
 
-    /** @return valeur de difficulte */
-    public int getDifficulte() {
-        //System.out.println(this.difficulte);
-        return difficulte;
-    }
+	/** Vérifie que les paramètres d'une question sont correctes */
+	private static boolean verifQuestion(String libelle, Categorie nomCategorie, String propositionJuste, String[] propositionFausse, String feedback,
+			int difficulte) {
+		boolean questionOk;
+		boolean propOk = true;
+		for (int index = 0; index < propositionFausse.length && propOk; index++) {
+			propOk = !propositionFausse[index].isBlank();
+		}
+		questionOk = !libelle.isBlank() && nomCategorie != null 
+				&& !propositionJuste.isBlank() && propOk && propositionFausse != null
+				&& !feedback.isBlank() && 1 <= difficulte && difficulte <= 3;
+		return questionOk;
+	}
 
-    /** @param difficulte nouvelle valeur de difficulte  
-     * @return false*/
-    public boolean setDifficulte(int difficulte) {
-        boolean difficulteOk;
-        difficulteOk = 1 <= difficulte && difficulte <= 3;
-        if(difficulteOk) {
-            this.difficulte = difficulte;
-        }
-        return difficulteOk;
-    }
-    
-    @Override
-    public String toString() {
+	/** TODO comparer deux Questions */
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+		if (o instanceof Question) {
+			Question aComparer = (Question) o;
+			boolean propOk = propositionFausse.size() == aComparer.getPropositionFausse().size();
+			for (int index = 0; index < propositionFausse.size() && propOk; index++) {
+				propOk = propositionFausse.get(index).toUpperCase().equals(aComparer.getPropositionFausse().get(index).toUpperCase());
+			}
+			return libelle.toUpperCase().equals(aComparer.getLibelle().toUpperCase())
+					&& nomCategorie.equals(nomCategorie)
+					&& propositionJuste.toUpperCase().equals(aComparer.getPropositionJuste().toUpperCase())
+					&& propOk
+					&& feedback.toUpperCase().equals(aComparer.feedback.toUpperCase())
+					&& difficulte == aComparer.getDifficulte();
+		} else {
+			return false;
+		}
+	}
+
+	/** @return valeur de libelle */
+	public String getLibelle() {
+		return this.libelle;
+	}
+
+	/** @param libelle nouvelle valeur de libelle 
+	 * @return false si le libellé n'a pas pu être modifié
+	 *         true sinon
+	 */
+	public boolean setLibelle(String libelle) {
+		boolean nouvLibelOk;
+		nouvLibelOk = !libelle.isBlank();
+		if (nouvLibelOk) {
+			this.libelle = libelle;
+		}
+		return nouvLibelOk;
+	}
+
+	/** @return valeur de libelle */
+	public Categorie getCategorie() {
+		return nomCategorie;
+	}
+
+	/** @param nouveau 
+	 * @return valeur de libelle */
+	public boolean setCategorie(Categorie nouveau) {
+		boolean nouvCategorie;
+		nouvCategorie = nouveau != null;
+		if (nouvCategorie) {
+			this.nomCategorie = nouveau;
+		}
+		return nouvCategorie;
+	}
+
+	/** @return valeur de propositionJuste */
+	public String getPropositionJuste() {
+		return propositionJuste;
+	}
+
+	/** @param propositionJuste nouvelle valeur de propositionJuste 
+	 * @return false
+	 */
+	public boolean setPropositionJuste(String propositionJuste) {
+		boolean propoJusteOk = !propositionJuste.isBlank();
+		if (propoJusteOk) {
+			this.propositionJuste = propositionJuste;
+		}
+
+		return propoJusteOk;
+	}
+
+	/** @return valeur de propositionFausse */
+	public ArrayList<String> getPropositionFausse() {
+		return this.propositionFausse;
+	}
+
+	/** @param propositionFausse nouvelle valeur de propositionFausse
+	 * @return false
+	 */
+	public boolean setPropositionFausse(String[] propositionFausse) {
+		
+		boolean propOk = propositionFausse.length > 1;
+		for (int index = 0; index < propositionFausse.length && propOk; index++) {
+			propOk = !propositionFausse[index].isBlank();
+		}
+		if (propOk) {
+			for (String element : propositionFausse) {
+				this.propositionFausse.add(element);
+			}
+		}
+		return propOk;
+	}
+	
+	
+	/** @param propositionFausse nouvelle valeur de propositionFausse
+	 * @return true si ça a marché, false sinon
+	 */
+	public boolean addPropositionFausse(String propositionFausse) {
+		if (!(this.propositionFausse.size()>3)) {
+			this.propositionFausse.add(propositionFausse);
+			return true;
+		}
+		return false;
+		
+	}
+	
+	/*
+	 * 
+	 */
+	public void viderPropositionFausse() {
+		this.propositionFausse.clear();
+	}
+
+	/** @return valeur de feedback */
+	public String getFeedback() {
+		return feedback;
+	}
+
+	/** @param feedback nouvelle valeur de feedback  
+	 * @return false*/
+	public boolean setFeedback(String feedback) {
+		boolean feedBackOk = !feedback.isBlank();
+		if (feedBackOk) {
+			this.feedback = feedback;
+		}
+		return feedBackOk;
+	}
+
+	/** @return valeur de difficulte */
+	public int getDifficulte() {
+		//System.out.println(this.difficulte);
+		return difficulte;
+	}
+
+	/** @param difficulte nouvelle valeur de difficulte  
+	 * @return false*/
+	public boolean setDifficulte(int difficulte) {
+		boolean difficulteOk;
+		difficulteOk = 1 <= difficulte && difficulte <= 3;
+		if(difficulteOk) {
+			this.difficulte = difficulte;
+		}
+		return difficulteOk;
+	}
+
+	@Override
+	public String toString() {
 		return libelle;
-    }
-    
+	}
+
 }
