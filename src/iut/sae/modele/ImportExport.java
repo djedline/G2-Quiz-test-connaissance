@@ -29,25 +29,25 @@ public class ImportExport {
     public static final String[] NOM_COLONNE = { "Catégorie", "Niveau", "Libellé", "Vrai", "Faux1", "Faux2", "Faux3",
             "Faux4", "Feedback" };
 
-    /**
-     * Envoie l'ensemble des questions de l'application dans un fichier.
-     * 
-     * @param chemin le chemin du fichier d'exportation
-     * @throws IOException s'il est impossible d'écrire les données
-     */
-    public static void exporter(String chemin) throws IOException {
-        File aEcrire = new File(chemin);
+	/**
+	 * Envoie l'ensemble des questions de l'application dans un fichier.
+	 * @param aEcrire le fichier dans lequel on va écrire
+	 * 
+	 * @param chemin le chemin du fichier d'exportation
+	 * @throws IOException s'il est impossible d'écrire les données
+	 */
+	public static void exporter(File aEcrire) throws IOException {
 
-        if (aEcrire.exists()) {
-            throw new IOException("Ce fichier existe déjà !");
-        }
-        aEcrire.createNewFile();
-        if (!aEcrire.canWrite()) {
-            throw new IOException("Impossible de modifier ce fichier !");
-        }
-        if (aEcrire.isDirectory()) {
-            throw new IOException("Impossible d'écrire dans un dossier !" + "Indiquez un fichier n'existant pas déjà.");
-        }
+		if (!aEcrire.exists()) {
+			aEcrire.createNewFile();
+		}
+		
+		if (!aEcrire.canWrite()) {
+			throw new IOException("Impossible de modifier ce fichier !");
+		}
+		if (aEcrire.isDirectory()) {
+			throw new IOException("Impossible d'écrire dans un dossier !" + "Indiquez un fichier n'existant pas déjà.");
+		}
 
         FileWriter fw = new FileWriter(aEcrire);
         fw.write(produireEntete());
@@ -95,20 +95,19 @@ public class ImportExport {
      * @param chemin le chemin du fichier à importer
      * @throws IOException s'il est impossible de l'importer
      */
-    public static void importer(String chemin) throws IOException {
-        File aImporter = new File(chemin);
+    public static void importer(File chemin) throws IOException {
 
-        if (!aImporter.exists()) {
+        if (!chemin.exists()) {
             throw new IOException("Ce fichier ne peut être lu car il n'existe pas");
         }
-        if (!aImporter.canRead()) {
+        if (!chemin.canRead()) {
             throw new IOException("Vous ne disposez pas des droits pour lire ce fichier.");
         }
-        if (aImporter.isDirectory()) {
+        if (chemin.isDirectory()) {
             throw new IOException("Impossible de lire un dossier. Indiquez un fichier.");
         }
 
-        BufferedReader bf = new BufferedReader(new FileReader(aImporter));
+        BufferedReader bf = new BufferedReader(new FileReader(chemin));
 
         /*
          * indice pour les messages d'erreur. Commence à 1 par soucis de lisibilité pour

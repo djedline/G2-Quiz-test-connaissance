@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import javax.swing.text.LayoutQueue;
 
 /**
+ * Centralise les données de l'application avec sa persistence.
+ * @author djedline.boyer
  * Centralise les données de l'application.
  * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
