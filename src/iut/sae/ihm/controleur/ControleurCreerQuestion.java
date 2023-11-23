@@ -62,6 +62,8 @@ public class ControleurCreerQuestion {
     @FXML
     private TextField txtRepFausse4;
 
+    private ArrayList<TextField> lesTxtFaux = new ArrayList<TextField>();
+
     @FXML
     private Pane idPane;
 
@@ -95,6 +97,11 @@ public class ControleurCreerQuestion {
         }
         choiceCategorie.setValue(Donnees.listeCategorie.getFirst());
 
+        lesTxtFaux.add(txtRepFausse1);
+        lesTxtFaux.add(txtRepFausse2);
+        lesTxtFaux.add(txtRepFausse3);
+        lesTxtFaux.add(txtRepFausse4);
+
     }
 
     /**
@@ -106,19 +113,16 @@ public class ControleurCreerQuestion {
     public String[] tableauReponseFausse() {
         ArrayList<String> listeIntermediaire = new ArrayList<>();
         String[] repFausse;
-        if (txtRepFausse1.getText() == null || txtRepFausse1.getText().isBlank()) {
+        boolean repFausseNbValide = false;
+
+        for (TextField laZoneTexte:lesTxtFaux) {
+            if (laZoneTexte.getText() != null && !laZoneTexte.getText().isBlank()) {
+                listeIntermediaire.add(laZoneTexte.getText());
+                repFausseNbValide = true;
+            }
+        }
+        if (!repFausseNbValide) {
             throw new IllegalArgumentException();
-        } else {
-            listeIntermediaire.add(txtRepFausse1.getText());
-        }
-        if (txtRepFausse2.getText() != null && !txtRepFausse2.getText().isBlank()) {
-            listeIntermediaire.add(txtRepFausse2.getText());
-        }
-        if (txtRepFausse3.getText() != null && !txtRepFausse3.getText().isBlank()) {
-            listeIntermediaire.add(txtRepFausse3.getText());
-        }
-        if (txtRepFausse4.getText() != null && !txtRepFausse4.getText().isBlank()) {
-            listeIntermediaire.add(txtRepFausse4.getText());
         }
         repFausse = new String[listeIntermediaire.size()];
         repFausse = listeIntermediaire.toArray(repFausse);
