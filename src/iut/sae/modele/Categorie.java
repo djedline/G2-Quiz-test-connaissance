@@ -24,7 +24,7 @@ public class Categorie implements Serializable {
      * @throws IllegalArgumentException si le titre est vide
      */
     public Categorie(String libelle) {
-        this.titreCat = libelle;
+        this.titreCat = libelle.strip();
         if (libelle.isBlank()){
             throw new IllegalArgumentException("le libellé n'est pas valide");
         }
@@ -35,8 +35,15 @@ public class Categorie implements Serializable {
     public String getLibelle() {
         return this.titreCat;
     }
-
-    /* non javadoc - @see java.lang.Object#toString() */
+    
+    /**
+     * Seteur de titre cat
+     * @param titreCat
+     */
+    public void setTitreCat(String titreCat) {
+		this.titreCat = titreCat;
+	}
+	/* non javadoc - @see java.lang.Object#toString() */
     @Override
     public String toString() {
         return this.titreCat;

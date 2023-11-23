@@ -94,6 +94,9 @@ public class ControleurCreerQuestion {
         	choiceCategorie.getItems().add(element);
         }
 
+        choiceCategorie.setValue(Donnees.listeCategorie.get(0));
+
+
     }
 
     /** TODO comment method role
