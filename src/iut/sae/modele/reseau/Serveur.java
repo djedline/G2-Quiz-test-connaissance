@@ -17,6 +17,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+
 /**
  * Classe qui représente le serveur lors d'un échange d'information
  * 
@@ -60,6 +61,7 @@ public class Serveur {
 
     /**
      * prépare le serveur en démarrant la socket conn
+     * 
      * @return l'adresse inet
      */
     public static String preparerServeur() {
@@ -77,8 +79,8 @@ public class Serveur {
         }
         return "";
     }
-    
-    /** 
+
+    /**
      * Ferme le serveur
      */
     public static void fermetureServeur() {
@@ -126,10 +128,9 @@ public class Serveur {
                         test = false;
                     }
                 }
-                
+
                 // lis la clé en UTF-8
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(comm.getInputStream(), "UTF-8"));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(comm.getInputStream(), "UTF-8"));
                 while (reader.ready()) {
                     cle += Character.toString(reader.read());
                 }

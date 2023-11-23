@@ -21,9 +21,12 @@ import iut.sae.modele.reseau.Cryptage;
 /*
  * Représente le client dans les échanges de données via le réseau.
  */
-/** TODO comment class responsibility (SRP)
- * @author djedline.boyer
- *
+/**
+ * TODO comment class responsibility (SRP)
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class Client {
 
@@ -31,9 +34,8 @@ public class Client {
      * La Socket client utilisée pour échanger.
      */
     private static Socket sock;
-    
-    private static final File FICHIER_RECEPTION = 
-    		new File("src/iut/sae/modele/reseau/tests/fichierRecu.txt");
+
+    private static final File FICHIER_RECEPTION = new File("src/iut/sae/modele/reseau/tests/fichierRecu.txt");
 
     /**
      * Méthode de test des sockets.
@@ -44,8 +46,8 @@ public class Client {
         try {
             Scanner sc = new Scanner(System.in);
             creerClient("10.2.14.31", 6666);
-			String cle = "";
-			String recu = "";
+            String cle = "";
+            String recu = "";
             while (recu.isEmpty()) {
                 System.out.print("Génération et envoi de la clé");
                 cle = construireMessage();
@@ -53,11 +55,11 @@ public class Client {
                 envoyerMessage(cle.getBytes());
                 recu = recevoirMessage(FICHIER_RECEPTION, cle);
             }
-			fermerSocket();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            fermerSocket();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * @param host l'adresse ou le nom du serveur
@@ -101,8 +103,9 @@ public class Client {
 
     /**
      * Saisie le message reçu dans un fichier.
+     * 
      * @param fichRecu le fichier dans lequel écrire
-     * @param cle la clé de décryptage
+     * @param cle      la clé de décryptage
      * @return le message reçu
      * @throws InterruptedException
      * @throws IOException
@@ -124,7 +127,7 @@ public class Client {
                 recu += Character.toString(reader.read());
             }
             System.out.println("Recu par le client : " + recu);
-            
+
             if (!fichRecu.exists()) {
                 fichRecu.createNewFile();
             }
@@ -133,7 +136,7 @@ public class Client {
             System.err.println("C'est la réception le problème.");
             e.printStackTrace();
         }
-        
+
         try {
             FileWriter fw = new FileWriter(fichRecu);
             fw.append(recu);

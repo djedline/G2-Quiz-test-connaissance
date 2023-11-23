@@ -21,7 +21,7 @@ import javafx.scene.layout.Pane;
  *         leo.cheikh-boukal
  * @version 1.0
  */
-public class ControleurEchangeDonnes {
+public class ControleurEchangeDonnees {
 
     @FXML
     private Pane idPane;

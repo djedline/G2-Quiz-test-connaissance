@@ -266,7 +266,7 @@ public class Donnees {
     }
 
     /**
-     * TODO comment method role Méthode qui vérifie si la catégorie à ajouter est
+     * Méthode qui vérifie si la catégorie à ajouter est
      * vide ou non
      * 
      * @param laCategorie
