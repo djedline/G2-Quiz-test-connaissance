@@ -67,7 +67,14 @@ public class ControleurGestionDonnees {
 			public void handle(ActionEvent e)
 			{
 				Categorie laCategorie = (Categorie)((MenuItem)e.getSource()).getUserData();
-				EchangeurDeVue.echangerAvec(laCategorie);
+				if (laCategorie != Donnees.listeCategorie.getFirst()) {
+					EchangeurDeVue.echangerAvec(laCategorie);
+				}else {
+					Alert erreur = new Alert(AlertType.WARNING);
+					erreur.setContentText("Vous ne pouvez pas modifier la categorie Général");
+					erreur.showAndWait();
+				}
+				
 			}
 		};
 		EventHandler<ActionEvent> modifierQuest = new EventHandler<ActionEvent>() {
@@ -81,16 +88,25 @@ public class ControleurGestionDonnees {
 			public void handle(ActionEvent e)
 			{
 				Categorie laCategorie = (Categorie)((MenuItem)e.getSource()).getUserData();
-				if (Donnees.isCategorieVide(laCategorie)) {
-					Donnees.suprimerCategorie(laCategorie);
-				}else {
-					Alert confirmation = new Alert(AlertType.CONFIRMATION);
-					Optional<ButtonType> result = confirmation.showAndWait();
-					if(result.get() == ButtonType.OK) {
+				
+				
+				if (laCategorie != Donnees.listeCategorie.getFirst()) {
+					if (Donnees.isCategorieVide(laCategorie)) {
 						Donnees.suprimerCategorie(laCategorie);
+					}else {
+						Alert confirmation = new Alert(AlertType.CONFIRMATION);
+						Optional<ButtonType> result = confirmation.showAndWait();
+						if(result.get() == ButtonType.OK) {
+							Donnees.suprimerCategorie(laCategorie);
+						}
 					}
+					EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
+					
+				}else {
+					Alert erreur = new Alert(AlertType.WARNING);
+					erreur.setContentText("Vous ne pouvez pas suprimer la categorie Général");
+					erreur.showAndWait();
 				}
-				EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
 			}
 		};
 		EventHandler<ActionEvent> suprimerQuest = new EventHandler<ActionEvent>() {
