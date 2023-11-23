@@ -61,6 +61,7 @@ public class EchangeurDeVue {
         } catch(IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println("Echec du chargement de la vue de code " + codeVue);
+            erreur.printStackTrace();
         }
     }
     
