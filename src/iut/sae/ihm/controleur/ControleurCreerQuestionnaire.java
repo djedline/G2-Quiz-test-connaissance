@@ -12,9 +12,11 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 
-/** TODO comment class responsibility (SRP)
- * @author nael.briot
- *
+/** 
+ * Classe controleur permettant de gérer la création du questionnaire
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurCreerQuestionnaire {
 

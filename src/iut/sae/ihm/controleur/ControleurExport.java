@@ -22,9 +22,11 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-/** TODO comment class responsibility (SRP)
- * @author nael.briot
- *
+/** 
+ * Classe controleur permettant de gérer l'exportation de données
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurExport {
 

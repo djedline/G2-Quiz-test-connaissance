@@ -44,6 +44,9 @@ public class ControleurModifierCategorie {
     
     private Categorie laCategorie;
     
+    /** TODO comment method role
+     * @param lacat
+     */
     public void setCategorie(Categorie lacat){
         this.laCategorie = lacat;
         idNom.setText(laCategorie.toString());

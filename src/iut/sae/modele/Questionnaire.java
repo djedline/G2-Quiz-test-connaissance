@@ -8,8 +8,9 @@ import static iut.sae.modele.Donnees.getQuestionOfCategorie;
 
 /**
  * Modele de référence d'un questionnaire
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
- * 		   leo.cheikh-boukal 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly
+ * leo.cheikh-boukal
+ * @version 1.0 
  */
 public class Questionnaire {
 

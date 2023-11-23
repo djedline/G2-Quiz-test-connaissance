@@ -20,8 +20,9 @@ import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 
 /** TODO comment class responsibility (SRP)
- * @author nael.briot
- *
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
+ * @version 1.0
  */
 public class EchangeurDeVue {
 
@@ -64,6 +65,7 @@ public class EchangeurDeVue {
     }
     
     /** TODO comment method role
+     * @param laCategorie 
      * @param codeVue
      */
     public static void echangerAvec(Categorie laCategorie) {

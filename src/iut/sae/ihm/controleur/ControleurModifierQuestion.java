@@ -81,6 +81,9 @@ public class ControleurModifierQuestion {
 
 	private Question laQuestion;
 
+	/** TODO comment method role
+	 * @param laquest
+	 */
 	public void setQuestion(Question laquest){
 		this.laQuestion = laquest;
 
