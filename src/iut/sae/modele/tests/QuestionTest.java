@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.util.ArrayList;
 
@@ -151,7 +152,12 @@ class QuestionTest {
      */
     @Test
     void testGetPropositionFausse() {
-        assertArrayEquals(listeQuestion.get(0).getPropositionFausse(), propoFausse);
+    	int comp = 0;
+    	for (String laRepFausse : listeQuestion.get(0).getPropositionFausse()) {
+    		assertEquals(laRepFausse, propoFausse[comp]);
+    		comp++;
+    	}
+        
     }
 
     /**
