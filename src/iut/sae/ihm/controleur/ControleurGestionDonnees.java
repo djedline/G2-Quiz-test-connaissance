@@ -7,12 +7,10 @@ package iut.sae.ihm.controleur;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javax.swing.JOptionPane;
 
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
@@ -20,20 +18,20 @@ import iut.sae.modele.Categorie;
 import iut.sae.modele.CustomBtn;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.input.ContextMenuEvent;
+
 
 /** 
  * Controleur de la scène MenuGestionDonnees
@@ -67,37 +65,81 @@ public class ControleurGestionDonnees {
 
 		// Créez les racines pour le TreeView
 
-		
-		
+		EventHandler<ActionEvent> modifierCat = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e)
+			{
+				Categorie laCategorie = (Categorie)((MenuItem)e.getSource()).getUserData();
+				EchangeurDeVue.echangerAvec(laCategorie);
+			}
+		};
+		EventHandler<ActionEvent> modifierQuest = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e)
+			{
+				Question laQuestion = (Question) ((MenuItem)e.getSource()).getUserData();
+				EchangeurDeVue.echangerAvec(laQuestion);
+			}
+		};
+		EventHandler<ActionEvent> suprimerCat = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e)
+			{
+				Categorie laCategorie = (Categorie)((MenuItem)e.getSource()).getUserData();
+				if (Donnees.isCategorieVide(laCategorie)) {
+					Donnees.suprimerCategorie(laCategorie);
+				}else {
+					Alert confirmation = new Alert(AlertType.CONFIRMATION);
+					Optional<ButtonType> result = confirmation.showAndWait();
+					if(result.get() == ButtonType.OK) {
+						Donnees.suprimerCategorie(laCategorie);
+					}
+				}
+				EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
+			}
+		};
+		EventHandler<ActionEvent> suprimerQuest = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e)
+			{
+				Question laQuestion = (Question) ((MenuItem)e.getSource()).getUserData();
+				Donnees.suprimerQuestion(laQuestion);
+				EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
+			}
+		};
+
 
 		List<TreeItem<CustomBtn>> listeTreeItem = new ArrayList<>();
 		for (Categorie item : Donnees.listeCategorie) {
 			MenuButton btnModifierCategorie = new MenuButton("Gérer");
-		    MenuItem menuItemModifier = new MenuItem("Modifier"); 
-	        MenuItem menuItemSuprimer = new MenuItem("Suprimer");
-	        btnModifierCategorie.getItems().add(menuItemModifier); 
-	        btnModifierCategorie.getItems().add(menuItemSuprimer);
-			listeTreeItem.add(new TreeItem<CustomBtn>(new CustomBtn(new Label(item.toString()), btnModifierCategorie)));
+			MenuItem menuItemModifier = new MenuItem("Modifier"); 
+			MenuItem menuItemSuprimer = new MenuItem("Suprimer");
+			menuItemModifier.setUserData(item);
+			menuItemSuprimer.setUserData(item);
+			menuItemModifier.setOnAction(modifierCat);
+			menuItemSuprimer.setOnAction(suprimerCat);
+			btnModifierCategorie.getItems().add(menuItemModifier); 
+			btnModifierCategorie.getItems().add(menuItemSuprimer);
+			listeTreeItem.add(new TreeItem<CustomBtn>(new CustomBtn(item, btnModifierCategorie)));
 		}
 
 		for (TreeItem<CustomBtn> leTreeItem : listeTreeItem) {
 			for (Question laQuestion : Donnees.listeQuestions) {
-				
+
 				Categorie cat = new Categorie("erreur");
 				for (Categorie laCategorie : Donnees.listeCategorie) {
 					if (leTreeItem.getValue().getString()==laCategorie.toString()) {
 						cat = laCategorie;
 					}
 				}
-				System.out.println(laQuestion.getCategorie().toString()==cat.toString());
-				System.out.println(laQuestion.getCategorie() + " "+  cat);
+
 				if (cat.toString().equals(laQuestion.getCategorie().toString())) {
 					MenuButton btnModifierQuestion = new MenuButton("Gérer");
 					MenuItem menuItemModifier = new MenuItem("Modifier"); 
-				    MenuItem menuItemSuprimer = new MenuItem("Suprimer");
-				    btnModifierQuestion.getItems().add(menuItemModifier);
-				    btnModifierQuestion.getItems().add(menuItemSuprimer);
-					leTreeItem.getChildren().add(new TreeItem<CustomBtn>(new CustomBtn(new Label(laQuestion.toString()), btnModifierQuestion)));
+					MenuItem menuItemSuprimer = new MenuItem("Suprimer");
+					menuItemModifier.setUserData(laQuestion);
+					menuItemSuprimer.setUserData(laQuestion);
+					menuItemModifier.setOnAction(modifierQuest);
+					menuItemSuprimer.setOnAction(suprimerQuest);
+					btnModifierQuestion.getItems().add(menuItemModifier);
+					btnModifierQuestion.getItems().add(menuItemSuprimer);
+					leTreeItem.getChildren().add(new TreeItem<CustomBtn>(new CustomBtn(laQuestion, btnModifierQuestion)));
 				}
 
 			}

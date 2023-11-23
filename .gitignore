@@ -1,3 +1,8 @@
 /bin/
 .classpath
 .settings/
+<<<<<<< HEAD
+.data
+=======
+.data
+>>>>>>> f7dfe560580be5bb783133268ada2a06af160f40

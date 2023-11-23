@@ -14,7 +14,10 @@ import javafx.scene.layout.HBox;
  */
 public class CustomBtn extends HBox {
 
-    private Label boxText;
+	
+	private Categorie laCategorie;
+	private Question laQuestion;
+    private Label boxText = new Label();
     private MenuButton boxButton;
 
     CustomBtn(Label txt) {
@@ -28,13 +31,26 @@ public class CustomBtn extends HBox {
 
     /** 
      * Constructeur d'un ensemble de bouton et item
-     * @param txt
+     * @param laquest
      * @param bt
      */
-    public CustomBtn(Label txt, MenuButton bt) {
+    public CustomBtn(Question laquest, MenuButton bt) {
+
         super(5);
 
-        this.boxText = txt;
+        this.laQuestion = laquest;
+        this.boxText.setText(laQuestion.toString());
+        this.boxButton = bt;
+
+        this.getChildren().addAll(boxText, boxButton);
+        this.setAlignment(Pos.CENTER_LEFT);
+    }
+    
+    public CustomBtn(Categorie lacat, MenuButton bt) {
+        super(5);
+
+        this.laCategorie = lacat;
+        this.boxText.setText(laCategorie.toString());
         this.boxButton = bt;
 
         this.getChildren().addAll(boxText, boxButton);
@@ -47,5 +63,13 @@ public class CustomBtn extends HBox {
      */
     public String getString() {
     	return this.boxText.getText();
+    }
+    
+    public Categorie getCategorie() {
+    	return this.laCategorie;
+    }
+    
+    public Question getQuestion() {
+    	return this.laQuestion;
     }
 }
