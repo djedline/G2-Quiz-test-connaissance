@@ -33,13 +33,12 @@ public class ImportExport {
 	 * @param chemin le chemin du fichier d'exportation
 	 * @throws IOException s'il est impossible d'écrire les données
 	 */
-	public static void exporter(String chemin) throws IOException {
-		File aEcrire = new File(chemin);
+	public static void exporter(File aEcrire) throws IOException {
 
-		if (aEcrire.exists()) {
-			throw new IOException("Ce fichier existe déjà !");
+		if (!aEcrire.exists()) {
+			aEcrire.createNewFile();
 		}
-		aEcrire.createNewFile();
+		
 		if (!aEcrire.canWrite()) {
 			throw new IOException("Impossible de modifier ce fichier !");
 		}
@@ -90,12 +89,10 @@ public class ImportExport {
 	/**
 	 * Récupère l'ensemble des questions contenues dans un fichier CSV.
 	 * 
-	 * @param chemin le chemin du fichier à importer
+	 * @param chemin le fichier à importer
 	 * @throws IOException s'il est impossible de l'importer
 	 */
-	public static void importer(String chemin) throws IOException {
-		File aImporter = new File(chemin);
-
+	public static void importer(File aImporter) throws IOException {
 		if (!aImporter.exists()) {
 			throw new IOException("Ce fichier ne peut être lu car il n'existe pas");
 		}

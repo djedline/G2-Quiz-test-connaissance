@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
- * Centralise les données de l'application.
+ * Centralise les données de l'application avec sa persistence.
  * @author djedline.boyer
  */
 public class Donnees {

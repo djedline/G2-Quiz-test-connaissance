@@ -25,6 +25,10 @@ public class Lanceur extends Application {
 
 	private static Stage stage;
 
+	public static Stage getStage() {
+		return stage;
+	}
+
 	/**
 	 * Programme principal
 	 * 
