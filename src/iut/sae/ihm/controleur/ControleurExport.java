@@ -58,7 +58,7 @@ public class ControleurExport {
 	void chercherFichier(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
 		// Ajout d'un filtre pour ne montrer que certains fichiers
-		ExtensionFilter extFilter = new ExtensionFilter("Fichiers CSV UTF-8 séparateur point-virgule(*.csv)", "*.csv");
+		ExtensionFilter extFilter = new ExtensionFilter("Fichier CSV UTF-8 séparateur point-virgule(*.csv)", "*.csv");
 		fileChooser.setInitialFileName("sauvegardeQuiz");
 		fileChooser.getExtensionFilters().add(extFilter);
 
