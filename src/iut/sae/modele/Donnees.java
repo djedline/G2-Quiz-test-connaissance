@@ -15,7 +15,9 @@ import java.util.ArrayList;
 
 /**
  * Centralise les données de l'application.
- * @author djedline.boyer
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
+ * @version 1.0
  */
 public class Donnees {
 
@@ -134,6 +136,9 @@ public class Donnees {
         }
     }
     
+    /** 
+     * Méthode qui permet d'afficher l'ensemble des catégories et des questions
+     */
     public static void afficherDonnees() {
         System.out.println("CATEGORIES : ");
         for (Categorie cat : listeCategorie) {

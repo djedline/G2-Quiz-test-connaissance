@@ -8,7 +8,9 @@ import java.io.Serializable;
 
 /** 
  * Classe permettant de créer des catégories pour le quiz
- * @author nael.briot
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
+ * @version 1.0
  */
 public class Categorie implements Serializable {
 

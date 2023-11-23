@@ -6,6 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.HBox;
 
+/** 
+ * Classe permettant la création d'un ensemble bouton et item
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
+ * @version 1.0
+ */
 public class CustomBtn extends HBox {
 
     private Label boxText;
@@ -20,6 +26,11 @@ public class CustomBtn extends HBox {
         this.setAlignment(Pos.CENTER_LEFT);
     }
 
+    /** 
+     * Constructeur d'un ensemble de bouton et item
+     * @param txt
+     * @param bt
+     */
     public CustomBtn(Label txt, MenuButton bt) {
         super(5);
 
@@ -30,6 +41,10 @@ public class CustomBtn extends HBox {
         this.setAlignment(Pos.CENTER_LEFT);
     }
     
+    /** 
+     * Méthode qui permet de récupérer le texte sur le bouton
+     * @return le texte du bouton
+     */
     public String getString() {
     	return this.boxText.getText();
     }

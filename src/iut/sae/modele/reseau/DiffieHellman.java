@@ -7,7 +7,8 @@ package iut.sae.modele.reseau;
 import java.util.ArrayList;
 
 /** TODO comment class responsibility (SRP)
- * @author nael.briot
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
  * @version 1.0
  */
 public class DiffieHellman {

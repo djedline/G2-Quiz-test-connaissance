@@ -1,5 +1,6 @@
-/**
- * Sample Skeleton for 'GestionDonnees.fxml' Controller Class
+/*
+ * ControleurGestionDonnees.java                           9 nov. 2023
+ * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
 
 package iut.sae.ihm.controleur;
@@ -36,8 +37,9 @@ import javafx.scene.input.ContextMenuEvent;
 
 /** 
  * Controleur de la scène MenuGestionDonnees
- * @author djedline.boyer
- *
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurGestionDonnees {
 

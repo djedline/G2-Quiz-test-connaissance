@@ -26,9 +26,10 @@ import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
 
-/** TODO comment class responsibility (SRP)
- * @author tany.catalabailly
- *
+/** 
+ * Classe controleur permettant de gérer la création de questions
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
  */
 public class ControleurCreerQuestion {
 

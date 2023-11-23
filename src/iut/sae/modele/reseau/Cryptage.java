@@ -5,12 +5,12 @@
 package iut.sae.modele.reseau;
 
 import java.lang.Math;
-import java.nio.charset.Charset;
 
 /** 
  * Classe qui permet le cryptage d'un message  grâce à la génération
  * d'une clé puis le décryptage de ce même message
- * @author nael.briot
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
  * @version 1.0
  */
 public class Cryptage {

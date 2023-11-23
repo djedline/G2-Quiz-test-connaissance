@@ -13,11 +13,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-/** TODO comment class responsibility (SRP)
- * @author nael.briot
- *
+/** 
+ * Classe controleur permettant de gérer la page de gestion d'échange des données
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
+ * @version 1.0
  */
-public class ControleurImpExp {
+public class ControleurEchangeDonnes {
 
     @FXML
     private Pane idPane;

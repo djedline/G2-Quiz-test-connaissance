@@ -16,9 +16,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-/**Controleur de la page pour la création de catégories
- * @author nael.briot
- *
+/**
+ * Controleur de la page pour la création de catégories
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal 
+ * @version 1.0
  */
 public class ControleurCreeCategorie {
 
