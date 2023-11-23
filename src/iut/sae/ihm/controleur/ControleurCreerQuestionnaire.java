@@ -1,6 +1,7 @@
 /* ControleurQuestionnaire.java                                     22 nov. 2023
  * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
+
 package iut.sae.ihm.controleur;
 
 import java.util.Optional;
@@ -21,9 +22,17 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 
 /**
+<<<<<<< HEAD
  * Classe du controlleur de la vue 'creerQuestionnaire'
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly
  *         leo.cheikh-boukal
+=======
+ * Classe controleur permettant de gérer la création du questionnaire
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
+>>>>>>> c7a075986a73b6af9aff19cb89718c07590c6d47
  */
 public class ControleurCreerQuestionnaire {
 
@@ -104,6 +113,7 @@ public class ControleurCreerQuestionnaire {
             }
         }
     }
+
 
     /** 
      * Methode qui converti le choix de la difficulté dans le format utilisé 
