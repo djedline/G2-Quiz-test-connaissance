@@ -57,9 +57,10 @@ public class ControleurServeur {
         System.out.println(!allumageOk);
         if (!allumageOk) {
             System.out.println("Salut");
-            adresseIpServeur.setText(Serveur.preparerServeur());
             btnDemarrer.setText("Eteindre");
             allumageOk = true;
+            adresseIpServeur.setText(Serveur.preparerServeur());
+           
         } else {
             System.out.println("Au revoir");
             Serveur.fermetureServeur();

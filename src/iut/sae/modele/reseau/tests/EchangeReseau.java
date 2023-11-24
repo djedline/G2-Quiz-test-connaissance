@@ -18,7 +18,7 @@ public class EchangeReseau {
      * initialise le serveur et le client
      */
     public void initialisation() {
-        Serveur.preparerServeur();
+        /*Serveur.preparerServeur();
         Serveur.accepterConnexion(); // bloquante : attend que le client se connecte
         String reponse = "";
         
@@ -31,6 +31,6 @@ public class EchangeReseau {
         } catch (IOException e) {
                 System.err.println("Impossible de fermer la socket serveur.");
                 e.printStackTrace();
-        }
+        }*/
     }
 }

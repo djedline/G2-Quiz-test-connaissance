@@ -115,6 +115,13 @@ public class ControleurPartager {
         
     }
     
+    /** 
+     * Partage un fichier
+     */
+    public static void partageFichier() {
+        Serveur.accepterConnexion();
+    }
+    
     @FXML
     void clicValider(ActionEvent event) {
         fichierOk = choixFichier.getValue().equals("-- Pas de fichier --") ||
@@ -128,6 +135,7 @@ public class ControleurPartager {
        if (ipOk && !fichierOk) {
            try {
             Client.creerLiaisonServeur(adresseIpServeur.getText(), 6666);
+            partageFichier();
         } catch (IOException e) {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("L'adresse Ip rentrée n'est pas l'adresseIp du serveur");

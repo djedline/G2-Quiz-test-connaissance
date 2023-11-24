@@ -7,6 +7,7 @@ package iut.sae.modele.reseau;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +15,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.nio.charset.Charset;
 import java.util.Scanner;
 
 import iut.sae.modele.reseau.Cryptage;
@@ -31,9 +33,11 @@ public class Client {
      * La Socket client utilisée pour échanger.
      */
     private static Socket sock;
+    /** socket qui permet la communication entre le serveur et le client */
+    static Socket comm;
     
     private static final File FICHIER_RECEPTION = 
-    		new File("src/iut/sae/modele/reseau/tests/fichierRecu.txt");
+            new File("src/iut/sae/modele/reseau/tests/fichierRecu.txt");
 
     /**
      * Méthode de test des sockets.
@@ -44,20 +48,14 @@ public class Client {
         try {
             Scanner sc = new Scanner(System.in);
             creerLiaisonServeur("10.2.14.31", 6666);
-			String cle = "";
-			String recu = "";
-            while (recu.isEmpty()) {
-                System.out.print("Génération et envoi de la clé");
-                cle = construireMessage();
-                System.out.println("Le client a envoyé : " + cle);
-                envoyerMessage(cle.getBytes());
-                recu = recevoirMessage(FICHIER_RECEPTION, cle);
-            }
-			fermerSocket();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            String reponse = "";
+            //reponse = recevoirEtAnalyser();
+            envoyerReponse(reponse);
+            fermerSocket();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * @param host l'adresse ou le nom du serveur
@@ -74,82 +72,82 @@ public class Client {
     }
 
     /**
-     * Méthode qui crée la clé a envoyer au serveur a partir d'un fichier
+     * Permet de recevoir la requete du client et de l'analyser pour construire le
+     * contenu de la reponse
+     * Crypte le fichier et l'envoie
+     * @param fichierEnvoyer 
      * 
-     * @return renvoie une chaine avec la clé à envoyer
-     * @throws IOException si le message n'a pas pu être construit
+     * @return text : la reponse a la requete
      */
-    public static String construireMessage() throws IOException {
-        return Cryptage.genereCle();
-    }
+    public static String recevoirEtAnalyser(File fichierEnvoyer) {
+        String cle = "";
+        String fichLu = "";
 
-    /**
-     * @param data les données à envoyer
-     * @throws IOException si les données ne sont pas envoyées.
-     */
-    public static void envoyerMessage(byte[] data) throws IOException {
-        System.out.println("ENVOI DES DONNEES");
+        System.out.println("RECEPTION DE LA REPONSE");
         try {
-            OutputStream os = sock.getOutputStream();
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-            os.write(data);
-            System.out.println("Le client a envoyé : " + data.toString());
-        } catch (IOException e) {
-            throw new IOException("Impossible d'envoyer le message au serveur.");
-        }
-    }
-
-    /**
-     * Saisie le message reçu dans un fichier.
-     * @param fichRecu le fichier dans lequel écrire
-     * @param cle la clé de décryptage
-     * @return le message reçu
-     * @throws InterruptedException
-     * @throws IOException
-     */
-    public static String recevoirMessage(File fichRecu, String cle) throws InterruptedException, IOException {
-        String recu = "";
-        try {
-            System.out.println("RECEPTION DES DONNEES");
-            InputStream is = sock.getInputStream();
-            boolean test = true;
-            while (test) {
-                if (is.available() != 0) {
-                    System.out.println("Le serveur a recu : " + is.available() + " octets.");
-                    test = false;
+            if (comm != null) {
+                InputStream is = comm.getInputStream();
+                boolean test = true;
+                while (test) {
+                    if (is.available() != 0) {
+                        System.out.println("En attente...");
+                        test = false;
+                    }
                 }
+                
+                // lis la clé en UTF-8
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(comm.getInputStream(), "UTF-8"));
+                while (reader.ready()) {
+                    cle += Character.toString(reader.read());
+                }
+                System.out.println("Le serveur a reçu la clé : " + cle);
+
+                System.out.println(fichierEnvoyer.getAbsolutePath());
+                if (!fichierEnvoyer.exists()) {
+                    fichierEnvoyer.createNewFile();
+                }
+
+                FileReader fr = new FileReader(fichierEnvoyer, Charset.forName("UTF-8"));
+                while (fr.ready()) {
+                    fichLu += Character.toString(fr.read());
+                }
+                System.out.println("Le fichier contient : " + fichLu);
+                fichLu = Cryptage.chiffrer(fichLu, cle);
+                fr.close();
+                System.out.println("le serveur a écrit : " + fichLu);
             }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-            while (reader.ready()) {
-                recu += Character.toString(reader.read());
-            }
-            System.out.println("Recu par le client : " + recu);
-            
-            if (!fichRecu.exists()) {
-                fichRecu.createNewFile();
-            }
-            recu = Cryptage.dechiffrer(recu, cle);
-        } catch (IOException e) {
-            System.err.println("C'est la réception le problème.");
+        } catch (Exception e) {
+            System.err.println("Impossible de recevoir la requête.");
             e.printStackTrace();
         }
-        
+        return fichLu;
+    }
+    
+    /**
+     * Permet d'envoyer la reponse au client en retour d'une requete
+     * 
+     * @param rep : la reponse a envoyer
+     */
+    public static void envoyerReponse(String rep) {
+        System.out.println("ENVOI DE LA REPONSE");
+        System.out.println("Le serveur est : " + comm.getLocalSocketAddress());
+        System.out.println("Le client est : " + comm.getRemoteSocketAddress());
         try {
-            FileWriter fw = new FileWriter(fichRecu);
-            fw.append(recu);
-            fw.flush();
-            fw.close();
-
-            System.out.println("Le client a reçu : " + recu);
-            return recu;
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new IOException("C'est le fichier le problème.");
+            if (comm != null) {
+                OutputStream os = comm.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                writer.write(rep);
+                System.out.println("Le client a envoyé " + rep);
+                writer.flush();
+                writer.close();
+            }
         } catch (Exception e) {
-            throw new InterruptedException("La connection a été interrompue");
+            System.err.println("Impossible de répondre au serveur.");
+            e.printStackTrace();
         }
     }
-
+    
     /**
      * Ferme la socket courante.
      * 
