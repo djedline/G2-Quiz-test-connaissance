@@ -32,12 +32,14 @@ public class Donnees {
     /**
      * Le chemin dans lequel les questions sont sauvegardées.
      */
-    public static final File FICH_QUESTIONS = new File("donnees/questions.data");
+    public static final File FICH_QUESTIONS
+    	= new File("donnees/questions.data");
 
     /**
      * Le chemin dans lequel les catégories sont sauvegardées.
      */
-    public static final File FICH_CATEGORIES = new File("donnees/categories.data");
+    public static final File FICH_CATEGORIES
+    	= new File("donnees/categories.data");
 
     /**
      * Le nom de la catégorie par défaut existante.
@@ -124,7 +126,7 @@ public class Donnees {
             listeCategorie.add(new Categorie(NOM_CATEGORIE_DEFAUT));
             donneesChargees = false;
         }
-        if (listeQuestions == null) {
+        if (listeQuestions == null || listeQuestions.size() == 0) {
         	chargerQuestionsParDefaut();
             donneesChargees = false;
         }
