@@ -15,7 +15,12 @@ import java.util.ArrayList;
 
 import javax.swing.text.LayoutQueue;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 /**
+ * Centralise les données de l'application avec sa persistence.
+ * @author djedline.boyer
  * Centralise les données de l'application.
  * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
@@ -38,6 +43,12 @@ public class Donnees {
      * Le nom de la catégorie par défaut existante.
      */
     public static final String NOM_CATEGORIE_DEFAUT = "Général";
+    
+	public static final File FICHIER_IMPORT_QUEST_JAVA
+	= new File("src/iut/sae/modele/tests/questionsbasiques.csv");
+
+	public static final File FICHIER_IMPORT_QUEST_ORTHO 
+	= new File("src/iut/sae/modele/tests/questionsorthographe.csv");
 
     /** Liste de Categorie */
     public static ArrayList<Categorie> listeCategorie = new ArrayList<>();
@@ -93,7 +104,6 @@ public class Donnees {
      */
     public static boolean charger() {
         boolean donneesChargees = true;
-        System.out.println("Fichier existe ? " + (FICH_CATEGORIES.exists() && FICH_QUESTIONS.exists()));
         try {
             if (FICH_CATEGORIES.exists()) {
                 listeCategorie = (ArrayList<Categorie>) chargerSauvegarde(FICH_CATEGORIES);
@@ -111,12 +121,11 @@ public class Donnees {
         }
         // Cas par défaut
         if (listeCategorie == null || listeCategorie.size() == 0) {
-            System.out.println("Cas par défaut : création d'une catégorie");
             listeCategorie.add(new Categorie(NOM_CATEGORIE_DEFAUT));
             donneesChargees = false;
         }
         if (listeQuestions == null) {
-            System.out.println("Cas par défaut : liste par défaut créee");
+        	chargerQuestionsParDefaut();
             donneesChargees = false;
         }
         afficherDonnees();
@@ -266,7 +275,7 @@ public class Donnees {
     }
 
     /**
-     * TODO comment method role Méthode qui vérifie si la catégorie à ajouter est
+     * Méthode qui vérifie si la catégorie à ajouter est
      * vide ou non
      * 
      * @param laCategorie
@@ -308,5 +317,19 @@ public class Donnees {
         listeCategorie.add(new Categorie(NOM_CATEGORIE_DEFAUT));
         listeQuestions = new ArrayList<>();
     }
-
+    
+    /**
+     * Si les données n'existent pas, charge les données
+     * des banques de questions Java & Orthographe.
+     */
+    public static void chargerQuestionsParDefaut() {
+    	reinitialiserDonnees();
+    	try {
+			ImportExport.importer(FICHIER_IMPORT_QUEST_JAVA);
+			ImportExport.importer(FICHIER_IMPORT_QUEST_ORTHO);
+		} catch (IOException e) {
+			new Alert(AlertType.ERROR, "Impossible de charger les données "
+					+ "par défaut.\n" + e.getMessage()).show();
+		}
+    }
 }

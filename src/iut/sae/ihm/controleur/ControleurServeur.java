@@ -19,10 +19,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-/** 
- * Controleur Serveur
- * @author djedline.boyer
- *
+/**
+ * Classe controleur de la page Serveur
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurServeur {
 
@@ -40,36 +42,33 @@ public class ControleurServeur {
 
     @FXML
     private Label adresseIPServeur;
-    
+
     @FXML
     private Label FichierAExporter;
 
     @FXML
     private Button btnDemarrer;
-    
+
     boolean allumageOk = false;
-    
+
     @FXML
     void clicDemarrer(ActionEvent event) {
         if (!allumageOk) {
-        adresseIPServeur.setText(Serveur.preparerServeur());
-        btnDemarrer.setText("Eteindre");
-        allumageOk = true;
+            adresseIPServeur.setText(Serveur.preparerServeur());
+            btnDemarrer.setText("Eteindre");
+            allumageOk = true;
         } else {
             Serveur.fermetureServeur();
             allumageOk = false;
             btnDemarrer.setText("Demarrer");
             adresseIPServeur.setText("");
         }
-        /*try {
-            message = Client.construireMessage(fichierATraiter);
-            Client.envoyerMessage(message.getBytes());
-            s = Client.recevoirMessage();
-            Client.fermerSocket();
-        } catch (IOException | InterruptedException e) {
-            System.out.println("Problème avec le fichier");
-            e.printStackTrace();
-        }*/
+        /*
+         * try { message = Client.construireMessage(fichierATraiter);
+         * Client.envoyerMessage(message.getBytes()); s = Client.recevoirMessage();
+         * Client.fermerSocket(); } catch (IOException | InterruptedException e) {
+         * System.out.println("Problème avec le fichier"); e.printStackTrace(); }
+         */
     }
 
     @FXML

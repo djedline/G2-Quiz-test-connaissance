@@ -17,11 +17,14 @@ import iut.sae.modele.Question;
 
 class ImportExportTest {
 
-	private static final String FICHIER_IMPORT_QUEST_JAVA = "src/iut/sae/modele/tests/questionsbasiques.csv";
+	private static final File FICHIER_IMPORT_QUEST_JAVA
+	= Donnees.FICHIER_IMPORT_QUEST_JAVA;
 
-	private static final String FICHIER_IMPORT_QUEST_ORTHO = "src/iut/sae/modele/tests/questionsorthographe.csv";
+	private static final File FICHIER_IMPORT_QUEST_ORTHO 
+	= Donnees.FICHIER_IMPORT_QUEST_ORTHO;
 
-	private static final String FICHIER_EXPORT_QUEST = "src/iut/sae/modele/tests/exporte.csv";
+	private static final File FICHIER_EXPORT_QUEST 
+		= new File("src/iut/sae/modele/tests/exporte.csv");
 
 	@Test
 	void testImportJava() {
@@ -31,7 +34,7 @@ class ImportExportTest {
 		final int NB_QUEST_JAVA = 31;
 
 		try {
-			ImportExport.importer(FICHIER_IMPORT_QUEST_JAVA);
+			ImportExport.importer(Donnees.FICHIER_IMPORT_QUEST_JAVA);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -49,7 +52,7 @@ class ImportExportTest {
 		final int NB_QUEST_ORTHO = 189;
 
 		try {
-			ImportExport.importer(FICHIER_IMPORT_QUEST_ORTHO);
+			ImportExport.importer(Donnees.FICHIER_IMPORT_QUEST_ORTHO);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -64,10 +67,9 @@ class ImportExportTest {
 		String EXPORT_VIDE = "Catégorie;Niveau;Libellé;Vrai;Faux1;Faux2;Faux3;Faux4;Feedback;\n";
 		
 		Donnees.reinitialiserDonnees();
-		File f = new File(FICHIER_EXPORT_QUEST);
-		f.delete();
+		FICHIER_EXPORT_QUEST.delete();
 		ImportExport.exporter(FICHIER_EXPORT_QUEST);
-		String contenu = lireFichier(f);
+		String contenu = lireFichier(FICHIER_EXPORT_QUEST);
 		
 		// fichier vide
 		assertEquals(EXPORT_VIDE, contenu);
@@ -83,9 +85,9 @@ class ImportExportTest {
 		Question nvQuestion = new Question("Maquestion", nvCategorie, "JeSuisJuste", repFausses, "Feedback", 1);
 		Donnees.listeQuestions.add(nvQuestion);
 		
-		f.delete();
+		FICHIER_EXPORT_QUEST.delete();
 		ImportExport.exporter(FICHIER_EXPORT_QUEST);
-		contenu = lireFichier(f);
+		contenu = lireFichier(FICHIER_EXPORT_QUEST);
 		
 		String EXPORT_PAS_VIDE = EXPORT_VIDE
 				+ "Cat;1;Maquestion;JeSuisJuste;Rouge;Vert;Bleu;Argenté;Feedback;\n";
