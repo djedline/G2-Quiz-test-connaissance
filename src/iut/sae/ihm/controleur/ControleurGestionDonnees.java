@@ -97,6 +97,7 @@ public class ControleurGestionDonnees {
                         Donnees.suprimerCategorie(laCategorie);
                     }else {
                         Alert confirmation = new Alert(AlertType.CONFIRMATION);
+                        confirmation.setContentText("La categorie contien des question.\nCette action les suprimeras aussi.");
                         Optional<ButtonType> result = confirmation.showAndWait();
                         if(result.get() == ButtonType.OK) {
                             Donnees.suprimerCategorie(laCategorie);
@@ -161,14 +162,9 @@ public class ControleurGestionDonnees {
             }
         }
 
-        // Créez le TreeView avec les racines
         treeViewData.setRoot(new TreeItem<>());
         treeViewData.setShowRoot(false);
         treeViewData.getRoot().getChildren().addAll(listeTreeItem);
-
-        /* initialize TreeItem<CustomBtn> as container for CustomBtn object */
-        // TreeItem<CustomBtn> node = new TreeItem<CustomBtn>(new CustomBtn(new
-        // Label("Node 1"), new Button("Button 1")));
 
     }
 
