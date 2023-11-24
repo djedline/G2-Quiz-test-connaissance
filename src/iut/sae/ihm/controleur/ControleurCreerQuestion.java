@@ -6,10 +6,6 @@
 package iut.sae.ihm.controleur;
 
 import java.util.ArrayList;
-
-
-
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -26,9 +22,11 @@ import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
 
-/** TODO comment class responsibility (SRP)
- * @author tany.catalabailly
- *
+/**
+ * Classe controleur de la page creerQuestion
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
  */
 public class ControleurCreerQuestion {
 
@@ -62,6 +60,8 @@ public class ControleurCreerQuestion {
     @FXML
     private TextField txtRepFausse4;
 
+    private ArrayList<TextField> lesTxtFaux = new ArrayList<TextField>();
+
     @FXML
     private Pane idPane;
 
@@ -76,11 +76,11 @@ public class ControleurCreerQuestion {
 
     @FXML
     private TextArea txtFeedback;
-    
+
     private ArrayList<String> lesRepFausse;
 
-    
-    /** TODO comment method role
+    /**
+     * TODO comment method role
      * 
      */
     @FXML
@@ -89,50 +89,54 @@ public class ControleurCreerQuestion {
         choiceDifficulte.getItems().add("Moyen");
         choiceDifficulte.getItems().add("Difficile");
         choiceDifficulte.setValue("Facile");
-        
+
         for (Categorie element : Donnees.listeCategorie) {
-        	choiceCategorie.getItems().add(element);
+            choiceCategorie.getItems().add(element);
         }
 
+        choiceCategorie.setValue(Donnees.listeCategorie.get(0));
+
+
+        lesTxtFaux.add(txtRepFausse1);
+        lesTxtFaux.add(txtRepFausse2);
+        lesTxtFaux.add(txtRepFausse3);
+        lesTxtFaux.add(txtRepFausse4);
 
     }
 
-    /** TODO comment method role
-     * @return repFausse Laou les réponses fausses
+    /**
+     * Méthode permettant de répertorier toute les réponses fausses d'une question
+     * dans un tableau
+     * 
+     * @return repFausse La ou les réponses fausses
      */
     public String[] tableauReponseFausse() {
-    	ArrayList<String> listeIntermediaire = new ArrayList<>();
-    	String[] repFausse;
-    	if (txtRepFausse1.getText() == null || txtRepFausse1.getText().isBlank()) {
-    		throw new IllegalArgumentException();
-    	} else {
-    		listeIntermediaire.add(txtRepFausse1.getText());
-    	}
-    	if (txtRepFausse2.getText() != null && !txtRepFausse2.getText().isBlank()) {
-    		listeIntermediaire.add(txtRepFausse2.getText());
-    	}
-    	if (txtRepFausse3.getText() != null && !txtRepFausse3.getText().isBlank()) {
-    		listeIntermediaire.add(txtRepFausse3.getText());
-    	}
-    	if (txtRepFausse4.getText() != null && !txtRepFausse4.getText().isBlank()) {
-    		listeIntermediaire.add(txtRepFausse4.getText());
-    	}
-    	repFausse = new String[listeIntermediaire.size()];
-    	repFausse = listeIntermediaire.toArray(repFausse);
-		return repFausse;
-    	
+        ArrayList<String> listeIntermediaire = new ArrayList<>();
+        String[] repFausse;
+        boolean repFausseNbValide = false;
+
+        for (TextField laZoneTexte : lesTxtFaux) {
+            if (laZoneTexte.getText() != null && !laZoneTexte.getText().isBlank()) {
+                listeIntermediaire.add(laZoneTexte.getText());
+                repFausseNbValide = true;
+            }
+        }
+        if (!repFausseNbValide) {
+            throw new IllegalArgumentException();
+        }
+        repFausse = new String[listeIntermediaire.size()];
+        repFausse = listeIntermediaire.toArray(repFausse);
+        return repFausse;
+
     }
-    
-    
-    
-    
+
     @FXML
     void creerQuestion(ActionEvent event) {
         int laDifficulte;
         String[] faux;
-        switch(choiceDifficulte.getValue()){
+        switch (choiceDifficulte.getValue()) {
 
-        case "Facile": 
+        case "Facile":
             laDifficulte = 1;
             break;
 
@@ -149,22 +153,22 @@ public class ControleurCreerQuestion {
         }
 
         try {
-        	System.out.println(txtRepFausse1.getText() == null);
-        	if (txtFeedback.getText() == null) {
-        	    txtFeedback.setText(""); 
-        	}
-            Question nouvelleQuestion = new Question(txtIntitule.getText(), choiceCategorie.getValue(), txtRepJuste.getText(),
-            		tableauReponseFausse(), txtFeedback.getText(), laDifficulte);
-            
+            System.out.println(txtRepFausse1.getText() == null);
+            if (txtFeedback.getText() == null) {
+                txtFeedback.setText("");
+            }
+            Question nouvelleQuestion = new Question(txtIntitule.getText(), choiceCategorie.getValue(),
+                    txtRepJuste.getText(), tableauReponseFausse(), txtFeedback.getText(), laDifficulte);
+
             if (!Donnees.verifDoubleQuestion(nouvelleQuestion)) {
-            	Donnees.listeQuestions.add(nouvelleQuestion);
+                Donnees.listeQuestions.add(nouvelleQuestion);
                 System.out.println(nouvelleQuestion);
             } else {
-            	Alert messageErreur = new Alert(AlertType.ERROR);
+                Alert messageErreur = new Alert(AlertType.ERROR);
                 messageErreur.setContentText("La Question existe déjà.");
                 messageErreur.show();
             }
-            
+
             txtIntitule.setText(null);
             txtRepJuste.setText(null);
             txtFeedback.setText(null);
@@ -181,8 +185,8 @@ public class ControleurCreerQuestion {
 
     @FXML
     void ajouterCategorie(ActionEvent event) {
-    	Donnees.numScenePrecedenteCategorie = EnsembleDesVues.VUE_QUESTION;
-    	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CATEGORIE);
+        Donnees.numScenePrecedenteCategorie = EnsembleDesVues.VUE_QUESTION;
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CATEGORIE);
     }
 
     @FXML

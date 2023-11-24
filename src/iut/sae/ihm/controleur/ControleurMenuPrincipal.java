@@ -15,9 +15,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-/** TODO comment class responsibility (SRP)
- * @author nael.briot
- *
+/**
+ * Classe controleur du menu principal de l'application
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurMenuPrincipal {
 
@@ -35,17 +38,17 @@ public class ControleurMenuPrincipal {
 
     @FXML
     void clicStart(ActionEvent event) throws Exception {
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_QUESTIONNAIRE);
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CREER_QUESTIONNAIRE);
     }
 
     @FXML
     void clicGerer(ActionEvent event) throws Exception {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_MENU_GESTION_DONNEES);
-    } 
-    @FXML
-    void clicDon(ActionEvent event)throws Exception {
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);
     }
 
+    @FXML
+    void clicDon(ActionEvent event) throws Exception {
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);
+    }
 
 }

@@ -19,10 +19,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-/** 
- * Controleur Serveur
- * @author djedline.boyer
- *
+/**
+ * Classe controleur de la page Serveur
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurServeur {
 
@@ -39,37 +41,38 @@ public class ControleurServeur {
     private Button btnQuitter;
 
     @FXML
-    private Label adresseIPServeur;
-    
+    private Label adresseIpServeur;
+
     @FXML
     private Label FichierAExporter;
 
     @FXML
     private Button btnDemarrer;
-    
+
     boolean allumageOk = false;
-    
+
     @FXML
     void clicDemarrer(ActionEvent event) {
+        System.out.println(allumageOk);
+        System.out.println(!allumageOk);
         if (!allumageOk) {
-        adresseIPServeur.setText(Serveur.preparerServeur());
-        btnDemarrer.setText("Eteindre");
-        allumageOk = true;
+            System.out.println("Salut");
+            btnDemarrer.setText("Eteindre");
+            allumageOk = true;
+            adresseIpServeur.setText(Serveur.preparerServeur());
         } else {
+            System.out.println("Au revoir");
             Serveur.fermetureServeur();
             allumageOk = false;
             btnDemarrer.setText("Demarrer");
-            adresseIPServeur.setText("");
+            adresseIpServeur.setText("");
         }
-        /*try {
-            message = Client.construireMessage(fichierATraiter);
-            Client.envoyerMessage(message.getBytes());
-            s = Client.recevoirMessage();
-            Client.fermerSocket();
-        } catch (IOException | InterruptedException e) {
-            System.out.println("Problème avec le fichier");
-            e.printStackTrace();
-        }*/
+        /*
+         * try { message = Client.construireMessage(fichierATraiter);
+         * Client.envoyerMessage(message.getBytes()); s = Client.recevoirMessage();
+         * Client.fermerSocket(); } catch (IOException | InterruptedException e) {
+         * System.out.println("Problème avec le fichier"); e.printStackTrace(); }
+         */
     }
 
     @FXML
