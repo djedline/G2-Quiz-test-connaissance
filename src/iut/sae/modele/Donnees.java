@@ -12,9 +12,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
-import javax.swing.text.LayoutQueue;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -32,22 +29,26 @@ public class Donnees {
     /**
      * Le chemin dans lequel les questions sont sauvegardées.
      */
-    public static final File FICH_QUESTIONS = new File("donnees/questions.data");
+    public static final File FICH_QUESTIONS
+    	= new File("donnees/questions.data");
 
     /**
      * Le chemin dans lequel les catégories sont sauvegardées.
      */
-    public static final File FICH_CATEGORIES = new File("donnees/categories.data");
+    public static final File FICH_CATEGORIES
+    	= new File("donnees/categories.data");
 
     /**
      * Le nom de la catégorie par défaut existante.
      */
     public static final String NOM_CATEGORIE_DEFAUT = "Général";
     
-	public static final File FICHIER_IMPORT_QUEST_JAVA
+    /** TODO comment field role (attribute, association) */
+    public static final File FICHIER_IMPORT_QUEST_JAVA
 	= new File("src/iut/sae/modele/tests/questionsbasiques.csv");
 
-	public static final File FICHIER_IMPORT_QUEST_ORTHO 
+    /** TODO comment field role (attribute, association) */
+    public static final File FICHIER_IMPORT_QUEST_ORTHO 
 	= new File("src/iut/sae/modele/tests/questionsorthographe.csv");
 
     /** Liste de Categorie */
@@ -61,8 +62,12 @@ public class Donnees {
      */
     public static int numScenePrecedenteCategorie;
 
+    /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
+    public static File fichierAPartager;
+
     /** Le questionnaire généré avant son */
     public static Questionnaire QuestionnaireGénéré;
+
 
     /**
      * Sauvegarde la base de questions et de catégories.
@@ -124,7 +129,7 @@ public class Donnees {
             listeCategorie.add(new Categorie(NOM_CATEGORIE_DEFAUT));
             donneesChargees = false;
         }
-        if (listeQuestions == null) {
+        if (listeQuestions == null || listeQuestions.size() == 0) {
         	chargerQuestionsParDefaut();
             donneesChargees = false;
         }
@@ -212,7 +217,7 @@ public class Donnees {
      */
     public static ArrayList<Question> getQuestionOfCategorie(String categorie) {
         ArrayList<Question> res = new ArrayList<Question>();
-        if (categorie.equals("General")) {
+        if (categorie.equals(Donnees.listeCategorie.get(0).getLibelle())) {
             res = (ArrayList<Question>) listeQuestions;
         } else {
             for (Question laQuestion : listeQuestions) {

@@ -41,10 +41,13 @@ public class Questionnaire {
             }
         }
 
-        if (listeQuestionCategorieEtDifficulte.size() == 0) {
-            throw new IllegalArgumentException("La liste de question de cette categorie et difficulte " + "est vide");
+        int tailleListe = listeQuestionCategorieEtDifficulte.size();
+        if (tailleListe == 0) {
+            throw new IllegalArgumentException(
+                    "La liste de question de cette categorie et difficulte "
+                    + "est vide");
         }
-
+        
         listeQuestion = listeQuestionCategorieEtDifficulte;
         listeReponseDonnee = new ArrayList<String>();
 
@@ -78,25 +81,24 @@ public class Questionnaire {
             throw new IllegalArgumentException(
                     "Attention, La liste de question" + " ne contient pas assez de question");
         }
-        if (tailleListe == nbQuestion) {
-            listeQuestion = listeQuestionCategorieEtDifficulte;
-        } else {
-            listeQuestion = new ArrayList<Question>();
-            int i = 1;
+        
+        
+        listeQuestion = new ArrayList<Question>();
+        int i = 1;
 
-            while (i <= nbQuestion) {
-                int n = (int) (Math.random() * tailleListe);
-                Question laQuestion = listeQuestionCategorieEtDifficulte.get(n);
-                if (!listeQuestion.contains(laQuestion)) {
-                    listeQuestion.add(laQuestion);
-                    i++;
-                }
+        while (i <= nbQuestion) {
+            int n = (int)(Math.random() * tailleListe);
+            Question laQuestion = listeQuestionCategorieEtDifficulte.get(n);
+            if (!listeQuestion.contains(laQuestion)) {
+                listeQuestion.add(laQuestion);
+                i++;
             }
         }
+    
 
         listeReponseDonnee = new ArrayList<String>();
 
-        for (int i = 0; i < listeQuestion.size(); i++) {
+        for (int j = 0; j < listeQuestion.size(); j++) {
             listeReponseDonnee.add("");
         }
     }
