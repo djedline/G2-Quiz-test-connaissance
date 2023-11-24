@@ -7,12 +7,12 @@
 
 <Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurCreerQuestionnaire">
 	<children>
-		<Button fx:id="btnValider" layoutX="78.0" layoutY="235.0" mnemonicParsing="false" onAction="#clicValider" prefHeight="25.0" prefWidth="131.0" text="Valider" />
+		<Button fx:id="btnQuitter" layoutX="78.0" layoutY="235.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="131.0" text="Annuler" />
 		<Label fx:id="idLabelNom" layoutX="28.0" layoutY="48.0" prefHeight="21.0" prefWidth="161.0" text="Choisir la difficulté :">
          <font>
             <Font size="17.0" />
          </font></Label>
-      <Button fx:id="btnQuitter" layoutX="242.0" layoutY="235.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="131.0" text="Annuler" />
+      <Button fx:id="btnValider" layoutX="242.0" layoutY="235.0" mnemonicParsing="false" onAction="#clicValider" prefHeight="25.0" prefWidth="131.0" text="Valider" />
       <Label fx:id="idLabelNom1" layoutX="28.0" layoutY="114.0" prefHeight="21.0" prefWidth="168.0" text="Choisir la catégorie : ">
          <font>
             <Font size="17.0" />
