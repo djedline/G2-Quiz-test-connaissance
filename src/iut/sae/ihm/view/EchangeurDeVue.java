@@ -69,7 +69,6 @@ public class EchangeurDeVue {
      * TODO comment method role
      * 
      * @param laCategorie
-     * @param codeVue
      */
     public static void echangerAvec(Categorie laCategorie) {
         if (sceneCourante == null) {
@@ -99,7 +98,6 @@ public class EchangeurDeVue {
 
     /**
      * TODO comment method role
-     * 
      * @param laQuestion
      */
     public static void echangerAvec(Question laQuestion) {

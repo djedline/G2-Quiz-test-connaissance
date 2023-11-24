@@ -62,8 +62,12 @@ public class Donnees {
      */
     public static int numScenePrecedenteCategorie;
 
+    /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
+    public static File fichierAPartager;
+
     /** Le questionnaire généré avant son */
     public static Questionnaire QuestionnaireGénéré;
+
 
     /**
      * Sauvegarde la base de questions et de catégories.

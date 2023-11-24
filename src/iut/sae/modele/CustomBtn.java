@@ -53,7 +53,6 @@ public class CustomBtn extends HBox {
         this.setAlignment(Pos.CENTER_LEFT);
     }
     
-
     /** TODO comment initial state
      * @param lacat
      * @param bt
@@ -69,14 +68,14 @@ public class CustomBtn extends HBox {
         this.setAlignment(Pos.CENTER_LEFT);
     }
     
-    /** 
+    /**
      * Méthode qui permet de récupérer le texte sur le bouton
      * @return le texte du bouton
      */
     public String getString() {
     	return this.boxText.getText();
     }
-    
+
     /** 
      * Méthode qui permet de récupérer la catégorie enregistré
      * @return la catégorie enregistré

@@ -93,7 +93,9 @@ public class ControleurCreerQuestion {
         for (Categorie element : Donnees.listeCategorie) {
             choiceCategorie.getItems().add(element);
         }
-        choiceCategorie.setValue(Donnees.listeCategorie.getFirst());
+
+        choiceCategorie.setValue(Donnees.listeCategorie.get(0));
+
 
         lesTxtFaux.add(txtRepFausse1);
         lesTxtFaux.add(txtRepFausse2);

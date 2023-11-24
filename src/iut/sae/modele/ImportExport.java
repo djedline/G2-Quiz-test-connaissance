@@ -24,7 +24,7 @@ public class ImportExport {
 
     /** Symbole pour définir une chaine de caractères */
     public static final char GUILLEMET = '"';
-
+    
     /** Ordre des champs dans les fichiers CSV */
     public static final String[] NOM_COLONNE = { "Catégorie", "Niveau", "Libellé", "Vrai", "Faux1", "Faux2", "Faux3",
             "Faux4", "Feedback" };
@@ -180,7 +180,7 @@ public class ImportExport {
                 }
             }
         }
-
+        
         // création de la nouvelle catégorie
         bonneCategorie = new Categorie(catImportee);
         Donnees.listeCategorie.add(bonneCategorie);

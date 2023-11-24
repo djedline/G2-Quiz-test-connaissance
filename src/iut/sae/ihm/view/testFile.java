@@ -2,7 +2,7 @@
  * testFile.java                                    14 nov. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
-package iut.sae.ihm.controleur;
+package iut.sae.ihm.view;
 
 import java.io.File;
 
@@ -22,7 +22,7 @@ public class testFile extends Application {
     public void start(Stage primaryStage) {
         FileChooser fileChooser = new FileChooser();
         // Ajout d'un filtre pour ne montrer que certains fichiers
-        ExtensionFilter extFilter = new ExtensionFilter("Fichiers texte(*.txt)", "*.txt");
+        ExtensionFilter extFilter = new ExtensionFilter("Fichiers texte(*.csv)", "*.csv");
         fileChooser.setTitle("Choisir un fichier");
         fileChooser.getExtensionFilters().add(extFilter);
         //Afficher la boîte de dialogue de choix de fichier
@@ -31,7 +31,8 @@ public class testFile extends Application {
     }
     
     
-    /** TODO comment method role
+    /** 
+     * Ouvre une fenêtre pour sélectionner des fichiers
      * @param args
      */
     public static void main(String[] args) {
