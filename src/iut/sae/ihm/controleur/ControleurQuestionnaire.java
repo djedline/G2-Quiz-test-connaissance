@@ -99,6 +99,10 @@ public class ControleurQuestionnaire {
         numQuestion ++;
         if (numQuestion >= nbQuestion ) {
             //TODO : Stub
+            for (String laReponse : Donnees.QuestionnaireGénéré.getListeReponseDonnee()) {
+                System.out.println(laReponse);
+            } 
+            // petit test de verification si les question sont bien enregistrés
             EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);
 
         } else {
