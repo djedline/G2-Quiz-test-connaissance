@@ -82,7 +82,7 @@ public class Client {
      * @throws IOException si le message n'a pas pu être construit
      */
     public static String construireMessage() throws IOException {
-        return Cryptage.genereCle();
+        return Cryptage.genereCleVigenere();
     }
 
     /**

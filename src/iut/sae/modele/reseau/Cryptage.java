@@ -5,6 +5,7 @@
 package iut.sae.modele.reseau;
 
 import java.lang.Math;
+import iut.sae.modele.reseau.DiffieHellman;
 
 /**
  * Classe qui permet le cryptage d'un message grâce à la génération d'une clé
@@ -33,10 +34,22 @@ public class Cryptage {
     public static void main(String[] args) {
         String message = "Le cryptage c'est compliqué.";
         System.out.println("Message : " + message);
-        String cle = genereCle();
+        String cle = genereCleVigenere();
 
         String crypte = chiffrer(message, cle);
         dechiffrer(crypte, cle);
+    }
+
+    /**
+     * Méthode pour récupérer une clé selon l'algorithme de Diffie-Hellman
+     * 
+     * @return la cle de cryptage
+     */
+    public static String creerCleDiffie() {
+        int cleDiffieChiffre;
+        String cleDiffieF = "";
+        
+        return cleDiffieF;
     }
 
     /**
@@ -44,7 +57,7 @@ public class Cryptage {
      * 
      * @return laCle la clé de cryptage
      */
-    public static String genereCle() {
+    public static String genereCleVigenere() {
         String laCle = "";
         int nombreAlea;
         final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE - MIN_LONGUEUR_CLE) + (int) MIN_LONGUEUR_CLE;

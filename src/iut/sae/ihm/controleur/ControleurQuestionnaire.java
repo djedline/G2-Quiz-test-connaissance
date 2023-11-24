@@ -19,6 +19,7 @@ import javafx.scene.control.RadioButton;
  * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurQuestionnaire {
 

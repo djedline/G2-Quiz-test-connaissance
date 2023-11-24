@@ -25,10 +25,11 @@ import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
 
 /**
- * TODO comment class responsibility (SRP)
+ * Classe controleur pour la modification de questions
  * 
- * @author tany.catalabailly
- *
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurModifierQuestion {
 
