@@ -37,7 +37,7 @@ import javafx.scene.control.TreeView;
  *         leo.cheikh-boukal
  * @version 1.0
  */
-public class ControleurGestionDonnees {
+public class ControleurChoixQuestions {
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;

@@ -23,9 +23,12 @@ import iut.sae.modele.reseau.Cryptage;
 /*
  * Représente le client dans les échanges de données via le réseau.
  */
-/** TODO comment class responsibility (SRP)
- * @author djedline.boyer
- *
+/**
+ * TODO comment class responsibility (SRP)
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class Client {
 
@@ -85,6 +88,7 @@ public class Client {
 
         System.out.println("RECEPTION DE LA REPONSE");
         try {
+
             if (comm != null) {
                 InputStream is = comm.getInputStream();
                 boolean test = true;
@@ -93,6 +97,7 @@ public class Client {
                         System.out.println("En attente...");
                         test = false;
                     }
+
                 }
                 
                 // lis la clé en UTF-8
@@ -117,6 +122,7 @@ public class Client {
                 fr.close();
                 System.out.println("le serveur a écrit : " + fichLu);
             }
+
         } catch (Exception e) {
             System.err.println("Impossible de recevoir la requête.");
             e.printStackTrace();
@@ -133,6 +139,7 @@ public class Client {
         System.out.println("ENVOI DE LA REPONSE");
         System.out.println("Le serveur est : " + comm.getLocalSocketAddress());
         System.out.println("Le client est : " + comm.getRemoteSocketAddress());
+
         try {
             if (comm != null) {
                 OutputStream os = comm.getOutputStream();

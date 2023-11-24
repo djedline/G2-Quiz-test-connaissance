@@ -1,3 +1,8 @@
+/*
+ * CustomBtn.java                                    21 nov. 2023
+ * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ */
+
 package iut.sae.modele;
 
 import javafx.geometry.Pos;
@@ -6,10 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.HBox;
 
+
 /** 
- * Créer des boutons
- * @author djedline.boyer
- *
+ * Classe permettant la création d'un ensemble bouton et item
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * leo.cheikh-boukal
+ * @version 1.0
  */
 public class CustomBtn extends HBox {
 
@@ -28,12 +35,14 @@ public class CustomBtn extends HBox {
         this.setAlignment(Pos.CENTER_LEFT);
     }
 
+
     /** 
-     * Customize les boutons
-     * @param laquest 
+     * Constructeur d'un ensemble de bouton et item
+     * @param laquest
      * @param bt
      */
     public CustomBtn(Question laquest, MenuButton bt) {
+
         super(5);
 
         this.laQuestion = laquest;
@@ -59,23 +68,25 @@ public class CustomBtn extends HBox {
         this.setAlignment(Pos.CENTER_LEFT);
     }
     
-    /** 
-     * Affiche le texte des boutons
-     * @return texte
+    /**
+     * Méthode qui permet de récupérer le texte sur le bouton
+     * @return le texte du bouton
      */
     public String getString() {
     	return this.boxText.getText();
     }
-    
-    /** TODO comment method role
-     * @return f
+
+    /** 
+     * Méthode qui permet de récupérer la catégorie enregistré
+     * @return la catégorie enregistré
      */
     public Categorie getCategorie() {
     	return this.laCategorie;
     }
     
-    /** TODO comment method role
-     * @return laQuestion
+    /** 
+     * Méthode qui permet de récupérer la question enregistré
+     * @return la question enregistré
      */
     public Question getQuestion() {
     	return this.laQuestion;

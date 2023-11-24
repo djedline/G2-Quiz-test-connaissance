@@ -1,5 +1,5 @@
 /*
- * ControleurExport.java                                    13 nov. 2023
+ * ControleurPartager.java                                    13 nov. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
 package iut.sae.ihm.controleur;
@@ -30,15 +30,18 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-/** TODO comment class responsibility (SRP)
- * @author nael.briot
- *
+/**
+ * Classe controleur de la page Partager
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurPartager {
 
     @FXML
     private Label idLabelNom;
-    
+
     @FXML
     private TextField adresseIpServeur;
 
@@ -121,7 +124,7 @@ public class ControleurPartager {
     public static void partageFichier() {
         Serveur.accepterConnexion();
     }
-    
+
     @FXML
     void clicValider(ActionEvent event) {
         fichierOk = choixFichier.getValue().equals("-- Pas de fichier --") ||
@@ -153,10 +156,8 @@ public class ControleurPartager {
             messageErreur.setContentText("Remplissez tous les champs");
             messageErreur.show();
         }
-
     }
 
-    
     @FXML
     void clicQuitter(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);

@@ -1,4 +1,5 @@
 /bin/
 .classpath
 .settings/
-.data
+donnees/
+.metadata/

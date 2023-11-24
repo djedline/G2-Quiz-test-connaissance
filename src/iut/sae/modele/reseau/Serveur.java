@@ -17,6 +17,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+
 /**
  * Classe qui représente le serveur lors d'un échange d'information
  * 
@@ -100,6 +101,7 @@ public class Serveur {
 
     /**
      * prépare le serveur en démarrant la socket conn
+     * 
      * @return l'adresse inet
      */
     public static String preparerServeur() {
@@ -119,8 +121,8 @@ public class Serveur {
         System.out.println("ah");
         return "";
     }
-    
-    /** 
+
+    /**
      * Ferme le serveur
      */
     public static void fermetureServeur() {
@@ -147,6 +149,6 @@ public class Serveur {
             e.printStackTrace();
         }
     }
-
     
+
 }
