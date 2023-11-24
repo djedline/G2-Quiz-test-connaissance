@@ -1,5 +1,5 @@
 /*
- * ControleurExport.java                                    13 nov. 2023
+ * ControleurPartager.java                                    13 nov. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
 package iut.sae.ihm.controleur;
@@ -22,9 +22,12 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-/** TODO comment class responsibility (SRP)
- * @author nael.briot
- *
+/**
+ * Classe controleur de la page Partager
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurPartager {
 
@@ -42,7 +45,7 @@ public class ControleurPartager {
 
     @FXML
     private Label idLabelNom;
-    
+
     @FXML
     private Label FichierAExporter;
 
@@ -50,28 +53,28 @@ public class ControleurPartager {
     private Button btnValider;
 
     private void choixFichier(Stage stage1) {
-       /* FileChooser fileChooser = new FileChooser();
-        // Ajout d'un filtre pour ne montrer que certains fichiers
-        ExtensionFilter extFilter = new ExtensionFilter("Fichiers texte(*.txt)", "*.txt");
-        fileChooser.getExtensionFilters().add(extFilter);
-        
-        stage1.getScene().getWindow();
-        //Afficher la boîte de dialogue de choix de fichier
-        //File fichierSelectionner = fileChooser.showOpenDialog();*/
+        /*
+         * FileChooser fileChooser = new FileChooser(); // Ajout d'un filtre pour ne
+         * montrer que certains fichiers ExtensionFilter extFilter = new
+         * ExtensionFilter("Fichiers texte(*.txt)", "*.txt");
+         * fileChooser.getExtensionFilters().add(extFilter);
+         * 
+         * stage1.getScene().getWindow(); //Afficher la boîte de dialogue de choix de
+         * fichier //File fichierSelectionner = fileChooser.showOpenDialog();
+         */
         testFile.main(null);
     }
-    
+
     @FXML
-    void chercherFichier (ActionEvent event) {
+    void chercherFichier(ActionEvent event) {
         System.out.print("TODO");
     }
-    
+
     @FXML
     void clicValider(ActionEvent event) {
-     
+
     }
 
-    
     @FXML
     void clicQuitter(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);

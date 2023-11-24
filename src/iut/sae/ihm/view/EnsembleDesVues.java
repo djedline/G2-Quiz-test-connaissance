@@ -1,15 +1,18 @@
 /*
- * Gére la correspondance entre le code d'une vue (un entier) et le nom
- * du fichier fxml décrivant cette vue 05/23
+ * EnsembleDesVues.java                                    26 oct. 2023
+ * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
+
 package iut.sae.ihm.view;
+
 /**
  * Classe outil qui établit la correspondance entre un code de vue (sous la
- * forme d'un entier) et le nom du fichier fxml contenant la vue associée
- * à ce code.
- * @author nael.briot, djedline.boyer, tany.catala-bailly
+ * forme d'un entier) et le nom du fichier fxml contenant la vue associée à ce
+ * code.
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
  * @version 1.0
- *
  */
 public class EnsembleDesVues {
     
@@ -58,10 +61,11 @@ public class EnsembleDesVues {
           "creerCategorie.fxml",  "creerQuestionnaire.fxml", "MenuGestionImpExp.fxml", 
           "ImportDonnees.fxml", "ExportDonnees.fxml", "GestionDonnees.fxml", 
           "Partager.fxml", "Serveur.fxml", "questionnaire.fxml"};
-    
+
     /**
-     * Renvoie le nom du fichier fxml contenant la vue dont le code est donné
-     * en paramètre
+     * Renvoie le nom du fichier fxml contenant la vue dont le code est donné en
+     * paramètre
+     * 
      * @param codeVue code de la vue dont le fichier fxml doit être renvoyé
      * @return une chaîne contenant le nom du fichier fxml
      * @throw IllegalArgumentException levée si le code argument n'est pas valide

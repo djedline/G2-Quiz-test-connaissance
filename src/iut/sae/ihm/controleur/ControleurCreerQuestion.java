@@ -23,7 +23,7 @@ import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
 
 /**
- * Classe controleur permettant de gérer la création de questions
+ * Classe controleur de la page creerQuestion
  * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
@@ -113,7 +113,7 @@ public class ControleurCreerQuestion {
         String[] repFausse;
         boolean repFausseNbValide = false;
 
-        for (TextField laZoneTexte:lesTxtFaux) {
+        for (TextField laZoneTexte : lesTxtFaux) {
             if (laZoneTexte.getText() != null && !laZoneTexte.getText().isBlank()) {
                 listeIntermediaire.add(laZoneTexte.getText());
                 repFausseNbValide = true;

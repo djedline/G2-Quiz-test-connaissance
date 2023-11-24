@@ -17,12 +17,13 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
 /**
- * Classe controlleur de la vue "Questionnaire.fxml"
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
+ * Classe controlleur de la page Questionnaire
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
  */
 public class ControleurQuestionnaire {
-    
+
     /** Nombre de question du questionnaire */
     public int nbQuestion;
 
@@ -59,7 +60,7 @@ public class ControleurQuestionnaire {
     @FXML
     void initialize() {
         nbQuestion = Donnees.QuestionnaireGénéré.getListeQuestion().size();
-        numQuestion = -1; // -1 est la pour que je puisse charger la question 
+        numQuestion = -1; // -1 est la pour que je puisse charger la question
                           // suivante
         
         listeRadioButton.add(idReponse1);
@@ -67,6 +68,7 @@ public class ControleurQuestionnaire {
         listeRadioButton.add(idReponse3);
         listeRadioButton.add(idReponse4);
         listeRadioButton.add(idReponse5);
+
        
         //je crée un Toggle pour empecher de selectionner tous les radiobutton
         ToggleGroup groupe = new ToggleGroup();
@@ -74,8 +76,9 @@ public class ControleurQuestionnaire {
         
         chargerQuestionSuivante();
         
+
     }
-    
+
     @FXML
     void actionPasser(ActionEvent event) {
         chargerQuestionSuivante();
@@ -86,7 +89,7 @@ public class ControleurQuestionnaire {
         validerReponse();
         chargerQuestionSuivante();
     }
-    
+
     /**
      * Méthode permettant le changement de l'affichage pour afficher la question
      * suivante du questionnaire
@@ -97,20 +100,20 @@ public class ControleurQuestionnaire {
         if (numQuestion >= nbQuestion ) {
             //TODO : Stub
             EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);
+
         } else {
-            Question laQuestionSuivante =
-                    Donnees.QuestionnaireGénéré.getQuestion(numQuestion);
+            Question laQuestionSuivante = Donnees.QuestionnaireGénéré.getQuestion(numQuestion);
             ArrayList<String> listeReponses = new ArrayList<>();
             listeReponses.add(laQuestionSuivante.getPropositionJuste());
-            for(String element : laQuestionSuivante.getPropositionFausse()) {
+            for (String element : laQuestionSuivante.getPropositionFausse()) {
                 listeReponses.add(element);
             }
             listeReponses = melangerReponses(listeReponses);
             idQuestion.setText(laQuestionSuivante.getLibelle());
-            chargerReponses(listeReponses); 
+            chargerReponses(listeReponses);
         }
     }
-    
+
 
 
     /** 
@@ -145,20 +148,20 @@ public class ControleurQuestionnaire {
                listeRadioButton.get(i).setVisible(false); 
            }
        }
-        
     }
 
-    /** 
+    /**
      * Melange les réponses pour afficher les reponses dans un ordre différent
+     * 
      * @param listeReponses
      * @return res liste de reponses melanger
      */
     private static ArrayList<String> melangerReponses(ArrayList<String> listeReponses) {
         ArrayList<String> res = new ArrayList<String>();
         int i = 1;
-        
+
         while (i <= listeReponses.size()) {
-            int n = (int)(Math.random() * listeReponses.size());
+            int n = (int) (Math.random() * listeReponses.size());
             String laReponse = listeReponses.get(n);
             if (!res.contains(laReponse)) {
                 res.add(laReponse);
@@ -169,20 +172,20 @@ public class ControleurQuestionnaire {
     }
 
     /**
-     * Méthode permettant d'enregistrer la réponse choisi et le stocke dans la 
-     * liste des reponses du questionnaire
+     * Méthode permettant d'enregistrer la réponse choisi et le stocke dans la liste
+     * des reponses du questionnaire
      */
     public void validerReponse() {
         String reponseChoisi = "";
-        
+
         for (RadioButton leBouton : listeRadioButton) {
-            if(leBouton.isSelected()) {
+            if (leBouton.isSelected()) {
                 reponseChoisi = leBouton.getText();
             }
         }
-        
+
         Donnees.QuestionnaireGénéré.stockerReponse(numQuestion, reponseChoisi);
-        
+
     }
 
 }

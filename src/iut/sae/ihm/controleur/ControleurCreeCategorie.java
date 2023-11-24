@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 /**
- * Controleur de la page pour la création de catégories
+ * Controleur de la page creerCategorie
  * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal

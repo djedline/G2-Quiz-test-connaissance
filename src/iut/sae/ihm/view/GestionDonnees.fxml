@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurGestionDonnees">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurGestionDonnees">
    <children>
       <Label alignment="CENTER" layoutX="75.0" layoutY="24.0" prefHeight="36.0" prefWidth="300.0" text="Gestion des données">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Button fx:id="btnAnnuler" layoutX="125.0" layoutY="252.0" mnemonicParsing="false" onAction="#retourArriere" prefHeight="30.0" prefWidth="200.0" text="Annuler">
+      <Button fx:id="btnAnnuler" layoutX="125.0" layoutY="252.0" mnemonicParsing="false" onAction="#retourArriere" prefHeight="30.0" prefWidth="200.0" text="Retour">
          <font>
             <Font size="15.0" />
          </font>

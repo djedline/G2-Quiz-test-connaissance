@@ -10,69 +10,72 @@ import iut.sae.modele.Categorie;
 
 /**
  * Utilisation de la classe Catégorie et test de ses méthodes
- * @author nael.briot
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class TestCategorie {
-         
-     /**
-      * tests du constructeur de la classe Catégorie 
-      */
-     public static void testConstructeur() {
-         System.out.println("\nTest de la création d'une catégorie :\n"
-                             + "-------------------------------------------\n");
-            
-             /**
-              * Test du constructeur en cas d'erreur imprévu du programme
-              */
-             try {
-                 Categorie nouvelleCategorie1 = new Categorie("Java"); 
-                 System.out.println("Test 1 OK");
-             } catch(IllegalArgumentException erreurProgramme) {
-                 System.out.print("Le programme a eu une erreur");
-             }
-             
-             /**
-              * Test du constructeur au cas où l'utilisateur rentre 
-              * un nom de catégorie vide
-              */   
-             try {
-                 Categorie nouvelleCategorie2 = new Categorie(""); 
-                 System.out.println("Attention : aucune erreur n'a été renvoyé");
-             } catch(IllegalArgumentException erreurLibelle) {
-                 System.out.println("Test 2 OK");
-             }
-             
-             /**
-              * Test du constructeur au cas où l'utilisateur rentre 
-              * un nom de catégorie rempli d'espace
-              */
-             try {
-                 Categorie nouvelleCategorie3 = new Categorie("          "); 
-                 System.out.println("Attention : aucune erreur n'a été renvoyé");
-             } catch(IllegalArgumentException erreurLibelle) {
-                 System.out.println("Test 3 OK");
-             }
-     }
-         
-         /**
-          * tests du getter de la classe Catégorie
-          */
-         private static void testGetter() {
-                 String test = "java";
-                 Categorie syntaxe = new Categorie("java");
-                 if (test.equals(syntaxe.getLibelle())) {
-                         System.out.println("Test getter OK");
-                 } else {
-                         System.out.println("Test Not OK");
-                 }
+
+    /**
+     * tests du constructeur de la classe Catégorie
+     */
+    public static void testConstructeur() {
+        System.out
+                .println("\nTest de la création d'une catégorie :\n" + "-------------------------------------------\n");
+
+        /**
+         * Test du constructeur en cas d'erreur imprévu du programme
+         */
+        try {
+            Categorie nouvelleCategorie1 = new Categorie("Java");
+            System.out.println("Test 1 OK");
+        } catch (IllegalArgumentException erreurProgramme) {
+            System.out.print("Le programme a eu une erreur");
         }
-         
-         /**
-          * Programme principal
-          * @param args argument non utilisé
-          */
-         public static void main(String[] args){
-                 testConstructeur();
-                 testGetter();
-         }
+
+        /**
+         * Test du constructeur au cas où l'utilisateur rentre un nom de catégorie vide
+         */
+        try {
+            Categorie nouvelleCategorie2 = new Categorie("");
+            System.out.println("Attention : aucune erreur n'a été renvoyé");
+        } catch (IllegalArgumentException erreurLibelle) {
+            System.out.println("Test 2 OK");
+        }
+
+        /**
+         * Test du constructeur au cas où l'utilisateur rentre un nom de catégorie
+         * rempli d'espace
+         */
+        try {
+            Categorie nouvelleCategorie3 = new Categorie("          ");
+            System.out.println("Attention : aucune erreur n'a été renvoyé");
+        } catch (IllegalArgumentException erreurLibelle) {
+            System.out.println("Test 3 OK");
+        }
+    }
+
+    /**
+     * tests du getter de la classe Catégorie
+     */
+    private static void testGetter() {
+        String test = "java";
+        Categorie syntaxe = new Categorie("java");
+        if (test.equals(syntaxe.getLibelle())) {
+            System.out.println("Test getter OK");
+        } else {
+            System.out.println("Test Not OK");
+        }
+    }
+
+    /**
+     * Programme principal
+     * 
+     * @param args argument non utilisé
+     */
+    public static void main(String[] args) {
+        testConstructeur();
+        testGetter();
+    }
 }

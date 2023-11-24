@@ -47,9 +47,8 @@ public class ControleurModifierCategorie {
     private Categorie laCategorie;
 
     /**
-     * TODO comment method role
-     * 
-     * @param lacat
+     * Méthode permettant de modifier les arguments d'une catégorie
+     * @param lacat la Catégorie à modifier
      */
     public void setCategorie(Categorie lacat) {
         this.laCategorie = lacat;

@@ -18,10 +18,10 @@ import iut.sae.modele.Question;
 class ImportExportTest {
 
 	private static final File FICHIER_IMPORT_QUEST_JAVA
-		= new File("src/iut/sae/modele/tests/questionsbasiques.csv");
+	= Donnees.FICHIER_IMPORT_QUEST_JAVA;
 
 	private static final File FICHIER_IMPORT_QUEST_ORTHO 
-		= new File("src/iut/sae/modele/tests/questionsorthographe.csv");
+	= Donnees.FICHIER_IMPORT_QUEST_ORTHO;
 
 	private static final File FICHIER_EXPORT_QUEST 
 		= new File("src/iut/sae/modele/tests/exporte.csv");
@@ -34,7 +34,7 @@ class ImportExportTest {
 		final int NB_QUEST_JAVA = 31;
 
 		try {
-			ImportExport.importer(FICHIER_IMPORT_QUEST_JAVA);
+			ImportExport.importer(Donnees.FICHIER_IMPORT_QUEST_JAVA);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -52,7 +52,7 @@ class ImportExportTest {
 		final int NB_QUEST_ORTHO = 189;
 
 		try {
-			ImportExport.importer(FICHIER_IMPORT_QUEST_ORTHO);
+			ImportExport.importer(Donnees.FICHIER_IMPORT_QUEST_ORTHO);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

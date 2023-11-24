@@ -1,13 +1,13 @@
-
 /*
- * Gère l'échange entre les vues affichées par la scène de l'application 05/23
+ * EchangeurDeVue.java                                    26 oct. 2023
+ * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
+
 package iut.sae.ihm.view;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import iut.sae.ihm.controleur.ControleurMenuPrincipal;
 import iut.sae.ihm.controleur.ControleurModifierCategorie;
 import iut.sae.ihm.controleur.ControleurModifierQuestion;
 import iut.sae.ihm.controleur.Lanceur;
@@ -17,27 +17,31 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 
-/** TODO comment class responsibility (SRP)
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
- * leo.cheikh-boukal
+/**
+ * Classe permettant l'échange entre les vues affichées par la scène de
+ * l'application
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
  * @version 1.0
  */
 public class EchangeurDeVue {
 
-    
     /** Scene courante, ou scène qui est associée à la fenêtre principale */
     private static Scene sceneCourante;
 
-    /** TODO comment method role
-     * @param nouvelleScene
+    /**
+     * Méthode qui permet de définir une nouvelle scène
+     * 
+     * @param nouvelleScene la nouvelle scène
      */
     public static void setSceneCourante(Scene nouvelleScene) {
         sceneCourante = nouvelleScene;
     }
-    
-    
 
-    /** TODO comment method role
+    /**
+     * TODO comment method role
+     * 
      * @param codeVue
      */
     public static void echangerAvec(int codeVue) {
@@ -47,24 +51,24 @@ public class EchangeurDeVue {
         }
         try {
             Parent racine; // recevra le conteneur racine de la vue à afficher
-	
-            racine = FXMLLoader.load(
-            		EchangeurDeVue.class.getResource(EnsembleDesVues.getNomVue(codeVue)));
+
+            racine = FXMLLoader.load(EchangeurDeVue.class.getResource(EnsembleDesVues.getNomVue(codeVue)));
             // ajout de la vue à la table cache
-            
 
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
-            //Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());
-        } catch(IOException erreur) {
+            // Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());
+        } catch (IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println("Echec du chargement de la vue de code " + codeVue);
             erreur.printStackTrace();
         }
     }
-    
-    /** TODO comment method role
-     * @param laCategorie 
+
+    /**
+     * TODO comment method role
+     * 
+     * @param laCategorie
      * @param codeVue
      */
     public static void echangerAvec(Categorie laCategorie) {
@@ -76,27 +80,27 @@ public class EchangeurDeVue {
             // recevra le conteneur racine de la vue à afficher
             FXMLLoader loader = new FXMLLoader();
             URL fxmlUrl = new File("src/iut/sae/ihm/view/modifierCategorie.fxml").toURI().toURL();
-            
+
             loader.setLocation(fxmlUrl);
             Parent racine = (Parent) loader.load();
-            ControleurModifierCategorie controllerRef = 
-            		(ControleurModifierCategorie) loader.getController();
-            
+            ControleurModifierCategorie controllerRef = (ControleurModifierCategorie) loader.getController();
+
             controllerRef.setCategorie(laCategorie);
-            
-            
+
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
-            //Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());
-        } catch(IOException erreur) {
+            // Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());
+        } catch (IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println("Echec du chargement de la vue de code modifier categorie");
             erreur.printStackTrace();
         }
     }
-    
-    /** TODO comment method role
-     * @param laQuestion 
+
+    /**
+     * TODO comment method role
+     * 
+     * @param laQuestion
      */
     public static void echangerAvec(Question laQuestion) {
         if (sceneCourante == null) {
@@ -104,21 +108,20 @@ public class EchangeurDeVue {
             throw new IllegalStateException("Echange de vue impossible. Pas de scène courante.");
         }
         try {
-        	// recevra le conteneur racine de la vue à afficher
+            // recevra le conteneur racine de la vue à afficher
             FXMLLoader loader = new FXMLLoader();
             URL fxmlUrl = new File("src/iut/sae/ihm/view/modifierQuestion.fxml").toURI().toURL();
-            
+
             loader.setLocation(fxmlUrl);
             Parent racine = (Parent) loader.load();
-            ControleurModifierQuestion controllerRef = 
-            		(ControleurModifierQuestion) loader.getController();
-            
+            ControleurModifierQuestion controllerRef = (ControleurModifierQuestion) loader.getController();
+
             controllerRef.setQuestion(laQuestion);
-            
+
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
-            //Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());
-        } catch(IOException erreur) {
+            // Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());
+        } catch (IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println("Echec du chargement de la vue de code modifier question");
             erreur.printStackTrace();

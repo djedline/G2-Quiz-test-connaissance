@@ -26,7 +26,7 @@ public class Lanceur extends Application {
 	private static Stage stage;
 
 	/** TODO comment method role
-	 * @return stage
+	 * @return la scène
 	 */
 	public static Stage getStage() {
 		return stage;
