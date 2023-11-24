@@ -24,7 +24,7 @@ public class ImportExport {
 
     /** Symbole pour définir une chaine de caractères */
     public static final char GUILLEMET = '"';
-
+    
     /** Ordre des champs dans les fichiers CSV */
     public static final String[] NOM_COLONNE = { "Catégorie", "Niveau", "Libellé", "Vrai", "Faux1", "Faux2", "Faux3",
             "Faux4", "Feedback" };
@@ -32,8 +32,6 @@ public class ImportExport {
 	/**
 	 * Envoie l'ensemble des questions de l'application dans un fichier.
 	 * @param aEcrire le fichier dans lequel on va écrire
-	 * 
-	 * @param chemin le chemin du fichier d'exportation
 	 * @throws IOException s'il est impossible d'écrire les données
 	 */
 	public static void exporter(File aEcrire) throws IOException {
@@ -88,6 +86,7 @@ public class ImportExport {
         s.append(NEW_LINE);
         return s.toString();
     }
+
 
     /**
      * Récupère l'ensemble des questions contenues dans un fichier CSV.
@@ -145,13 +144,11 @@ public class ImportExport {
             for (int i = 5; i < 9; i++) {
                 if (!colonnes[i].isBlank()) {
                     repFausses.add(colonnes[i]);
-                    // System.out.println("On rajoute : " + colonnes[i] + " dans le " + "tableau.");
                 }
             }
             // récupérer un array de réponses fausses
             String[] fausses = new String[repFausses.size()];
             fausses = repFausses.toArray(fausses);
-            // System.out.println("Nombre de rep fausses : " + fausses.length);
             Question questionGeneree = new Question(colonnes[2], categorie, colonnes[3], fausses, colonnes[8], diff);
             Donnees.listeQuestions.add(questionGeneree);
         }
@@ -183,7 +180,7 @@ public class ImportExport {
                 }
             }
         }
-
+        
         // création de la nouvelle catégorie
         bonneCategorie = new Categorie(catImportee);
         Donnees.listeCategorie.add(bonneCategorie);
@@ -238,10 +235,6 @@ public class ImportExport {
                 }
             }
         }
-        /*
-         * for (int i = 0; i < valeurs.length; i++) { System.out.println(NOM_COLONNE[i]
-         * + " : " + valeurs[i]); }
-         */
         return valeurs;
     }
 }

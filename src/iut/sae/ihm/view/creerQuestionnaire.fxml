@@ -23,8 +23,8 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <MenuButton fx:id="idCategorie" layoutX="211.0" layoutY="112.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" />
-      <MenuButton fx:id="idDifficulte" layoutX="211.0" layoutY="46.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" />
-      <MenuButton fx:id="idNbQuestion" layoutX="308.0" layoutY="172.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="104.0" />
+      <ChoiceBox fx:id="idDifficulte" layoutX="211.0" layoutY="49.0" prefHeight="30.0" prefWidth="200.0" />
+      <ChoiceBox fx:id="idCategorie" layoutX="211.0" layoutY="112.0" prefHeight="30.0" prefWidth="200.0" />
+      <ChoiceBox fx:id="idNbQuestion" layoutX="303.0" layoutY="174.0" prefHeight="30.0" prefWidth="108.0" />
 	</children>
 </Pane>

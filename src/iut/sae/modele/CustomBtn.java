@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.HBox;
 
+
 /** 
  * Classe permettant la création d'un ensemble bouton et item
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
@@ -33,6 +34,7 @@ public class CustomBtn extends HBox {
         this.getChildren().add(boxText);
         this.setAlignment(Pos.CENTER_LEFT);
     }
+
 
     /** 
      * Constructeur d'un ensemble de bouton et item
@@ -66,14 +68,14 @@ public class CustomBtn extends HBox {
         this.setAlignment(Pos.CENTER_LEFT);
     }
     
-    /** 
+    /**
      * Méthode qui permet de récupérer le texte sur le bouton
      * @return le texte du bouton
      */
     public String getString() {
     	return this.boxText.getText();
     }
-    
+
     /** 
      * Méthode qui permet de récupérer la catégorie enregistré
      * @return la catégorie enregistré

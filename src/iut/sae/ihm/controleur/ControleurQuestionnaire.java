@@ -1,11 +1,12 @@
-/*
- * ControleurQuestionnaire.java                                    21 nov. 2023
+/* ControleurQuestionnaire.java                                    21 nov. 2023
  * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.ihm.controleur;
 
 import java.util.ArrayList;
 
+import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 
 /**
  * Classe controlleur de la page Questionnaire
@@ -24,59 +26,67 @@ import javafx.scene.control.RadioButton;
 public class ControleurQuestionnaire {
 
     /** Nombre de question du questionnaire */
-    public static int nbQuestion;
+    public int nbQuestion;
 
     /** Numéro de la question affiché */
-    public static int numQuestion;
-
-    /** List des boutons radio */
-    public static ArrayList<RadioButton> listeRadioButton = new ArrayList<>();
+    public int numQuestion;
+    
+    /** Liste des boutons radio */
+    public ArrayList<RadioButton> listeRadioButton = new ArrayList<>();
+    
+    @FXML
+    private RadioButton idReponse2;
 
     @FXML
-    private static RadioButton idReponse2;
-
-    @FXML
-    private static RadioButton idReponse1;
+    private RadioButton idReponse1;
 
     @FXML
     private Button idPasser;
 
     @FXML
-    private static Label idQuestion;
+    private Label idQuestion;
 
     @FXML
     private Button idValider;
 
     @FXML
-    private static RadioButton idReponse5;
+    private RadioButton idReponse5;
 
     @FXML
-    private static RadioButton idReponse4;
+    private RadioButton idReponse4;
 
     @FXML
-    private static RadioButton idReponse3;
+    private RadioButton idReponse3;
 
     @FXML
-    static void initialize() {
+    void initialize() {
         nbQuestion = Donnees.QuestionnaireGénéré.getListeQuestion().size();
         numQuestion = -1; // -1 est la pour que je puisse charger la question
                           // suivante
-        chargerQuestionSuivante();
+        
         listeRadioButton.add(idReponse1);
         listeRadioButton.add(idReponse2);
         listeRadioButton.add(idReponse3);
         listeRadioButton.add(idReponse4);
         listeRadioButton.add(idReponse5);
 
+       
+        //je crée un Toggle pour empecher de selectionner tous les radiobutton
+        ToggleGroup groupe = new ToggleGroup();
+        groupe.getToggles().addAll(listeRadioButton);
+        
+        chargerQuestionSuivante();
+        
+
     }
 
     @FXML
-    static void actionPasser(ActionEvent event) {
+    void actionPasser(ActionEvent event) {
         chargerQuestionSuivante();
     }
 
     @FXML
-    static void actionValider(ActionEvent event) {
+    void actionValider(ActionEvent event) {
         validerReponse();
         chargerQuestionSuivante();
     }
@@ -85,10 +95,13 @@ public class ControleurQuestionnaire {
      * Méthode permettant le changement de l'affichage pour afficher la question
      * suivante du questionnaire
      */
-    public static void chargerQuestionSuivante() {
-        numQuestion++;
-        if (numQuestion >= nbQuestion) {
-            // TODO : Charger Vue du resultat du questionnaire
+    public void chargerQuestionSuivante() {
+        reinitialiserRadioButton();
+        numQuestion ++;
+        if (numQuestion >= nbQuestion ) {
+            //TODO : Stub
+            EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);
+
         } else {
             Question laQuestionSuivante = Donnees.QuestionnaireGénéré.getQuestion(numQuestion);
             ArrayList<String> listeReponses = new ArrayList<>();
@@ -102,29 +115,40 @@ public class ControleurQuestionnaire {
         }
     }
 
-    /**
-     * Méthode qui change le texte des radiobutton pour afficher les reponses de la
-     * question et rendre les radio
-     * 
+
+
+    /** 
+     * Methode qui desélectionne tout les radiobuttons
+     */
+    private void reinitialiserRadioButton() {
+        for (RadioButton leBouton : listeRadioButton) {
+            if(leBouton.isSelected()) {
+                leBouton.setSelected(false);
+            }
+        } 
+    }
+
+    /** 
+     * Change le texte des radiobutton pour afficher les reponses de la question
+     * et rendre les radio
      * @param listeReponses
      */
-    private static void chargerReponses(ArrayList<String> listeReponses) {
-        // je change l'affichage des reponses
-        int i = 0;
-        for (; i < listeReponses.size(); i++) {
-            if (!listeRadioButton.get(i).isVisible()) {
-                listeRadioButton.get(i).setVisible(true);
-            }
-            listeRadioButton.get(i).setText(listeReponses.get(i));
-        }
-
-        // si il y a moins de 5 reponses, je rend le reste des radio button invisible
-        if (i < 4) {
-            for (; i < listeRadioButton.size(); i++) {
-                listeRadioButton.get(i).setVisible(false);
-            }
-        }
-
+    private void chargerReponses(ArrayList<String> listeReponses) {
+       // je change l'affichage des reponses 
+       int i = 0;
+       for(;i<listeReponses.size(); i++) {
+           if (!listeRadioButton.get(i).isVisible()) {
+               listeRadioButton.get(i).setVisible(true); 
+           }
+           listeRadioButton.get(i).setText(listeReponses.get(i));
+       } 
+       
+       // si il y a moins de 5 reponses, je rend le reste des radio button invisible
+       if ( i < 4 ) {
+           for (;i<listeRadioButton.size(); i++) {
+               listeRadioButton.get(i).setVisible(false); 
+           }
+       }
     }
 
     /**
@@ -152,7 +176,7 @@ public class ControleurQuestionnaire {
      * Méthode permettant d'enregistrer la réponse choisi et le stocke dans la liste
      * des reponses du questionnaire
      */
-    public static void validerReponse() {
+    public void validerReponse() {
         String reponseChoisi = "";
 
         for (RadioButton leBouton : listeRadioButton) {
