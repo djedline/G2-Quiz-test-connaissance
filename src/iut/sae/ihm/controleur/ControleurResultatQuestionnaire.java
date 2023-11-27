@@ -6,6 +6,9 @@ package iut.sae.ihm.controleur;
 
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
+import iut.sae.modele.Donnees;
+import iut.sae.modele.Question;
+import iut.sae.modele.Questionnaire;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,6 +20,12 @@ import javafx.scene.control.Label;
  *         leo.cheikh-boukal
  */
 public class ControleurResultatQuestionnaire {
+
+    /** Nombre de question du questionnaire */
+    public int nbQuestion;
+
+    /** Numéro de la question affiché */
+    public int numQuestion;
 
     /** Label qui affiche un commentaire sur le resultat */
     @FXML
@@ -57,21 +66,105 @@ public class ControleurResultatQuestionnaire {
     private Button idRetourMP;
 
     /**
-     * TODO comment method role
-     * @param event
+     * Initialisation de la vue au moment ou elle est appelé
      */
     @FXML
-    void clicQuestionPrecedente(ActionEvent event) {
+    void initialize() {
+        nbQuestion = Donnees.QuestionnaireGénéré.getListeQuestion().size();
+        numQuestion = 0; 
+        
+        // fait en sorte que les zone de texte passe directe a la ligne
+        idCommentaireResultat.setWrapText(true);
+        idResultat.setWrapText(true);
+        idReponseJuste.setWrapText(true);
+        idReponseDonnee.setWrapText(true);
+        idQuestion.setWrapText(true);
+        idFeedBack.setWrapText(true);
+        
+        // Rendre le bouton inutilisable au demarage 
+        idQuestionPrecedente.setDisable(true);
+        
+        double resultat = Donnees.QuestionnaireGénéré.leTauxDeReussite();
+        System.out.println(resultat);
+        idResultat.setText(String.format("%.2f", resultat) + "%");
+        idCommentaireResultat.setText(genererCommentaire(resultat));
+        
+        afficherCorrectionQuestion();    
+        
+    }
+    
+    /** 
+     * Affiche la correction de la question en place numQuestion
+     */
+    private void afficherCorrectionQuestion() {
+        Questionnaire leQuestionnaire = Donnees.QuestionnaireGénéré;
+        Question laQuestion = leQuestionnaire.getQuestion(numQuestion);
+        
+        idQuestion.setText(laQuestion.getLibelle());
+        idReponseJuste.setText(laQuestion.getPropositionJuste());
+        idReponseDonnee.setText(
+                leQuestionnaire.getListeReponseDonnee().get(numQuestion));
+        if (laQuestion.getFeedback().isBlank()) {
+            idFeedBack.setText("Aucun FeedBack");
+        } else {
+            idFeedBack.setText(laQuestion.getFeedback());
+        }    
+    }
 
+    /**
+     * methode qui genere le commentaire sur le resultat en fonction du resultat
+     * et si il est renseigné, le pseudo du joueur
+     * @param resultat
+     * @return le commentaire 
+     */
+    private String genererCommentaire(double resultat) {
+        String commentaire = "";
+        
+        if (resultat < 25.0) {
+            commentaire = "Aie... Vous allez devoir travailler un peu plus.";
+        } else if (resultat >= 25.0 && resultat < 50.0) {
+            commentaire = "Mmmh... Vous pouvez faire mieux faire.";
+        } else if (resultat >= 50.0 && resultat < 75.0) {
+            commentaire = 
+                    "Bravo ! Plus de la moitié de vos reponses sont justes.";
+        } else if (resultat >= 75.0 && resultat < 100.0) {
+            commentaire = "Excellent résultat !";
+        } else if (resultat == 100.0) {
+            commentaire = "Parfait.";
+        } else {
+            commentaire = "Erreur sur le pourcentage.";
+        }
+        return commentaire;
+    }
+
+    /**
+     * Methode qui charge la correction de la question precedente
+     */
+    @FXML
+    void clicQuestionPrecedente() {
+        if(numQuestion > 0) {
+            numQuestion --;
+            idQuestionSuivante.setDisable(false);
+        } 
+        if(numQuestion == 0){
+            idQuestionPrecedente.setDisable(true);
+        }
+        afficherCorrectionQuestion();
     }
     
     /**
-     * TODO comment method role
-     * @param event
+     * Methode qui charge la correction de la question suivante
      */
     @FXML
     void clicQuestionSuivante(ActionEvent event) {
-
+        if(numQuestion < nbQuestion-1) {
+            numQuestion ++;
+            idQuestionPrecedente.setDisable(false);
+        } 
+        if(numQuestion == nbQuestion-1){
+            idQuestionSuivante.setDisable(true);
+        }
+        afficherCorrectionQuestion();
     }
 
     /**

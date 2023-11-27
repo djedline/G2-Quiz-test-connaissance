@@ -57,6 +57,7 @@ class QuestionnaireTest {
 
     @Test
     void testQuestionnaireIntString() {
+        System.out.println("voila la size");
         assertThrows(IllegalArgumentException.class, () -> {
             new Questionnaire(1, "sansQuestion");
         });
@@ -102,7 +103,7 @@ class QuestionnaireTest {
         assertEquals(leQuestionnaire1.leTauxDeReussite(), 0.0);
         leQuestionnaire1.stockerReponse(0, "oui");
 
-        assertEquals(leQuestionnaire1.leTauxDeReussite(), (1 / 4) * 100.0);
+        assertEquals(leQuestionnaire1.leTauxDeReussite(), 25.0);
         leQuestionnaire1.stockerReponse(1, "oui");
         leQuestionnaire1.stockerReponse(2, "oui");
         leQuestionnaire1.stockerReponse(3, "oui");

@@ -98,12 +98,12 @@ public class ControleurQuestionnaire {
         reinitialiserRadioButton();
         numQuestion ++;
         if (numQuestion >= nbQuestion ) {
-            //TODO : Stub
+            // petit test de verification si les reponses sont bien enregistrés
             for (String laReponse : Donnees.QuestionnaireGénéré.getListeReponseDonnee()) {
                 System.out.println(laReponse);
             } 
-            // petit test de verification si les question sont bien enregistrés
-            EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);
+            
+            EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_RESULTAT_QUESTIONNAIRE);
 
         } else {
             Question laQuestionSuivante = Donnees.QuestionnaireGénéré.getQuestion(numQuestion);
