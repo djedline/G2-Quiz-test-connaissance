@@ -55,6 +55,14 @@ public class ControleurExport {
 
 	@FXML
 	private Button btnValider;
+	
+    @FXML
+    private Button btnSelectQuestions;
+	
+    @FXML
+    void selectQuestions(ActionEvent event) {
+    	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_SELECT_EXPORT);
+    }
 
 	private File destination;
 
