@@ -66,24 +66,28 @@ public class ImportExport {
         s.append("\n");
         return s.toString();
     }
+    
+    private static String mettreEntreGuillemets(String s) {
+    	return GUILLEMET + s + GUILLEMET;
+    }
 
     private static String exporterQuestion(Question q) {
         StringBuilder s = new StringBuilder();
-        s.append(q.getCategorie());
+        s.append(mettreEntreGuillemets(q.getCategorie().getLibelle()));
         s.append(DELIMITEUR);
         s.append(q.getDifficulte());
         s.append(DELIMITEUR);
-        s.append(q.getLibelle());
+        s.append(mettreEntreGuillemets(q.getLibelle()));
         s.append(DELIMITEUR);
-        s.append(q.getPropositionJuste());
+        s.append(mettreEntreGuillemets(q.getPropositionJuste()));
         s.append(DELIMITEUR);
         for (int i = 0; i < 4; i++) {
             if (i < q.getPropositionFausse().size()) {
-                s.append(q.getPropositionFausse().get(i));
+                s.append(mettreEntreGuillemets(q.getPropositionFausse().get(i)));
             }
             s.append(DELIMITEUR);
         }
-        s.append(q.getFeedback());
+        s.append(mettreEntreGuillemets(q.getFeedback()));
         s.append(DELIMITEUR);
         s.append(NEW_LINE);
         return s.toString();
