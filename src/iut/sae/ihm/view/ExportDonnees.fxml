@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurExport">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurExport">
 	<children>
-		<Button fx:id="btnValider" layoutX="77.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicValider" prefHeight="25.0" prefWidth="131.0" text="Valider" />
+		<Button fx:id="btnQuitter" layoutX="77.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="131.0" text="Annuler" />
 		<Label fx:id="idLabelNom" alignment="CENTER" layoutX="7.0" layoutY="136.0" prefHeight="25.0" prefWidth="164.0" text="Fichier à exporter  :" />
 		<Label fx:id="idTitre" alignment="CENTER" layoutX="134.0" layoutY="55.0" prefHeight="55.0" prefWidth="164.0" text="Exportation">
 			<font>
 				<Font size="30.0" />
 			</font>
 		</Label>
-      <Button fx:id="btnQuitter" layoutX="241.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="131.0" text="Annuler" />
+      <Button fx:id="btnValider" layoutX="241.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicValider" prefHeight="25.0" prefWidth="131.0" text="Valider" />
       <Button fx:id="parcourir" layoutX="340.0" layoutY="137.0" mnemonicParsing="false" onAction="#chercherFichier" prefHeight="25.0" prefWidth="72.0" text="Parcourir" />
       <TextField fx:id="fichierAExporter" layoutX="143.0" layoutY="137.0" prefHeight="25.0" prefWidth="188.0" />
 	</children>
