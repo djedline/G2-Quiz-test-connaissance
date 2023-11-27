@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
-import iut.sae.ihm.view.testFile;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.reseau.Client;
 import iut.sae.modele.reseau.Serveur;
