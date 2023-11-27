@@ -8,8 +8,6 @@ package iut.sae.ihm.view;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
-import iut.sae.ihm.controleur.ControleurMenuPrincipal;
 import iut.sae.ihm.controleur.ControleurModifierCategorie;
 import iut.sae.ihm.controleur.ControleurModifierQuestion;
 import iut.sae.ihm.controleur.Lanceur;
@@ -71,7 +69,6 @@ public class EchangeurDeVue {
      * TODO comment method role
      * 
      * @param laCategorie
-     * @param codeVue
      */
     public static void echangerAvec(Categorie laCategorie) {
         if (sceneCourante == null) {
@@ -101,7 +98,6 @@ public class EchangeurDeVue {
 
     /**
      * TODO comment method role
-     * 
      * @param laQuestion
      */
     public static void echangerAvec(Question laQuestion) {

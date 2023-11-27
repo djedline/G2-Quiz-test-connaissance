@@ -6,9 +6,13 @@ package iut.sae.ihm.controleur;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Scanner;
 
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
+import iut.sae.modele.Donnees;
 import iut.sae.modele.reseau.Client;
 import iut.sae.modele.reseau.Serveur;
 import javafx.event.ActionEvent;
@@ -41,7 +45,7 @@ public class ControleurServeur {
     private Button btnQuitter;
 
     @FXML
-    private Label adresseIPServeur;
+    private Label adresseIpServeur;
 
     @FXML
     private Label FichierAExporter;
@@ -49,27 +53,78 @@ public class ControleurServeur {
     @FXML
     private Button btnDemarrer;
 
-    boolean allumageOk = false;
+    //boolean allumageOk = false;
 
+    /** 
+     * Initialise la liste déroulante
+     */
+    @FXML
+    void initialize() {
+        InetAddress ip;
+        try {
+            ip = InetAddress.getLocalHost();
+            Donnees.adresseIpServeur = ip.getHostAddress();
+            adresseIpServeur.setText(Donnees.adresseIpServeur);
+        } catch (UnknownHostException e) {
+            System.out.println("Problème à la récupérartion de l'adresse IP");
+            e.printStackTrace();
+        }
+        if (Donnees.serveurAllumee) {
+            btnDemarrer.setText("Eteindre");
+        }
+    }
+    
     @FXML
     void clicDemarrer(ActionEvent event) {
-        if (!allumageOk) {
-            adresseIPServeur.setText(Serveur.preparerServeur());
+        //System.out.println(allumageOk);
+        //System.out.println(!allumageOk);
+        if (!Donnees.serveurAllumee) {
+            System.out.println("Salut");
             btnDemarrer.setText("Eteindre");
-            allumageOk = true;
+            Donnees.serveurAllumee = true;
+            Serveur.preparerServeur();
+            Serveur.accepterConnexion();
         } else {
+            System.out.println("Au revoir");
             Serveur.fermetureServeur();
-            allumageOk = false;
+            Donnees.serveurAllumee = false;
             btnDemarrer.setText("Demarrer");
-            adresseIPServeur.setText("");
+            adresseIpServeur.setText("");
         }
+    }
+        /** 
+         * Partage un fichier
+         */
+        public static void ReceptionFichier() {
+            try {
+                Serveur.preparerServeur();
+                Serveur.accepterConnexion();
+                String cle = "";
+                String recu ="";
+                while (recu.isEmpty()) {
+                    System.out.print("Génération et envoi de la clé");
+                    try {
+                        cle = Serveur.genererCle();
+                        System.out.println("Le serveur a envoyé : la cle)");
+                        Serveur.envoyerMessage(cle.getBytes());
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    
+                   // recu = Serveur.recevoirMessage(FICHIER_RECEPTION, cle);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
         /*
          * try { message = Client.construireMessage(fichierATraiter);
          * Client.envoyerMessage(message.getBytes()); s = Client.recevoirMessage();
          * Client.fermerSocket(); } catch (IOException | InterruptedException e) {
          * System.out.println("Problème avec le fichier"); e.printStackTrace(); }
          */
-    }
 
     @FXML
     void clicQuitter(ActionEvent event) {

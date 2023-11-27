@@ -12,9 +12,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
-import javax.swing.text.LayoutQueue;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -46,10 +43,12 @@ public class Donnees {
      */
     public static final String NOM_CATEGORIE_DEFAUT = "Général";
     
-	public static final File FICHIER_IMPORT_QUEST_JAVA
+    /** TODO comment field role (attribute, association) */
+    public static final File FICHIER_IMPORT_QUEST_JAVA
 	= new File("src/iut/sae/modele/tests/questionsbasiques.csv");
 
-	public static final File FICHIER_IMPORT_QUEST_ORTHO 
+    /** TODO comment field role (attribute, association) */
+    public static final File FICHIER_IMPORT_QUEST_ORTHO 
 	= new File("src/iut/sae/modele/tests/questionsorthographe.csv");
 
     /** Liste de Categorie */
@@ -63,8 +62,18 @@ public class Donnees {
      */
     public static int numScenePrecedenteCategorie;
 
+    /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
+    public static File fichierAPartager;
+    
+    /** adresse ip du serveur */
+    public static String adresseIpServeur;
+    
+    /** Permet de savoir si le serveur est allumée */
+    public static boolean serveurAllumee = false;
+
     /** Le questionnaire généré avant son */
     public static Questionnaire QuestionnaireGénéré;
+
 
     /**
      * Sauvegarde la base de questions et de catégories.
@@ -214,7 +223,7 @@ public class Donnees {
      */
     public static ArrayList<Question> getQuestionOfCategorie(String categorie) {
         ArrayList<Question> res = new ArrayList<Question>();
-        if (categorie.equals("General")) {
+        if (categorie.equals(Donnees.listeCategorie.get(0).getLibelle())) {
             res = (ArrayList<Question>) listeQuestions;
         } else {
             for (Question laQuestion : listeQuestions) {

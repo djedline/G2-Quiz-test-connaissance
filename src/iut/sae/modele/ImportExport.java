@@ -24,7 +24,7 @@ public class ImportExport {
 
     /** Symbole pour définir une chaine de caractères */
     public static final char GUILLEMET = '"';
-
+    
     /** Ordre des champs dans les fichiers CSV */
     public static final String[] NOM_COLONNE = { "Catégorie", "Niveau", "Libellé", "Vrai", "Faux1", "Faux2", "Faux3",
             "Faux4", "Feedback" };
@@ -32,8 +32,6 @@ public class ImportExport {
 	/**
 	 * Envoie l'ensemble des questions de l'application dans un fichier.
 	 * @param aEcrire le fichier dans lequel on va écrire
-	 * 
-	 * @param chemin le chemin du fichier d'exportation
 	 * @throws IOException s'il est impossible d'écrire les données
 	 */
 	public static void exporter(File aEcrire) throws IOException {
@@ -92,6 +90,7 @@ public class ImportExport {
         s.append(NEW_LINE);
         return s.toString();
     }
+
 
     /**
      * Récupère l'ensemble des questions contenues dans un fichier CSV.
@@ -185,7 +184,7 @@ public class ImportExport {
                 }
             }
         }
-
+        
         // création de la nouvelle catégorie
         bonneCategorie = new Categorie(catImportee);
         Donnees.listeCategorie.add(bonneCategorie);
