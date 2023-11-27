@@ -17,13 +17,14 @@ import iut.sae.modele.Question;
 /**
  * Classe unitaire de la classe Donnees.
  * 
- * @author leila.baudroit
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
+ * @version 1.0
  */
 class DonneesTest {
 
     /**
-     * Crée les fixtures de test.
-     * ATTENTION ces tests réunitialise les sauvegardes.
+     * Crée les fixtures de test. ATTENTION ces tests réunitialise les sauvegardes.
      * 
      * @throws java.lang.Exception
      */
@@ -47,24 +48,23 @@ class DonneesTest {
         // Vérifie l'existence des fichiers
         assertTrue(Donnees.FICH_CATEGORIES.exists());
         assertTrue(Donnees.FICH_QUESTIONS.exists());
-        
+
         testAjoutCategorie();
         testAjoutQuestion();
     }
 
-    /** 
+    /**
      * Vérifie qu'une question ajoutée est bien sauvegardée et restituée
      */
     private void testAjoutQuestion() {
         lancementAppli();
         creerQuestion(Donnees.listeCategorie.get(1));
         fermetureAppli();
-        
+
         lancementAppli();
         assertEquals(Donnees.listeQuestions.size(), 1);
         assertEquals(Donnees.listeQuestions.get(0).getLibelle(), "Intitulé");
-        assertEquals(Donnees.listeQuestions.get(0).getCategorie(), 
-                Donnees.listeCategorie.get(1));
+        assertEquals(Donnees.listeQuestions.get(0).getCategorie(), Donnees.listeCategorie.get(1));
         fermetureAppli();
     }
 
@@ -75,7 +75,7 @@ class DonneesTest {
         lancementAppli();
         creerCategorie("Catégorie de test");
         fermetureAppli();
-        
+
         lancementAppli();
         assertTrue(Donnees.listeCategorie.size() == 2);
         assertEquals(Donnees.listeCategorie.get(1).getLibelle(), "Catégorie de test");
@@ -85,16 +85,17 @@ class DonneesTest {
     void lancementAppli() {
         Donnees.charger();
     }
-    
+
     /**
-     * Réplique les actions de sauvegarde à la 
+     * Réplique les actions de sauvegarde à la
      */
     void fermetureAppli() {
         Donnees.sauvegarder();
     }
-    
+
     /**
      * Réplique la création d'une catégorie depuis l'IHM
+     * 
      * @param nom le nom de la catégorie
      */
     void creerCategorie(String nom) {
@@ -106,6 +107,7 @@ class DonneesTest {
 
     /**
      * Réplique la création d'une question depuis l'IHM
+     * 
      * @param cat la catégorie de la question
      */
     void creerQuestion(Categorie cat) {

@@ -17,20 +17,25 @@ import iut.sae.modele.Questionnaire;
 
 /**
  * Test Unitaire de la Classe Questionnaire.java dans "iut.sae.modele"
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
- *              leo.cheikh-boukal
+ * 
+ * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
+ *         leo.cheikh-boukal
  */
 class QuestionnaireTest {
 
     public static Categorie categorieSansQuestion = new Categorie("sansQuestion");
     public static Categorie categorieAvecQuestion = new Categorie("avecQuestion");
-    public static String[] reponseFausse = {"non","non"};
+    public static String[] reponseFausse = { "non", "non" };
     public static Questionnaire leQuestionnaire1;
     public static Questionnaire leQuestionnaire2;
-    public static Question question1 = new Question("La question 1 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
-    public static Question question2 = new Question("La question 2 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
-    public static Question question3 = new Question("La question 3 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
-    public static Question question4 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
+    public static Question question1 = new Question("La question 1 ?", categorieAvecQuestion, "oui", reponseFausse,
+            "pas de feedback", 1);
+    public static Question question2 = new Question("La question 2 ?", categorieAvecQuestion, "oui", reponseFausse,
+            "pas de feedback", 1);
+    public static Question question3 = new Question("La question 3 ?", categorieAvecQuestion, "oui", reponseFausse,
+            "pas de feedback", 1);
+    public static Question question4 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse,
+            "pas de feedback", 1);
 
     @BeforeAll
     static void setUpBeforeClass() throws Exception {
@@ -42,32 +47,37 @@ class QuestionnaireTest {
         Donnees.listeQuestions.add(question2);
         Donnees.listeQuestions.add(question3);
         Donnees.listeQuestions.add(question4);
-        
+
         System.out.println(Donnees.listeQuestions.toString());
         System.out.println(Donnees.listeQuestions.size());
-        
-        leQuestionnaire1 = new Questionnaire(1,"avecQuestion");
-        leQuestionnaire2 = new Questionnaire(1,"avecQuestion");
+
+        leQuestionnaire1 = new Questionnaire(1, "avecQuestion");
+        leQuestionnaire2 = new Questionnaire(1, "avecQuestion");
     }
 
     @Test
     void testQuestionnaireIntString() {
-        assertThrows(IllegalArgumentException.class, () -> {new Questionnaire(1,"sansQuestion");});
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Questionnaire(1, "sansQuestion");
+        });
         try {
-            new Questionnaire(1,"avecQuestion");
-        } catch(IllegalArgumentException e) {
+            new Questionnaire(1, "avecQuestion");
+        } catch (IllegalArgumentException e) {
             fail("Renvoie une erreur alors qu'il ne devrait pas");
         }
     }
 
     @Test
     void testQuestionnaireIntStringInt() {
-        assertThrows(IllegalArgumentException.class, () -> {new Questionnaire(1,"sansQuestion",5);});
-        Question question5 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse , "pas de feedback", 1);
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Questionnaire(1, "sansQuestion", 5);
+        });
+        Question question5 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse,
+                "pas de feedback", 1);
         Donnees.listeQuestions.add(question5);
         try {
-            new Questionnaire(1,"avecQuestion",5);
-        } catch(IllegalArgumentException e) {
+            new Questionnaire(1, "avecQuestion", 5);
+        } catch (IllegalArgumentException e) {
             fail("Renvoie une erreur alors qu'il ne devrait pas");
         }
     }
@@ -77,18 +87,22 @@ class QuestionnaireTest {
         leQuestionnaire1.stockerReponse(0, "la reponse 1");
         assertNotEquals(leQuestionnaire1.getListeReponseDonnee().get(0), "");
         assertEquals(leQuestionnaire1.getListeReponseDonnee().get(0), "la reponse 1");
-        
-        assertThrows(IllegalArgumentException.class, () -> {leQuestionnaire1.stockerReponse(-1, "la reponse ?");});
-        assertThrows(IllegalArgumentException.class, () -> {leQuestionnaire1.stockerReponse(1, null);});
-        
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            leQuestionnaire1.stockerReponse(-1, "la reponse ?");
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            leQuestionnaire1.stockerReponse(1, null);
+        });
+
     }
 
     @Test
     void testLeTauxDeReussite() {
         assertEquals(leQuestionnaire1.leTauxDeReussite(), 0.0);
         leQuestionnaire1.stockerReponse(0, "oui");
-        
-        assertEquals(leQuestionnaire1.leTauxDeReussite(), (1/4)*100.0);
+
+        assertEquals(leQuestionnaire1.leTauxDeReussite(), (1 / 4) * 100.0);
         leQuestionnaire1.stockerReponse(1, "oui");
         leQuestionnaire1.stockerReponse(2, "oui");
         leQuestionnaire1.stockerReponse(3, "oui");
@@ -97,7 +111,9 @@ class QuestionnaireTest {
 
     @Test
     void testGetQuestion() {
-        assertThrows(IllegalArgumentException.class, () -> {leQuestionnaire1.getQuestion(-1);});
+        assertThrows(IllegalArgumentException.class, () -> {
+            leQuestionnaire1.getQuestion(-1);
+        });
         assertEquals(leQuestionnaire1.getQuestion(1), question2);
     }
 
@@ -108,7 +124,7 @@ class QuestionnaireTest {
         listeTest.add(question2);
         listeTest.add(question3);
         listeTest.add(question4);
-        
+
         assertTrue(leQuestionnaire1.getListeQuestion().containsAll(listeTest));
     }
 
