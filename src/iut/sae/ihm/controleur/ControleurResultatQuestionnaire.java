@@ -73,14 +73,6 @@ public class ControleurResultatQuestionnaire {
         nbQuestion = Donnees.QuestionnaireGénéré.getListeQuestion().size();
         numQuestion = 0; 
         
-        // fait en sorte que les zone de texte passe directe a la ligne
-        idCommentaireResultat.setWrapText(true);
-        idResultat.setWrapText(true);
-        idReponseJuste.setWrapText(true);
-        idReponseDonnee.setWrapText(true);
-        idQuestion.setWrapText(true);
-        idFeedBack.setWrapText(true);
-        
         // Rendre le bouton inutilisable au demarage 
         idQuestionPrecedente.setDisable(true);
         
