@@ -64,6 +64,12 @@ public class Donnees {
 
     /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
     public static File fichierAPartager;
+    
+    /** adresse ip du serveur */
+    public static String adresseIpServeur;
+    
+    /** Permet de savoir si le serveur est allumée */
+    public static boolean serveurAllumee = false;
 
     /** Le questionnaire généré avant son */
     public static Questionnaire QuestionnaireGénéré;
