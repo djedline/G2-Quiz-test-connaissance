@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurImport">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurImport">
 	<children>
 		<Button fx:id="btnValider" layoutX="77.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicValider" prefHeight="25.0" prefWidth="131.0" text="Valider" />
 		<Label fx:id="idLabelNom" alignment="CENTER" layoutX="12.0" layoutY="137.0" prefHeight="25.0" prefWidth="131.0" text="Fichier à importer  :" />
