@@ -63,23 +63,26 @@ public class ControleurCreerQuestionnaire {
      */
     @FXML
     void initialize() {
+        idDifficulte.getItems().add(Donnees.CHOIX_INDIFFERENT);
         idDifficulte.getItems().add("Facile");
         idDifficulte.getItems().add("Moyen");
         idDifficulte.getItems().add("Difficile");
-        idDifficulte.getItems().add("indifferent");
+        
         
         idNbQuestion.getItems().add("5");
         idNbQuestion.getItems().add("10");
         idNbQuestion.getItems().add("20");
         
+        idCategorie.getItems().add(Donnees.CHOIX_INDIFFERENT);
+        
         for (Categorie element : Donnees.listeCategorie) {
             idCategorie.getItems().add(element.getLibelle());
         }
-        idCategorie.getItems().add("indifferent");
         
-        idDifficulte.setValue("Facile");
+
+        idDifficulte.setValue(Donnees.CHOIX_INDIFFERENT);
         idNbQuestion.setValue("5");
-        idCategorie.setValue(Donnees.listeCategorie.getFirst().getLibelle());
+        idCategorie.setValue(Donnees.CHOIX_INDIFFERENT);
 
     }
     
@@ -105,7 +108,7 @@ public class ControleurCreerQuestionnaire {
                     + ", Voulez-vous créer le questionnaire quand meme ?");
             Optional<ButtonType> result = messageErreur.showAndWait();
             if(result.get() == ButtonType.OK) {
-                genererQuestionSansNombreQuestion();
+                genererQuestionnaireSansNombreQuestion();
             }
         }
     }
@@ -132,7 +135,7 @@ public class ControleurCreerQuestionnaire {
         case "Difficile":
             laDifficulte = 3;
             break;
-        case "indifferent"://TODO
+        case "indifferent":
             laDifficulte = 0;
             break;
         default:
@@ -148,7 +151,7 @@ public class ControleurCreerQuestionnaire {
      * Si il n'y a pas de question pour le questionnaire, un message d'alerte 
      * apparait.
      */
-    private void genererQuestionSansNombreQuestion() {
+    private void genererQuestionnaireSansNombreQuestion() {
         try {
             int laDifficulte = genererDifficulte();
             Questionnaire leQuestionnaire = 

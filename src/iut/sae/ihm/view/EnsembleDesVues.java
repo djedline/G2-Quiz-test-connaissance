@@ -66,7 +66,7 @@ public class EnsembleDesVues {
         { "MenuPrincipal.fxml", "MenuGestionDonnees.fxml", "creerQuestion.fxml",
           "creerCategorie.fxml",  "creerQuestionnaire.fxml", "MenuGestionImpExp.fxml", 
           "ImportDonnees.fxml", "ExportDonnees.fxml", "GestionDonnees.fxml", 
-          "Partager.fxml", "Serveur.fxml", "questionnaire.fxml",
+          "Partager.fxml", "Serveur.fxml", "Questionnaire.fxml",
           "resultatQuestionnaire.fxml","modifierNomUtilisateur.fxml"};
 
     /**

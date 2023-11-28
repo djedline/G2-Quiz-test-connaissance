@@ -88,7 +88,7 @@ public class Questionnaire {
         
         
         listeQuestion = new ArrayList<Question>();
-        int i = 1;
+        int i = 0;
 
         while (i < nbQuestion) {
             int n = (int)(Math.random() * tailleListe);
