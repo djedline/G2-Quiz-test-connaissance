@@ -64,6 +64,12 @@ public class Donnees {
 
     /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
     public static File fichierAPartager;
+    
+    /** adresse ip du serveur */
+    public static String adresseIpServeur;
+    
+    /** Permet de savoir si le serveur est allumée */
+    public static boolean serveurAllumee = false;
 
     /** Le questionnaire généré avant son */
     public static Questionnaire QuestionnaireGénéré;
@@ -217,15 +223,13 @@ public class Donnees {
      */
     public static ArrayList<Question> getQuestionOfCategorie(String categorie) {
         ArrayList<Question> res = new ArrayList<Question>();
-        if (categorie.equals(Donnees.listeCategorie.get(0).getLibelle())) {
-            res = (ArrayList<Question>) listeQuestions;
-        } else {
-            for (Question laQuestion : listeQuestions) {
-                if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
-                    res.add(laQuestion);
-                }
+
+        for (Question laQuestion : listeQuestions) {
+            if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
+                res.add(laQuestion);
             }
         }
+
         return res;
     }
 

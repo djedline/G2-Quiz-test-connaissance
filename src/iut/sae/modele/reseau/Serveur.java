@@ -80,7 +80,7 @@ public class Serveur {
      * @throws IOException si le message n'a pas pu être construit
      */
     public static String genererCle() throws IOException {
-        return Cryptage.genereCleVigenere();
+        return Cryptage.genereCleDiffie();
     }
     
     /**
@@ -95,22 +95,19 @@ public class Serveur {
             os.write(data);
             System.out.println("Le serveur a envoyé : " + data.toString());
         } catch (IOException e) {
-            throw new IOException("Impossible d'envoyer le message au serveur.");
+            throw new IOException("Impossible d'envoyer le message au client.");
         }
     }
 
     /**
      * prépare le serveur en démarrant la socket conn
      * 
-     * @return l'adresse inet
      */
-    public static String preparerServeur() {
+    public static void preparerServeur() {
         System.out.println("CREATION DU SERVEUR");
         try {          
-            InetAddress ip = InetAddress.getLocalHost();
             conn = new ServerSocket(6666);
             System.out.println("coucou");
-            return ip.getHostAddress();
         } catch (UnknownHostException e) {
             System.err.println("Impossible de trouver l'ip");
             e.printStackTrace();
@@ -118,8 +115,6 @@ public class Serveur {
             System.err.println("Impossible de créer la Socket serveur.");
             e.printStackTrace();
         }
-        System.out.println("ah");
-        return "";
     }
 
     /**

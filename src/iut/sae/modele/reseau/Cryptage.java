@@ -18,7 +18,7 @@ import iut.sae.modele.reseau.DiffieHellman;
 public class Cryptage {
 
     /** La taille maximale de l'ensemble de caractères */
-    public final static int TAILLE_ENSEMBLE = 880;
+    public final static int TAILLE_ENSEMBLE = 350;
 
     /** La longueur max de la clé */
     private final static double MAX_LONGUEUR_CLE = 100.0;
@@ -32,16 +32,32 @@ public class Cryptage {
      * @param args
      */
     public static void main(String[] args) {
-        creerCleDiffie();
-        
-        String message = "Le cryptage c'est compliqué.";
+       	String message = "Le cryptage c'est compliqué.";
         System.out.println("Message : " + message);
-        String cle = genereCleVigenere();
+        String cle = genereCleDiffie();
 
         String crypte = chiffrer(message, cle);
         dechiffrer(crypte, cle);
     }
 
+    /** TODO comment method role
+     * @return laCle la cle de cryptage
+     */
+    public static String genereCleDiffie() {
+        String laCle = "";
+    	int p = DiffieHellman.genererModulo();
+    	int g = DiffieHellman.genererGenerateur();
+    	int x = DiffieHellman.genererX();
+    	int x1 = DiffieHellman.genererX();
+    	int gx = DiffieHellman.calculGX(g, x);
+		int gxe = DiffieHellman.calculGXE(gx, x1);
+		if (Character.isValidCodePoint(gxe) && Character.toString(gxe).length() == 1) {
+            laCle += Character.toString(gxe);
+		}
+		System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
+		return laCle;
+    }
+    
     /**
      * Méthode pour récupérer une clé selon l'algorithme de Diffie-Hellman
      * 
@@ -70,6 +86,7 @@ public class Cryptage {
      * 
      * @return laCle la clé de cryptage
      */
+    /*
     public static String genereCleVigenere() {
         String laCle = "";
         int nombreAlea;
@@ -83,7 +100,7 @@ public class Cryptage {
         }
         System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
         return laCle;
-    }
+    } */
 
     /**
      * Méthode qui permet de crypter un message
