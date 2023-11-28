@@ -352,7 +352,7 @@ public class Donnees {
      */
     public static void chargerQuestionsParDefaut() {
     	reinitialiserDonnees();
-    	/*
+    	
     	try {
 			ImportExport.importer(FICHIER_IMPORT_QUEST_JAVA);
 			ImportExport.importer(FICHIER_IMPORT_QUEST_ORTHO);
@@ -360,6 +360,6 @@ public class Donnees {
 			new Alert(AlertType.ERROR, "Impossible de charger les données "
 					+ "par défaut.\n" + e.getMessage()).show();
 		}
-		*/
+		
     }
 }
