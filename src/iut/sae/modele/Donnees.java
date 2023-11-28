@@ -26,6 +26,9 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class Donnees {
 
+    /** Le chemin dans lequel les questions sont sauvegardées. */
+    public static final String CHOIX_INDIFFERENT = "indifferent";
+    
     /**
      * Le chemin dans lequel les questions sont sauvegardées.
      */
@@ -242,13 +245,15 @@ public class Donnees {
      */
     public static ArrayList<Question> getQuestionOfCategorie(String categorie) {
         ArrayList<Question> res = new ArrayList<Question>();
-
-        for (Question laQuestion : listeQuestions) {
-            if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
-                res.add(laQuestion);
+        if (categorie.equals(CHOIX_INDIFFERENT)) {
+            res = listeQuestions;
+        } else {
+            for (Question laQuestion : listeQuestions) {
+                if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
+                    res.add(laQuestion);
+                }
             }
         }
-
         return res;
     }
 
@@ -352,7 +357,7 @@ public class Donnees {
      */
     public static void chargerQuestionsParDefaut() {
     	reinitialiserDonnees();
-    	/*
+    	
     	try {
 			ImportExport.importer(FICHIER_IMPORT_QUEST_JAVA);
 			ImportExport.importer(FICHIER_IMPORT_QUEST_ORTHO);
@@ -360,6 +365,6 @@ public class Donnees {
 			new Alert(AlertType.ERROR, "Impossible de charger les données "
 					+ "par défaut.\n" + e.getMessage()).show();
 		}
-		*/
+		
     }
 }
