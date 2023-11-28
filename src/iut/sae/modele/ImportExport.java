@@ -183,6 +183,11 @@ public class ImportExport {
 		}
 	}
 
+	/**
+	 * Vérifie que toutes les colonnes d'une ligne sont vides
+	 * @param colonnes les valeurs à vérifier
+	 * @return true si les colonnes sont toutes vides, false sinon
+	 */
 	private static boolean tousVides(String[] colonnes) {
 		boolean tousVides = true;
 		for (String valeur : colonnes) {
@@ -244,15 +249,10 @@ public class ImportExport {
 				char suivant = c == ligne.length() - 2 ? ' ' : ligne.charAt(c + 1);
 				if (precedent == DELIMITEUR || suivant == DELIMITEUR) {
 					guillemetsOuverts = !guillemetsOuverts;
-				} else if (precedent == GUILLEMET) {
-					char avantprecedent = c < 1 ? ' ' : ligne.charAt(c - 2);
-					if (avantprecedent != DELIMITEUR) {
-						valeurs[colonneARemplir] += courant;
-					}
 				}
-				// TODO bug : guillemets dédoublés
 			}
 			if (courant == DELIMITEUR && !guillemetsOuverts) {
+				deformater(valeurs[colonneARemplir]);
 				colonneARemplir++;
 			} else {
 				if (colonneARemplir < NB_COLONNES) {
@@ -265,5 +265,14 @@ public class ImportExport {
 			}
 		}
 		return valeurs;
+	}
+
+	/**
+	 * Enlève le formatage des lignes de textes CSV (notamment dédoublement des
+	 * guillemets)
+	 * @param string la chaine à déformater
+	 */
+	private static void deformater(String string) {
+		
 	}
 }
