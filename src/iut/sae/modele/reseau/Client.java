@@ -14,7 +14,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.util.Scanner;
 
@@ -40,11 +42,11 @@ public class Client {
     private static final File FICHIER_RECEPTION = 
             new File("src/iut/sae/modele/reseau/tests/fichierRecu.txt");
 
-    /**
+    /*
      * Méthode de test des sockets.
      * 
      * @param args
-     */
+     *
     public static void main(String[] args) {
         try {
             Scanner sc = new Scanner(System.in);
@@ -56,7 +58,7 @@ public class Client {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     /**
      * @param host l'adresse ou le nom du serveur
@@ -64,11 +66,19 @@ public class Client {
      * @throws IOException si la socket client ne peut être crée
      */
     public static void creerLiaisonServeur(String host, int port) throws IOException {
-        System.out.println("CREATION DU CLIENT");
+        System.out.println("CREATION SOCKET EN COURS");
         try {
             sock = new Socket(host, port);
+            System.out.println("CREATION DU CLIENT");
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+            throw new IOException("Hôte inconnu : " + e.getMessage());
+        } catch (ConnectException e) {
+            e.printStackTrace();
+            throw new IOException("La connexion a été refusée : " + e.getMessage());
         } catch (IOException e) {
-            throw new IOException("Impossible de créer la Socket client.");
+            e.printStackTrace();
+            throw new IOException("Erreur lors de la création de la Socket client : " + e.getMessage());
         }
     }
 

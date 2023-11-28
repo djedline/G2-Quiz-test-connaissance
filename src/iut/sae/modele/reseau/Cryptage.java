@@ -39,6 +39,10 @@ public class Cryptage {
         dechiffrer(crypte, cle);
     }
 
+    /**
+     * Génère la clé
+     * @return la clé
+     */
     public static String genereCleDiffie() {
         String laCle = "";
     	int p = DiffieHellman.genererModulo();
