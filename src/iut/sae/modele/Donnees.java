@@ -38,6 +38,9 @@ public class Donnees {
     public static final File FICH_CATEGORIES
     	= new File("donnees/categories.data");
 
+    /** le nom de l'utilisateur*/
+    public static String nomUtilisateur = "";
+    
     /**
      * Le nom de la catégorie par défaut existante.
      */
@@ -144,6 +147,22 @@ public class Donnees {
     }
 
     /**
+     * le geteur de nomutilisateur
+     * @return le nom de l'utilisateur
+     */
+	public static String getNomUtilisateur() {
+		return nomUtilisateur;
+	}
+
+	/**
+	 * le setteur du nom de l'utilisateur
+	 * @param nomUtilisateur
+	 */
+	public static void setNomUtilisateur(String nomUtilisateur) {
+		Donnees.nomUtilisateur = nomUtilisateur;
+	}
+
+	/**
      * Charge le fichier au chemin donné et renvoie la valeur stockée.
      * 
      * @param fichier le chemin du fichier à ouvrir

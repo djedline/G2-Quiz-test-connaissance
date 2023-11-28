@@ -16,12 +16,12 @@
 		</Label>
       <VBox layoutX="125.0" layoutY="78.0" prefHeight="200.0" prefWidth="200.0" spacing="10.0">
          <children>
-            <Button fx:id="btnPageQuest" mnemonicParsing="false" onAction="#clicPageQuest" prefHeight="30.0" prefWidth="200.0" text="Créer des questions">
+      		<Button fx:id="btnPageCat" mnemonicParsing="false" onAction="#clicPageCat" prefHeight="30.0" prefWidth="200.0" text="Créer des catégories">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-      		<Button fx:id="btnPageCat" mnemonicParsing="false" onAction="#clicPageCat" prefHeight="30.0" prefWidth="200.0" text="Créer des catégories">
+            <Button fx:id="btnPageQuest" mnemonicParsing="false" onAction="#clicPageQuest" prefHeight="30.0" prefWidth="200.0" text="Créer des questions">
                <font>
                   <Font size="15.0" />
                </font>

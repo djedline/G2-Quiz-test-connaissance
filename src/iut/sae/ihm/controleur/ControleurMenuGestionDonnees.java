@@ -77,7 +77,7 @@ public class ControleurMenuGestionDonnees {
 
     @FXML
     void clicModifierNom(ActionEvent event) {
-
+    	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_MODIFIER_NOM);
     }
     
 }
