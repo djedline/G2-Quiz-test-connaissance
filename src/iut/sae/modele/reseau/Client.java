@@ -36,8 +36,6 @@ public class Client {
      * La Socket client utilisée pour échanger.
      */
     private static Socket sock;
-    /** socket qui permet la communication entre le serveur et le client */
-    static Socket comm;
     
     private static final File FICHIER_RECEPTION = 
             new File("src/iut/sae/modele/reseau/tests/fichierRecu.txt");
@@ -89,8 +87,8 @@ public class Client {
         System.out.println("RECEPTION DE LA REPONSE");
         try {
 
-            if (comm != null) {
-                InputStream is = comm.getInputStream();
+            if (sock != null) {
+                InputStream is = sock.getInputStream();
                 boolean test = true;
                 while (test) {
                     if (is.available() != 0) {
@@ -102,7 +100,7 @@ public class Client {
                 
                 // lis la clé en UTF-8
                 BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(comm.getInputStream(), "UTF-8"));
+                        new InputStreamReader(sock.getInputStream(), "UTF-8"));
                 while (reader.ready()) {
                     cle += Character.toString(reader.read());
                 }
@@ -137,12 +135,12 @@ public class Client {
      */
     public static void envoyerReponse(String rep) {
         System.out.println("ENVOI DE LA REPONSE");
-        System.out.println("Le serveur est : " + comm.getLocalSocketAddress());
-        System.out.println("Le client est : " + comm.getRemoteSocketAddress());
+        System.out.println("Le serveur est : " + sock.getLocalSocketAddress());
+        System.out.println("Le client est : " + sock.getRemoteSocketAddress());
 
         try {
-            if (comm != null) {
-                OutputStream os = comm.getOutputStream();
+            if (sock != null) {
+                OutputStream os = sock.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
                 writer.write(rep);
                 System.out.println("Le client a envoyé " + rep);

@@ -30,7 +30,7 @@ public class CustomBtn extends HBox {
         super();
 
         this.boxText = txt;
-
+        this.boxText.setWrapText(true);
         this.getChildren().add(boxText);
         this.setAlignment(Pos.CENTER_LEFT);
     }

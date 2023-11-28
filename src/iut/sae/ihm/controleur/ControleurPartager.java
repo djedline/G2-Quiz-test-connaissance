@@ -7,6 +7,7 @@ package iut.sae.ihm.controleur;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,32 +44,32 @@ public class ControleurPartager {
     private Label idLabelNom;
 
     @FXML
-    private TextField adresseIpServeur;
+    private static TextField adresseIpServeur;
 
     @FXML
     private Button btnQuitter;
-    
+
     @FXML
     private ChoiceBox<String> choixFichier;
 
     @FXML
     private Button btnValider;
-    
+
     @FXML
     private Button btnDemarrer;
-    
+
     boolean allumageOk = false;
-    
+
     private String chemineDossier;
     private File dossier;
     private File[] listeFichier;
     private boolean ipOk;
     private boolean fichierOk;
 
-    
-    
 
-   /** 
+
+
+    /** 
      * Initialise la liste déroulante
      */
     @FXML
@@ -91,17 +92,17 @@ public class ControleurPartager {
             }
             choixFichier.setValue("-- selectionner un Fichier --");
         }
-       /* */
-        
+        /* */
+
     }
-   
-    
+
+
     @FXML
     void verifIp (ActionEvent event) {
         //(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?) pour que le nombre soit de 0 à 255
         Pattern motif = Pattern.compile("^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]"
-                                       + "?).){3}(25[0-5]|2[0-4][0-9]|[0-1]?"
-                                       + "[0-9][0-9]?)$");
+                + "?).){3}(25[0-5]|2[0-4][0-9]|[0-1]?"
+                + "[0-9][0-9]?)$");
         Matcher correct = motif.matcher(adresseIpServeur.getText());
         if (correct.matches()) {
             System.out.print("C'est bon");
@@ -115,14 +116,23 @@ public class ControleurPartager {
             adresseIpServeur.setText("");
             idLabelNom.setStyle("-fx-text-fil:red;");
         }
-        
+
     }
-    
+
     /** 
      * Partage un fichier
      */
     public static void partageFichier() {
-        Serveur.accepterConnexion();
+        try {
+            Scanner sc = new Scanner(System.in);
+            Client.creerLiaisonServeur(adresseIpServeur.getText(), 6666);
+            String reponse = "";
+            reponse = Client.recevoirEtAnalyser(Donnees.fichierAPartager);
+            Client.envoyerReponse(reponse);
+            Client.fermerSocket();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -134,23 +144,10 @@ public class ControleurPartager {
             messageErreur.setContentText("Vous ne pouvez pas partager ça");
             messageErreur.show();
         }
-        
-       if (ipOk && !fichierOk) {
-           try {
-            Client.creerLiaisonServeur(adresseIpServeur.getText(), 6666);
+
+        if (ipOk && !fichierOk) {
+            //Client.creerLiaisonServeur(adresseIpServeur.getText(), 6666);
             partageFichier();
-        } catch (IOException e) {
-            Alert messageErreur = new Alert(AlertType.ERROR);
-            messageErreur.setContentText("L'adresse Ip rentrée n'est pas l'adresseIp du serveur");
-            messageErreur.show();
-            adresseIpServeur.setText("");
-            ipOk = false;
-            //e.printStackTrace();
-        }
-          /* for (File fichier : listeFichier) {
-               if (fichier.getName().equals(choixFichier.getValue()));
-               Donnees.fichierAPartager = fichier;
-           }*/
         } else {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("Remplissez tous les champs");
