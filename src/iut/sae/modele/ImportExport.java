@@ -30,9 +30,6 @@ public class ImportExport {
 	/** Ordre des champs dans les fichiers CSV */
 	public static final String[] NOM_COLONNE = { "Catégorie", "Niveau", "Libellé", "Vrai", "Faux1", "Faux2", "Faux3",
 			"Faux4", "Feedback" };
-	
-	public static final String ESCAPING_REGEX = 
-			GUILLEMET + "|" + DELIMITEUR + "|" + NEW_LINE;
 
 	/**
 	 * Envoie l'ensemble des questions de l'application dans un fichier.
@@ -73,8 +70,9 @@ public class ImportExport {
 	}
 
 	/**
-	 * Met un texte entre guillemets si le contenu de la string
-	 * comporte des caractères spéciaux
+	 * Met un texte entre guillemets si le contenu de la string comporte des
+	 * caractères spéciaux
+	 * 
 	 * @param s la string à modifier
 	 * @return la string formatée
 	 */
@@ -185,6 +183,7 @@ public class ImportExport {
 
 	/**
 	 * Vérifie que toutes les colonnes d'une ligne sont vides
+	 * 
 	 * @param colonnes les valeurs à vérifier
 	 * @return true si les colonnes sont toutes vides, false sinon
 	 */
@@ -240,19 +239,27 @@ public class ImportExport {
 
 		int colonneARemplir = 0;
 		boolean guillemetsOuverts = false;
+		boolean contientCaracteresSpeciaux = false;
 		for (int c = 0; c < ligne.length(); c++) {
 			char courant = ligne.charAt(c);
+			char precedent = c == 0 ? ' ' : ligne.charAt(c - 1);
+			char suivant = c == ligne.length() - 1 ? ' ' : ligne.charAt(c + 1);
 
-			// gestion des guillemets
 			if (courant == GUILLEMET) {
-				char precedent = c == 0 ? ' ' : ligne.charAt(c - 1);
-				char suivant = c == ligne.length() - 2 ? ' ' : ligne.charAt(c + 1);
-				if (precedent == DELIMITEUR || suivant == DELIMITEUR) {
+				if (precedent == DELIMITEUR) {
+					guillemetsOuverts = !guillemetsOuverts;
+					contientCaracteresSpeciaux = true;
+				}
+				if (suivant == DELIMITEUR) {
 					guillemetsOuverts = !guillemetsOuverts;
 				}
 			}
+			
 			if (courant == DELIMITEUR && !guillemetsOuverts) {
-				deformater(valeurs[colonneARemplir]);
+				if (contientCaracteresSpeciaux) {
+					valeurs[colonneARemplir] = deformater(valeurs[colonneARemplir]);
+					contientCaracteresSpeciaux = false;
+				}
 				colonneARemplir++;
 			} else {
 				if (colonneARemplir < NB_COLONNES) {
@@ -260,7 +267,8 @@ public class ImportExport {
 				} else {
 					// Si on veut ajouter dans une colonne inexistante.
 					throw new FichierMalFormeException(
-							"Nombre de colonnes invalides (" + (colonneARemplir + 1) + " plutôt que " + NB_COLONNES);
+							"Nombre de colonnes invalides (" + (colonneARemplir + 1) 
+							+ " plutôt que " + NB_COLONNES);
 				}
 			}
 		}
@@ -270,9 +278,20 @@ public class ImportExport {
 	/**
 	 * Enlève le formatage des lignes de textes CSV (notamment dédoublement des
 	 * guillemets)
+	 * 
 	 * @param string la chaine à déformater
+	 * @return la chaine de caractère telle qu'elle peut être insérée
 	 */
-	private static void deformater(String string) {
-		
+	private static String deformater(String texte) {
+		texte = texte.substring(1, texte.length() - 1);
+		StringBuilder sb = new StringBuilder();
+		for (int c = 0; c < texte.length(); c++) {
+			char courant = texte.charAt(c);
+			char precedent = c > 1 ? texte.charAt(c - 1) : ' ';
+			if (courant != GUILLEMET || precedent != GUILLEMET) {
+				sb.append(courant);
+			}
+		}
+		return sb.toString();
 	}
 }
