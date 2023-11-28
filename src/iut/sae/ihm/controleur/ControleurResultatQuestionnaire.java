@@ -75,6 +75,9 @@ public class ControleurResultatQuestionnaire {
         
         // Rendre le bouton inutilisable au demarage 
         idQuestionPrecedente.setDisable(true);
+        if (nbQuestion == 0) {
+            idQuestionSuivante.setDisable(true); 
+        }
         
         double resultat = Donnees.QuestionnaireGénéré.leTauxDeReussite();
         System.out.println(resultat);
