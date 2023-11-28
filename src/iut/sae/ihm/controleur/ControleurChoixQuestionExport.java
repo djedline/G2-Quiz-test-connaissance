@@ -5,6 +5,7 @@
 
 package iut.sae.ihm.controleur;
 
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,6 +16,7 @@ import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
+import iut.sae.modele.ImportExport;
 import iut.sae.modele.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,34 +59,35 @@ public class ControleurChoixQuestionExport {
 	@FXML
 	void valider(ActionEvent event) {
 		List<Question> selectionnees = new ArrayList<>();
-
+		
 		for (TreeItem<Object> itemCat : treeViewData.getRoot().getChildren()) {
-			CheckBoxTreeItem<Categorie> convertiCat = CheckBoxTreeItem<Categorie> itemCat;
+			CheckBoxTreeItem<Object> convertiCat = (CheckBoxTreeItem<Object>) itemCat;
 			if (convertiCat.isSelected()) {
-				selectionnees.addAll(Donnees.getQuestionOfCategorie(itemCat.getValue()));
+				String nomCat = (String) convertiCat.getValue();
+				selectionnees.addAll(Donnees.getQuestionOfCategorie(nomCat));
 			} else if (convertiCat.isIndeterminate()){
-				for (TreeItem<String> itemQ : itemCat.getChildren()) {
-					CheckBoxTreeItem<String> convertiQ = 
-							(CheckBoxTreeItem<String>) itemQ;
-					if (convertiQ.isSelected()) {
-						
+				for (TreeItem<Object> itemQ : itemCat.getChildren()) {
+					CustomCheckboxTreeItem<Object> ccti = 
+							(CustomCheckboxTreeItem<Object>) itemQ;
+					if (ccti.isSelected() && ccti.getUserData() != null) {
+						Question q = (Question) ccti.getUserData();
+						selectionnees.add(q);
 					}
-
 				}
 			}
-		
-
 		}
+		ImportExport.exporter(selectionnees);
 	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete
 	void initialize() {
+		
 		// creation d'une arraylist qui contiendra les treeitem de categorie
-		List<TreeItem<Object>> listeTreeItem = new ArrayList<>();
+		List<CustomCheckboxTreeItem<Object>> listeTreeItem = new ArrayList<>();
 		for (Categorie item : Donnees.listeCategorie) {
 
-			// creation du menuButton de modification
-			TreeItem<Object> checkable = new CheckBoxTreeItem<>(item);
+			// ajoute le treeitem
+			CustomCheckboxTreeItem<Object> checkable = new CustomCheckboxTreeItem<>(item);
 
 			// ajout d'un treeitem avec en parametre la categorie et le menuButton
 			listeTreeItem.add(checkable);
@@ -96,7 +99,6 @@ public class ControleurChoixQuestionExport {
 					// et on l'ajoute au treeitem de la categorie
 					checkable.getChildren().add(new CheckBoxTreeItem<>(laQuestion));
 				}
-
 			}
 		}
 		// on cree le root du treeview puis on le cache

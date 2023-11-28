@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -293,5 +294,10 @@ public class ImportExport {
 			}
 		}
 		return sb.toString();
+	}
+
+	public static void exporter(List<Question> selectionnees) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -64,7 +64,7 @@ public class ControleurExport {
     	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_SELECT_EXPORT);
     }
 
-	private File destination;
+	private File destination = new File("./fichiers_sauvegarde_partage/export.csv");
 
 	@FXML
 	void chercherFichier(ActionEvent event) {
@@ -88,12 +88,20 @@ public class ControleurExport {
 			} catch (IOException e) {
 				new Alert(AlertType.ERROR, e.getMessage()).show();
 			}
+		} else {
+			new Alert(AlertType.INFORMATION, "Sélectionnez d'abord un fichier")
+				.show();
 		}
 	}
 
 	@FXML
 	void clicQuitter(ActionEvent event) {
 		EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);
+	}
+	
+	@FXML
+	void initialize(){
+		fichierAExporter.setText(destination.getAbsolutePath());
 	}
 
 }
