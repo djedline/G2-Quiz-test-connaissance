@@ -13,11 +13,11 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <RadioButton fx:id="idReponse2" alignment="TOP_LEFT" layoutX="41.0" layoutY="120.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="475.0" text="**Reponse 2**" wrapText="true" />
-      <RadioButton fx:id="idReponse3" alignment="TOP_LEFT" layoutX="41.0" layoutY="153.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="475.0" text="**Reponse 3**" wrapText="true" />
-      <RadioButton fx:id="idReponse5" alignment="TOP_LEFT" layoutX="41.0" layoutY="223.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="475.0" text="**Reponse 5**" wrapText="true" />
-      <RadioButton fx:id="idReponse4" alignment="TOP_LEFT" layoutX="41.0" layoutY="186.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="475.0" text="**Reponse 4**" wrapText="true" />
-      <RadioButton fx:id="idReponse1" alignment="TOP_LEFT" layoutX="41.0" layoutY="87.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="475.0" text="**Reponse 1**" wrapText="true" />
+      <RadioButton fx:id="idReponse2" alignment="TOP_LEFT" layoutX="41.0" layoutY="126.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="475.0" text="**Reponse 2**" wrapText="true" />
+      <RadioButton fx:id="idReponse3" alignment="TOP_LEFT" layoutX="41.0" layoutY="165.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="475.0" text="**Reponse 3**" wrapText="true" />
+      <RadioButton fx:id="idReponse5" alignment="TOP_LEFT" layoutX="41.0" layoutY="243.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="475.0" text="**Reponse 5**" wrapText="true" />
+      <RadioButton fx:id="idReponse4" alignment="TOP_LEFT" layoutX="41.0" layoutY="204.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="475.0" text="**Reponse 4**" wrapText="true" />
+      <RadioButton fx:id="idReponse1" alignment="TOP_LEFT" layoutX="41.0" layoutY="87.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="475.0" text="**Reponse 1**" wrapText="true" />
       <Button fx:id="idPasser" layoutX="119.0" layoutY="296.0" mnemonicParsing="false" onAction="#actionPasser" prefHeight="25.0" prefWidth="125.0" text="Passer" />
       <Button fx:id="idValider" layoutX="307.0" layoutY="296.0" mnemonicParsing="false" onAction="#actionValider" prefHeight="25.0" prefWidth="125.0" text="Valider" />
    </children>
