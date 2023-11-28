@@ -17,26 +17,24 @@ import java.util.ArrayList;
 public class DiffieHellman {
 
     /* Variable contenant la valeur de p, le modulo pour l'échange de données */
-    private int p;
+    private static int p;
 
     /*
      * Variable contenant le générateur échangé par le serveur et le client en clair
      */
-    private int g;
+    private static int g;
 
     /* Variable contenant le chiffre qui sert de premier exposant */
-    private int x;
+    private static int x;
 
-    private final int MAX_P = Cryptage.TAILLE_ENSEMBLE;
-
-    private final int MAX_G = p - 1;
+    private static final int MAX_P = Cryptage.TAILLE_ENSEMBLE;
 
     /**
      * Méthode qui permet de générer aléatoirement le modulo de l'échange
      * 
      * @return p le chiffre qui sert de modulo
      */
-    public int genererModulo() {
+    public static int genererModulo() {
         p = (int) (Math.random() * MAX_P);
         return p;
     }
@@ -46,9 +44,9 @@ public class DiffieHellman {
      * 
      * @return g le générateur échangé par le client et le serveur
      */
-    public int genererGenerateur() {
+    public static int genererGenerateur() {
         do {
-            g = (int) (1 + Math.random() * MAX_G - 1);
+            g = (int) (1 + Math.random() * MAX_P - 1);
         } while (!isGenerateur(g));
         return g;
     }
@@ -58,7 +56,7 @@ public class DiffieHellman {
      * 
      * @return x chiffre qui sert d'exposant
      */
-    public int genererX() {
+    public static int genererX() {
         x = (int) (1 + Math.random() * MAX_P - 1);
         return x;
     }
@@ -70,7 +68,7 @@ public class DiffieHellman {
      * @param x chiffre qui sert de premier exposant
      * @return ga g à la puissance x
      */
-    public int calculGX(int g, int x) {
+    public static int calculGX(int g, int x) {
         int gx;
         gx = (int) Math.pow(g, x) % p;
         return gx;
@@ -85,7 +83,7 @@ public class DiffieHellman {
      * @return gXE g à la puissance x, à la puissance E (l'élement reçu depuis le
      *         client ou le serveur
      */
-    public int calculGXE(int gx, int eltArrivant) {
+    public static int calculGXE(int gx, int eltArrivant) {
         int gXE;
         gXE = (int) Math.pow(gx, eltArrivant) % p;
         return gXE;
@@ -98,7 +96,7 @@ public class DiffieHellman {
      * @param g
      * @return True ou False selon si le nombre choisi est un générateur ou non
      */
-    public boolean isGenerateur(int g) {
+    public static boolean isGenerateur(int g) {
         /** Ensemble des résultats de g modulo p ( g, g², g³, ..., g) */
         ArrayList<Integer> valeurGValide = new ArrayList<>();
         /** L'ensemble des valeurs dans ℤ/pℤ */

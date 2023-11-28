@@ -32,6 +32,8 @@ public class Cryptage {
      * @param args
      */
     public static void main(String[] args) {
+        creerCleDiffie();
+        
         String message = "Le cryptage c'est compliqué.";
         System.out.println("Message : " + message);
         String cle = genereCleVigenere();
@@ -43,12 +45,23 @@ public class Cryptage {
     /**
      * Méthode pour récupérer une clé selon l'algorithme de Diffie-Hellman
      * 
-     * @return la cle de cryptage
+     * @return cleDiffieF la cle de cryptage
      */
     public static String creerCleDiffie() {
         int cleDiffieChiffre;
+        int p;
+        int g;
+        int x;
+        int gx;
         String cleDiffieF = "";
-        
+        p = DiffieHellman.genererModulo();
+        System.out.println(p);
+        g = DiffieHellman.genererGenerateur();
+        System.out.println(g);
+        x = DiffieHellman.genererX();
+        System.out.println(x);
+        gx = DiffieHellman.calculGX(g, x);
+        System.out.println(gx);
         return cleDiffieF;
     }
 
