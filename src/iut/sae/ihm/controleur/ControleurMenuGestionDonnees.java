@@ -50,6 +50,9 @@ public class ControleurMenuGestionDonnees {
 
     @FXML
     private Button btnGererDonnees;
+    
+    @FXML
+    private Button btnModifierNom;
 
     @FXML
     void clicPageCat(ActionEvent event) throws Exception {
@@ -72,4 +75,9 @@ public class ControleurMenuGestionDonnees {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);
     }
 
+    @FXML
+    void clicModifierNom(ActionEvent event) {
+    	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_MODIFIER_NOM);
+    }
+    
 }

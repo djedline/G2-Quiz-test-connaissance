@@ -5,55 +5,55 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="392.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="651.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurResultatQuestionnaire">
    <children>
-      <Label fx:id="idResultat" alignment="CENTER" layoutX="242.0" layoutY="35.0" prefHeight="30.0" prefWidth="109.0" text="**Résultat**" textAlignment="CENTER">
+      <Label fx:id="idResultat" alignment="CENTER" layoutX="271.0" layoutY="35.0" prefHeight="30.0" prefWidth="109.0" text="**Résultat**" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="idCommentaireResultat" alignment="CENTER" layoutX="13.0" layoutY="85.0" prefHeight="30.0" prefWidth="566.0" text="**Message/Commentaire sur le résultat**" textAlignment="CENTER">
+      <Label fx:id="idCommentaireResultat" alignment="CENTER" layoutX="18.0" layoutY="65.0" prefHeight="30.0" prefWidth="622.0" text="**Message/Commentaire sur le résultat**" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="idQuestion" alignment="TOP_LEFT" layoutX="50.0" layoutY="122.0" prefHeight="44.0" prefWidth="491.0" text="**Question**" textAlignment="CENTER">
+      <Label fx:id="idQuestion" alignment="TOP_LEFT" layoutX="51.0" layoutY="101.0" prefHeight="71.0" prefWidth="565.0" text="**Question**" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="49.0" layoutY="174.0" prefHeight="30.0" prefWidth="145.0" text="Réponse Juste :" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="44.0" layoutY="174.0" prefHeight="30.0" prefWidth="145.0" text="Réponse Juste :" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="idReponseJuste" alignment="TOP_LEFT" layoutX="296.0" layoutY="174.0" prefHeight="30.0" prefWidth="165.0" text="**Reponse Juste**" textAlignment="CENTER">
+      <Label fx:id="idReponseJuste" alignment="TOP_LEFT" layoutX="291.0" layoutY="178.0" prefHeight="53.0" prefWidth="344.0" text="**Reponse Juste**" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="44.0" layoutY="230.0" prefHeight="30.0" prefWidth="171.0" text="Réponse Donnée :" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="49.0" layoutY="204.0" prefHeight="30.0" prefWidth="171.0" text="Réponse Donnée :" textAlignment="CENTER">
+      <Label fx:id="idReponseDonnee" alignment="TOP_LEFT" layoutX="291.0" layoutY="230.0" prefHeight="53.0" prefWidth="344.0" text="**Reponse Donnée**" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="51.0" layoutY="284.0" prefHeight="30.0" prefWidth="145.0" text="FeedBack :" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="idReponseDonnee" alignment="TOP_LEFT" layoutX="296.0" layoutY="204.0" prefHeight="30.0" prefWidth="191.0" text="**Reponse Donnée**" textAlignment="CENTER">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label alignment="TOP_LEFT" layoutX="54.0" layoutY="234.0" prefHeight="30.0" prefWidth="145.0" text="FeedBack :" textAlignment="CENTER">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="idFeedBack" alignment="TOP_LEFT" layoutX="111.0" layoutY="264.0" prefHeight="71.0" prefWidth="369.0" text="**FeedBack**" textAlignment="CENTER">
+      <Label fx:id="idFeedBack" alignment="TOP_LEFT" layoutX="72.0" layoutY="314.0" prefHeight="71.0" prefWidth="534.0" text="**FeedBack**" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="idRetourMP" layoutX="34.0" layoutY="343.0" mnemonicParsing="false" onAction="#clicRetourMP" prefHeight="25.0" prefWidth="156.0" text="Retour au Menu Principal" />
-      <Button fx:id="idQuestionPrecedente" layoutX="256.0" layoutY="343.0" mnemonicParsing="false" onAction="#clicQuestionPrecedente" prefHeight="25.0" prefWidth="145.0" text="Question précedente" />
-      <Button fx:id="idQuestionSuivante" layoutX="415.0" layoutY="343.0" mnemonicParsing="false" onAction="#clicQuestionSuivante" prefHeight="25.0" prefWidth="145.0" text="Question suivante" />
+      <Button fx:id="idRetourMP" layoutX="24.0" layoutY="400.0" mnemonicParsing="false" onAction="#clicRetourMP" prefHeight="25.0" prefWidth="156.0" text="Retour au Menu Principal" />
+      <Button fx:id="idQuestionPrecedente" layoutX="296.0" layoutY="400.0" mnemonicParsing="false" onAction="#clicQuestionPrecedente" prefHeight="25.0" prefWidth="145.0" text="Question précedente" />
+      <Button fx:id="idQuestionSuivante" layoutX="468.0" layoutY="400.0" mnemonicParsing="false" onAction="#clicQuestionSuivante" prefHeight="25.0" prefWidth="145.0" text="Question suivante" />
    </children>
 </Pane>

@@ -80,7 +80,7 @@ public class Serveur {
      * @throws IOException si le message n'a pas pu être construit
      */
     public static String genererCle() throws IOException {
-        return Cryptage.genereCle();
+        return Cryptage.genereCleDiffie();
     }
     
     /**

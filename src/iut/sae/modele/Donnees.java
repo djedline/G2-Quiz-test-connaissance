@@ -38,6 +38,9 @@ public class Donnees {
     public static final File FICH_CATEGORIES
     	= new File("donnees/categories.data");
 
+    /** le nom de l'utilisateur*/
+    public static String nomUtilisateur = "";
+    
     /**
      * Le nom de la catégorie par défaut existante.
      */
@@ -144,6 +147,22 @@ public class Donnees {
     }
 
     /**
+     * le geteur de nomutilisateur
+     * @return le nom de l'utilisateur
+     */
+	public static String getNomUtilisateur() {
+		return nomUtilisateur;
+	}
+
+	/**
+	 * le setteur du nom de l'utilisateur
+	 * @param nomUtilisateur
+	 */
+	public static void setNomUtilisateur(String nomUtilisateur) {
+		Donnees.nomUtilisateur = nomUtilisateur;
+	}
+
+	/**
      * Charge le fichier au chemin donné et renvoie la valeur stockée.
      * 
      * @param fichier le chemin du fichier à ouvrir
@@ -223,15 +242,13 @@ public class Donnees {
      */
     public static ArrayList<Question> getQuestionOfCategorie(String categorie) {
         ArrayList<Question> res = new ArrayList<Question>();
-        if (categorie.equals(Donnees.listeCategorie.get(0).getLibelle())) {
-            res = (ArrayList<Question>) listeQuestions;
-        } else {
-            for (Question laQuestion : listeQuestions) {
-                if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
-                    res.add(laQuestion);
-                }
+
+        for (Question laQuestion : listeQuestions) {
+            if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
+                res.add(laQuestion);
             }
         }
+
         return res;
     }
 
