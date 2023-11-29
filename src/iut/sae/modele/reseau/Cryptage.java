@@ -18,7 +18,7 @@ import iut.sae.modele.reseau.DiffieHellman;
 public class Cryptage {
 
     /** La taille maximale de l'ensemble de caractères */
-    public final static int TAILLE_ENSEMBLE = 350;
+    public final static int TAILLE_ENSEMBLE = 255;
 
     /** La longueur max de la clé */
     private final static double MAX_LONGUEUR_CLE = 100.0;
@@ -32,7 +32,6 @@ public class Cryptage {
      * @param args
      */
     public static void main(String[] args) {
-        genereCleDiffie();
         String message = "Le cryptage c'est compliqué.";
         System.out.println("Message : " + message);
         String cle = genereCleDiffie();
