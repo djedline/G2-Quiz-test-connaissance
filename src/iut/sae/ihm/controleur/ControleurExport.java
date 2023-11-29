@@ -1,11 +1,9 @@
-/*
- * ControleurExport.java                                    13 nov. 2023
+/* ControleurExport.java                                            13 nov. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
 package iut.sae.ihm.controleur;
 
 import java.io.File;
-
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import javafx.event.ActionEvent;
@@ -55,14 +53,18 @@ public class ControleurExport {
     @FXML
     private Button btnSelectQuestions;
 
-	private File destination = new File("fichiers_sauvegarde_partage/sauvegardeQuiz.csv");
+	private File destination = new File(
+	        "fichiers_sauvegarde_partage/sauvegardeQuiz.csv");
 
 	@FXML
 	void chercherFichier(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
 		// Ajout d'un filtre pour ne montrer que certains fichiers
-		ExtensionFilter extFilter = new ExtensionFilter("Fichier CSV UTF-8 séparateur point-virgule(*.csv)", "*.csv");
-		fileChooser.setInitialDirectory(new File("fichiers_sauvegarde_partage/"));
+		ExtensionFilter extFilter = new ExtensionFilter(
+		        "Fichier CSV UTF-8 séparateur point-virgule(*.csv)",
+		        "*.csv");
+		fileChooser.setInitialDirectory(
+		        new File("fichiers_sauvegarde_partage/"));
 		fileChooser.setInitialFileName("sauvegardeQuiz");
 		fileChooser.getExtensionFilters().add(extFilter);
 
@@ -74,8 +76,9 @@ public class ControleurExport {
 	@FXML
 	void clicSuivant(ActionEvent event) {
 		if (destination == null || destination.isDirectory()) {
-			new Alert(AlertType.INFORMATION, "Choisissez d'abord un fichier à écrire.")
-				.show();
+			new Alert(AlertType.INFORMATION, 
+			        "Choisissez d'abord un fichier à écrire.")
+			        .show();
 		} else {
 			EchangeurDeVue.echangerAvec(destination);
 		}

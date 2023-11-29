@@ -1,6 +1,6 @@
 /*
- * ControleurGestionDonnees.java                           9 nov. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ * ControleurGestionDonnees.java                                     9 nov. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 
 package iut.sae.ihm.controleur;
@@ -11,7 +11,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Categorie;

@@ -1,6 +1,6 @@
 /*
  * ControleurCreeCategorie.java                       18 oct. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.ihm.controleur;
 
@@ -18,7 +18,6 @@ import javafx.scene.layout.Pane;
 
 /**
  * Controleur de la page creerCategorie
- * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
  * @version 1.0

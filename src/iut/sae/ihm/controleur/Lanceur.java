@@ -1,6 +1,5 @@
-/*
- * Lanceur.java                                    24 Oct. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+/* Lanceur.java                                    24 Oct. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 
 package iut.sae.ihm.controleur;
@@ -28,11 +27,11 @@ import javafx.stage.WindowEvent;
  */
 public class Lanceur extends Application {
 
+    /** scene principale */
     private static Stage stage;
 
     /**
-     * TODO comment method role
-     * 
+     * getter de stage
      * @return la scène
      */
     public static Stage getStage() {
@@ -48,6 +47,9 @@ public class Lanceur extends Application {
         launch(args);
     }
 
+    /**
+     * prepare la scene et l'affiche
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         Persistance.charger();
@@ -61,9 +63,8 @@ public class Lanceur extends Application {
 
         Parent parent = (Parent) loader.load();
 
-        ControleurMenuPrincipal controllerRef = (ControleurMenuPrincipal) loader.getController();
-
-        // ControleurMenuPrincipal controllerRef = loader.getController();
+        ControleurMenuPrincipal controllerRef = 
+                (ControleurMenuPrincipal) loader.getController();
 
         // Lance la sauvegarde lorsqu'on appuie sur la croix
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -71,7 +72,8 @@ public class Lanceur extends Application {
             public void handle(WindowEvent arg0) {
                 if (!Persistance.sauvegarder()) {
                     new Alert(AlertType.WARNING,
-                            "Impossible de sauvegarder les données ! " + "Vos données seront perdues...");
+                            "Impossible de sauvegarder les données ! " 
+                          + "Vos données seront perdues...");
                 }
             }
         });
