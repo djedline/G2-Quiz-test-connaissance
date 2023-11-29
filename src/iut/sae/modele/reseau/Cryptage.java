@@ -42,9 +42,8 @@ public class Cryptage {
     }
 
     /**
-     * TODO comment method role
-     * 
-     * @return laCle la cle de cryptage
+     * Génère la clé de cryptage grâce à la méthode de Diffie-Hellma
+     * @return la clé
      */
     public static String genereCleDiffie() {
         String laCle = "";
