@@ -1,5 +1,5 @@
 /*
- * Cryptage.java                                    14 nov. 2023
+ù * Cryptage.java                                    14 nov. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
 package iut.sae.modele.reseau;
@@ -31,7 +31,7 @@ public class Cryptage {
      * @param args
      */
     public static void main(String[] args) {
-       	String message = "Le cryptage c'est compliqué.";
+        String message = "Le cryptage c'est compliqué.";
         System.out.println("Message : " + message);
         String cle = genereCleDiffie();
 
@@ -39,27 +39,32 @@ public class Cryptage {
         dechiffrer(crypte, cle);
     }
 
+    /**
+     * permet de générer la clé de cryptage grâce à la méthode de Dffie-Hellman
+     * 
+     * @return laCle
+     */
     public static String genereCleDiffie() {
         String laCle = "";
-    	int p = DiffieHellman.genererModulo();
-    	int g = DiffieHellman.genererGenerateur();
-    	int x = DiffieHellman.genererX();
-    	int x1 = DiffieHellman.genererX();
-    	int gx = DiffieHellman.calculGX(g, x);
-		int gxe = DiffieHellman.calculGXE(gx, x1);
-		if (Character.isValidCodePoint(gxe) && Character.toString(gxe).length() == 1) {
+        int p = DiffieHellman.genererModulo();
+        int g = DiffieHellman.genererGenerateur();
+        int x = DiffieHellman.genererX();
+        int x1 = DiffieHellman.genererX();
+        int gx = DiffieHellman.calculGX(g, x);
+        int gxe = DiffieHellman.calculGXE(gx, x1);
+        if (Character.isValidCodePoint(gxe) && Character.toString(gxe).length() == 1) {
             laCle += Character.toString(gxe);
-		}
-		System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
-		return laCle;
+        }
+        System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
+        return laCle;
     }
-    
+
     /**
      * Méthode qui permet de Générer la clé de cryptage
      * 
      * @return laCle la clé de cryptage
      */
-    /* public static String genereCle() {
+    public static String genereCle() {
         String laCle = "";
         int nombreAlea;
         final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE - MIN_LONGUEUR_CLE) + (int) MIN_LONGUEUR_CLE;
@@ -72,7 +77,7 @@ public class Cryptage {
         }
         System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
         return laCle;
-    } */
+    }
 
     /**
      * Méthode qui permet de crypter un message
