@@ -8,7 +8,7 @@ package iut.sae.ihm.controleur;
 import java.io.File;
 import java.net.URL;
 import iut.sae.ihm.view.EchangeurDeVue;
-import iut.sae.modele.Donnees;
+import iut.sae.modele.Persistance;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -50,7 +50,7 @@ public class Lanceur extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Donnees.charger();
+        Persistance.charger();
         Lanceur.stage = primaryStage;
 
         FXMLLoader loader = new FXMLLoader();
@@ -69,7 +69,7 @@ public class Lanceur extends Application {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent arg0) {
-                if (!Donnees.sauvegarder()) {
+                if (!Persistance.sauvegarder()) {
                     new Alert(AlertType.WARNING,
                             "Impossible de sauvegarder les données ! " + "Vos données seront perdues...");
                 }

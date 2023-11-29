@@ -13,15 +13,16 @@ import org.junit.jupiter.api.Test;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.ImportExport;
+import iut.sae.modele.Persistance;
 import iut.sae.modele.Question;
 
 class ImportExportTest {
 
 	private static final File FICHIER_IMPORT_QUEST_JAVA
-	= Donnees.FICHIER_IMPORT_QUEST_JAVA;
+	= Persistance.FICHIER_IMPORT_QUEST_JAVA;
 
 	private static final File FICHIER_IMPORT_QUEST_ORTHO 
-	= Donnees.FICHIER_IMPORT_QUEST_ORTHO;
+	= Persistance.FICHIER_IMPORT_QUEST_ORTHO;
 
 	private static final File FICHIER_EXPORT_QUEST 
 		= new File("src/iut/sae/modele/tests/exporte.csv");
@@ -34,7 +35,7 @@ class ImportExportTest {
 		final int NB_QUEST_JAVA = 31;
 
 		try {
-			ImportExport.importer(Donnees.FICHIER_IMPORT_QUEST_JAVA);
+			ImportExport.importer(Persistance.FICHIER_IMPORT_QUEST_JAVA);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -52,7 +53,7 @@ class ImportExportTest {
 		final int NB_QUEST_ORTHO = 189;
 
 		try {
-			ImportExport.importer(Donnees.FICHIER_IMPORT_QUEST_ORTHO);
+			ImportExport.importer(Persistance.FICHIER_IMPORT_QUEST_ORTHO);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
