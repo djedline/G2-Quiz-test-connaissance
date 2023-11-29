@@ -6,6 +6,7 @@
 package iut.sae.ihm.controleur;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,12 @@ import iut.sae.modele.ImportExport;
 import iut.sae.modele.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBoxTreeItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTreeCell;
 
 /**
@@ -80,7 +83,12 @@ public class ControleurChoixQuestionExport {
 				}
 			}
 		}
-		ImportExport.exporter(selectionnees);
+		try {
+			ImportExport.exporter(fichierAExporter);
+			new Alert(AlertType.INFORMATION, "Exportation réussie.").show();
+		} catch (IOException e) {
+			new Alert(AlertType.ERROR, e.getMessage()).show();
+		}
 	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete
@@ -92,6 +100,7 @@ public class ControleurChoixQuestionExport {
 
 			// ajoute le treeitem
 			CustomCheckboxTreeItem<Object> checkable = new CustomCheckboxTreeItem<>(item);
+			checkable.setValue(item);
 
 			// ajout d'un treeitem avec en parametre la categorie et le menuButton
 			listeTreeItem.add(checkable);

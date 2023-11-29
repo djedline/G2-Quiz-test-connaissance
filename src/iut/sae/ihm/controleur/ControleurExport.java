@@ -64,13 +64,14 @@ public class ControleurExport {
     	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_SELECT_EXPORT);
     }
 
-	private File destination = new File("./fichiers_sauvegarde_partage/export.csv");
+	private File destination = new File("fichiers_sauvegarde_partage/sauvegardeQuiz.csv");
 
 	@FXML
 	void chercherFichier(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
 		// Ajout d'un filtre pour ne montrer que certains fichiers
 		ExtensionFilter extFilter = new ExtensionFilter("Fichier CSV UTF-8 séparateur point-virgule(*.csv)", "*.csv");
+		fileChooser.setInitialDirectory(new File("fichiers_sauvegarde_partage/"));
 		fileChooser.setInitialFileName("sauvegardeQuiz");
 		fileChooser.getExtensionFilters().add(extFilter);
 
@@ -81,16 +82,11 @@ public class ControleurExport {
 
 	@FXML
 	void clicValider(ActionEvent event) {
-		if (destination != null) {
-			try {
-				ImportExport.exporter(destination);
-				new Alert(AlertType.INFORMATION, "Exportation réussie.").show();
-			} catch (IOException e) {
-				new Alert(AlertType.ERROR, e.getMessage()).show();
-			}
-		} else {
-			new Alert(AlertType.INFORMATION, "Sélectionnez d'abord un fichier")
+		if (destination == null || destination.isDirectory()) {
+			new Alert(AlertType.INFORMATION, "Choisissez d'abord un fichier à écrire.")
 				.show();
+		} else {
+			EchangeurDeVue.echangerAvec(destination);
 		}
 	}
 
