@@ -32,7 +32,8 @@ public class Cryptage {
      * @param args
      */
     public static void main(String[] args) {
-       	String message = "Le cryptage c'est compliqué.";
+        genereCleDiffie();
+        String message = "Le cryptage c'est compliqué.";
         System.out.println("Message : " + message);
         String cle = genereCleDiffie();
 
@@ -40,45 +41,29 @@ public class Cryptage {
         dechiffrer(crypte, cle);
     }
 
-    /** TODO comment method role
+    /**
+     * TODO comment method role
+     * 
      * @return laCle la cle de cryptage
      */
     public static String genereCleDiffie() {
         String laCle = "";
-    	int p = DiffieHellman.genererModulo();
-    	int g = DiffieHellman.genererGenerateur();
-    	int x = DiffieHellman.genererX();
-    	int x1 = DiffieHellman.genererX();
-    	int gx = DiffieHellman.calculGX(g, x);
-		int gxe = DiffieHellman.calculGXE(gx, x1);
-		if (Character.isValidCodePoint(gxe) && Character.toString(gxe).length() == 1) {
-            laCle += Character.toString(gxe);
-		}
-		System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
-		return laCle;
-    }
-    
-    /**
-     * Méthode pour récupérer une clé selon l'algorithme de Diffie-Hellman
-     * 
-     * @return cleDiffieF la cle de cryptage
-     */
-    public static String creerCleDiffie() {
-        int cleDiffieChiffre;
-        int p;
-        int g;
-        int x;
-        int gx;
-        String cleDiffieF = "";
-        p = DiffieHellman.genererModulo();
-        System.out.println(p);
-        g = DiffieHellman.genererGenerateur();
-        System.out.println(g);
-        x = DiffieHellman.genererX();
-        System.out.println(x);
-        gx = DiffieHellman.calculGX(g, x);
-        System.out.println(gx);
-        return cleDiffieF;
+        int reste;
+        int p = DiffieHellman.genererModulo();
+        int g = DiffieHellman.genererGenerateur();
+        int x = DiffieHellman.genererX();
+        int x1 = DiffieHellman.genererX();
+        int gx = DiffieHellman.calculGX(g, x);
+        int gxe = DiffieHellman.calculGXE(gx, x1);
+        do {
+            reste = gxe % TAILLE_ENSEMBLE;
+            gxe = (int) gxe / TAILLE_ENSEMBLE;
+            if (Character.isValidCodePoint(reste) && Character.toString(reste).length() == 1) {
+                laCle += Character.toString(reste);
+            }
+        } while (gxe > TAILLE_ENSEMBLE);
+        System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
+        return laCle;
     }
 
     /**
@@ -87,20 +72,16 @@ public class Cryptage {
      * @return laCle la clé de cryptage
      */
     /*
-    public static String genereCleVigenere() {
-        String laCle = "";
-        int nombreAlea;
-        final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE - MIN_LONGUEUR_CLE) + (int) MIN_LONGUEUR_CLE;
-
-        for (int i = 0; laCle.length() < LONGUEUR_CLE; i++) {
-            nombreAlea = (int) (TAILLE_ENSEMBLE * Math.random());
-            if (Character.isValidCodePoint(nombreAlea) && Character.toString(nombreAlea).length() == 1) {
-                laCle += Character.toString(nombreAlea);
-            }
-        }
-        System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
-        return laCle;
-    } */
+     * public static String genereCleVigenere() { String laCle = ""; int nombreAlea;
+     * final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE -
+     * MIN_LONGUEUR_CLE) + (int) MIN_LONGUEUR_CLE;
+     * 
+     * for (int i = 0; laCle.length() < LONGUEUR_CLE; i++) { nombreAlea = (int)
+     * (TAILLE_ENSEMBLE * Math.random()); if (Character.isValidCodePoint(nombreAlea)
+     * && Character.toString(nombreAlea).length() == 1) { laCle +=
+     * Character.toString(nombreAlea); } } System.out.println("Clé : " + laCle +
+     * " de longueur " + laCle.length()); return laCle; }
+     */
 
     /**
      * Méthode qui permet de crypter un message
