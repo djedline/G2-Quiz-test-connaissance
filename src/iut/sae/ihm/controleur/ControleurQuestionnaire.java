@@ -156,11 +156,11 @@ public class ControleurQuestionnaire {
        } 
        
        // si il y a moins de 5 reponses, je rend le reste des radio button invisible
-       if ( i < 4 ) {
-           for (;i<listeRadioButton.size(); i++) {
-               listeRadioButton.get(i).setVisible(false); 
-           }
+       
+       for (;i<listeRadioButton.size(); i++) {
+           listeRadioButton.get(i).setVisible(false); 
        }
+       
     }
 
     /**
