@@ -54,11 +54,6 @@ public class ControleurExport {
 	
     @FXML
     private Button btnSelectQuestions;
-	
-    @FXML
-    void selectQuestions(ActionEvent event) {
-    	EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_SELECT_EXPORT);
-    }
 
 	private File destination = new File("fichiers_sauvegarde_partage/sauvegardeQuiz.csv");
 
@@ -77,7 +72,7 @@ public class ControleurExport {
 	}
 
 	@FXML
-	void clicValider(ActionEvent event) {
+	void clicSuivant(ActionEvent event) {
 		if (destination == null || destination.isDirectory()) {
 			new Alert(AlertType.INFORMATION, "Choisissez d'abord un fichier à écrire.")
 				.show();

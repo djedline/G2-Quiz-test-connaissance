@@ -118,7 +118,9 @@ public class ControleurChoixQuestionExport {
 		// on cree le root du treeview puis on le cache
 		treeViewData.setCellFactory(CheckBoxTreeCell.<Object>forTreeView());
 		treeViewData.setRoot(new TreeItem<>());
-		treeViewData.setShowRoot(false);
+		treeViewData.getRoot().setValue("Exporter toutes les questions");
+		treeViewData.getRoot().setExpanded(true);
+		treeViewData.setShowRoot(true);
 		// on ajoute tout les treeitem des categorie
 		treeViewData.getRoot().getChildren().addAll(listeTreeItem);
 	}

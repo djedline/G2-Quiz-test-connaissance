@@ -343,7 +343,7 @@ public class Donnees {
     }
 
     /**
-     * Vide les fichiers de sauvegarde.
+     * Vide les questions et catégories sauvegardées en mémoire.
      */
     public static void reinitialiserDonnees() {
         listeCategorie = new ArrayList<>();

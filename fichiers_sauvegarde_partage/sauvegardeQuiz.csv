@@ -1,3 +1,1 @@
 Catégorie;Niveau;Libellé;Vrai;Faux1;Faux2;Faux3;Faux4;Feedback;
-if;2;Dans une instruction if, la branche else est facultative ? Ou autrement dit, on peut écrire :                              if ( condition ) {                                                  instructions                                                                       };oui;non;;;;;
-if;1;Dans une instruction if, les paranthèses autour de la condition sont obligatoires :                                           if ( condition ) { ;oui;non;;;;;
