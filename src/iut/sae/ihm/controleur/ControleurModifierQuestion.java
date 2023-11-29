@@ -49,7 +49,7 @@ public class ControleurModifierQuestion {
     private Button btnCreer;
 
     @FXML
-    private TextField txtIntitule;
+    private TextArea txtIntitule;
 
     @FXML
     private TextField txtRepFausse1;

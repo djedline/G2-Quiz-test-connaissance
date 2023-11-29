@@ -7,7 +7,6 @@ package iut.sae.ihm.controleur;
 
 import java.io.File;
 import java.net.URL;
-
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.modele.Donnees;
 import javafx.application.Application;
