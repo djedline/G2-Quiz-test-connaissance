@@ -14,6 +14,7 @@ import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.reseau.Client;
+import iut.sae.modele.reseau.DiffieHellman;
 import iut.sae.modele.reseau.Serveur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -100,15 +101,32 @@ public class ControleurServeur {
     public void ReceptionFichier() {
         try {
             serveurPartage.accepterConnexion();
-            String cle = "";
+            String msgG = "";
+            String msgP = "";
+            String msgX = "";
+            String msgGX = "";
+            int p;
+            int g;
+            int x;
+            int gx;
             String recu = "";
             while (recu.isEmpty()) {
                 System.out.print("Génération et envoi du générateur g " 
                         + " et du modulo p");
                 try {
-                    cle = Serveur.genererCle();
+                    p = DiffieHellman.genererModulo();
+                    g = DiffieHellman.genererGenerateur();
+                    x = DiffieHellman.genererX();
+                    gx = DiffieHellman.calculGX(g, x);
+                    msgP = Integer.toString(p);
+                    msgG = Integer.toString(g);
+                    msgX = Integer.toString(x);
+                    msgGX = Integer.toString(gx);
                     System.out.println("Le serveur a envoyé : p et g)");
-                    serveurPartage.envoyerMessage(cle.getBytes());
+                    serveurPartage.envoyerMessage((msgG.getBytes()));
+                    serveurPartage.envoyerMessage((msgP.getBytes()));
+                    System.out.println("Le serveur a envoyé la puissance x");
+                    serveurPartage.envoyerMessage((msgX.getBytes()));
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

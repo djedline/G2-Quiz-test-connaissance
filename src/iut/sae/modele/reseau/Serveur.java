@@ -85,16 +85,6 @@ public class Serveur {
     }*/
     
     /**
-     * Méthode qui crée la clé a envoyer au serveur a partir d'un fichier
-     * 
-     * @return renvoie une chaine avec la clé à envoyer
-     * @throws IOException si le message n'a pas pu être construit
-     */
-    public static String genererCle() throws IOException {
-        return Cryptage.genereCleDiffie();
-    }
-    
-    /**
      * @param data les données à envoyer
      * @throws IOException si les données ne sont pas envoyées.
      */

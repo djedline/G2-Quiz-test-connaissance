@@ -88,10 +88,10 @@ public class Client {
      * @return text : la reponse a la requete
      */
     public String recevoirEtAnalyser(File fichierEnvoyer) {
+        
         String cle = "";
         String fichLu = "";
-
-
+        
         System.out.println("RECEPTION DE LA REPONSE");
         try {
 
@@ -142,6 +142,14 @@ public class Client {
      * @param rep : la reponse a envoyer
      */
     public void envoyerReponse(String rep) {
+        
+        String msgx2 = "";
+        String fichLu = "";
+        
+        int x2;
+        int gx2;
+        int gxe1;
+        
         System.out.println("ENVOI DE LA REPONSE");
         System.out.println("Le serveur est : " + sock.getLocalSocketAddress());
         System.out.println("Le client est : " + sock.getRemoteSocketAddress());

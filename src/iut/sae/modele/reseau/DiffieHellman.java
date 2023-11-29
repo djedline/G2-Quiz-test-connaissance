@@ -37,7 +37,9 @@ public class DiffieHellman {
 	 * @return p le chiffre qui sert de modulo
 	 */
 	public static int genererModulo() {
-		p = (int) (Math.random() * MAX_P);
+	        do {
+	            p = (int) (Math.random() * MAX_P);
+	        } while(!isPremier(p));
 		MAX_G = p - 1;
 		return p;
 	}
@@ -112,23 +114,21 @@ public class DiffieHellman {
 			int valeurValide = (int) ((Math.pow(g, j)) % p); // Récupère la valeur (g, g², etc) % p
 			if (!valeurGValide.contains(valeurValide)) { // Vérifie si le chiffre obtenu n'est pas déja présent
 				valeurGValide.add(valeurValide);
+			} else {
+			    return false;
 			}
 		}
-		if (valeurGValide.size() == ensembleP.size()) { // Vérifie la taille des 2 ArrayList
-			return true;
-		} else {
-			return false;
-		}
+		return (valeurGValide.size() == ensembleP.size()); // Vérifie la taille des 2 ArrayList
 	}
-
+	
 	/**
-	 * Vérifie si le générateur g est un entier premier 
-	 * @param g le générateur à vérifier
+	 * Vérifie si le modulo p est un entier premier 
+	 * @param p le modulo à vérifier
 	 * @return Vrai ou Faux selon si le nombre est premier ou non
 	 */
-	public static boolean isPremier(int g) {
-		for (int i = 2; i < Math.sqrt(g); i++) {
-			if (g%i == 0 && g!=1) {
+	public static boolean isPremier(int p) {
+		for (int i = 2; i < Math.sqrt(p); i++) {
+			if (p%i == 0 && p!=1) {
 				return false;
 			}
 		}
