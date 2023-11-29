@@ -34,10 +34,9 @@ class DonneesTest {
 
     @Test
     void test() {
-        Donnees.FICH_CATEGORIES.delete();
-        Donnees.FICH_QUESTIONS.delete();
-
-        lancementAppli();
+        Donnees.effacerSauvegarde();
+        Donnees.reinitialiserDonnees();
+     
 
         // vérification de l'existence de Général au démarrage
         assertEquals(1, Donnees.listeCategorie.size());

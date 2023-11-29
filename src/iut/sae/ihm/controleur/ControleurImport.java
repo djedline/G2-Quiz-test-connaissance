@@ -53,7 +53,7 @@ public class ControleurImport {
 	@FXML
 	private Button btnValider;
 
-	private File origine;
+	private File origine = new File("fichiers_sauvegarde_partage/");
 
 	@FXML
 	void chercherFichier(ActionEvent event) {
@@ -61,6 +61,7 @@ public class ControleurImport {
 		// Ajout d'un filtre pour ne montrer que certains fichiers
 		ExtensionFilter extFilter = new ExtensionFilter("Fichier CSV UTF-8 séparateur point-virgule(*.csv)", "*.csv");
 		fileChooser.getExtensionFilters().add(extFilter);
+		fileChooser.setInitialDirectory(new File("fichiers_sauvegarde_partage/"));
 
 		// Afficher la boîte de dialogue de choix de fichier
 		origine = fileChooser.showOpenDialog(Lanceur.getStage());
