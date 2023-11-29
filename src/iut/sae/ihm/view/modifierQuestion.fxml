@@ -10,7 +10,7 @@
 
 <Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurModifierQuestion">
 	<children>
-		<Button fx:id="btnCreer" layoutX="239.0" layoutY="545.0" mnemonicParsing="false" onAction="#creerQuestion" prefHeight="25.0" prefWidth="131.0" text="Créer" />
+		<Button fx:id="btnCreer" layoutX="239.0" layoutY="545.0" mnemonicParsing="false" onAction="#creerQuestion" prefHeight="25.0" prefWidth="131.0" text="Modifier" />
 		<Label fx:id="idLabelNom" layoutX="25.0" layoutY="133.0" prefHeight="21.0" prefWidth="97.0" text="Question : ">
          <font>
             <Font size="17.0" />
