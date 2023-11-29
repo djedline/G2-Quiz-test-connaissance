@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,39 +28,53 @@ public class ImportExport {
     /** Symbole pour définir une chaine de caractères */
     public static final char GUILLEMET = '"';
 
-    /** Ordre des champs dans les fichiers CSV */
-    public static final String[] NOM_COLONNE = { "Catégorie", "Niveau", "Libellé", "Vrai", "Faux1", "Faux2", "Faux3",
-            "Faux4", "Feedback" };
+	/** Ordre des champs dans les fichiers CSV */
+	public static final String[] NOM_COLONNE = { "Catégorie", "Niveau", "Libellé", "Vrai", "Faux1", "Faux2", "Faux3",
+			"Faux4", "Feedback" };
+	
+	/**
+	 * Envoie l'ensemble des questions de l'application dans un fichier.
+	 * 
+	 * @param aEcrire le fichier dans lequel on va écrire
+	 * @throws IOException s'il est impossible d'écrire les données
+	 */
+	public static void exporter(File aEcrire) throws IOException {
+		exporter(aEcrire, Donnees.listeQuestions);
+	}
 
-    /**
-     * Envoie l'ensemble des questions de l'application dans un fichier.
-     * 
-     * @param aEcrire le fichier dans lequel on va écrire
-     * @throws IOException s'il est impossible d'écrire les données
+    /** TODO comment method role
+     * @param aEcrire
+     * @param selectionnees
+     * @throws IOException
      */
-    public static void exporter(File aEcrire) throws IOException {
+    public static void exporter(File aEcrire, List<Question> selectionnees) throws IOException {
+		
+		if (aEcrire == null || selectionnees == null) {
+			throw new IllegalArgumentException("Impossible d'écrire avec un fichier "
+					+ "ou des questions nulles.");
+		}
+		
+		if (!aEcrire.exists()) {
+			aEcrire.createNewFile();
+		}
+	
+		if (!aEcrire.canWrite()) {
+			throw new IOException("Impossible de modifier le fichier " + aEcrire.getAbsolutePath() + "!");
+		}
+		if (aEcrire.isDirectory()) {
+			throw new IOException("Impossible d'écrire dans un dossier !" + "Indiquez un fichier.");
+		}
+		
+		FileWriter fw = new FileWriter(aEcrire);
+		fw.write(produireEntete());
+		for (Question q : selectionnees) {
+			fw.write(exporterQuestion(q));
+			System.out.println(exporterQuestion(q));
+		}
+		fw.close();
+	}
 
-        if (!aEcrire.exists()) {
-            aEcrire.createNewFile();
-        }
-
-        if (!aEcrire.canWrite()) {
-            throw new IOException("Impossible de modifier le fichier " + aEcrire.getAbsolutePath() + "!");
-        }
-        if (aEcrire.isDirectory()) {
-            throw new IOException("Impossible d'écrire dans un dossier !" + "Indiquez un fichier.");
-        }
-
-        FileWriter fw = new FileWriter(aEcrire);
-        fw.write(produireEntete());
-        for (Question q : Donnees.listeQuestions) {
-            fw.write(exporterQuestion(q));
-            System.out.println(exporterQuestion(q));
-        }
-        fw.close();
-    }
-
-    private static String produireEntete() {
+	private static String produireEntete() {
         StringBuilder s = new StringBuilder();
         for (String nom : NOM_COLONNE) {
             s.append(nom);
@@ -147,6 +162,7 @@ public class ImportExport {
             }
             noLigne++;
         }
+        bf.close();
     }
 
     private static void importerLigne(String ligne, int noLigne) throws FichierMalFormeException {
@@ -221,8 +237,8 @@ public class ImportExport {
         Donnees.listeCategorie.add(bonneCategorie);
         return bonneCategorie;
     }
-
-    /**
+    
+	/**
      * Méthode qui prend en argument une ligne et la découpe pour récupérer les
      * valeurs comprises dans celle ci
      * 
@@ -238,7 +254,6 @@ public class ImportExport {
         for (int i = 0; i < valeurs.length; i++) {
             valeurs[i] = "";
         }
-
         int colonneARemplir = 0;
         boolean guillemetsOuverts = false;
         boolean contientCaracteresSpeciaux = false;

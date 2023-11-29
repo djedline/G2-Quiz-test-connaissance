@@ -1,14 +1,10 @@
-/*
- * ControleurMenuGestionDonnees.java                           9 nov. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+/* ControleurMenuGestionDonnees.java                                 9 nov. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 
 package iut.sae.ihm.controleur;
 
-import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URL;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -56,7 +52,8 @@ public class ControleurMenuGestionDonnees {
 
     @FXML
     void clicPageCat(ActionEvent event) throws Exception {
-        Donnees.numScenePrecedenteCategorie = EnsembleDesVues.VUE_MENU_GESTION_DONNEES;
+        Donnees.numScenePrecedenteCategorie = 
+                EnsembleDesVues.VUE_MENU_GESTION_DONNEES;
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CATEGORIE);
     }
 

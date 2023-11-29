@@ -4,7 +4,6 @@
 package iut.sae.ihm.controleur;
 
 import java.util.ArrayList;
-
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
@@ -32,10 +31,10 @@ public class ControleurQuestionnaire {
 
     /** Numéro de la question affiché */
     public int numQuestion;
-    
+
     /** Liste des boutons radio */
     public ArrayList<RadioButton> listeRadioButton = new ArrayList<>();
-    
+
     @FXML
     private RadioButton idReponse2;
 
@@ -65,20 +64,18 @@ public class ControleurQuestionnaire {
         nbQuestion = Donnees.QuestionnaireGénéré.getListeQuestion().size();
         numQuestion = -1; // -1 est la pour que je puisse charger la question
                           // suivante
-        
+
         listeRadioButton.add(idReponse1);
         listeRadioButton.add(idReponse2);
         listeRadioButton.add(idReponse3);
         listeRadioButton.add(idReponse4);
         listeRadioButton.add(idReponse5);
 
-       
-        //je crée un Toggle pour empecher de selectionner tous les radiobutton
+        // je crée un Toggle pour empecher de selectionner tous les radiobutton
         ToggleGroup groupe = new ToggleGroup();
         groupe.getToggles().addAll(listeRadioButton);
-        
+
         chargerQuestionSuivante();
-        
 
     }
 
@@ -90,9 +87,9 @@ public class ControleurQuestionnaire {
     @FXML
     void actionValider(ActionEvent event) {
         try {
-        validerReponse();
-        chargerQuestionSuivante();
-        }catch(IllegalStateException erreur){
+            validerReponse();
+            chargerQuestionSuivante();
+        } catch (IllegalStateException erreur) {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText(erreur.getMessage());
             messageErreur.show();
@@ -105,17 +102,20 @@ public class ControleurQuestionnaire {
      */
     public void chargerQuestionSuivante() {
         reinitialiserRadioButton();
-        numQuestion ++;
-        if (numQuestion >= nbQuestion ) {
+        numQuestion++;
+        if (numQuestion >= nbQuestion) {
             // petit test de verification si les reponses sont bien enregistrés
-            for (String laReponse : Donnees.QuestionnaireGénéré.getListeReponseDonnee()) {
+            for (String laReponse : 
+                Donnees.QuestionnaireGénéré.getListeReponseDonnee()) {
                 System.out.println(laReponse);
-            } 
-            
-            EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_RESULTAT_QUESTIONNAIRE);
+            }
+
+            EchangeurDeVue.echangerAvec(
+                    EnsembleDesVues.VUE_RESULTAT_QUESTIONNAIRE);
 
         } else {
-            Question laQuestionSuivante = Donnees.QuestionnaireGénéré.getQuestion(numQuestion);
+            Question laQuestionSuivante = 
+                    Donnees.QuestionnaireGénéré.getQuestion(numQuestion);
             ArrayList<String> listeReponses = new ArrayList<>();
             listeReponses.add(laQuestionSuivante.getPropositionJuste());
             for (String element : laQuestionSuivante.getPropositionFausse()) {
@@ -127,40 +127,39 @@ public class ControleurQuestionnaire {
         }
     }
 
-
-
-    /** 
+    /**
      * Methode qui desélectionne tout les radiobuttons
      */
     private void reinitialiserRadioButton() {
         for (RadioButton leBouton : listeRadioButton) {
-            if(leBouton.isSelected()) {
+            if (leBouton.isSelected()) {
                 leBouton.setSelected(false);
             }
-        } 
+        }
     }
 
-    /** 
-     * Change le texte des radiobutton pour afficher les reponses de la question
+    /**
+     * Change le texte des radiobutton pour afficher les reponses de la question 
      * et rendre les radio
+     * 
      * @param listeReponses
      */
     private void chargerReponses(ArrayList<String> listeReponses) {
-       // je change l'affichage des reponses 
-       int i = 0;
-       for(;i<listeReponses.size(); i++) {
-           if (!listeRadioButton.get(i).isVisible()) {
-               listeRadioButton.get(i).setVisible(true); 
-           }
-           listeRadioButton.get(i).setText(listeReponses.get(i));
-       } 
-       
-       // si il y a moins de 5 reponses, je rend le reste des radio button invisible
-       
-       for (;i<listeRadioButton.size(); i++) {
-           listeRadioButton.get(i).setVisible(false); 
-       }
-       
+        // je change l'affichage des reponses
+        int i = 0;
+        for (; i < listeReponses.size(); i++) {
+            if (!listeRadioButton.get(i).isVisible()) {
+                listeRadioButton.get(i).setVisible(true);
+            }
+            listeRadioButton.get(i).setText(listeReponses.get(i));
+        }
+
+        // si il y a moins de 5 reponses, je rend le reste des radio button 
+        // invisible
+        for (; i < listeRadioButton.size(); i++) {
+            listeRadioButton.get(i).setVisible(false);
+        }
+
     }
 
     /**
@@ -169,7 +168,8 @@ public class ControleurQuestionnaire {
      * @param listeReponses
      * @return res liste de reponses melanger
      */
-    private static ArrayList<String> melangerReponses(ArrayList<String> listeReponses) {
+    private static ArrayList<String> melangerReponses(
+            ArrayList<String> listeReponses) {
         ArrayList<String> res = new ArrayList<String>();
         int i = 1;
 
@@ -185,8 +185,8 @@ public class ControleurQuestionnaire {
     }
 
     /**
-     * Méthode permettant d'enregistrer la réponse choisi et le stocke dans la liste
-     * des reponses du questionnaire
+     * Méthode permettant d'enregistrer la réponse choisi et le stocke dans la 
+     * liste des reponses du questionnaire
      */
     public void validerReponse() {
         String reponseChoisi = "";

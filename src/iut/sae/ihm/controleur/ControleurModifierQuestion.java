@@ -1,13 +1,10 @@
-/*
- * ControleurCreerQuestion.java                                    24 Oct. 2023
+/* ControleurCreerQuestion.java                                    24 Oct. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
 
 package iut.sae.ihm.controleur;
 
 import java.util.ArrayList;
-
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -92,7 +89,8 @@ public class ControleurModifierQuestion {
 
         this.txtIntitule.setText(laQuestion.getLibelle());
         this.choiceCategorie.setValue(laQuestion.getCategorie());
-        this.choiceDifficulte.setValue(choiceDifficulte.getItems().get(laQuestion.getDifficulte() - 1));
+        this.choiceDifficulte.setValue(
+                choiceDifficulte.getItems().get(laQuestion.getDifficulte()-1));
         this.txtRepJuste.setText(laQuestion.getPropositionJuste());
 
         int compteur = 0;
@@ -106,10 +104,6 @@ public class ControleurModifierQuestion {
     }
 
 
-    /**
-     * TODO comment method role
-     * 
-     */
     @FXML
     void initialize() {
         choiceDifficulte.getItems().add("Facile");
@@ -141,7 +135,8 @@ public class ControleurModifierQuestion {
         boolean repFausseNbValide = false;
 
         for (TextField laZoneTexte : lesTxtFaux) {
-            if (laZoneTexte.getText() != null && !laZoneTexte.getText().isBlank()) {
+            if (laZoneTexte.getText() != null 
+                    && !laZoneTexte.getText().isBlank()) {
                 listeIntermediaire.add(laZoneTexte.getText());
                 repFausseNbValide = true;
             }
@@ -172,7 +167,8 @@ public class ControleurModifierQuestion {
             laDifficulte = 3;
             break;
         default:
-            throw new IllegalArgumentException("Mauvaise valeur dans le choiceBox de difficulté");
+            throw new IllegalArgumentException(
+                    "Mauvaise valeur dans le choiceBox de difficulté");
 
         }
 
@@ -181,11 +177,6 @@ public class ControleurModifierQuestion {
             if (txtFeedback.getText() == null) {
                 txtFeedback.setText("");
             }
-            /*
-             * Question nouvelleQuestion = new Question(txtIntitule.getText(),
-             * choiceCategorie.getValue(), txtRepJuste.getText(), tableauReponseFausse(),
-             * txtFeedback.getText(), laDifficulte);
-             */
 
             laQuestion.setLibelle(txtIntitule.getText());
             laQuestion.setCategorie(choiceCategorie.getValue());
