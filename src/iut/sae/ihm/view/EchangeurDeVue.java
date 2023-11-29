@@ -8,6 +8,8 @@ package iut.sae.ihm.view;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
+import iut.sae.ihm.controleur.ControleurChoixQuestionExport;
 import iut.sae.ihm.controleur.ControleurModifierCategorie;
 import iut.sae.ihm.controleur.ControleurModifierQuestion;
 import iut.sae.ihm.controleur.Lanceur;
@@ -122,6 +124,38 @@ public class EchangeurDeVue {
         } catch (IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println("Echec du chargement de la vue de code modifier question");
+            erreur.printStackTrace();
+        }
+    }
+    
+    /**
+     * 
+     * @param laQuestion
+     */
+    public static void echangerAvec(File f) {
+        if (sceneCourante == null) {
+            // pas de scène courante : impossible de modifier sa vue
+            throw new IllegalStateException("Echange de vue impossible. Pas de scène courante.");
+        }
+        try {
+            // recevra le conteneur racine de la vue à afficher
+            FXMLLoader loader = new FXMLLoader();
+            URL fxmlUrl = new File("src/iut/sae/ihm/view/ChoixQuestionsExportation.fxml")
+            		.toURI().toURL();
+
+            loader.setLocation(fxmlUrl);
+            Parent racine = (Parent) loader.load();
+            ControleurChoixQuestionExport controllerRef = 
+            		(ControleurChoixQuestionExport) loader.getController();
+
+            controllerRef.setExportFile(f);
+
+            sceneCourante.setRoot(racine);
+            Lanceur.resizeScene();
+            // Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());
+        } catch (IOException erreur) {
+            // problème lors de l'accès au fichier décrivant la vue
+            System.out.println("Echec du chargement de la vue pour choisir la question");
             erreur.printStackTrace();
         }
     }

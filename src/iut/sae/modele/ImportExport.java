@@ -39,25 +39,7 @@ public class ImportExport {
 	 * @throws IOException s'il est impossible d'écrire les données
 	 */
 	public static void exporter(File aEcrire) throws IOException {
-
-		if (!aEcrire.exists()) {
-			aEcrire.createNewFile();
-		}
-
-		if (!aEcrire.canWrite()) {
-			throw new IOException("Impossible de modifier le fichier " + aEcrire.getAbsolutePath() + "!");
-		}
-		if (aEcrire.isDirectory()) {
-			throw new IOException("Impossible d'écrire dans un dossier !" + "Indiquez un fichier.");
-		}
-
-		FileWriter fw = new FileWriter(aEcrire);
-		fw.write(produireEntete());
-		for (Question q : Donnees.listeQuestions) {
-			fw.write(exporterQuestion(q));
-			System.out.println(exporterQuestion(q));
-		}
-		fw.close();
+		exporter(aEcrire, Donnees.listeQuestions);
 	}
 
 	private static String produireEntete() {
@@ -296,8 +278,30 @@ public class ImportExport {
 		return sb.toString();
 	}
 
-	public static void exporter(List<Question> selectionnees) {
-		// TODO Auto-generated method stub
+	public static void exporter(File aEcrire, List<Question> selectionnees) throws IOException {
 		
+		if (aEcrire == null || selectionnees == null) {
+			throw new IllegalArgumentException("Impossible d'écrire avec un fichier "
+					+ "ou des questions nulles.");
+		}
+		
+		if (!aEcrire.exists()) {
+			aEcrire.createNewFile();
+		}
+
+		if (!aEcrire.canWrite()) {
+			throw new IOException("Impossible de modifier le fichier " + aEcrire.getAbsolutePath() + "!");
+		}
+		if (aEcrire.isDirectory()) {
+			throw new IOException("Impossible d'écrire dans un dossier !" + "Indiquez un fichier.");
+		}
+		
+		FileWriter fw = new FileWriter(aEcrire);
+		fw.write(produireEntete());
+		for (Question q : selectionnees) {
+			fw.write(exporterQuestion(q));
+			System.out.println(exporterQuestion(q));
+		}
+		fw.close();
 	}
 }

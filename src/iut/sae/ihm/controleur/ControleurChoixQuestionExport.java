@@ -5,10 +5,9 @@
 
 package iut.sae.ihm.controleur;
 
-import java.lang.reflect.Array;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -20,7 +19,6 @@ import iut.sae.modele.ImportExport;
 import iut.sae.modele.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBoxTreeItem;
 import javafx.scene.control.TreeItem;
@@ -48,6 +46,12 @@ public class ControleurChoixQuestionExport {
 	@FXML // fx:id="treeViewData"
 	private TreeView<Object> treeViewData; // Value injected by FXMLLoader
 
+	private File fichierAExporter;
+	
+	public void setExportFile(File f) {
+		this.fichierAExporter = f;
+	}
+	
 	@FXML
 	void retourArriere(ActionEvent event) {
 		EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_EXPORT);

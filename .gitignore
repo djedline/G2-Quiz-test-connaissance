@@ -1,11 +1,7 @@
 /bin/
 .classpath
 .settings/
-<<<<<<< HEAD
 /donnees/
-=======
-*.data
->>>>>>> 34d029e4d2b5bf87202f6945dfd3cb86ae053372
 .metadata/
 .data
 .gitignore
