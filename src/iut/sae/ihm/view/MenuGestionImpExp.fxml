@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurEchangeDonnees">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurEchangeDonnees">
 	<children>
 		<Label fx:id="idTitre" alignment="CENTER" layoutX="85.0" layoutY="5.0" prefHeight="41.0" prefWidth="281.0" text="Gérer l’échange des">
 			<font>
@@ -19,11 +20,26 @@
       </Label>
       <VBox alignment="CENTER" layoutX="125.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0" spacing="10.0">
          <children>
-      		<Button fx:id="btnImpDon" mnemonicParsing="false" onAction="#clicImpDon" prefHeight="30.0" prefWidth="200.0" text="Import de données" />
-            <Button fx:id="btnExpDon" mnemonicParsing="false" onAction="#clicExpDon" prefHeight="30.0" prefWidth="200.0" text="Export de données" />
-            <Button fx:id="btnPartDon" mnemonicParsing="false" onAction="#clicPartDon" prefHeight="30.0" prefWidth="200.0" text="Partager des données" />
-            <Button fx:id="btnServeur" mnemonicParsing="false" onAction="#infoServeur" prefHeight="30.0" prefWidth="200.0" text="Information serveur" />
-            <Button fx:id="btnQuitter" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="30.0" prefWidth="200.0" text="Retour" />
+      		<Button fx:id="btnImpDon" mnemonicParsing="false" onAction="#clicImpDon" prefHeight="30.0" prefWidth="200.0" text="Import de données">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <Button fx:id="btnExpDon" mnemonicParsing="false" onAction="#clicExpDon" prefHeight="30.0" prefWidth="200.0" text="Export de données">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <Button fx:id="btnPartDon" mnemonicParsing="false" onAction="#clicPartDon" prefHeight="30.0" prefWidth="200.0" text="Partager des données">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <Button fx:id="btnServeur" mnemonicParsing="false" onAction="#infoServeur" prefHeight="30.0" prefWidth="200.0" text="Information serveur">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <Button fx:id="btnQuitter" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="30.0" prefWidth="200.0" text="Retour">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
          </children>
       </VBox>
 	</children>

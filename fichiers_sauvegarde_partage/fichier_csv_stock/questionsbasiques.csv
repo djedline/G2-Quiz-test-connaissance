@@ -30,6 +30,3 @@ condition;1;La condition suivante   100 =< quantite est correctement écrite; fa
 condition;1;Comment écrit-on la condition qui dit que la quantite doit être différente de 0 ?;quantite != 0;quantite <> 0;quantite /= 0;;;
 condition;2;Quelle condition exprime qu'une note doit être comprise entre 0 et 20 et être différente de 9 ?;note >= 0 && note <= 20 && note != 9;note > 0 && note < 20 && note != 9;note >= 0 || note <= 20 || note != 9;note > 0 || note < 20 || note != 9;note >= 0 && note < 9 && note >= 10 && note <= 20;
 condition;1;Quelle condition exprime que la variable entier contient un nombre pair ?;entier % 2 == 0;entier % 2 = 0;entier / 2 == 0;entier / 2 = 0;;
-;;;;;;;;
-;;;;;;;;
-;;;;;;;;

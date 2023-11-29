@@ -65,7 +65,14 @@ public class Question implements Serializable {
             this.feedback = feedback;
             this.difficulte = difficulte;
         } else {
+        	System.out.println("le libelle" + libelle);
+        	System.out.println("la categorie " + nomCategorie);
+        	System.out.println("la proposition juste " + propositionJuste);
+        	System.out.println("les proposition fausse " + propositionFausse);
+        	System.out.println("le feedback" + feedback);
+        	System.out.println("la difficulté " + difficulte);
             throw new IllegalArgumentException("Les arguments entrées sont incorrectes");
+            
         }
     }
 
