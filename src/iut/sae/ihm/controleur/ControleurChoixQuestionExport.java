@@ -70,7 +70,8 @@ public class ControleurChoixQuestionExport {
 		for (TreeItem<Object> itemCat : treeViewData.getRoot().getChildren()) {
 			CheckBoxTreeItem<Object> convertiCat = (CheckBoxTreeItem<Object>) itemCat;
 			if (convertiCat.isSelected()) {
-				String nomCat = (String) convertiCat.getValue();
+				Categorie laCat = (Categorie) convertiCat.getValue();
+				String nomCat = laCat.getLibelle();
 				selectionnees.addAll(Donnees.getQuestionOfCategorie(nomCat));
 			} else if (convertiCat.isIndeterminate()){
 				for (TreeItem<Object> itemQ : itemCat.getChildren()) {
@@ -84,7 +85,7 @@ public class ControleurChoixQuestionExport {
 			}
 		}
 		try {
-			ImportExport.exporter(fichierAExporter);
+			ImportExport.exporter(fichierAExporter, selectionnees);
 			new Alert(AlertType.INFORMATION, "Exportation réussie.").show();
 		} catch (IOException e) {
 			new Alert(AlertType.ERROR, e.getMessage()).show();

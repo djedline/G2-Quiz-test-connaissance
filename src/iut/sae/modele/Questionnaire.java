@@ -36,7 +36,8 @@ public class Questionnaire {
         ArrayList<Question> listeQuestionCategorieEtDifficulte = new ArrayList<Question>();
 
         for (Question laQuestion : listeQuestionOfCategorie) {
-            if (laQuestion.getDifficulte() == nivDifficulte) {
+            if (laQuestion.getDifficulte() == nivDifficulte 
+                    || nivDifficulte == 0) {
                 listeQuestionCategorieEtDifficulte.add(laQuestion);
             }
         }
@@ -71,7 +72,8 @@ public class Questionnaire {
         ArrayList<Question> listeQuestionCategorieEtDifficulte = new ArrayList<Question>();
 
         for (Question laQuestion : listeQuestionOfCategorie) {
-            if (laQuestion.getDifficulte() == nivDifficulte) {
+            if (laQuestion.getDifficulte() == nivDifficulte
+                    || nivDifficulte == 0) {
                 listeQuestionCategorieEtDifficulte.add(laQuestion);
             }
         }
@@ -80,12 +82,13 @@ public class Questionnaire {
 
         if (tailleListe < nbQuestion) {
             throw new IllegalArgumentException(
-                    "Attention, La liste de question" + " ne contient pas assez de question");
+                    "Attention, La liste de question" 
+                            + " ne contient pas assez de question");
         }
         
         
         listeQuestion = new ArrayList<Question>();
-        int i = 1;
+        int i = 0;
 
         while (i < nbQuestion) {
             int n = (int)(Math.random() * tailleListe);
@@ -138,7 +141,7 @@ public class Questionnaire {
                 nbReponseJuste++;
             }
         }
-        res = (nbReponseJuste / nbQuestion) *100.0;
+        res = (nbReponseJuste / nbQuestion) * 100.0;
         System.out.println(res);
         return res;
     }
@@ -152,7 +155,9 @@ public class Questionnaire {
      */
     public Question getQuestion(int i) {
         if (i < 0 || i >= listeQuestion.size()) {
-            throw new IllegalArgumentException("Tentative d'insertion d'une reponse a une place " + "inexistante");
+            throw new IllegalArgumentException(
+                    "Tentative d'insertion d'une reponse a une place " 
+                            + "inexistante");
         }
         return listeQuestion.get(i);
     }

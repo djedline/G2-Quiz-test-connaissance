@@ -43,7 +43,7 @@ public class ControleurCreerQuestionnaire {
     private Button btnQuitter;
 
     @FXML
-    private ChoiceBox<Categorie> idCategorie;
+    private ChoiceBox<String> idCategorie;
 
     @FXML
     private Label idLabelNom2;
@@ -63,21 +63,26 @@ public class ControleurCreerQuestionnaire {
      */
     @FXML
     void initialize() {
+        idDifficulte.getItems().add(Donnees.CHOIX_INDIFFERENT);
         idDifficulte.getItems().add("Facile");
         idDifficulte.getItems().add("Moyen");
         idDifficulte.getItems().add("Difficile");
+        
         
         idNbQuestion.getItems().add("5");
         idNbQuestion.getItems().add("10");
         idNbQuestion.getItems().add("20");
         
+        idCategorie.getItems().add(Donnees.CHOIX_INDIFFERENT);
+        
         for (Categorie element : Donnees.listeCategorie) {
-            idCategorie.getItems().add(element);
+            idCategorie.getItems().add(element.getLibelle());
         }
         
-        idDifficulte.setValue("Facile");
+
+        idDifficulte.setValue(Donnees.CHOIX_INDIFFERENT);
         idNbQuestion.setValue("5");
-        idCategorie.setValue(Donnees.listeCategorie.getFirst());
+        idCategorie.setValue(Donnees.CHOIX_INDIFFERENT);
 
     }
     
@@ -93,7 +98,7 @@ public class ControleurCreerQuestionnaire {
                 
         try {
             Questionnaire leQuestionnaire = 
-                    new Questionnaire(laDifficulte,idCategorie.getValue().getLibelle(),Integer.parseInt(idNbQuestion.getValue()));
+                    new Questionnaire(laDifficulte,idCategorie.getValue(),Integer.parseInt(idNbQuestion.getValue()));
             Donnees.QuestionnaireGénéré = leQuestionnaire;
             EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_QUESTIONNAIRE);
             
@@ -103,7 +108,7 @@ public class ControleurCreerQuestionnaire {
                     + ", Voulez-vous créer le questionnaire quand meme ?");
             Optional<ButtonType> result = messageErreur.showAndWait();
             if(result.get() == ButtonType.OK) {
-                genererQuestionSansNombreQuestion();
+                genererQuestionnaireSansNombreQuestion();
             }
         }
     }
@@ -130,6 +135,9 @@ public class ControleurCreerQuestionnaire {
         case "Difficile":
             laDifficulte = 3;
             break;
+        case "indifferent":
+            laDifficulte = 0;
+            break;
         default:
             throw new IllegalArgumentException(
                     "Mauvaise valeur dans le choiceBox de difficulté");
@@ -143,11 +151,11 @@ public class ControleurCreerQuestionnaire {
      * Si il n'y a pas de question pour le questionnaire, un message d'alerte 
      * apparait.
      */
-    private void genererQuestionSansNombreQuestion() {
+    private void genererQuestionnaireSansNombreQuestion() {
         try {
             int laDifficulte = genererDifficulte();
             Questionnaire leQuestionnaire = 
-                    new Questionnaire(laDifficulte,idCategorie.getValue().getLibelle());
+                    new Questionnaire(laDifficulte,idCategorie.getValue());
             Donnees.QuestionnaireGénéré = leQuestionnaire;
             EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_QUESTIONNAIRE);
         } catch (Exception erreur) {
