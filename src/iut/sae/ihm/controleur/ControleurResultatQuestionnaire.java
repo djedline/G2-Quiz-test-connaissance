@@ -82,7 +82,8 @@ public class ControleurResultatQuestionnaire {
         double resultat = Donnees.QuestionnaireGénéré.leTauxDeReussite();
         System.out.println(resultat);
         idResultat.setText(String.format("%.2f", resultat) + "%");
-        idCommentaireResultat.setText(genererCommentaire(resultat));
+        idCommentaireResultat.setText(genererCommentaire(resultat)
+                + Donnees.nomUtilisateur);
         
         afficherCorrectionQuestion();    
         
@@ -116,16 +117,16 @@ public class ControleurResultatQuestionnaire {
         String commentaire = "";
         
         if (resultat < 25.0) {
-            commentaire = "Aie... Vous allez devoir travailler un peu plus.";
+            commentaire = "Aie... Vous allez devoir travailler un peu plus ";
         } else if (resultat >= 25.0 && resultat < 50.0) {
-            commentaire = "Mmmh... Vous pouvez faire mieux faire.";
+            commentaire = "Mmmh... Vous pouvez faire mieux faire ";
         } else if (resultat >= 50.0 && resultat < 75.0) {
             commentaire = 
-                    "Bravo ! Plus de la moitié de vos reponses sont justes.";
+                    "Bravo ! Plus de la moitié de vos reponses sont justes ";
         } else if (resultat >= 75.0 && resultat < 100.0) {
-            commentaire = "Excellent résultat !";
+            commentaire = "Excellent résultat ";
         } else if (resultat == 100.0) {
-            commentaire = "Parfait.";
+            commentaire = "Parfait ";
         } else {
             commentaire = "Erreur sur le pourcentage.";
         }

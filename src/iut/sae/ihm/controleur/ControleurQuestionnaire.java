@@ -23,6 +23,7 @@ import javafx.scene.control.Alert.AlertType;
  * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurQuestionnaire {
 
@@ -155,11 +156,11 @@ public class ControleurQuestionnaire {
        } 
        
        // si il y a moins de 5 reponses, je rend le reste des radio button invisible
-       if ( i < 4 ) {
-           for (;i<listeRadioButton.size(); i++) {
-               listeRadioButton.get(i).setVisible(false); 
-           }
+       
+       for (;i<listeRadioButton.size(); i++) {
+           listeRadioButton.get(i).setVisible(false); 
        }
+       
     }
 
     /**

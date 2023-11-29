@@ -27,7 +27,7 @@ public class DiffieHellman {
 	/* Variable contenant le chiffre qui sert de premier exposant */
 	private static int x;
 
-	private static final int MAX_P = Cryptage.TAILLE_ENSEMBLE;
+	private static final int MAX_P = 1000000;
 
 	private static int MAX_G;
 
