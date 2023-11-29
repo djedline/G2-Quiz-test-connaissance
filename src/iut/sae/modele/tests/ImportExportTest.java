@@ -62,9 +62,10 @@ class ImportExportTest {
 		Donnees.afficherDonnees();
 	}
 
+	private static final String EXPORT_VIDE = "Catégorie;Niveau;Libellé;Vrai;Faux1;Faux2;Faux3;Faux4;Feedback;\n";
+	
 	@Test
-	void testExport() throws IOException {
-		String EXPORT_VIDE = "Catégorie;Niveau;Libellé;Vrai;Faux1;Faux2;Faux3;Faux4;Feedback;\n";
+	void testExportFichierVide() throws IOException {
 		
 		Donnees.reinitialiserDonnees();
 		FICHIER_EXPORT_QUEST.delete();
@@ -73,7 +74,12 @@ class ImportExportTest {
 		
 		// fichier vide
 		assertEquals(EXPORT_VIDE, contenu);
-		
+	}
+	private static final String EXPORT_UNE_LIGNE = EXPORT_VIDE
+			+ "Cat;1;Maquestion;JeSuisJuste;Rouge;Vert;Bleu;Argenté;Feedback;\n";
+	
+	@Test
+	void testExportFichierUneLigne() throws IOException {
 		Categorie nvCategorie = new Categorie("Cat");
 		Donnees.listeCategorie.add(nvCategorie);
 		String[] repFausses = {
@@ -87,11 +93,31 @@ class ImportExportTest {
 		
 		FICHIER_EXPORT_QUEST.delete();
 		ImportExport.exporter(FICHIER_EXPORT_QUEST);
-		contenu = lireFichier(FICHIER_EXPORT_QUEST);
+		String contenu = lireFichier(FICHIER_EXPORT_QUEST);
+		assertEquals(EXPORT_UNE_LIGNE , contenu);
+	}
+	
+	private static final String EXPORT_SPECIAUX = EXPORT_VIDE
+			+ "Cat;1;\"\"\"J'aime les vacances\"\" - Molière\";\"JeSuisJuste\"\"\"\"\";\"Hello\n\";\"\"\"Hello\"\"\";\" ; Hello\";\"\"\"Hello\"\"\";Feedback;\n";
+	
+	@Test
+	void testExportFichierCaracteresSpeciaux() throws IOException {
+		Categorie nvCategorie = new Categorie("Cat");
+		Donnees.listeCategorie.add(nvCategorie);
+		String[] repFausses = {
+				"Hello\n",
+				"\"Hello\"",
+				" ; Hello",
+				"\"Hello\""
+		};
+		Question nvQuestion = new Question("\"J'aime les vacances\" - Molière", 
+				nvCategorie, "JeSuisJuste\"\"", repFausses, "Feedback", 1);
+		Donnees.listeQuestions.add(nvQuestion);
 		
-		String EXPORT_PAS_VIDE = EXPORT_VIDE
-				+ "Cat;1;Maquestion;JeSuisJuste;Rouge;Vert;Bleu;Argenté;Feedback;\n";
-		assertEquals(EXPORT_PAS_VIDE , contenu);
+		FICHIER_EXPORT_QUEST.delete();
+		ImportExport.exporter(FICHIER_EXPORT_QUEST);
+		String contenu = lireFichier(FICHIER_EXPORT_QUEST);
+		assertEquals(EXPORT_SPECIAUX , contenu);
 	}
 
 	private String lireFichier(File f) throws IOException {

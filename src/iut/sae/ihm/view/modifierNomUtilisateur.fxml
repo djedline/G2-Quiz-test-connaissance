@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurModifierNomUtilisateur">
+	<children>
+		<Button fx:id="btnQuitter" layoutX="72.0" layoutY="234.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="131.0" text="Annuler" />
+		<Label fx:id="idTitre" alignment="CENTER" layoutX="51.0" layoutY="14.0" prefHeight="94.0" prefWidth="347.0" text="Modifier le nom de l'utilisateur" textAlignment="CENTER" wrapText="true">
+			<font>
+				<Font size="30.0" />
+			</font>
+		</Label>
+      <Button fx:id="btnCreer" layoutX="249.0" layoutY="234.0" mnemonicParsing="false" onAction="#clicCreer" prefHeight="25.0" prefWidth="131.0" text="Valider" />
+      <Pane layoutX="32.0" layoutY="112.0" prefHeight="62.0" prefWidth="385.0">
+         <children>
+      		<Label fx:id="idLabelNom" alignment="CENTER" layoutY="28.0" prefHeight="21.0" prefWidth="47.0" text="Nom : " />
+      		<TextField fx:id="idNom" layoutX="43.0" layoutY="24.0" prefHeight="30.0" prefWidth="340.0" />
+         </children>
+      </Pane>
+	</children>
+</Pane>

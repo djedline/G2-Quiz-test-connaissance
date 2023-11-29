@@ -26,18 +26,24 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class Donnees {
 
+    /** Le chemin dans lequel les questions sont sauvegardées. */
+    public static final String CHOIX_INDIFFERENT = "indifferent";
+    
     /**
      * Le chemin dans lequel les questions sont sauvegardées.
      */
     public static final File FICH_QUESTIONS
-    	= new File("donnees/questions.data");
+    	= new File("fichiers_sauvegarde_partage/questions.data");
 
     /**
      * Le chemin dans lequel les catégories sont sauvegardées.
      */
     public static final File FICH_CATEGORIES
-    	= new File("donnees/categories.data");
+    	= new File("fichiers_sauvegarde_partage/categories.data");
 
+    /** le nom de l'utilisateur*/
+    public static String nomUtilisateur = "";
+    
     /**
      * Le nom de la catégorie par défaut existante.
      */
@@ -45,11 +51,11 @@ public class Donnees {
     
     /** TODO comment field role (attribute, association) */
     public static final File FICHIER_IMPORT_QUEST_JAVA
-	= new File("src/iut/sae/modele/tests/questionsbasiques.csv");
+	= new File("fichiers_sauvegarde_partage/fichier_csv_stock/questionsbasiques.csv");
 
     /** TODO comment field role (attribute, association) */
     public static final File FICHIER_IMPORT_QUEST_ORTHO 
-	= new File("src/iut/sae/modele/tests/questionsorthographe.csv");
+	= new File("fichiers_sauvegarde_partage/fichier_csv_stock/questionsorthographe.csv");
 
     /** Liste de Categorie */
     public static ArrayList<Categorie> listeCategorie = new ArrayList<>();
@@ -144,6 +150,22 @@ public class Donnees {
     }
 
     /**
+     * le geteur de nomutilisateur
+     * @return le nom de l'utilisateur
+     */
+	public static String getNomUtilisateur() {
+		return nomUtilisateur;
+	}
+
+	/**
+	 * le setteur du nom de l'utilisateur
+	 * @param nomUtilisateur
+	 */
+	public static void setNomUtilisateur(String nomUtilisateur) {
+		Donnees.nomUtilisateur = nomUtilisateur;
+	}
+
+	/**
      * Charge le fichier au chemin donné et renvoie la valeur stockée.
      * 
      * @param fichier le chemin du fichier à ouvrir
@@ -223,13 +245,15 @@ public class Donnees {
      */
     public static ArrayList<Question> getQuestionOfCategorie(String categorie) {
         ArrayList<Question> res = new ArrayList<Question>();
-
-        for (Question laQuestion : listeQuestions) {
-            if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
-                res.add(laQuestion);
+        if (categorie.equals(CHOIX_INDIFFERENT)) {
+            res = listeQuestions;
+        } else {
+            for (Question laQuestion : listeQuestions) {
+                if (laQuestion.getCategorie().getLibelle().equals(categorie)) {
+                    res.add(laQuestion);
+                }
             }
         }
-
         return res;
     }
 
@@ -333,6 +357,7 @@ public class Donnees {
      */
     public static void chargerQuestionsParDefaut() {
     	reinitialiserDonnees();
+    	
     	try {
 			ImportExport.importer(FICHIER_IMPORT_QUEST_JAVA);
 			ImportExport.importer(FICHIER_IMPORT_QUEST_ORTHO);
@@ -340,5 +365,6 @@ public class Donnees {
 			new Alert(AlertType.ERROR, "Impossible de charger les données "
 					+ "par défaut.\n" + e.getMessage()).show();
 		}
+		
     }
 }
