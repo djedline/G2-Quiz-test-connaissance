@@ -129,8 +129,9 @@ public class EchangeurDeVue {
     }
     
     /**
-     * 
-     * @param laQuestion
+     * Ouvre le menu de sélection des questions à exporter en lui passant en 
+     * paramètre le fichier d'exportation.
+     * @param f le fichier d'exportation
      */
     public static void echangerAvec(File f) {
         if (sceneCourante == null) {
