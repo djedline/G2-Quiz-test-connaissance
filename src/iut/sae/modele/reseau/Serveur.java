@@ -3,20 +3,14 @@
  */
 package iut.sae.modele.reseau;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.nio.charset.Charset;
 
 /**
  * Classe qui représente le serveur lors d'un échange d'information
@@ -29,17 +23,35 @@ public class Serveur {
     private static final File FICHIER_A_ENVOYER = new File("src/iut/sae/modele/reseau/tests/fichEnvoi.txt");
 
     /** socket de connexion lors du démarrage du client et serveur */
-    public static ServerSocket conn;
+    public ServerSocket conn;
 
     /** socket qui permet la communication entre le serveur et le client */
-    static Socket comm;
+    private Socket comm;
 
     /**
+     * prépare le serveur en démarrant la socket conn
+     * 
+     */
+    public Serveur() {
+        System.out.println("CREATION DU SERVEUR");
+        try {          
+            conn = new ServerSocket(6666);
+            System.out.println("coucou");
+        } catch (UnknownHostException e) {
+            System.err.println("Impossible de trouver l'ip");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Impossible de créer la Socket serveur.");
+            e.printStackTrace();
+        }
+    }
+    
+    /*
      * 
      * @param args
      * @throws InterruptedException
-     */
-    public static void main(String[] args) throws InterruptedException {
+     *
+    public void main(String[] args) throws InterruptedException {
         preparerServeur();
         accepterConnexion(); // bloquante : attend que le client se connecte
         String cle = "";
@@ -71,7 +83,7 @@ public class Serveur {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
     /**
      * Méthode qui crée la clé a envoyer au serveur a partir d'un fichier
@@ -87,7 +99,7 @@ public class Serveur {
      * @param data les données à envoyer
      * @throws IOException si les données ne sont pas envoyées.
      */
-    public static void envoyerMessage(byte[] data) throws IOException {
+    public void envoyerMessage(byte[] data) throws IOException {
         System.out.println("ENVOI DES DONNEES");
         try {
             OutputStream os = comm.getOutputStream();
@@ -99,28 +111,11 @@ public class Serveur {
         }
     }
 
-    /**
-     * prépare le serveur en démarrant la socket conn
-     * 
-     */
-    public static void preparerServeur() {
-        System.out.println("CREATION DU SERVEUR");
-        try {          
-            conn = new ServerSocket(6666);
-            System.out.println("coucou");
-        } catch (UnknownHostException e) {
-            System.err.println("Impossible de trouver l'ip");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.err.println("Impossible de créer la Socket serveur.");
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Ferme le serveur
      */
-    public static void fermetureServeur() {
+    public void fermetureServeur() {
         try {
             conn.close();
         } catch (IOException e) {
@@ -132,7 +127,7 @@ public class Serveur {
     /**
      * attend qu'un client demande une connexion et l'accepte
      */
-    public static void accepterConnexion() {
+    public void accepterConnexion() {
 
         System.out.println("ACCEPTATION");
         try {

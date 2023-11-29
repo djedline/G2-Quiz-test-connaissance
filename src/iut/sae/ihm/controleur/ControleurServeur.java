@@ -53,6 +53,7 @@ public class ControleurServeur {
     @FXML
     private Button btnDemarrer;
 
+    private Serveur serveurPartage = new Serveur();
     //boolean allumageOk = false;
 
     /** 
@@ -82,11 +83,11 @@ public class ControleurServeur {
             System.out.println("Salut");
             btnDemarrer.setText("Eteindre");
             Donnees.serveurAllumee = true;
-            Serveur.preparerServeur();
-            Serveur.accepterConnexion();
+            //serveurPartage.preparerServeur();
+            ReceptionFichier();
         } else {
             System.out.println("Au revoir");
-            Serveur.fermetureServeur();
+            serveurPartage.fermetureServeur();
             Donnees.serveurAllumee = false;
             btnDemarrer.setText("Demarrer");
             adresseIpServeur.setText("");
@@ -95,10 +96,9 @@ public class ControleurServeur {
         /** 
          * Partage un fichier
          */
-        public static void ReceptionFichier() {
+        public void ReceptionFichier() {
             try {
-                Serveur.preparerServeur();
-                Serveur.accepterConnexion();
+                serveurPartage.accepterConnexion();
                 String cle = "";
                 String recu ="";
                 while (recu.isEmpty()) {
@@ -106,7 +106,7 @@ public class ControleurServeur {
                     try {
                         cle = Serveur.genererCle();
                         System.out.println("Le serveur a envoyé : la cle)");
-                        Serveur.envoyerMessage(cle.getBytes());
+                        serveurPartage.envoyerMessage(cle.getBytes());
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();

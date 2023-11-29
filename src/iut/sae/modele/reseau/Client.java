@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -18,9 +17,6 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
-import java.util.Scanner;
-
-import iut.sae.modele.reseau.Cryptage;
 
 /*
  * Représente le client dans les échanges de données via le réseau.
@@ -37,7 +33,7 @@ public class Client {
     /**
      * La Socket client utilisée pour échanger.
      */
-    private static Socket sock;
+    private Socket sock;
     
     private static final File FICHIER_RECEPTION = 
             new File("src/iut/sae/modele/reseau/tests/fichierRecu.txt");
@@ -60,12 +56,13 @@ public class Client {
         }
     }*/
 
+
     /**
      * @param host l'adresse ou le nom du serveur
      * @param port le port du serveur
      * @throws IOException si la socket client ne peut être crée
      */
-    public static void creerLiaisonServeur(String host, int port) throws IOException {
+    public Client(String host, int port) throws IOException {
         System.out.println("CREATION SOCKET EN COURS");
         try {
             sock = new Socket(host, port);
@@ -90,7 +87,7 @@ public class Client {
      * 
      * @return text : la reponse a la requete
      */
-    public static String recevoirEtAnalyser(File fichierEnvoyer) {
+    public String recevoirEtAnalyser(File fichierEnvoyer) {
         String cle = "";
         String fichLu = "";
 
@@ -143,7 +140,7 @@ public class Client {
      * 
      * @param rep : la reponse a envoyer
      */
-    public static void envoyerReponse(String rep) {
+    public void envoyerReponse(String rep) {
         System.out.println("ENVOI DE LA REPONSE");
         System.out.println("Le serveur est : " + sock.getLocalSocketAddress());
         System.out.println("Le client est : " + sock.getRemoteSocketAddress());
@@ -168,7 +165,7 @@ public class Client {
      * 
      * @throws IOException si la socket ne peut être fermée
      */
-    public static void fermerSocket() throws IOException {
+    public void fermerSocket() throws IOException {
         System.out.println("FERMETURE DU CLIENT");
         try {
             sock.close();

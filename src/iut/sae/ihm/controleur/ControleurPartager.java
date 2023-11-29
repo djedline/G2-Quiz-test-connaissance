@@ -56,6 +56,7 @@ public class ControleurPartager {
     private File[] listeFichier;
     private boolean ipOk;
     private boolean fichierOk;
+    private Client clientPartage;
 
 
 
@@ -116,12 +117,12 @@ public class ControleurPartager {
     public void partageFichier() {
         try {
             System.out.println("INITIALISATION CLIENT");
-            Client.creerLiaisonServeur(adresseIpServeur.getText(), 6666);
+            clientPartage = new Client(adresseIpServeur.getText(), 6666);
             String reponse = "";
             System.out.println("RECEPTION CLE");
-            reponse = Client.recevoirEtAnalyser(Donnees.fichierAPartager);
-            Client.envoyerReponse(reponse);
-            Client.fermerSocket();
+            reponse = clientPartage.recevoirEtAnalyser(Donnees.fichierAPartager);
+            clientPartage.envoyerReponse(reponse);
+            clientPartage.fermerSocket();
         } catch (Exception e) {
             e.printStackTrace();
         }
