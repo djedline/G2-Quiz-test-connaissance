@@ -119,6 +119,30 @@
                                  <padding>
                                     <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                  </padding>
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment partager les données ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="#d90000" strokeType="OUTSIDE" strokeWidth="0.0" text="LE PARTAGE DE DONNEES N'EST POSSIBLE QUE ENTRE DEUX ORDINATEUR CONNECTER SUR LE MEME RESAUX" textAlignment="CENTER" wrappingWidth="431.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour partager les données, vous devez aller sur la page &quot;Echange de données&quot; accesible depuis le menu principal." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Il faut deux ordinateur pour partager les données. La personne qui veux envoyer les données vas devoir commencer par exporter ses données*." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Une fois le csv créer, la personne qui veut recevoir les données vas devoir lancer un serveur**. La personne qui veux les envoyer vas devoir se connecter a ce serveur***." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Une fois le fichier récuperer, la personne qui veux recupérer les données vas devoir les importer****. " wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*Comment Exporter les données ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sur la page &quot;Exporter les données&quot;, l'utilisateur dois d'abors commencer par le nom de son fichier de sauvegarde ainsi que son emplacement. Le fichier dois forcement etre un .csv." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ensuite, l'utilisateur dois choisir les données qu'il veux partager. pour cela il dois cocher les differente question est categorie qu'il veux exporter." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si une categorie est cocher, cela exportera toute les question de la catégorie." wrappingWidth="431.0" />
+                                 </children>
                               </VBox>
                            </children>
                            <padding>

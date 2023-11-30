@@ -90,7 +90,6 @@ public class EchangeurDeVue {
 
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
-            // Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());
         } catch (IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println("Echec du chargement de la vue de code modifier categorie");
@@ -120,7 +119,6 @@ public class EchangeurDeVue {
 
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
-            // Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());
         } catch (IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println("Echec du chargement de la vue de code modifier question");
@@ -153,7 +151,6 @@ public class EchangeurDeVue {
 
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
-            // Lanceur.resizeScene(sceneCourante.getWidth(),sceneCourante.getHeight());
         } catch (IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println("Echec du chargement de la vue pour choisir la question");
