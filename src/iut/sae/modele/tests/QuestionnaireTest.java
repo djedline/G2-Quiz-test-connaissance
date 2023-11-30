@@ -22,18 +22,24 @@ import iut.sae.modele.Questionnaire;
  */
 class QuestionnaireTest {
 
-    public static Categorie categorieSansQuestion = new Categorie("sansQuestion");
-    public static Categorie categorieAvecQuestion = new Categorie("avecQuestion");
+    public static Categorie categorieSansQuestion = 
+            new Categorie("sansQuestion");
+    public static Categorie categorieAvecQuestion = 
+            new Categorie("avecQuestion");
     public static String[] reponseFausse = { "non", "non" };
     public static Questionnaire leQuestionnaire1;
     public static Questionnaire leQuestionnaire2;
-    public static Question question1 = new Question("La question 1 ?", categorieAvecQuestion, "oui", reponseFausse,
+    public static Question question1 = new Question(
+            "La question 1 ?", categorieAvecQuestion, "oui", reponseFausse,
             "pas de feedback", 1);
-    public static Question question2 = new Question("La question 2 ?", categorieAvecQuestion, "oui", reponseFausse,
+    public static Question question2 = new Question(
+            "La question 2 ?", categorieAvecQuestion, "oui", reponseFausse,
             "pas de feedback", 1);
-    public static Question question3 = new Question("La question 3 ?", categorieAvecQuestion, "oui", reponseFausse,
+    public static Question question3 = new Question(
+            "La question 3 ?", categorieAvecQuestion, "oui", reponseFausse,
             "pas de feedback", 1);
-    public static Question question4 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse,
+    public static Question question4 = new Question(
+            "La question 4 ?", categorieAvecQuestion, "oui", reponseFausse,
             "pas de feedback", 1);
 
     @BeforeAll
@@ -72,7 +78,8 @@ class QuestionnaireTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new Questionnaire(1, "sansQuestion", 5);
         });
-        Question question5 = new Question("La question 4 ?", categorieAvecQuestion, "oui", reponseFausse,
+        Question question5 = new Question(
+                "La question 4 ?", categorieAvecQuestion, "oui", reponseFausse,
                 "pas de feedback", 1);
         Donnees.listeQuestions.add(question5);
         try {
@@ -86,7 +93,8 @@ class QuestionnaireTest {
     void testStockerReponse() {
         leQuestionnaire1.stockerReponse(0, "la reponse 1");
         assertNotEquals(leQuestionnaire1.getListeReponseDonnee().get(0), "");
-        assertEquals(leQuestionnaire1.getListeReponseDonnee().get(0), "la reponse 1");
+        assertEquals(leQuestionnaire1.getListeReponseDonnee().get(0), 
+                "la reponse 1");
 
         assertThrows(IllegalArgumentException.class, () -> {
             leQuestionnaire1.stockerReponse(-1, "la reponse ?");
@@ -134,7 +142,8 @@ class QuestionnaireTest {
         for (int i = 0; i < 4; i++) {
             listeTest.add("");
         }
-        assertTrue(leQuestionnaire2.getListeReponseDonnee().containsAll(listeTest));
+        assertTrue(leQuestionnaire2.getListeReponseDonnee()
+                .containsAll(listeTest));
     }
 
 }

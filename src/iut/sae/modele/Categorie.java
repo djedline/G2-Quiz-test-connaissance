@@ -1,6 +1,6 @@
 /*
- * Categorie.java                                    18 oct. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ * Categorie.java                                                   18 oct. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.modele;
 
@@ -9,7 +9,7 @@ import java.io.Serializable;
 /** 
  * Classe permettant de créer des catégories pour le quiz
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly, 
- * leo.cheikh-boukal
+ *              leo.cheikh-boukal
  * @version 1.0
  */
 public class Categorie implements Serializable {
@@ -45,7 +45,8 @@ public class Categorie implements Serializable {
     public void setTitreCat(String titreCat) {
 		this.titreCat = titreCat;
 	}
-	/* non javadoc - @see java.lang.Object#toString() */
+	
+    /* non javadoc - @see java.lang.Object#toString() */
     @Override
     public String toString() {
         return this.titreCat;

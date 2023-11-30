@@ -1,6 +1,6 @@
 /*
- * EnsembleDesVues.java                                    26 oct. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ * EnsembleDesVues.java                                             26 oct. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 
 package iut.sae.ihm.view;
@@ -68,11 +68,11 @@ public class EnsembleDesVues {
     
     private static final String[] NOM_DES_VUES =
         { "MenuPrincipal.fxml", "MenuGestionDonnees.fxml", "creerQuestion.fxml",
-          "creerCategorie.fxml",  "creerQuestionnaire.fxml", "MenuGestionImpExp.fxml", 
-          "ImportDonnees.fxml", "ExportDonnees.fxml", "GestionDonnees.fxml", 
-          "Partager.fxml", "Serveur.fxml", "questionnaire.fxml",
-          "resultatQuestionnaire.fxml","modifierNomUtilisateur.fxml", 
-          "ChoixQuestionsExportation.fxml"};
+          "creerCategorie.fxml",  "creerQuestionnaire.fxml", 
+          "MenuGestionImpExp.fxml", "ImportDonnees.fxml", "ExportDonnees.fxml",
+          "GestionDonnees.fxml", "Partager.fxml", "Serveur.fxml", 
+          "questionnaire.fxml","resultatQuestionnaire.fxml",
+          "modifierNomUtilisateur.fxml", "ChoixQuestionsExportation.fxml"};
 
     /**
      * Renvoie le nom du fichier fxml contenant la vue dont le code est donné en
@@ -80,11 +80,13 @@ public class EnsembleDesVues {
      * 
      * @param codeVue code de la vue dont le fichier fxml doit être renvoyé
      * @return une chaîne contenant le nom du fichier fxml
-     * @throw IllegalArgumentException levée si le code argument n'est pas valide
+     * @throw IllegalArgumentException levée si le code argument n'est pas 
+     *          valide
      */
     public static String getNomVue(int codeVue) {
         if (codeVue < 0 || codeVue >= NOM_DES_VUES.length) {
-            throw new IllegalArgumentException("Code vue " + codeVue + " invalide");
+            throw new IllegalArgumentException(
+                    "Code vue " + codeVue + " invalide");
         }
         return NOM_DES_VUES[codeVue];
     }

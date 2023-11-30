@@ -1,6 +1,6 @@
 /*
- * Donnees.java                                    10 nov. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ * Donnees.java                                                     10 nov. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.modele;
 
@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 /**
  * Centralise les données de l'application avec sa persistence.
- * @author djedline.boyer
- * Centralise les données de l'application.
+ * 
+ * @author djedline.boyer Centralise les données de l'application.
  * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
@@ -20,15 +20,15 @@ public class Donnees {
 
     /** Le chemin dans lequel les questions sont sauvegardées. */
     public static final String CHOIX_INDIFFERENT = "indifferent";
-    
-    /** le nom de l'utilisateur*/
+
+    /** le nom de l'utilisateur */
     public static String nomUtilisateur = "";
-    
+
     /**
      * Le nom de la catégorie par défaut existante.
      */
     public static final String NOM_CATEGORIE_DEFAUT = "Général";
-    
+
     /** Liste de Categorie */
     public static ArrayList<Categorie> listeCategorie = new ArrayList<>();
 
@@ -36,40 +36,45 @@ public class Donnees {
     public static ArrayList<Question> listeQuestions = new ArrayList<>();
 
     /**
-     * Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer
+     * Enregistre le numéro scène que le bouton annuler de categorie doit 
+     * renvoyer
      */
     public static int numScenePrecedenteCategorie;
 
-    /** Enregistre le numéro scène que le bouton annuler de categorie doit renvoyer */
+    /**
+     * Enregistre le numéro scène que le bouton annuler de categorie doit 
+     * renvoyer
+     */
     public static File fichierAPartager;
-    
+
     /** adresse ip du serveur */
     public static String adresseIpServeur;
-    
+
     /** Permet de savoir si le serveur est allumée */
     public static boolean serveurAllumee = false;
 
     /** Le questionnaire généré avant son */
     public static Questionnaire QuestionnaireGénéré;
 
-
     /**
      * le geteur de nomutilisateur
+     * 
      * @return le nom de l'utilisateur
      */
-	public static String getNomUtilisateur() {
-		return nomUtilisateur;
-	}
+    public static String getNomUtilisateur() {
+        return nomUtilisateur;
+    }
 
-	/**
-	 * le setteur du nom de l'utilisateur
-	 * @param nomUtilisateur
-	 */
-	public static void setNomUtilisateur(String nomUtilisateur) {
-		Donnees.nomUtilisateur = nomUtilisateur;
-	}
+    /**
+     * le setteur du nom de l'utilisateur
+     * 
+     * @param nomUtilisateur
+     */
+    public static void setNomUtilisateur(String nomUtilisateur) {
+        Donnees.nomUtilisateur = nomUtilisateur;
+    }
 
-	/**
+    /**
      * Méthode qui permet d'afficher l'ensemble des catégories et des questions
      */
     public static void afficherDonnees() {
@@ -183,7 +188,8 @@ public class Donnees {
      */
     public static boolean suprimerCategorie(Categorie laCategorie) {
         if (!isCategorieVide(laCategorie)) {
-            for (Question laQuestion : getQuestionOfCategorie(laCategorie.toString())) {
+            for (Question laQuestion : 
+                getQuestionOfCategorie(laCategorie.toString())) {
                 suprimerQuestion(laQuestion);
             }
         }
@@ -196,8 +202,7 @@ public class Donnees {
     }
 
     /**
-     * Méthode qui vérifie si la catégorie à ajouter est
-     * vide ou non
+     * Méthode qui vérifie si la catégorie à ajouter est vide ou non
      * 
      * @param laCategorie
      * @return true ou false si la catégorie est vide ou non

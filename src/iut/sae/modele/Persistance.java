@@ -100,7 +100,8 @@ public class Persistance {
 	 */
 	private static Object chargerSauvegarde(File fichier)
 	        throws FileNotFoundException, IOException, ClassNotFoundException {
-	    try (ObjectInputStream readerCategories = new ObjectInputStream(new FileInputStream(fichier))) {
+	    try (ObjectInputStream readerCategories 
+	    		= new ObjectInputStream(new FileInputStream(fichier))) {
 	        return readerCategories.readObject();
 	    }
 	}

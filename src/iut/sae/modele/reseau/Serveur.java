@@ -20,7 +20,8 @@ import java.net.UnknownHostException;
  */
 public class Serveur {
 
-    private static final File FICHIER_A_ENVOYER = new File("src/iut/sae/modele/reseau/tests/fichEnvoi.txt");
+    private static final File FICHIER_A_ENVOYER = 
+            new File("src/iut/sae/modele/reseau/tests/fichEnvoi.txt");
 
     /** socket de connexion lors du démarrage du client et serveur */
     public ServerSocket conn;
@@ -92,7 +93,8 @@ public class Serveur {
         System.out.println("ENVOI DES DONNEES");
         try {
             OutputStream os = comm.getOutputStream();
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+                                                                  os, "UTF-8"));
             os.write(data);
             System.out.println("Le serveur a envoyé : " + data.toString());
         } catch (IOException e) {
@@ -121,8 +123,10 @@ public class Serveur {
         System.out.println("ACCEPTATION");
         try {
             comm = conn.accept();
-            System.out.println("La inet Adress conn : " + conn.getInetAddress());
-            System.out.println("La inet Adress comm : " + comm.getInetAddress());
+            System.out.println("La inet Adress conn : " 
+                                + conn.getInetAddress());
+            System.out.println("La inet Adress comm : " 
+                                + comm.getInetAddress());
         } catch (IOException e) {
             System.err.println("Impossible d'accepter la connection.");
             e.printStackTrace();
