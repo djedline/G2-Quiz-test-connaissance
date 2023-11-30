@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurNotice">
+   <children>
+      <Button fx:id="btnRetour" layoutX="162.0" layoutY="260.0" mnemonicParsing="false" onAction="#clicRetour" prefHeight="31.0" prefWidth="126.0" text="Retour">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <TabPane prefHeight="260.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Créer des données">
+               <content>
+                  <ScrollPane hbarPolicy="NEVER" prefWidth="450.0">
+                     <content>
+                        <TextFlow prefWidth="450.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="434.0" spacing="3.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment créer des données ?">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vous pouvez creer des categories et des question dans l'onglet &quot;Gérer les données&quot;, avec les boutons &quot;Créer categorie&quot; et &quot;Créer question&quot;." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment créer des categories ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quand vous etes sur la page &quot;Créer categorie&quot;, vous devez remplir la zone de texte avec le nom de la categorie que vous voulez créer. Appuillez ensuite sur le bouton créer pour créer la catégorie." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous laissez la zone de texte vide, ou si vous rentrer un nom d'un categorie qui existe deja. Le programme renveras une erreur." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment créer des questions ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quand vous etes sur la page &quot;Créer question&quot;, vous devez remplir les different champs. Certain sont obligatoire et d'autre ne le sont pas." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Les information obligatoire sont : le libellé, la difficulté, la catégorie, la réponse juste et au moins une réponse fausse." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Il n'est pas obligatoire de remplire le feedback, ou les 4 reponse fausse. Il faut juste que une des reponse fausse soit remplit, peut importe l'ordre." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Une fois les parametres remplit, cliquez sur le bouton créer." wrappingWidth="431.0" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </TextFlow>
+                     </content>
+                  </ScrollPane>
+               </content>
+          </Tab>
+          <Tab text="Modifier des données">
+               <content>
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS">
+                     <content>
+                        <TextFlow prefWidth="450.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="434.0" spacing="3.0">
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment modifier les données ?">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour modifier les données vous devez allez sur la page de modification de données. Elle se trouve dans le menu &quot;Gérer les données&quot;." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sur cette page, vous pouvez modifier ou supprimer les question et categorie." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour acceder au questinon, vous devez cliquer sur la petite fleche a coté du nom des catégories. Cela deroulera toute les questions de cette categorie." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment modifier ou supprimer les categories ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quand vous cliquer sur le bouton gérer a coté du nom d'une catégorie, un menu s'ouvrira." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous cliquer sur le bouton modifier, cela vous amenera sur la page de modification de categorie. Elle fonctione de la meme maniere que la page de création de catégorie.." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour annuler les modification , cliquer sur le bouton &quot;Annuler&quot;." />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous cliquer sur le bouton suprimer, cela suprimera la categorie. Si la question n'est pas vide, l'application afficheras un message demandant la confirmation de l'action, car elle encoureras la supression de toutes les question dans la catégorie." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment modifier ou supprimer les questions ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comme pour les categories, le boutons &quot;Gérer&quot; ouvre un menu." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;Modifier&quot; vous enveras sur la page &quot;Modification de question&quot; qui fonctionne de la meme maniere que &quot;Création de question&quot;. Et &quot;Supprimer suprimera la question." wrappingWidth="431.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </TextFlow>
+                     </content></ScrollPane>
+               </content>
+          </Tab>
+            <Tab text="Partager des données">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <TextFlow prefWidth="450.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="434.0" spacing="3.0">
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </TextFlow>
+                     </content></ScrollPane>
+               </content>
+            </Tab>
+            <Tab text="Jouer">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>
