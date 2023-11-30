@@ -50,6 +50,9 @@ public class ControleurChoixQuestionExport {
 
 	private File fichierAExporter;
 	
+	/** TODO comment method role
+	 * @param f
+	 */
 	public void setExportFile(File f) {
 		this.fichierAExporter = f;
 	}

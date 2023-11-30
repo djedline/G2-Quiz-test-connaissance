@@ -79,6 +79,33 @@ public class Client {
         }
     }
 
+    /** TODO comment method role
+     * @throws IOException 
+     * @return strRecu l'ensemble des données reçues
+     */
+    public String reception() throws IOException {
+        String strRecu = "";
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(sock.getInputStream(), "UTF-8"));
+        while (reader.ready()) {
+            strRecu += Character.toString(reader.read());
+        }
+        return strRecu;
+    }
+    
+    /** TODO comment method role
+     * @throws IOException 
+     * 
+     */
+    public void recevoirDonneesInitiale() throws IOException {
+        String msgP = "";
+        String msgG = "";
+        int p;
+        int g;
+        msgG = reception();
+        msgP = reception();
+    }
+    
     /**
      * Permet de recevoir la requete du client et de l'analyser pour construire le
      * contenu de la reponse
