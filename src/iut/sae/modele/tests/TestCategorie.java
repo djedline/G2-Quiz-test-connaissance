@@ -22,7 +22,8 @@ public class TestCategorie {
      */
     public static void testConstructeur() {
         System.out
-                .println("\nTest de la création d'une catégorie :\n" + "-------------------------------------------\n");
+                .println("\nTest de la création d'une catégorie :\n" 
+        + "-------------------------------------------\n");
 
         /**
          * Test du constructeur en cas d'erreur imprévu du programme
@@ -35,7 +36,8 @@ public class TestCategorie {
         }
 
         /**
-         * Test du constructeur au cas où l'utilisateur rentre un nom de catégorie vide
+         * Test du constructeur au cas où l'utilisateur rentre un nom de 
+         * catégorie vide
          */
         try {
             Categorie nouvelleCategorie2 = new Categorie("");
@@ -45,8 +47,8 @@ public class TestCategorie {
         }
 
         /**
-         * Test du constructeur au cas où l'utilisateur rentre un nom de catégorie
-         * rempli d'espace
+         * Test du constructeur au cas où l'utilisateur rentre un nom de 
+         * catégorie rempli d'espace
          */
         try {
             Categorie nouvelleCategorie3 = new Categorie("          ");

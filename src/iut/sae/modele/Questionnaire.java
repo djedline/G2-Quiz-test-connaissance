@@ -43,11 +43,13 @@ public class Questionnaire {
      */
     public Questionnaire(int nivDifficulte, String categorie) {
 
-        ArrayList<Question> listeQuestionOfCategorie = getQuestionOfCategorie(categorie);
+        ArrayList<Question> listeQuestionOfCategorie = 
+                getQuestionOfCategorie(categorie);
 
         System.out.println(listeQuestionOfCategorie.size());
 
-        ArrayList<Question> listeQuestionCategorieEtDifficulte = new ArrayList<Question>();
+        ArrayList<Question> listeQuestionCategorieEtDifficulte = 
+                new ArrayList<Question>();
 
         for (Question laQuestion : listeQuestionOfCategorie) {
             if (laQuestion.getDifficulte() == nivDifficulte 
@@ -79,9 +81,11 @@ public class Questionnaire {
      */
     public Questionnaire(int nivDifficulte, String categorie, int nbQuestion) {
 
-        ArrayList<Question> listeQuestionOfCategorie = getQuestionOfCategorie(categorie);
+        ArrayList<Question> listeQuestionOfCategorie = 
+                getQuestionOfCategorie(categorie);
 
-        ArrayList<Question> listeQuestionCategorieEtDifficulte = new ArrayList<Question>();
+        ArrayList<Question> listeQuestionCategorieEtDifficulte = 
+                new ArrayList<Question>();
 
         for (Question laQuestion : listeQuestionOfCategorie) {
             if (laQuestion.getDifficulte() == nivDifficulte
@@ -122,19 +126,22 @@ public class Questionnaire {
     }
 
     /**
-     * methode permettant de rajouter une réponse a une question par rapport a sa
-     * place dans la liste
+     * methode permettant de rajouter une réponse a une question par rapport a 
+     * sa place dans la liste
      * 
      * @param i             indice de la reponse dans la liste
      * @param reponseDonnee reponse a mettre dans la liste
      */
     public void stockerReponse(int i, String reponseDonnee) {
         if (i < 0 || i >= listeReponseDonnee.size()) {
-            throw new IllegalArgumentException("Tentative d'insertion d'une reponse a une place " + "inexistante");
+            throw new IllegalArgumentException(
+                    "Tentative d'insertion d'une reponse a une place " 
+                  + "inexistante");
         }
 
         if (reponseDonnee == null) {
-            throw new IllegalArgumentException("Tentative d'insertion d'une reponse null");
+            throw new IllegalArgumentException(
+                    "Tentative d'insertion d'une reponse null");
         }
         this.listeReponseDonnee.set(i, reponseDonnee);
     }
@@ -151,7 +158,8 @@ public class Questionnaire {
         double res = 0.0;
 
         for (int i = 0; i < nbQuestion; i++) {
-            if (listeQuestion.get(i).getPropositionJuste().equals(listeReponseDonnee.get(i))) {
+            if (listeQuestion.get(i).getPropositionJuste().
+                    equals(listeReponseDonnee.get(i))) {
                 nbReponseJuste++;
             }
         }
@@ -161,8 +169,8 @@ public class Questionnaire {
     }
 
     /**
-     * Methode qui recupere l'objet Question a l'indice demander en parametre dans
-     * la liste des questions du questionnaire
+     * Methode qui recupere l'objet Question a l'indice demander en parametre 
+     * dans la liste des questions du questionnaire
      * 
      * @param i indice de la question dans la liste
      * @return laQuestion la question a l'indice i

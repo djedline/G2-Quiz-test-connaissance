@@ -1,6 +1,6 @@
 /*
  * DonneesTest.java                                    13 nov. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.modele.tests;
 
@@ -9,7 +9,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Persistance;
@@ -25,7 +24,8 @@ import iut.sae.modele.Question;
 class DonneesTest {
 
     /**
-     * Crée les fixtures de test. ATTENTION ces tests réunitialise les sauvegardes.
+     * Crée les fixtures de test. ATTENTION ces tests réunitialise les 
+     * sauvegardes.
      * 
      * @throws java.lang.Exception
      */
@@ -53,15 +53,16 @@ class DonneesTest {
      */
     @Test
     public void testAjoutQuestion() {
-    	Persistance.chargerSansImport();
+        Persistance.chargerSansImport();
         creerQuestion(Donnees.listeCategorie.get(1));
         fermetureAppli();
 
         Persistance.chargerSansImport();
         assertEquals(1, Donnees.listeQuestions.size());
         assertEquals("Intitulé", Donnees.listeQuestions.get(0).getLibelle());
-        assertEquals(Donnees.listeCategorie.get(1), 
-        		Donnees.listeQuestions.get(0).getCategorie());
+        assertEquals(
+                Donnees.listeCategorie.get(1), 
+                Donnees.listeQuestions.get(0).getCategorie());
         fermetureAppli();
     }
 
@@ -77,7 +78,7 @@ class DonneesTest {
         Persistance.chargerSansImport();
         assertEquals(2, Donnees.listeCategorie.size());
         assertEquals("Catégorie de test", 
-        		Donnees.listeCategorie.get(1).getLibelle());
+                Donnees.listeCategorie.get(1).getLibelle());
         fermetureAppli();
     }
 
@@ -106,7 +107,9 @@ class DonneesTest {
      * @param cat la catégorie de la question
      */
     private void creerQuestion(Categorie cat) {
-        Question nouvelleQuestion = new Question("Intitulé", cat, "Juste", new String[] { "Faux" }, "Feedback", 1);
+        Question nouvelleQuestion = new Question(
+                "Intitulé", cat, "Juste", new String[] { "Faux" }, "Feedback", 
+                1);
 
         if (!Donnees.verifDoubleQuestion(nouvelleQuestion)) {
             Donnees.listeQuestions.add(nouvelleQuestion);
