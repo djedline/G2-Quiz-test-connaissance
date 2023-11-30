@@ -22,7 +22,7 @@ import iut.sae.modele.Question;
  *         leo.cheikh-boukal
  * @version 1.0
  */
-class DonneesTest {
+class PersistanceTest {
 
     /**
      * Crée les fixtures de test. ATTENTION ces tests réunitialise les sauvegardes.
@@ -54,13 +54,13 @@ class DonneesTest {
     @Test
     public void testAjoutQuestion() {
     	Persistance.chargerSansImport();
-        creerQuestion(Donnees.listeCategorie.get(1));
+        creerQuestion(Donnees.listeCategorie.get(0));
         fermetureAppli();
 
         Persistance.chargerSansImport();
         assertEquals(1, Donnees.listeQuestions.size());
         assertEquals("Intitulé", Donnees.listeQuestions.get(0).getLibelle());
-        assertEquals(Donnees.listeCategorie.get(1), 
+        assertEquals(Donnees.listeCategorie.get(0), 
         		Donnees.listeQuestions.get(0).getCategorie());
         fermetureAppli();
     }
