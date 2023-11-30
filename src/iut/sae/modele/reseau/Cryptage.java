@@ -1,11 +1,8 @@
 /*
- * Cryptage.java                                    14 nov. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ * Cryptage.java                                                    14 nov. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.modele.reseau;
-
-import java.lang.Math;
-import iut.sae.modele.reseau.DiffieHellman;
 
 /**
  * Classe qui permet le cryptage d'un message grâce à la génération d'une clé
@@ -56,7 +53,8 @@ public class Cryptage {
         do {
             reste = gxe % TAILLE_ENSEMBLE;
             gxe = (int) gxe / TAILLE_ENSEMBLE;
-            if (Character.isValidCodePoint(reste) && Character.toString(reste).length() == 1) {
+            if (Character.isValidCodePoint(reste) && Character.toString(reste)
+                    .length() == 1) {
                 laCle += Character.toString(reste);
             }
         } while (gxe > TAILLE_ENSEMBLE);
