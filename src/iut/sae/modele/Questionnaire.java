@@ -14,7 +14,21 @@ import static iut.sae.modele.Donnees.getQuestionOfCategorie;
  * @version 1.0
  */
 public class Questionnaire {
-
+    
+    /** message d'erreur pour une liste de question vide */
+    public static final String ERREUR_QUESTION_VIDE = 
+            "La liste de question de cette categorie et difficulte "
+                    + "est vide";
+    
+    /** 
+     * Message d'erreur pour une liste de question plus petite que le nombre 
+     * prevu
+     */
+    public static final String ERREUR_MANQUE_DE_QUESTION = 
+                      "Attention, La liste de question " 
+                    + "ne contient pas assez de question, Voulez-vous créer "
+                    + "quand même le questionnaire ?";
+    
     /** Liste de question choisi */
     private ArrayList<Question> listeQuestion;
 
@@ -45,9 +59,7 @@ public class Questionnaire {
         int tailleListe = listeQuestionCategorieEtDifficulte.size();
         
         if (tailleListe == 0) {
-            throw new IllegalArgumentException(
-                    "La liste de question de cette categorie et difficulte "
-                    + "est vide");
+            throw new IllegalArgumentException(ERREUR_QUESTION_VIDE);
         }
         
         listeQuestion = listeQuestionCategorieEtDifficulte;
@@ -80,10 +92,12 @@ public class Questionnaire {
 
         int tailleListe = listeQuestionCategorieEtDifficulte.size();
 
+        if (tailleListe == 0) {
+            throw new IllegalArgumentException(ERREUR_QUESTION_VIDE);
+        }
+        
         if (tailleListe < nbQuestion) {
-            throw new IllegalArgumentException(
-                    "Attention, La liste de question" 
-                            + " ne contient pas assez de question");
+            throw new IllegalArgumentException(ERREUR_MANQUE_DE_QUESTION);
         }
         
         
