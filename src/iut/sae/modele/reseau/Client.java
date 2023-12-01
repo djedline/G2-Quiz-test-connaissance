@@ -72,16 +72,19 @@ public class Client {
             throw new IOException("Hôte inconnu : " + e.getMessage());
         } catch (ConnectException e) {
             e.printStackTrace();
-            throw new IOException("La connexion a été refusée : " + e.getMessage());
+            throw new IOException("La connexion a été refusée : " 
+            + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
-            throw new IOException("Erreur lors de la création de la Socket client : " + e.getMessage());
+            throw new IOException(
+                    "Erreur lors de la création de la Socket client : " 
+            + e.getMessage());
         }
     }
 
     /**
-     * Permet de recevoir la requete du client et de l'analyser pour construire le
-     * contenu de la reponse
+     * Permet de recevoir la requete du client et de l'analyser pour construire 
+     * le contenu de la reponse
      * Crypte le fichier et l'envoie
      * @param fichierEnvoyer 
      * 
@@ -119,7 +122,8 @@ public class Client {
                     fichierEnvoyer.createNewFile();
                 }
 
-                FileReader fr = new FileReader(fichierEnvoyer, Charset.forName("UTF-8"));
+                FileReader fr = new FileReader(
+                        fichierEnvoyer, Charset.forName("UTF-8"));
                 while (fr.ready()) {
                     fichLu += Character.toString(fr.read());
                 }
@@ -149,7 +153,8 @@ public class Client {
         try {
             if (sock != null) {
                 OutputStream os = sock.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
                 writer.write(rep);
                 System.out.println("Le client a envoyé " + rep);
                 writer.flush();

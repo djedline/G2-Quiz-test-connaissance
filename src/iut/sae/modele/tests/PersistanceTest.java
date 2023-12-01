@@ -1,6 +1,6 @@
 /*
  * DonneesTest.java                                    13 nov. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.modele.tests;
 
@@ -9,7 +9,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Persistance;
@@ -25,7 +24,8 @@ import iut.sae.modele.Question;
 class PersistanceTest {
 
     /**
-     * Crée les fixtures de test. ATTENTION ces tests réunitialise les sauvegardes.
+     * Crée les fixtures de test. ATTENTION ces tests réunitialise les 
+     * sauvegardes.
      * 
      * @throws java.lang.Exception
      */
@@ -53,15 +53,26 @@ class PersistanceTest {
      */
     @Test
     public void testAjoutQuestion() {
+<<<<<<< HEAD:src/iut/sae/modele/tests/DonneesTest.java
+        Persistance.chargerSansImport();
+        creerQuestion(Donnees.listeCategorie.get(1));
+=======
     	Persistance.chargerSansImport();
         creerQuestion(Donnees.listeCategorie.get(0));
+>>>>>>> fe7c7d5133cbbf5ed5098128ddeabeef11cbcb33:src/iut/sae/modele/tests/PersistanceTest.java
         fermetureAppli();
 
         Persistance.chargerSansImport();
         assertEquals(1, Donnees.listeQuestions.size());
         assertEquals("Intitulé", Donnees.listeQuestions.get(0).getLibelle());
+<<<<<<< HEAD:src/iut/sae/modele/tests/DonneesTest.java
+        assertEquals(
+                Donnees.listeCategorie.get(1), 
+                Donnees.listeQuestions.get(0).getCategorie());
+=======
         assertEquals(Donnees.listeCategorie.get(0), 
         		Donnees.listeQuestions.get(0).getCategorie());
+>>>>>>> fe7c7d5133cbbf5ed5098128ddeabeef11cbcb33:src/iut/sae/modele/tests/PersistanceTest.java
         fermetureAppli();
     }
 
@@ -77,7 +88,7 @@ class PersistanceTest {
         Persistance.chargerSansImport();
         assertEquals(2, Donnees.listeCategorie.size());
         assertEquals("Catégorie de test", 
-        		Donnees.listeCategorie.get(1).getLibelle());
+                Donnees.listeCategorie.get(1).getLibelle());
         fermetureAppli();
     }
 
@@ -106,7 +117,9 @@ class PersistanceTest {
      * @param cat la catégorie de la question
      */
     private void creerQuestion(Categorie cat) {
-        Question nouvelleQuestion = new Question("Intitulé", cat, "Juste", new String[] { "Faux" }, "Feedback", 1);
+        Question nouvelleQuestion = new Question(
+                "Intitulé", cat, "Juste", new String[] { "Faux" }, "Feedback", 
+                1);
 
         if (!Donnees.verifDoubleQuestion(nouvelleQuestion)) {
             Donnees.listeQuestions.add(nouvelleQuestion);
