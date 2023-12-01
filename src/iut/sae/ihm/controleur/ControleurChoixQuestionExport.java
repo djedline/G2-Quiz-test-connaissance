@@ -36,6 +36,7 @@ import javafx.scene.control.cell.CheckBoxTreeCell;
  */
 public class ControleurChoixQuestionExport {
 
+
 	@FXML
 	private Button btnAnnuler;
 
@@ -86,8 +87,8 @@ public class ControleurChoixQuestionExport {
 	}
 
 	/** TODO comment method role
-         * @param f
-         */
+	 * @param f
+	 */
 	public void setExportFile(File f) {
 		this.fichierAExporter = f;
 	}
@@ -153,5 +154,6 @@ public class ControleurChoixQuestionExport {
 			new Alert(AlertType.ERROR, e.getMessage()).show();
 		}
 	}
+
 
 }

@@ -100,7 +100,7 @@ public class EchangeurDeVue {
 
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
-         
+
         } catch (IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println(
@@ -137,7 +137,7 @@ public class EchangeurDeVue {
 
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
-          
+
         } catch (IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println(
