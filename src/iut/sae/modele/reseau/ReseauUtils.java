@@ -8,11 +8,16 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
+/** TODO comment class responsibility (SRP)
+ * @author nael.briot
+ *
+ */
 public class ReseauUtils {
 	
     /** 
      * Lit les données dans une String depuis la socket tant qu'elles 
      * sont disponibles.
+     * @param sock 
      * @throws IOException si la lecture est impossible.
      * @return strRecu l'ensemble des données reçues
      */
@@ -28,6 +33,7 @@ public class ReseauUtils {
 	
     /**
      * Envoie les données passées en paramètre dans la socket.
+     * @param sock 
      * @param data les données à envoyer
      * @throws IOException si les données ne sont pas envoyées.
      */

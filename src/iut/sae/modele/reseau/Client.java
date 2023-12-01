@@ -79,6 +79,10 @@ public class Client {
         }
     }
     
+    /** TODO comment method role
+     * @return
+     * @throws IOException
+     */
     public int echangerDonneesCryptage() throws IOException {
         try {
         	String msgP = ReseauUtils.reception(sock);
@@ -95,6 +99,11 @@ public class Client {
         }
     }
     
+    /** TODO comment method role
+     * @param fich
+     * @param cle
+     * @throws IOException
+     */
     public void envoyer(File fich, int cle) throws IOException {
     	BufferedReader br = new BufferedReader(new FileReader(fich));
     	String contenuFich = "";
