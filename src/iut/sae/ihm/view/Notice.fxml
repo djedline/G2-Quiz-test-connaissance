@@ -161,6 +161,8 @@
                                           <Font size="20.0" />
                                        </font>
                                     </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour importer les données, l'utilisateur dois se rendre sur la page &quot;Import de données&quot;." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Il dois selectionner le fichier .cvs qu'il veux importer. Cliquer sur le bouton parcourir ouvrira un gestionnaire de fichier pour facilité cette tache. Apres, il dois cliquer sur le boutons validé." wrappingWidth="431.0" />
                                  </children>
                               </VBox>
                            </children>
@@ -173,7 +175,46 @@
             </Tab>
             <Tab text="Jouer">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" />
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS">
+                     <content>
+                        <TextFlow prefWidth="450.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="434.0" spacing="3.0">
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment créer un questionnaire ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour jouer au jeu, l'utilisateur dois lancer un quiz dans le menu principal." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sur la page de création de questionnaire, l'utilisateur dois renseigner la categorie et la difficulté du questionnaire qu'il veux créer." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="L'utilisateur peux aussi ne pas choisir de categorie et de difficulté, en utilisent la l'option &quot;indiferent&quot;." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="L'utilisateur dois aussi choisir le nombre de question du questionnaire. Si il y a moins de question de la categorie et difficulté demandé, l'utilisateur seras mis au courent." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment repondre au question ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sur la page de questionnaire, l'utilisateur dois repondre au differente question pour avencer. Pour ce faire, il peux soir selectionner une reponser et cliquer sur &quot;valider&quot;, ou bien cliquer sur le bouton &quot;passer&quot;." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si l'utilisateur passe une question, elle sera considerer comme fausse." />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment voir ses resultat ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Une fois avoir fini le questionnaire, l'utilisateur auras acces a ses resultat. En haut il pourras voir son score, et au millieux de l'ecran il pourras voir quelle reponse etait attendue ainsi que la reponse qu'il a rentrer. Enfin en bas il pouras voir, si il y en a un, une explication." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tout en bas de la page, l'utilisateur pourras passer a la correction de la question suivante. Si il le souhaite, il pourras aussi retourner au menu principal sans voir la correction." wrappingWidth="431.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </TextFlow>
+                     </content></ScrollPane>
                </content>
             </Tab>
         </tabs>
