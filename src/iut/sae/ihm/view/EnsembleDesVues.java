@@ -57,9 +57,12 @@ public class EnsembleDesVues {
     
     /** Code de la vue pour gerer les donnees*/
     public static final int VUE_MODIFIER_NOM = 13;
-    
+
     /** Code de la vue pour sélectionner les questions à exporter */
     public static final int VUE_SELECT_EXPORT = 14;
+    
+    /** Code de la vue de la notice*/
+    public static final int VUE_NOTICE = 15;
     
     /** Tableau contenant les noms des fichiers fxml des différentes vues
      * de l'application. Il y a une correspondance entre l'indice de la case
@@ -68,11 +71,12 @@ public class EnsembleDesVues {
     
     private static final String[] NOM_DES_VUES =
         { "MenuPrincipal.fxml", "MenuGestionDonnees.fxml", "creerQuestion.fxml",
-          "creerCategorie.fxml",  "creerQuestionnaire.fxml", 
-          "MenuGestionImpExp.fxml", "ImportDonnees.fxml", "ExportDonnees.fxml",
-          "GestionDonnees.fxml", "Partager.fxml", "Serveur.fxml", 
-          "questionnaire.fxml","resultatQuestionnaire.fxml",
-          "modifierNomUtilisateur.fxml", "ChoixQuestionsExportation.fxml"};
+          "creerCategorie.fxml",  "creerQuestionnaire.fxml", "MenuGestionImpExp.fxml", 
+          "ImportDonnees.fxml", "ExportDonnees.fxml", "GestionDonnees.fxml", 
+          "Partager.fxml", "Serveur.fxml", "questionnaire.fxml",
+          "resultatQuestionnaire.fxml","modifierNomUtilisateur.fxml", 
+          "ChoixQuestionsExportation.fxml","Notice.fxml"};
+
 
     /**
      * Renvoie le nom du fichier fxml contenant la vue dont le code est donné en

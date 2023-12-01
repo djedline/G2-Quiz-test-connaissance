@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurNotice">
+   <children>
+      <Button fx:id="btnRetour" layoutX="162.0" layoutY="260.0" mnemonicParsing="false" onAction="#clicRetour" prefHeight="31.0" prefWidth="126.0" text="Retour">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <TabPane prefHeight="260.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Créer des données">
+               <content>
+                  <ScrollPane hbarPolicy="NEVER" prefWidth="450.0">
+                     <content>
+                        <TextFlow prefWidth="450.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="434.0" spacing="3.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment créer des données ?">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vous pouvez creer des categories et des question dans l'onglet &quot;Gérer les données&quot;, avec les boutons &quot;Créer categorie&quot; et &quot;Créer question&quot;." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment créer des categories ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quand vous etes sur la page &quot;Créer categorie&quot;, vous devez remplir la zone de texte avec le nom de la categorie que vous voulez créer. Appuillez ensuite sur le bouton créer pour créer la catégorie." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous laissez la zone de texte vide, ou si vous rentrer un nom d'un categorie qui existe deja. Le programme renveras une erreur." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment créer des questions ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quand vous etes sur la page &quot;Créer question&quot;, vous devez remplir les different champs. Certain sont obligatoire et d'autre ne le sont pas." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Les information obligatoire sont : le libellé, la difficulté, la catégorie, la réponse juste et au moins une réponse fausse." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Il n'est pas obligatoire de remplire le feedback, ou les 4 reponse fausse. Il faut juste que une des reponse fausse soit remplit, peut importe l'ordre." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Une fois les parametres remplit, cliquez sur le bouton créer." wrappingWidth="431.0" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </TextFlow>
+                     </content>
+                  </ScrollPane>
+               </content>
+          </Tab>
+          <Tab text="Modifier des données">
+               <content>
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS">
+                     <content>
+                        <TextFlow prefWidth="450.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="434.0" spacing="3.0">
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment modifier les données ?">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour modifier les données vous devez allez sur la page de modification de données. Elle se trouve dans le menu &quot;Gérer les données&quot;." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sur cette page, vous pouvez modifier ou supprimer les question et categorie." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour acceder au questinon, vous devez cliquer sur la petite fleche a coté du nom des catégories. Cela deroulera toute les questions de cette categorie." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment modifier ou supprimer les categories ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quand vous cliquer sur le bouton gérer a coté du nom d'une catégorie, un menu s'ouvrira." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous cliquer sur le bouton modifier, cela vous amenera sur la page de modification de categorie. Elle fonctione de la meme maniere que la page de création de catégorie.." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour annuler les modification , cliquer sur le bouton &quot;Annuler&quot;." />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous cliquer sur le bouton suprimer, cela suprimera la categorie. Si la question n'est pas vide, l'application afficheras un message demandant la confirmation de l'action, car elle encoureras la supression de toutes les question dans la catégorie." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment modifier ou supprimer les questions ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comme pour les categories, le boutons &quot;Gérer&quot; ouvre un menu." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;Modifier&quot; vous enveras sur la page &quot;Modification de question&quot; qui fonctionne de la meme maniere que &quot;Création de question&quot;. Et &quot;Supprimer suprimera la question." wrappingWidth="431.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </TextFlow>
+                     </content></ScrollPane>
+               </content>
+          </Tab>
+            <Tab text="Partager des données">
+               <content>
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <TextFlow prefWidth="450.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="434.0" spacing="3.0">
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                                 <children>
+                                    <Text fill="#d90000" strokeType="OUTSIDE" strokeWidth="0.0" text="LE PARTAGE DE DONNEES N'EST POSSIBLE QUE ENTRE DEUX ORDINATEUR CONNECTER SUR LE MEME RESAUX" textAlignment="CENTER" wrappingWidth="431.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment partager les données ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour partager les données, vous devez aller sur la page &quot;Echange de données&quot; accesible depuis le menu principal." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Il faut deux ordinateur pour partager les données. La personne qui veux envoyer les données vas devoir commencer par exporter ses données*." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Une fois le csv créer, la personne qui veut recevoir les données vas devoir lancer un serveur**. La personne qui veux les envoyer vas devoir se connecter a ce serveur***." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Une fois le fichier récuperer, la personne qui veux recupérer les données vas devoir les importer****. " wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*Comment Exporter les données ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sur la page &quot;Exporter les données&quot;, l'utilisateur dois d'abors commencer par le nom de son fichier de sauvegarde ainsi que son emplacement. Le fichier dois forcement etre un .csv." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ensuite, l'utilisateur dois choisir les données qu'il veux partager. pour cela il dois cocher les differente question est categorie qu'il veux exporter." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si une categorie est cocher, cela exportera toute les question de la catégorie." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quand le bouton valider est cliquer, le fichier .csv seras créer." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="**Comment lancer un serveur ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour lancer un serveur, l'utilisateur dois cliquer sur le bouton &quot;Information serveur&quot; puis sur le bouton démarrer." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="L'adresse ip du serveur est trouvable au millieux de la page." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="***Comment se connecter a un serveur ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour se connecter a un serveur, l'utilisateur dois allez sur la page &quot;Partager les données&quot;, l'utilisateur devras renseigner l'adresse ip du serveur, ainsi que le fichier .csv qu'il veut partager." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="****Comment importer des données ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour importer les données, l'utilisateur dois se rendre sur la page &quot;Import de données&quot;." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Il dois selectionner le fichier .cvs qu'il veux importer. Cliquer sur le bouton parcourir ouvrira un gestionnaire de fichier pour facilité cette tache. Apres, il dois cliquer sur le boutons validé." wrappingWidth="431.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </TextFlow>
+                     </content></ScrollPane>
+               </content>
+            </Tab>
+            <Tab text="Jouer">
+               <content>
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS">
+                     <content>
+                        <TextFlow prefWidth="450.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="434.0" spacing="3.0">
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment créer un questionnaire ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pour jouer au jeu, l'utilisateur dois lancer un quiz dans le menu principal." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sur la page de création de questionnaire, l'utilisateur dois renseigner la categorie et la difficulté du questionnaire qu'il veux créer." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="L'utilisateur peux aussi ne pas choisir de categorie et de difficulté, en utilisent la l'option &quot;indiferent&quot;." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="L'utilisateur dois aussi choisir le nombre de question du questionnaire. Si il y a moins de question de la categorie et difficulté demandé, l'utilisateur seras mis au courent." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment repondre au question ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sur la page de questionnaire, l'utilisateur dois repondre au differente question pour avencer. Pour ce faire, il peux soir selectionner une reponser et cliquer sur &quot;valider&quot;, ou bien cliquer sur le bouton &quot;passer&quot;." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si l'utilisateur passe une question, elle sera considerer comme fausse." />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comment voir ses resultat ?" wrappingWidth="431.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Une fois avoir fini le questionnaire, l'utilisateur auras acces a ses resultat. En haut il pourras voir son score, et au millieux de l'ecran il pourras voir quelle reponse etait attendue ainsi que la reponse qu'il a rentrer. Enfin en bas il pouras voir, si il y en a un, une explication." wrappingWidth="431.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tout en bas de la page, l'utilisateur pourras passer a la correction de la question suivante. Si il le souhaite, il pourras aussi retourner au menu principal sans voir la correction." wrappingWidth="431.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </TextFlow>
+                     </content></ScrollPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>

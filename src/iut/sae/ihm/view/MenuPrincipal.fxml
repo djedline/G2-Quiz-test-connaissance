@@ -30,6 +30,11 @@
                   <Font size="15.0" />
                </font>
             </Button>
+            <Button fx:id="btnNotice" mnemonicParsing="false" onAction="#clicNotice" prefHeight="30.0" prefWidth="184.0" text="Notice d'utilisation">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
 	</children>
