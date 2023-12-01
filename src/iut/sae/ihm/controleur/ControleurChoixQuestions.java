@@ -10,14 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Categorie;
 import iut.sae.modele.CustomBtn;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -32,7 +30,6 @@ import javafx.scene.control.TreeView;
 
 /**
  * Controleur de la scène GestionDonnees
- * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
  * @version 1.0
@@ -64,8 +61,8 @@ public class ControleurChoixQuestions {
                 : "fx:id=\"treeViewData\" was not injected: check your FXML file 'GestionDonnees.fxml'.";
 
         // Créez les racines pour le TreeView
-
-                EventHandler<ActionEvent> modifierCat = new EventHandler<ActionEvent>() {
+        EventHandler<ActionEvent> modifierCat = new EventHandler<ActionEvent>() {
+            
             public void handle(ActionEvent e)
             {
                 Categorie laCategorie = (Categorie)((MenuItem)e.getSource()).getUserData();

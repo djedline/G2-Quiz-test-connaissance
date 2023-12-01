@@ -12,42 +12,42 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="idCommentaireResultat" alignment="CENTER" layoutX="18.0" layoutY="65.0" prefHeight="30.0" prefWidth="622.0" text="**Message/Commentaire sur le résultat**" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="idCommentaireResultat" alignment="TOP_CENTER" layoutX="18.0" layoutY="65.0" prefHeight="53.0" prefWidth="622.0" text="**Message/Commentaire sur le résultat**" textAlignment="CENTER" wrapText="true">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="idQuestion" alignment="TOP_LEFT" layoutX="51.0" layoutY="101.0" prefHeight="71.0" prefWidth="565.0" text="**Question**" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="idQuestion" alignment="TOP_LEFT" layoutX="46.0" layoutY="120.0" prefHeight="71.0" prefWidth="565.0" text="**Question**" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="44.0" layoutY="174.0" prefHeight="30.0" prefWidth="145.0" text="Réponse Juste :" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="39.0" layoutY="193.0" prefHeight="30.0" prefWidth="145.0" text="Réponse Juste :" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="idReponseJuste" alignment="TOP_LEFT" layoutX="291.0" layoutY="178.0" prefHeight="53.0" prefWidth="344.0" text="**Reponse Juste**" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="idReponseJuste" alignment="TOP_LEFT" layoutX="286.0" layoutY="197.0" prefHeight="53.0" prefWidth="344.0" text="**Reponse Juste**" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="44.0" layoutY="230.0" prefHeight="30.0" prefWidth="171.0" text="Réponse Donnée :" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="39.0" layoutY="249.0" prefHeight="30.0" prefWidth="171.0" text="Réponse Donnée :" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="idReponseDonnee" alignment="TOP_LEFT" layoutX="291.0" layoutY="230.0" prefHeight="53.0" prefWidth="344.0" text="**Reponse Donnée**" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="idReponseDonnee" alignment="TOP_LEFT" layoutX="286.0" layoutY="249.0" prefHeight="53.0" prefWidth="344.0" text="**Reponse Donnée**" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="51.0" layoutY="284.0" prefHeight="30.0" prefWidth="145.0" text="FeedBack :" textAlignment="CENTER">
+      <Label alignment="TOP_LEFT" layoutX="44.0" layoutY="302.0" prefHeight="30.0" prefWidth="145.0" text="FeedBack :" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="idFeedBack" alignment="TOP_LEFT" layoutX="72.0" layoutY="314.0" prefHeight="71.0" prefWidth="534.0" text="**FeedBack**" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="idFeedBack" alignment="TOP_LEFT" layoutX="67.0" layoutY="332.0" prefHeight="53.0" prefWidth="534.0" text="**FeedBack**" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>

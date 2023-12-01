@@ -18,11 +18,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 
-/*
- * Représente le client dans les échanges de données via le réseau.
- */
 /**
- * TODO comment class responsibility (SRP)
+ * Représente le client dans les échanges de données via le réseau.
  * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
@@ -72,26 +69,69 @@ public class Client {
             throw new IOException("Hôte inconnu : " + e.getMessage());
         } catch (ConnectException e) {
             e.printStackTrace();
-            throw new IOException("La connexion a été refusée : " + e.getMessage());
+            throw new IOException("La connexion a été refusée : " 
+            + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
-            throw new IOException("Erreur lors de la création de la Socket client : " + e.getMessage());
+            throw new IOException(
+                    "Erreur lors de la création de la Socket client : " 
+            + e.getMessage());
         }
     }
-
+    
+    /** 
+     * Récupère les données et génère les données
+     * @return gA^b
+     * @throws IOException
+     */
+    public int echangerDonneesCryptage() throws IOException {
+        try {
+        	String msgP = ReseauUtils.reception(sock);
+            String msgG = ReseauUtils.reception(sock);
+	        int p = Integer.parseInt(msgP);
+	        int g = Integer.parseInt(msgG);
+	        String msgGA = ReseauUtils.reception(sock);
+	        int gA = Integer.parseInt(msgGA);
+	        int b = DiffieHellman.genererX();
+	        ReseauUtils.envoyerMessage(sock, Integer.toString(b));
+	        return (int) Math.pow(gA, b);
+        } catch (NumberFormatException e) {
+        	throw new IOException("Données corrompues envoyées par le serveur.");
+        }
+    }
+    
+    /** 
+     * Envoyer le fichier et la clé au serveur
+     * @param fich
+     * @param cle 
+     * @throws IOException
+     */
+    public void envoyer(File fich, int cle) throws IOException {
+    	BufferedReader br = new BufferedReader(new FileReader(fich));
+    	String contenuFich = "";
+    	while (br.ready()) {
+    		contenuFich += br.readLine();
+    	}
+    	br.close();
+    	
+    	String fichEncode = Cryptage.chiffrer(contenuFich, Integer.toString(cle));
+    	ReseauUtils.envoyerMessage(sock, fichEncode);
+    }
+    
     /**
-     * Permet de recevoir la requete du client et de l'analyser pour construire le
-     * contenu de la reponse
+     * Permet de recevoir la requete du client et de l'analyser pour construire 
+     * le contenu de la reponse
      * Crypte le fichier et l'envoie
      * @param fichierEnvoyer 
      * 
      * @return text : la reponse a la requete
      */
+    /*
     public String recevoirEtAnalyser(File fichierEnvoyer) {
+        
         String cle = "";
         String fichLu = "";
-
-
+        
         System.out.println("RECEPTION DE LA REPONSE");
         try {
 
@@ -119,7 +159,8 @@ public class Client {
                     fichierEnvoyer.createNewFile();
                 }
 
-                FileReader fr = new FileReader(fichierEnvoyer, Charset.forName("UTF-8"));
+                FileReader fr = new FileReader(
+                        fichierEnvoyer, Charset.forName("UTF-8"));
                 while (fr.ready()) {
                     fichLu += Character.toString(fr.read());
                 }
@@ -135,13 +176,22 @@ public class Client {
         }
         return fichLu;
     }
+    */
     
-    /**
+ /*   /**
      * Permet d'envoyer la reponse au client en retour d'une requete
      * 
      * @param rep : la reponse a envoyer
-     */
+     
     public void envoyerReponse(String rep) {
+        
+        String msgx2 = "";
+        String fichLu = "";
+        
+        int x2;
+        int gx2;
+        int gxe1;
+        
         System.out.println("ENVOI DE LA REPONSE");
         System.out.println("Le serveur est : " + sock.getLocalSocketAddress());
         System.out.println("Le client est : " + sock.getRemoteSocketAddress());
@@ -149,7 +199,8 @@ public class Client {
         try {
             if (sock != null) {
                 OutputStream os = sock.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
                 writer.write(rep);
                 System.out.println("Le client a envoyé " + rep);
                 writer.flush();
@@ -159,7 +210,7 @@ public class Client {
             System.err.println("Impossible de répondre au serveur.");
             e.printStackTrace();
         }
-    }
+    }*/
     
     /**
      * Ferme la socket courante.

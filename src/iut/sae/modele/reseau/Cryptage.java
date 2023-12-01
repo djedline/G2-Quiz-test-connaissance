@@ -1,11 +1,13 @@
 /*
- * Cryptage.java                                    14 nov. 2023
+<<<<<<< HEAD
+ù * Cryptage.java                                    14 nov. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+=======
+ * Cryptage.java                                                    14 nov. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
+>>>>>>> 9e76170f3c30abcb9ceba3a71a4610f0a101ede1
  */
 package iut.sae.modele.reseau;
-
-import java.lang.Math;
-import iut.sae.modele.reseau.DiffieHellman;
 
 /**
  * Classe qui permet le cryptage d'un message grâce à la génération d'une clé
@@ -18,13 +20,13 @@ import iut.sae.modele.reseau.DiffieHellman;
 public class Cryptage {
 
     /** La taille maximale de l'ensemble de caractères */
-    public final static int TAILLE_ENSEMBLE = 350;
+    public final static int TAILLE_ENSEMBLE = 255;
 
     /** La longueur max de la clé */
-    private final static double MAX_LONGUEUR_CLE = 100.0;
+    // private final static double MAX_LONGUEUR_CLE = 100.0;
 
     /** La longueur min de la clé */
-    private final static double MIN_LONGUEUR_CLE = 3.0;
+    // private final static double MIN_LONGUEUR_CLE = 3.0;
 
     /**
      * Programme Principal
@@ -32,7 +34,6 @@ public class Cryptage {
      * @param args
      */
     public static void main(String[] args) {
-        genereCleDiffie();
         String message = "Le cryptage c'est compliqué.";
         System.out.println("Message : " + message);
         String cle = genereCleDiffie();
@@ -43,12 +44,12 @@ public class Cryptage {
 
     /**
      * Génère la clé de cryptage grâce à la méthode de Diffie-Hellma
+     * 
      * @return la clé
      */
     public static String genereCleDiffie() {
         String laCle = "";
         int reste;
-        int p = DiffieHellman.genererModulo();
         int g = DiffieHellman.genererGenerateur();
         int x = DiffieHellman.genererX();
         int x1 = DiffieHellman.genererX();
@@ -57,7 +58,8 @@ public class Cryptage {
         do {
             reste = gxe % TAILLE_ENSEMBLE;
             gxe = (int) gxe / TAILLE_ENSEMBLE;
-            if (Character.isValidCodePoint(reste) && Character.toString(reste).length() == 1) {
+            if (Character.isValidCodePoint(reste) && Character.toString(reste)
+                    .length() == 1) {
                 laCle += Character.toString(reste);
             }
         } while (gxe > TAILLE_ENSEMBLE);
@@ -70,6 +72,7 @@ public class Cryptage {
      * 
      * @return laCle la clé de cryptage
      */
+
     /*
      * public static String genereCleVigenere() { String laCle = ""; int nombreAlea;
      * final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE -

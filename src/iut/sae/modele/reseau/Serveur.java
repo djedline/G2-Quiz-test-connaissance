@@ -20,7 +20,8 @@ import java.net.UnknownHostException;
  */
 public class Serveur {
 
-    private static final File FICHIER_A_ENVOYER = new File("src/iut/sae/modele/reseau/tests/fichEnvoi.txt");
+    private static final File FICHIER_A_ENVOYER = 
+            new File("src/iut/sae/modele/reseau/tests/fichEnvoi.txt");
 
     /** socket de connexion lors du démarrage du client et serveur */
     public ServerSocket conn;
@@ -38,12 +39,55 @@ public class Serveur {
             conn = new ServerSocket(6666);
             System.out.println("coucou");
         } catch (UnknownHostException e) {
-            System.err.println("Impossible de trouver l'ip");
+            System.err.println("Impossible de trouver l'adresse IP");
             e.printStackTrace();
         } catch (IOException e) {
             System.err.println("Impossible de créer la Socket serveur.");
             e.printStackTrace();
         }
+    }
+    
+    /** 
+     * Envoie les données initiales (P et G de Diffie-Hellman)
+     * @return int
+     * @throws IOException 
+     * @throws InterruptedException 
+     */
+    public int envoiDonneesInitiale() throws IOException, InterruptedException {
+        int p = DiffieHellman.genererModulo();
+        int g = DiffieHellman.genererGenerateur();
+        String msgP = Integer.toString(p);
+        String msgG = Integer.toString(g);
+        int b = DiffieHellman.genererX();
+        
+        ReseauUtils.envoyerMessage(comm, msgG);
+        Thread.sleep(500);
+        ReseauUtils.envoyerMessage(comm, msgP);
+        Thread.sleep(500);
+        System.out.println("Le serveur a envoyé : p et g)");
+        
+        String msgGB = Integer.toString((int) Math.pow(g, b));
+        ReseauUtils.envoyerMessage(comm, msgGB);
+        
+        String msgGA = ReseauUtils.reception(comm);
+        try {
+        	int gA = Integer.parseInt(msgGA);
+            return (int) Math.pow(gA, b);
+        } catch (NumberFormatException e) {
+        	throw new IOException("Données corrompues envoyées par le serveur");
+        }
+    }
+    
+    /** 
+     * Receptionne un le contenue d'un fichier
+     * @param cle
+     * @return f
+     * @throws IOException
+     */
+    public String receptionFichier(int cle) throws IOException {
+    	String contenuFichCrypte = ReseauUtils.reception(comm);
+    	return Cryptage.dechiffrer(contenuFichCrypte, 
+    			Integer.toString(cle));
     }
     
     /*
@@ -83,32 +127,6 @@ public class Serveur {
             e.printStackTrace();
         }
     }*/
-    
-    /**
-     * Méthode qui crée la clé a envoyer au serveur a partir d'un fichier
-     * 
-     * @return renvoie une chaine avec la clé à envoyer
-     * @throws IOException si le message n'a pas pu être construit
-     */
-    public static String genererCle() throws IOException {
-        return Cryptage.genereCleDiffie();
-    }
-    
-    /**
-     * @param data les données à envoyer
-     * @throws IOException si les données ne sont pas envoyées.
-     */
-    public void envoyerMessage(byte[] data) throws IOException {
-        System.out.println("ENVOI DES DONNEES");
-        try {
-            OutputStream os = comm.getOutputStream();
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-            os.write(data);
-            System.out.println("Le serveur a envoyé : " + data.toString());
-        } catch (IOException e) {
-            throw new IOException("Impossible d'envoyer le message au client.");
-        }
-    }
 
 
     /**
@@ -131,8 +149,10 @@ public class Serveur {
         System.out.println("ACCEPTATION");
         try {
             comm = conn.accept();
-            System.out.println("La inet Adress conn : " + conn.getInetAddress());
-            System.out.println("La inet Adress comm : " + comm.getInetAddress());
+            System.out.println("La inet Adress conn : " 
+                                + conn.getInetAddress());
+            System.out.println("La inet Adress comm : " 
+                                + comm.getInetAddress());
         } catch (IOException e) {
             System.err.println("Impossible d'accepter la connection.");
             e.printStackTrace();

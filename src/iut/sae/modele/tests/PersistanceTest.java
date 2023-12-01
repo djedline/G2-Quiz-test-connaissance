@@ -1,6 +1,6 @@
 /*
  * DonneesTest.java                                    13 nov. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.modele.tests;
 
@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
+import iut.sae.modele.Persistance;
 import iut.sae.modele.Question;
 
 /**
@@ -21,24 +22,22 @@ import iut.sae.modele.Question;
  *         leo.cheikh-boukal
  * @version 1.0
  */
-class DonneesTest {
+class PersistanceTest {
 
     /**
-     * Crée les fixtures de test. ATTENTION ces tests réunitialise les sauvegardes.
+     * Crée les fixtures de test. ATTENTION ces tests réunitialise les 
+     * sauvegardes.
      * 
      * @throws java.lang.Exception
      */
     @BeforeEach
     void setUp() throws Exception {
+        Persistance.effacerSauvegarde();
+        Donnees.reinitialiserDonnees();
     }
 
     @Test
-    void test() {
-        Donnees.FICH_CATEGORIES.delete();
-        Donnees.FICH_QUESTIONS.delete();
-
-        lancementAppli();
-
+    public void testAppliVide() {
         // vérification de l'existence de Général au démarrage
         assertEquals(1, Donnees.listeCategorie.size());
         assertEquals("Général", Donnees.listeCategorie.get(0).getLibelle());
@@ -46,51 +45,48 @@ class DonneesTest {
         fermetureAppli();
 
         // Vérifie l'existence des fichiers
-        assertTrue(Donnees.FICH_CATEGORIES.exists());
-        assertTrue(Donnees.FICH_QUESTIONS.exists());
-
-        testAjoutCategorie();
-        testAjoutQuestion();
+        assertTrue(Persistance.FICH_CATEGORIES.exists());
+        assertTrue(Persistance.FICH_QUESTIONS.exists());
     }
 
     /**
      * Vérifie qu'une question ajoutée est bien sauvegardée et restituée
      */
-    private void testAjoutQuestion() {
-        lancementAppli();
-        creerQuestion(Donnees.listeCategorie.get(1));
+    @Test
+    public void testAjoutQuestion() {
+    	Persistance.chargerSansImport();
+        creerQuestion(Donnees.listeCategorie.get(0));
         fermetureAppli();
 
-        lancementAppli();
-        assertEquals(Donnees.listeQuestions.size(), 1);
-        assertEquals(Donnees.listeQuestions.get(0).getLibelle(), "Intitulé");
-        assertEquals(Donnees.listeQuestions.get(0).getCategorie(), Donnees.listeCategorie.get(1));
+        Persistance.chargerSansImport();
+        assertEquals(1, Donnees.listeQuestions.size());
+        assertEquals("Intitulé", Donnees.listeQuestions.get(0).getLibelle());
+        assertEquals(Donnees.listeCategorie.get(0), 
+        		Donnees.listeQuestions.get(0).getCategorie());
         fermetureAppli();
     }
 
     /**
      * Vérifie qu'une catégorie ajoutée est bien sauvegardée et restituée
      */
-    private void testAjoutCategorie() {
-        lancementAppli();
+    @Test
+    public void testAjoutCategorie() {
+        Persistance.chargerSansImport();
         creerCategorie("Catégorie de test");
         fermetureAppli();
 
-        lancementAppli();
-        assertTrue(Donnees.listeCategorie.size() == 2);
-        assertEquals(Donnees.listeCategorie.get(1).getLibelle(), "Catégorie de test");
+        Persistance.chargerSansImport();
+        assertEquals(2, Donnees.listeCategorie.size());
+        assertEquals("Catégorie de test", 
+                Donnees.listeCategorie.get(1).getLibelle());
         fermetureAppli();
-    }
-
-    void lancementAppli() {
-        Donnees.charger();
     }
 
     /**
      * Réplique les actions de sauvegarde à la
      */
-    void fermetureAppli() {
-        Donnees.sauvegarder();
+    private void fermetureAppli() {
+        Persistance.sauvegarder();
     }
 
     /**
@@ -98,7 +94,7 @@ class DonneesTest {
      * 
      * @param nom le nom de la catégorie
      */
-    void creerCategorie(String nom) {
+    private void creerCategorie(String nom) {
         Categorie nouvelleCategorie = new Categorie(nom);
         if (!Donnees.verifDoubleCategorie(nouvelleCategorie)) {
             Donnees.listeCategorie.add(nouvelleCategorie);
@@ -110,8 +106,10 @@ class DonneesTest {
      * 
      * @param cat la catégorie de la question
      */
-    void creerQuestion(Categorie cat) {
-        Question nouvelleQuestion = new Question("Intitulé", cat, "Juste", new String[] { "Faux" }, "Feedback", 1);
+    private void creerQuestion(Categorie cat) {
+        Question nouvelleQuestion = new Question(
+                "Intitulé", cat, "Juste", new String[] { "Faux" }, "Feedback", 
+                1);
 
         if (!Donnees.verifDoubleQuestion(nouvelleQuestion)) {
             Donnees.listeQuestions.add(nouvelleQuestion);

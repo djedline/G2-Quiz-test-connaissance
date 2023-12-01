@@ -4,16 +4,14 @@
  */
 package iut.sae.ihm.controleur;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Scanner;
 
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
-import iut.sae.modele.reseau.Client;
+import iut.sae.modele.reseau.DiffieHellman;
 import iut.sae.modele.reseau.Serveur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 /**
  * Classe controleur de la page Serveur
@@ -54,9 +51,9 @@ public class ControleurServeur {
     private Button btnDemarrer;
 
     private Serveur serveurPartage = new Serveur();
-    //boolean allumageOk = false;
+    // boolean allumageOk = false;
 
-    /** 
+    /**
      * Initialise la liste déroulante
      */
     @FXML
@@ -74,17 +71,23 @@ public class ControleurServeur {
             btnDemarrer.setText("Eteindre");
         }
     }
-    
+
     @FXML
-    void clicDemarrer(ActionEvent event) {
-        //System.out.println(allumageOk);
-        //System.out.println(!allumageOk);
+    void clicDemarrer(ActionEvent event) throws IOException, InterruptedException {
+        // System.out.println(allumageOk);
+        // System.out.println(!allumageOk);
         if (!Donnees.serveurAllumee) {
+            String contenuFichier;
+            int cle;
             System.out.println("Salut");
             btnDemarrer.setText("Eteindre");
             Donnees.serveurAllumee = true;
-            //serveurPartage.preparerServeur();
-            ReceptionFichier();
+            // serveurPartage.preparerServeur();
+            Serveur s = new Serveur();
+            s.accepterConnexion();
+            cle = s.envoiDonneesInitiale();
+            contenuFichier = s.receptionFichier(cle);
+            
         } else {
             System.out.println("Au revoir");
             serveurPartage.fermetureServeur();
@@ -93,38 +96,38 @@ public class ControleurServeur {
             adresseIpServeur.setText("");
         }
     }
-        /** 
-         * Partage un fichier
-         */
-        public void ReceptionFichier() {
-            try {
-                serveurPartage.accepterConnexion();
-                String cle = "";
-                String recu ="";
-                while (recu.isEmpty()) {
-                    System.out.print("Génération et envoi de la clé");
-                    try {
-                        cle = Serveur.genererCle();
-                        System.out.println("Le serveur a envoyé : la cle)");
-                        serveurPartage.envoyerMessage(cle.getBytes());
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    
-                   // recu = Serveur.recevoirMessage(FICHIER_RECEPTION, cle);
+    
+    /**
+     * Partage un fichier
+     */
+   /* public void ReceptionFichier() {
+        try {
+            serveurPartage.accepterConnexion();
+            String recu = "";
+            while (recu.isEmpty()) {
+                System.out.print("Génération et envoi du générateur g " 
+                        + " et du modulo p");
+                try {
+                    System.out.println("Le serveur a envoyé la puissance x");
+                    serveurPartage.envoyerMessage((msgX.getBytes()));
+                 } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        
-        /*
-         * try { message = Client.construireMessage(fichierATraiter);
-         * Client.envoyerMessage(message.getBytes()); s = Client.recevoirMessage();
-         * Client.fermerSocket(); } catch (IOException | InterruptedException e) {
-         * System.out.println("Problème avec le fichier"); e.printStackTrace(); }
-         */
+
+                // recu = Serveur.recevoirMessage(FICHIER_RECEPTION, cle);
+            } 
+        } catch (Exception e) {
+            e.printStackTrace();
+      //}
+    } */
+
+    /*
+     * try { message = Client.construireMessage(fichierATraiter);
+     * Client.envoyerMessage(message.getBytes()); s = Client.recevoirMessage();
+     * Client.fermerSocket(); } catch (IOException | InterruptedException e) {
+     * System.out.println("Problème avec le fichier"); e.printStackTrace(); }
+     */
 
     @FXML
     void clicQuitter(ActionEvent event) {

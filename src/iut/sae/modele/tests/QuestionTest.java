@@ -10,11 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Question;
 
@@ -31,9 +29,12 @@ class QuestionTest {
     static String libelle = "Quel question ?";
     static Categorie nomCategorie = new Categorie("absurde");
     static String propoJuste = "Bonne question ?";
-    static String[] propoFausse = { "J'ai pas la reponse", "J'ai la reponse", "c'est quoi cette question ?" };
+    static String[] propoFausse = { 
+            "J'ai pas la reponse", "J'ai la reponse", 
+            "c'est quoi cette question ?" };
     static String feedback = "La réponse est 'Bonne question ?' car "
-            + "la reponse est compliqué et que c'est réellement" + " une bonne question";
+            + "la reponse est compliqué et que c'est réellement" 
+            + " une bonne question";
     static int diff = 2;
 
     /**
@@ -43,7 +44,8 @@ class QuestionTest {
      */
     @BeforeAll
     static void setUpBeforeClass() throws Exception {
-        listeQuestion.add(new Question(libelle, nomCategorie, propoJuste, propoFausse, feedback, diff));
+        listeQuestion.add(new Question(libelle, nomCategorie, propoJuste, 
+                                       propoFausse, feedback, diff));
 
     }
 
@@ -58,42 +60,47 @@ class QuestionTest {
 
     /**
      * Test method for
-     * {@link src.iut.sae.modele.Question#Question(java.lang.String, src.iut.sae.modele.Categorie, java.lang.String, java.lang.String[], java.lang.String, int)}.
+     * {@link src.iut.sae.modele.Question#Question
+     * (java.lang.String, src.iut.sae.modele.Categorie, java.lang.String, 
+     * java.lang.String[], java.lang.String, int)}.
      */
     @Test
     void testQuestion() {
         String[] tableauVide = {};
         String[] tableauAvecRien = { " ", " " };
         assertThrows(IllegalArgumentException.class, () -> {
-            listeQuestion.add(new Question("", nomCategorie, propoJuste, propoFausse, feedback, diff));
+            listeQuestion.add(new Question(
+                    "", nomCategorie, propoJuste, propoFausse, feedback, diff));
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
-            listeQuestion.add(new Question(libelle, null, propoJuste, propoFausse, feedback, diff));
+            listeQuestion.add(new Question(
+                    libelle, null, propoJuste, propoFausse, feedback, diff));
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
-            listeQuestion.add(new Question(libelle, nomCategorie, "", propoFausse, feedback, diff));
-        });
-
-        /*
-         * assertThrows(IllegalArgumentException.class, () -> {listeQuestion.add(new
-         * Question(libelle, nomCategorie, propoJuste, tableauVide,feedback,diff)); });
-         */
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            listeQuestion.add(new Question(libelle, nomCategorie, propoJuste, propoFausse, "", diff));
+            listeQuestion.add(new Question(
+                    libelle, nomCategorie, "", propoFausse, feedback, diff));
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
-            listeQuestion.add(new Question(libelle, nomCategorie, propoJuste, propoFausse, "", 5));
+            listeQuestion.add(new Question(
+                    libelle, nomCategorie, propoJuste, propoFausse, "", diff));
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
-            listeQuestion.add(new Question(" ", null, " ", tableauVide, " ", 0));
+            listeQuestion.add(new Question(
+                    libelle, nomCategorie, propoJuste, propoFausse, "", 5));
         });
 
-        assertTrue(listeQuestion.add(new Question(libelle, nomCategorie, propoJuste, propoFausse, feedback, diff)));
+        assertThrows(IllegalArgumentException.class, () -> {
+            listeQuestion.add(new Question(
+                    " ", null, " ", tableauVide, " ", 0));
+        });
+
+        assertTrue(listeQuestion.add(new Question(
+                libelle, nomCategorie, propoJuste, propoFausse, feedback, 
+                diff)));
     }
 
     /**
@@ -134,26 +141,29 @@ class QuestionTest {
     }
 
     /**
-     * Test method for {@link src.iut.sae.modele.Question#getPropositionJuste()}.
+     * Test method for {@link src.iut.sae.modele.Question#getPropositionJuste()}
      */
     @Test
     void testGetPropositionJuste() {
-        assertEquals(listeQuestion.get(0).getPropositionJuste(), "Exemple proposition juste");
+        assertEquals(listeQuestion.get(0).getPropositionJuste(), 
+                "Exemple proposition juste");
     }
 
     /**
      * Test method for
-     * {@link src.iut.sae.modele.Question#setPropositionJuste(java.lang.String)}.
+     * {@link src.iut.sae.modele.Question#setPropositionJuste(java.lang.String)}
      */
     @Test
     void testSetPropositionJuste() {
-        assertTrue(listeQuestion.get(0).setPropositionJuste("Exemple proposition juste"));
+        assertTrue(listeQuestion.get(0).setPropositionJuste(
+                "Exemple proposition juste"));
         assertFalse(listeQuestion.get(0).setPropositionJuste(""));
         assertFalse(listeQuestion.get(0).setPropositionJuste(" "));
     }
 
     /**
-     * Test method for {@link src.iut.sae.modele.Question#getPropositionFausse()}.
+     * Test method for 
+     * {@link src.iut.sae.modele.Question#getPropositionFausse()}
      */
     @Test
     void testGetPropositionFausse() {
@@ -167,13 +177,15 @@ class QuestionTest {
 
     /**
      * Test method for
-     * {@link src.iut.sae.modele.Question#setPropositionFausse(java.lang.String[])}.
+     * {@link src.iut.sae.modele.Question#setPropositionFausse
+     * (java.lang.String[])}
      */
     @Test
     void testSetPropositionFausse() {
         String[] mauvaisePropFausse = { "a", "", "b" };
         String[] vide = {};
-        assertFalse(listeQuestion.get(0).setPropositionFausse(mauvaisePropFausse));
+        assertFalse(listeQuestion.get(0).setPropositionFausse(
+                mauvaisePropFausse));
         assertFalse(listeQuestion.get(0).setPropositionFausse(vide));
         assertTrue(listeQuestion.get(0).setPropositionFausse(propoFausse));
 
