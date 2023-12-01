@@ -38,7 +38,6 @@ public class ImportExport {
         { "Catégorie", "Niveau", "Libellé", "Vrai", "Faux1", "Faux2", "Faux3",
             "Faux4", "Feedback" };
 
-
     /**
      * Envoie l'ensemble des questions de l'application dans un fichier.
      * 

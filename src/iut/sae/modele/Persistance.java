@@ -13,7 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 /** TODO comment class responsibility (SRP)
- * @author catal
+ * @author Nael Briot
  *
  */
 public class Persistance {
