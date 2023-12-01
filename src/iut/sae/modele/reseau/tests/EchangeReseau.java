@@ -4,10 +4,6 @@
  */
 package iut.sae.modele.reseau.tests;
 
-import java.io.IOException;
-
-import iut.sae.modele.reseau.Serveur;
-
 /**
  * TODO comment class responsibility (SRP)
  * 
