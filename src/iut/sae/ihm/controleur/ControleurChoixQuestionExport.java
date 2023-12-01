@@ -30,7 +30,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.CheckBoxTreeCell;
 
 /**
- * Controleur de la scène GestionDonnees
+ * Controleur de la scène ChoixQuestionExport
  * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
@@ -38,119 +38,124 @@ import javafx.scene.control.cell.CheckBoxTreeCell;
  */
 public class ControleurChoixQuestionExport {
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
+	@FXML
+	private Button btnAnnuler;
 
-    @FXML // fx:id="btnAnnuler"
-    private Button btnAnnuler; // Value injected by FXMLLoader
+	@FXML
+	private Button btnValider;
 
-    @FXML // fx:id="treeViewData"
-    private TreeView<Object> treeViewData; // Value injected by FXMLLoader
-
-    private File fichierAExporter;
-
-
-
-
-    @FXML
+	@FXML
+	private TreeView<Object> treeViewData;
+	
+	@FXML
     private CheckBox checkboxAllQuestions;
+	
+	private File fichierAExporter;
+	
+	@FXML // This method is called by the FXMLLoader when initialization is complete
+	void initialize() {
+		
+		// creation d'une arraylist qui contiendra les treeitem de categorie
+		List<CustomCheckboxTreeItem<Object>> listeTreeItem = new ArrayList<>();
+		for (Categorie item : Donnees.listeCategorie) {
+	
+			// crée et ajoute le treeitem de catégorie
+			CustomCheckboxTreeItem<Object> checkable = new CustomCheckboxTreeItem<>(item);
+			checkable.setValue(item);
+			listeTreeItem.add(checkable);
+	
+			for (Question laQuestion : Donnees.listeQuestions) {
+				
+				// si la categorie et la categorie de la question sont la meme
+				if (item.toString().equals(laQuestion.getCategorie().toString())) {
+					
+					// on cree un treeitem de la question
+					// et on l'ajoute au treeitem de la categorie
+					checkable.getChildren().add(new CheckBoxTreeItem<>(laQuestion));
+				}
+			}
+		}
+		// affiche les checkbox
+		treeViewData.setCellFactory(CheckBoxTreeCell.<Object>forTreeView());
+		
+		// on cree la racine du treeview puis on le cache
+		treeViewData.setRoot(new TreeItem<>());
+		treeViewData.getRoot().setExpanded(true);
+		treeViewData.setShowRoot(false);
+		
+		// on ajoute tout les treeitem des categorie
+		treeViewData.getRoot().getChildren().addAll(listeTreeItem);
+	}
 
-    /** TODO comment method role
-     * @param f
-     */
-    public void setExportFile(File f) {
-        this.fichierAExporter = f;
-    }
+	/** TODO comment method role
+	 * @param f
+	 */
+	public void setExportFile(File f) {
+		this.fichierAExporter = f;
+	}
 
-    @FXML
-    void retourArriere(ActionEvent event) {
-        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_EXPORT);
-    }
+	@FXML
+	/**
+	 * Coche toutes les questions si le bouton "tout exporter" est coché,
+	 * et les décoche si il est décoché
+	 * @param event l'évènement déclenché par la coche
+	 */
+	void checkExportAll(ActionEvent event) {
+		if(checkboxAllQuestions.isSelected()) {
+			for (TreeItem<Object> cat : treeViewData.getRoot().getChildren()) {
+				CheckBoxTreeItem<Object> catConv 
+						= (CheckBoxTreeItem<Object>) cat;
+				catConv.setSelected(true);
+			}
+		} else {
+			for (TreeItem<Object> cat : treeViewData.getRoot().getChildren()) {
+				CheckBoxTreeItem<Object> catConv 
+						= (CheckBoxTreeItem<Object>) cat;
+				catConv.setSelected(false);
+			}
+		}
+	}
 
-    @FXML
-    private Button btnValider;
+	@FXML
+	void retourArriere(ActionEvent event) {
+		EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_EXPORT);
+	}
 
-    @FXML
-    void valider(ActionEvent event) {
-        List<Question> selectionnees = new ArrayList<>();
+	@FXML
+	/**
+	 * Sélectionne toutes les questions à exporter dans une liste
+	 * et les exporte avant de notifier l'utilisateur du résultat de
+	 * l'exportation
+	 * @param event l'évènement déclenché.
+	 */
+	void valider(ActionEvent event) {
+		List<Question> selectionnees = new ArrayList<>();
+		
+		for (TreeItem<Object> itemCat : treeViewData.getRoot().getChildren()) {
+			CheckBoxTreeItem<Object> convertiCat = (CheckBoxTreeItem<Object>) itemCat;
+			if (convertiCat.isSelected()) {
+				Categorie laCat = (Categorie) convertiCat.getValue();
+				String nomCat = laCat.getLibelle();
+				selectionnees.addAll(Donnees.getQuestionOfCategorie(nomCat));
+			} else if (convertiCat.isIndeterminate()){
+				for (TreeItem<Object> itemQ : itemCat.getChildren()) {
+					CustomCheckboxTreeItem<Object> ccti = 
+							(CustomCheckboxTreeItem<Object>) itemQ;
+					if (ccti.isSelected() && ccti.getUserData() != null) {
+						Question q = (Question) ccti.getUserData();
+						selectionnees.add(q);
+					}
+				}
+			}
+		}
+		try {
+			ImportExport.exporter(fichierAExporter, selectionnees);
+			new Alert(AlertType.INFORMATION, "Exportation réussie.").show();
+		} catch (IOException e) {
+			new Alert(AlertType.ERROR, e.getMessage()).show();
+		}
+	}
 
-        for (TreeItem<Object> itemCat : treeViewData.getRoot().getChildren()) {
-            CheckBoxTreeItem<Object> convertiCat = (CheckBoxTreeItem<Object>) itemCat;
-            if (convertiCat.isSelected()) {
-                Categorie laCat = (Categorie) convertiCat.getValue();
-                String nomCat = laCat.getLibelle();
-                selectionnees.addAll(Donnees.getQuestionOfCategorie(nomCat));
-            } else if (convertiCat.isIndeterminate()){
-                for (TreeItem<Object> itemQ : itemCat.getChildren()) {
-                    CustomCheckboxTreeItem<Object> ccti = 
-                            (CustomCheckboxTreeItem<Object>) itemQ;
-                    if (ccti.isSelected() && ccti.getUserData() != null) {
-                        Question q = (Question) ccti.getUserData();
-                        selectionnees.add(q);
-                    }
-                }
-            }
-        }
-        try {
-            ImportExport.exporter(fichierAExporter, selectionnees);
-            new Alert(AlertType.INFORMATION, "Exportation réussie.").show();
-        } catch (IOException e) {
-            new Alert(AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
-    @FXML
-    void checkExportAll(ActionEvent event) {
-        if(checkboxAllQuestions.isSelected()) {
-            for (TreeItem<Object> cat : treeViewData.getRoot().getChildren()) {
-                CheckBoxTreeItem<Object> catConv 
-                = (CheckBoxTreeItem<Object>) cat;
-                catConv.setSelected(true);
-            }
-        } else {
-            for (TreeItem<Object> cat : treeViewData.getRoot().getChildren()) {
-                CheckBoxTreeItem<Object> catConv 
-                = (CheckBoxTreeItem<Object>) cat;
-                catConv.setSelected(false);
-            }
-        }
-    }
-
-    @FXML // This method is called by the FXMLLoader when initialization is complete
-    void initialize() {
-
-        // creation d'une arraylist qui contiendra les treeitem de categorie
-        List<CustomCheckboxTreeItem<Object>> listeTreeItem = new ArrayList<>();
-        for (Categorie item : Donnees.listeCategorie) {
-
-            // ajoute le treeitem
-            CustomCheckboxTreeItem<Object> checkable = new CustomCheckboxTreeItem<>(item);
-            checkable.setValue(item);
-
-            // ajout d'un treeitem avec en parametre la categorie et le menuButton
-            listeTreeItem.add(checkable);
-
-            for (Question laQuestion : Donnees.listeQuestions) {
-                // si la categorie et la categorie de la question sont la meme
-                if (item.toString().equals(laQuestion.getCategorie().toString())) {
-                    // on cree un treeitem avec en parametre la question et le menuButton
-                    // et on l'ajoute au treeitem de la categorie
-                    checkable.getChildren().add(new CheckBoxTreeItem<>(laQuestion));
-                }
-            }
-        }
-        // on cree le root du treeview puis on le cache
-        treeViewData.setCellFactory(CheckBoxTreeCell.<Object>forTreeView());
-        treeViewData.setRoot(new TreeItem<>());
-        treeViewData.getRoot().setValue("Exporter toutes les questions");
-        treeViewData.getRoot().setExpanded(true);
-        treeViewData.setShowRoot(false);
-
-        // on ajoute tout les treeitem des categorie
-        treeViewData.getRoot().getChildren().addAll(listeTreeItem);
-    }
 
 }

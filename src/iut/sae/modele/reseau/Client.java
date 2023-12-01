@@ -18,11 +18,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 
-/*
- * Représente le client dans les échanges de données via le réseau.
- */
 /**
- * TODO comment class responsibility (SRP)
+ * Représente le client dans les échanges de données via le réseau.
  * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
