@@ -66,7 +66,7 @@ public class ControleurPartager {
      */
     @FXML
     void initialize() {
-        chemineDossier = "src/fichiers_sauvegarde_partage/fichier_csv_stock";
+        chemineDossier = "fichiers_sauvegarde_partage/fichier_csv_stock";
         dossier = new File(chemineDossier);
         listeFichier = dossier.listFiles();
         ipOk = false;
