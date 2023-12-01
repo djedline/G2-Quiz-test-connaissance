@@ -49,6 +49,7 @@ public class Serveur {
     
     /** 
      * Envoie les données initiales (P et G de Diffie-Hellman)
+     * @return int
      * @throws IOException 
      * @throws InterruptedException 
      */
@@ -77,6 +78,12 @@ public class Serveur {
         }
     }
     
+    /** 
+     * Receptionne un le contenue d'un fichier
+     * @param cle
+     * @return f
+     * @throws IOException
+     */
     public String receptionFichier(int cle) throws IOException {
     	String contenuFichCrypte = ReseauUtils.reception(comm);
     	return Cryptage.dechiffrer(contenuFichCrypte, 

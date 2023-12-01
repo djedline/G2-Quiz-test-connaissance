@@ -77,13 +77,17 @@ public class ControleurServeur {
         // System.out.println(allumageOk);
         // System.out.println(!allumageOk);
         if (!Donnees.serveurAllumee) {
+            String contenuFichier;
+            int cle;
             System.out.println("Salut");
             btnDemarrer.setText("Eteindre");
             Donnees.serveurAllumee = true;
             // serveurPartage.preparerServeur();
             Serveur s = new Serveur();
             s.accepterConnexion();
-            s.envoiDonneesInitiale();
+            cle = s.envoiDonneesInitiale();
+            contenuFichier = s.receptionFichier(cle);
+            
         } else {
             System.out.println("Au revoir");
             serveurPartage.fermetureServeur();

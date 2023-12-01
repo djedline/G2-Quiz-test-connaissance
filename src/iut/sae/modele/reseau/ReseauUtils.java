@@ -8,8 +8,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-/** TODO comment class responsibility (SRP)
- * @author nael.briot
+/** 
+ * Fonction utilitaire qui permette de tout récupére facilement
+ * @author djedline.boyer
  *
  */
 public class ReseauUtils {
