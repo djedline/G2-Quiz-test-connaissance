@@ -78,32 +78,33 @@ public class Client {
             + e.getMessage());
         }
     }
-
-    /** TODO comment method role
-     * @throws IOException 
-     * @return strRecu l'ensemble des données reçues
-     */
-    public String reception() throws IOException {
-        String strRecu = "";
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(sock.getInputStream(), "UTF-8"));
-        while (reader.ready()) {
-            strRecu += Character.toString(reader.read());
+    
+    public int echangerDonneesCryptage() throws IOException {
+        try {
+        	String msgP = ReseauUtils.reception(sock);
+            String msgG = ReseauUtils.reception(sock);
+	        int p = Integer.parseInt(msgP);
+	        int g = Integer.parseInt(msgG);
+	        String msgGA = ReseauUtils.reception(sock);
+	        int gA = Integer.parseInt(msgGA);
+	        int b = DiffieHellman.genererX();
+	        ReseauUtils.envoyerMessage(sock, Integer.toString(b));
+	        return (int) Math.pow(gA, b);
+        } catch (NumberFormatException e) {
+        	throw new IOException("Données corrompues envoyées par le serveur.");
         }
-        return strRecu;
     }
     
-    /** TODO comment method role
-     * @throws IOException 
-     * 
-     */
-    public void recevoirDonneesInitiale() throws IOException {
-        String msgP = "";
-        String msgG = "";
-        int p;
-        int g;
-        msgG = reception();
-        msgP = reception();
+    public void envoyer(File fich, int cle) throws IOException {
+    	BufferedReader br = new BufferedReader(new FileReader(fich));
+    	String contenuFich = "";
+    	while (br.ready()) {
+    		contenuFich += br.readLine();
+    	}
+    	br.close();
+    	
+    	String fichEncode = Cryptage.chiffrer(contenuFich, Integer.toString(cle));
+    	ReseauUtils.envoyerMessage(sock, fichEncode);
     }
     
     /**
@@ -114,6 +115,7 @@ public class Client {
      * 
      * @return text : la reponse a la requete
      */
+    /*
     public String recevoirEtAnalyser(File fichierEnvoyer) {
         
         String cle = "";
@@ -163,6 +165,7 @@ public class Client {
         }
         return fichLu;
     }
+    */
     
     /**
      * Permet d'envoyer la reponse au client en retour d'une requete

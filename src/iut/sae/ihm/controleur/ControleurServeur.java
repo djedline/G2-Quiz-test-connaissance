@@ -81,7 +81,9 @@ public class ControleurServeur {
             btnDemarrer.setText("Eteindre");
             Donnees.serveurAllumee = true;
             // serveurPartage.preparerServeur();
-            envoiDonneesInitiale();
+            Serveur s = new Serveur();
+            s.accepterConnexion();
+            s.envoiDonneesInitiale();
         } else {
             System.out.println("Au revoir");
             serveurPartage.fermetureServeur();
@@ -89,26 +91,6 @@ public class ControleurServeur {
             btnDemarrer.setText("Demarrer");
             adresseIpServeur.setText("");
         }
-    }
-
-    /** TODO comment method role
-     * @throws IOException 
-     * @throws InterruptedException 
-     * 
-     */
-    public void envoiDonneesInitiale() throws IOException, InterruptedException {
-        String msgG = "";
-        String msgP = "";
-        int p;
-        int g;
-        p = DiffieHellman.genererModulo();
-        g = DiffieHellman.genererGenerateur();
-        msgP = Integer.toString(p);
-        msgG = Integer.toString(g);
-        System.out.println("Le serveur a envoyé : p et g)");
-        serveurPartage.envoyerMessage((msgG.getBytes()));
-        Thread.sleep(500);
-        serveurPartage.envoyerMessage((msgP.getBytes()));
     }
     
     /**
