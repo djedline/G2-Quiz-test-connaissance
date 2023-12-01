@@ -6,8 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import org.junit.Ignore;
+
 import org.junit.jupiter.api.Test;
+
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.ImportExport;

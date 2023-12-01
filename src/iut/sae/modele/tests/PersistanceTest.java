@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.Persistance;
@@ -53,26 +54,15 @@ class PersistanceTest {
      */
     @Test
     public void testAjoutQuestion() {
-<<<<<<< HEAD:src/iut/sae/modele/tests/DonneesTest.java
-        Persistance.chargerSansImport();
-        creerQuestion(Donnees.listeCategorie.get(1));
-=======
     	Persistance.chargerSansImport();
         creerQuestion(Donnees.listeCategorie.get(0));
->>>>>>> fe7c7d5133cbbf5ed5098128ddeabeef11cbcb33:src/iut/sae/modele/tests/PersistanceTest.java
         fermetureAppli();
 
         Persistance.chargerSansImport();
         assertEquals(1, Donnees.listeQuestions.size());
         assertEquals("Intitulé", Donnees.listeQuestions.get(0).getLibelle());
-<<<<<<< HEAD:src/iut/sae/modele/tests/DonneesTest.java
-        assertEquals(
-                Donnees.listeCategorie.get(1), 
-                Donnees.listeQuestions.get(0).getCategorie());
-=======
         assertEquals(Donnees.listeCategorie.get(0), 
         		Donnees.listeQuestions.get(0).getCategorie());
->>>>>>> fe7c7d5133cbbf5ed5098128ddeabeef11cbcb33:src/iut/sae/modele/tests/PersistanceTest.java
         fermetureAppli();
     }
 
