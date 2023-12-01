@@ -2,5 +2,6 @@
 .classpath
 .settings/
 *.data
+/donnees/
 .metadata/
 .gitignore

@@ -1,14 +1,11 @@
-/*
- * ControleurPartager.java                                    13 nov. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+/* ControleurPartager.java                                          13 nov. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.ihm.controleur;
 
 import java.io.File;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
@@ -91,8 +88,9 @@ public class ControleurPartager {
 
     @FXML
     void verifIp (ActionEvent event) {
-        //(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?) pour que le nombre soit de 0 à 255
-        Pattern motif = Pattern.compile("^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]"
+        // pour que le nombre soit de 0 à 255
+        Pattern motif = Pattern.compile(
+                "^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]"
                 + "?).){3}(25[0-5]|2[0-4][0-9]|[0-1]?"
                 + "[0-9][0-9]?)$");
         Matcher correct = motif.matcher(adresseIpServeur.getText());
@@ -120,7 +118,8 @@ public class ControleurPartager {
             clientPartage = new Client(adresseIpServeur.getText(), 6666);
             String reponse = "";
             System.out.println("RECEPTION CLE");
-            reponse = clientPartage.recevoirEtAnalyser(Donnees.fichierAPartager);
+            reponse = clientPartage.recevoirEtAnalyser(
+                    Donnees.fichierAPartager);
             clientPartage.envoyerReponse(reponse);
             clientPartage.fermerSocket();
         } catch (Exception e) {

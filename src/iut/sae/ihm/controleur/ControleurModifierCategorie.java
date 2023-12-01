@@ -1,6 +1,5 @@
-/*
- * ControleurModifierCategorie.java                                    18 oct. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+/* ControleurModifierCategorie.java                                 18 oct. 2023
+ * IUT Rodez, info1 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.ihm.controleur;
 
@@ -48,6 +47,7 @@ public class ControleurModifierCategorie {
 
     /**
      * Méthode permettant de modifier les arguments d'une catégorie
+     * 
      * @param lacat la Catégorie à modifier
      */
     public void setCategorie(Categorie lacat) {
@@ -62,10 +62,12 @@ public class ControleurModifierCategorie {
             if (!Donnees.verifNomCategorie(idNom.getText())) {
                 laCategorie.setTitreCat(idNom.getText());
                 System.out.println(laCategorie);
-                EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
+                EchangeurDeVue.echangerAvec(
+                        EnsembleDesVues.VUE_GESTION_DONNEES);
             } else {
                 Alert messageErreur = new Alert(AlertType.ERROR);
-                messageErreur.setContentText("Une catégorie avec le meme nom existe deja.");
+                messageErreur.setContentText(
+                        "Une catégorie avec le meme nom existe deja.");
                 messageErreur.show();
             }
 

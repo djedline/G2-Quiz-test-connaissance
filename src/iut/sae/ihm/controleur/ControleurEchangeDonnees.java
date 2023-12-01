@@ -1,6 +1,5 @@
-/*
- * ControleurImpExp.java                                    13 nov. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+/* ControleurImpExp.java                                            13 nov. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 
 package iut.sae.ihm.controleur;
@@ -15,8 +14,7 @@ import javafx.scene.layout.Pane;
 
 /**
  * Classe controleur permettant de gérer la page de gestion d'échange des
- * données
- * 
+ * données 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
  * @version 1.0

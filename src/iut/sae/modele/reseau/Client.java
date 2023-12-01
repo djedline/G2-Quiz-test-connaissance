@@ -18,11 +18,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 
-/*
- * Représente le client dans les échanges de données via le réseau.
- */
 /**
- * TODO comment class responsibility (SRP)
+ * Représente le client dans les échanges de données via le réseau.
  * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
@@ -72,26 +69,56 @@ public class Client {
             throw new IOException("Hôte inconnu : " + e.getMessage());
         } catch (ConnectException e) {
             e.printStackTrace();
-            throw new IOException("La connexion a été refusée : " + e.getMessage());
+            throw new IOException("La connexion a été refusée : " 
+            + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
-            throw new IOException("Erreur lors de la création de la Socket client : " + e.getMessage());
+            throw new IOException(
+                    "Erreur lors de la création de la Socket client : " 
+            + e.getMessage());
         }
     }
 
+    /** TODO comment method role
+     * @throws IOException 
+     * @return strRecu l'ensemble des données reçues
+     */
+    public String reception() throws IOException {
+        String strRecu = "";
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(sock.getInputStream(), "UTF-8"));
+        while (reader.ready()) {
+            strRecu += Character.toString(reader.read());
+        }
+        return strRecu;
+    }
+    
+    /** TODO comment method role
+     * @throws IOException 
+     * 
+     */
+    public void recevoirDonneesInitiale() throws IOException {
+        String msgP = "";
+        String msgG = "";
+        int p;
+        int g;
+        msgG = reception();
+        msgP = reception();
+    }
+    
     /**
-     * Permet de recevoir la requete du client et de l'analyser pour construire le
-     * contenu de la reponse
+     * Permet de recevoir la requete du client et de l'analyser pour construire 
+     * le contenu de la reponse
      * Crypte le fichier et l'envoie
      * @param fichierEnvoyer 
      * 
      * @return text : la reponse a la requete
      */
     public String recevoirEtAnalyser(File fichierEnvoyer) {
+        
         String cle = "";
         String fichLu = "";
-
-
+        
         System.out.println("RECEPTION DE LA REPONSE");
         try {
 
@@ -119,7 +146,8 @@ public class Client {
                     fichierEnvoyer.createNewFile();
                 }
 
-                FileReader fr = new FileReader(fichierEnvoyer, Charset.forName("UTF-8"));
+                FileReader fr = new FileReader(
+                        fichierEnvoyer, Charset.forName("UTF-8"));
                 while (fr.ready()) {
                     fichLu += Character.toString(fr.read());
                 }
@@ -142,6 +170,14 @@ public class Client {
      * @param rep : la reponse a envoyer
      */
     public void envoyerReponse(String rep) {
+        
+        String msgx2 = "";
+        String fichLu = "";
+        
+        int x2;
+        int gx2;
+        int gxe1;
+        
         System.out.println("ENVOI DE LA REPONSE");
         System.out.println("Le serveur est : " + sock.getLocalSocketAddress());
         System.out.println("Le client est : " + sock.getRemoteSocketAddress());
@@ -149,7 +185,8 @@ public class Client {
         try {
             if (sock != null) {
                 OutputStream os = sock.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
                 writer.write(rep);
                 System.out.println("Le client a envoyé " + rep);
                 writer.flush();

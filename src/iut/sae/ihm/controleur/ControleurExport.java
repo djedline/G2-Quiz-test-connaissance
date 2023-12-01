@@ -1,22 +1,16 @@
-/*
- * ControleurExport.java                                    13 nov. 2023
+/* ControleurExport.java                                            13 nov. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
 package iut.sae.ihm.controleur;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Optional;
-
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
-import iut.sae.modele.ImportExport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -55,14 +49,22 @@ public class ControleurExport {
 
 	@FXML
 	private Button btnValider;
+	
+    @FXML
+    private Button btnSelectQuestions;
 
-	private File destination;
+	private File destination = new File(
+	        "fichiers_sauvegarde_partage/sauvegardeQuiz.csv");
 
 	@FXML
 	void chercherFichier(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
 		// Ajout d'un filtre pour ne montrer que certains fichiers
-		ExtensionFilter extFilter = new ExtensionFilter("Fichier CSV UTF-8 séparateur point-virgule(*.csv)", "*.csv");
+		ExtensionFilter extFilter = new ExtensionFilter(
+		        "Fichier CSV UTF-8 séparateur point-virgule(*.csv)",
+		        "*.csv");
+		fileChooser.setInitialDirectory(
+		        new File("fichiers_sauvegarde_partage/"));
 		fileChooser.setInitialFileName("sauvegardeQuiz");
 		fileChooser.getExtensionFilters().add(extFilter);
 
@@ -72,20 +74,24 @@ public class ControleurExport {
 	}
 
 	@FXML
-	void clicValider(ActionEvent event) {
-		if (destination != null) {
-			try {
-				ImportExport.exporter(destination);
-				new Alert(AlertType.INFORMATION, "Exportation réussie.").show();
-			} catch (IOException e) {
-				new Alert(AlertType.ERROR, e.getMessage()).show();
-			}
+	void clicSuivant(ActionEvent event) {
+		if (destination == null || destination.isDirectory()) {
+			new Alert(AlertType.INFORMATION, 
+			        "Choisissez d'abord un fichier à écrire.")
+			        .show();
+		} else {
+			EchangeurDeVue.echangerAvec(destination);
 		}
 	}
 
 	@FXML
 	void clicQuitter(ActionEvent event) {
 		EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);
+	}
+	
+	@FXML
+	void initialize(){
+		fichierAExporter.setText(destination.getAbsolutePath());
 	}
 
 }

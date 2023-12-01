@@ -1,3 +1,7 @@
+/*
+ * ImportExport.java                                                  21/11/2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
+ */
 package iut.sae.modele;
 
 import java.io.BufferedReader;
@@ -6,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +26,7 @@ public class ImportExport {
 
     /** Délimiteur utilisé pour séparer les colonnes */
     public static final char DELIMITEUR = ';';
+    
     /** Retour à la ligne séparant les lignes */
     public static final char NEW_LINE = '\n';
 
@@ -28,9 +34,9 @@ public class ImportExport {
     public static final char GUILLEMET = '"';
 
     /** Ordre des champs dans les fichiers CSV */
-    public static final String[] NOM_COLONNE = { "Catégorie", "Niveau", "Libellé", "Vrai", "Faux1", "Faux2", "Faux3",
+    public static final String[] NOM_COLONNE = 
+        { "Catégorie", "Niveau", "Libellé", "Vrai", "Faux1", "Faux2", "Faux3",
             "Faux4", "Feedback" };
-
     /**
      * Envoie l'ensemble des questions de l'application dans un fichier.
      * 
@@ -38,21 +44,42 @@ public class ImportExport {
      * @throws IOException s'il est impossible d'écrire les données
      */
     public static void exporter(File aEcrire) throws IOException {
+        exporter(aEcrire, Donnees.listeQuestions);
+    }
+
+    /**
+     * Envoie la listes des questions choisies par l'utilisateur dans un fichier
+     * @param aEcrire
+     * @param selectionnees
+     * @throws IOException
+     */
+    public static void exporter(File aEcrire, List<Question> selectionnees) 
+            throws IOException {
+
+        if (aEcrire == null || selectionnees == null) {
+            throw new IllegalArgumentException(
+                    "Impossible d'écrire avec un fichier " 
+                  + "ou des questions nulles.");
+        }
 
         if (!aEcrire.exists()) {
             aEcrire.createNewFile();
         }
 
         if (!aEcrire.canWrite()) {
-            throw new IOException("Impossible de modifier le fichier " + aEcrire.getAbsolutePath() + "!");
+            throw new IOException(
+                    "Impossible de modifier le fichier " 
+                  + aEcrire.getAbsolutePath() + "!");
         }
         if (aEcrire.isDirectory()) {
-            throw new IOException("Impossible d'écrire dans un dossier !" + "Indiquez un fichier.");
+            throw new IOException(
+                    "Impossible d'écrire dans un dossier !" 
+                  + "Indiquez un fichier.");
         }
 
         FileWriter fw = new FileWriter(aEcrire);
         fw.write(produireEntete());
-        for (Question q : Donnees.listeQuestions) {
+        for (Question q : selectionnees) {
             fw.write(exporterQuestion(q));
             System.out.println(exporterQuestion(q));
         }
@@ -77,7 +104,8 @@ public class ImportExport {
      * @return la string formatée
      */
     private static String formater(String s) {
-        Pattern pat = Pattern.compile("[" + NEW_LINE + DELIMITEUR + GUILLEMET + "]");
+        Pattern pat = Pattern.compile(
+                "[" + NEW_LINE + DELIMITEUR + GUILLEMET + "]");
         Matcher mat = pat.matcher(s);
         if (mat.find()) {
             StringBuilder nvString = new StringBuilder();
@@ -93,6 +121,11 @@ public class ImportExport {
         }
     }
 
+    /**
+     * Méthode qui exporte une question choisi en parametre
+     * @param q
+     * @return
+     */
     private static String exporterQuestion(Question q) {
         StringBuilder s = new StringBuilder();
         s.append(formater(q.getCategorie().getLibelle()));
@@ -124,20 +157,25 @@ public class ImportExport {
     public static void importer(File chemin) throws IOException {
 
         if (!chemin.exists()) {
-            throw new IOException("Le fichier " + chemin.getAbsolutePath() + " ne peut être lu car il n'existe pas");
+            throw new IOException(
+                    "Le fichier " + chemin.getAbsolutePath() 
+                  + " ne peut être lu car il n'existe pas");
         }
         if (!chemin.canRead()) {
-            throw new IOException("Vous ne disposez pas des droits pour lire le fichier " + chemin.getAbsolutePath());
+            throw new IOException(
+                    "Vous ne disposez pas des droits pour lire le fichier " 
+                  + chemin.getAbsolutePath());
         }
         if (chemin.isDirectory()) {
-            throw new IOException("Impossible de lire un dossier. Indiquez un fichier.");
+            throw new IOException(
+                    "Impossible de lire un dossier. Indiquez un fichier.");
         }
 
         BufferedReader bf = new BufferedReader(new FileReader(chemin));
 
         /*
-         * indice pour les messages d'erreur. Commence à 1 par soucis de lisibilité pour
-         * l'utilisateur
+         * indice pour les messages d'erreur. Commence à 1 par soucis 
+         * de lisibilité pour l'utilisateur
          */
         int noLigne = 1;
         while (bf.ready()) {
@@ -147,9 +185,11 @@ public class ImportExport {
             }
             noLigne++;
         }
+        bf.close();
     }
 
-    private static void importerLigne(String ligne, int noLigne) throws FichierMalFormeException {
+    private static void importerLigne(String ligne, int noLigne) 
+            throws FichierMalFormeException {
 
         String[] colonnes = decouper(ligne);
         if (!tousVides(colonnes)) {
@@ -158,10 +198,14 @@ public class ImportExport {
             try {
                 diff = Integer.parseInt(colonnes[1]);
                 if (diff < 1 || diff > 3) {
-                    throw new FichierMalFormeException("Difficulté hors des bornes (1, 2 ou 3) à la ligne " + noLigne);
+                    throw new FichierMalFormeException(
+                            "Difficulté hors des bornes (1, 2 ou 3) à la ligne " 
+                          + noLigne);
                 }
             } catch (Exception e) {
-                throw new FichierMalFormeException("La difficulté n'est pas un champ numérique à la ligne " + noLigne);
+                throw new FichierMalFormeException(
+                        "La difficulté n'est pas un champ numérique à la ligne " 
+                      + noLigne);
             }
 
             Categorie categorie = analyserCategorieImport(colonnes[0]);
@@ -176,7 +220,8 @@ public class ImportExport {
             // récupérer un array de réponses fausses
             String[] fausses = new String[repFausses.size()];
             fausses = repFausses.toArray(fausses);
-            Question questionGeneree = new Question(colonnes[2], categorie, colonnes[3], fausses, colonnes[8], diff);
+            Question questionGeneree = new Question(colonnes[2], categorie, 
+                    colonnes[3], fausses, colonnes[8], diff);
             Donnees.listeQuestions.add(questionGeneree);
         }
     }
@@ -195,8 +240,6 @@ public class ImportExport {
         return tousVides;
     }
 
-
-
     private static Categorie analyserCategorieImport(String catImportee) {
         catImportee = catImportee.strip();
         // ajoute la catégorie si elle existe
@@ -210,7 +253,8 @@ public class ImportExport {
         // si vide, ajout à la catégorie par défaut
         if (catImportee.isBlank()) {
             for (Categorie catExistante : Donnees.listeCategorie) {
-                if (catExistante.getLibelle().equals(Donnees.NOM_CATEGORIE_DEFAUT)) {
+                if (catExistante.getLibelle().equals(
+                        Donnees.NOM_CATEGORIE_DEFAUT)) {
                     return catExistante;
                 }
             }
@@ -230,7 +274,8 @@ public class ImportExport {
      * @return valeurs l'ensemble des valeurs découpées sur la ligne
      * @throws FichierMalFormeException si la ligne n'existe pas
      */
-    public static String[] decouper(String ligne) throws FichierMalFormeException {
+    public static String[] decouper(String ligne) 
+            throws FichierMalFormeException {
         int NB_COLONNES = NOM_COLONNE.length;
 
         // initialisation du tableau des données
@@ -238,27 +283,24 @@ public class ImportExport {
         for (int i = 0; i < valeurs.length; i++) {
             valeurs[i] = "";
         }
-
         int colonneARemplir = 0;
-        boolean guillemetsOuverts = false;
         boolean contientCaracteresSpeciaux = false;
         int nbGuillemet = 0;
         for (int c = 0; c < ligne.length(); c++) {
             char courant = ligne.charAt(c);
-            char precedent = c == 0 ? ' ' : ligne.charAt(c - 1);
-            char suivant = c == ligne.length() - 1 ? ' ' : ligne.charAt(c + 1);
-            
+
             if (courant == GUILLEMET) {
-                nbGuillemet ++;
+                nbGuillemet++;
                 contientCaracteresSpeciaux = true;
                 System.out.println("les guillemet " + nbGuillemet);
             }
 
-            if (courant == DELIMITEUR && nbGuillemet%2==0) {
+            if (courant == DELIMITEUR && nbGuillemet % 2 == 0) {
                 System.out.println("les guillemet " + nbGuillemet);
                 nbGuillemet = 0;
                 if (contientCaracteresSpeciaux) {
-                    valeurs[colonneARemplir] = deformater(valeurs[colonneARemplir]);
+                    valeurs[colonneARemplir] = 
+                            deformater(valeurs[colonneARemplir]);
                     contientCaracteresSpeciaux = false;
                 }
                 colonneARemplir++;
@@ -266,15 +308,15 @@ public class ImportExport {
                 if (colonneARemplir < NB_COLONNES) {
                     valeurs[colonneARemplir] += courant;
                 } else {
-                    for (String element :valeurs) {
-        
+                    for (String element : valeurs) {
+
                         System.out.println("l'element " + element);
                     }
-                    
+
                     // Si on veut ajouter dans une colonne inexistante.
                     throw new FichierMalFormeException(
-                            "Nombre de colonnes invalides (" + (colonneARemplir + 1) 
-                            + " plutôt que " + NB_COLONNES);
+                            "Nombre de colonnes invalides (" 
+                    + (colonneARemplir + 1) + " plutôt que " + NB_COLONNES);
                 }
             }
         }
