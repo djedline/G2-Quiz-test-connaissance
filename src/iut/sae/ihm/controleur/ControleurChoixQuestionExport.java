@@ -46,7 +46,7 @@ public class ControleurChoixQuestionExport {
 	private TreeView<Object> treeViewData;
 	
 	@FXML
-    private CheckBox checkboxAllQuestions;
+	private CheckBox checkboxAllQuestions;
 	
 	private File fichierAExporter;
 	
@@ -85,6 +85,9 @@ public class ControleurChoixQuestionExport {
 		treeViewData.getRoot().getChildren().addAll(listeTreeItem);
 	}
 
+	/** TODO comment method role
+         * @param f
+         */
 	public void setExportFile(File f) {
 		this.fichierAExporter = f;
 	}

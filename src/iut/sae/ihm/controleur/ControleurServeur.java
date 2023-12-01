@@ -7,9 +7,11 @@ package iut.sae.ihm.controleur;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
+import iut.sae.modele.reseau.DiffieHellman;
 import iut.sae.modele.reseau.Serveur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,7 +73,7 @@ public class ControleurServeur {
     }
 
     @FXML
-    void clicDemarrer(ActionEvent event) {
+    void clicDemarrer(ActionEvent event) throws IOException, InterruptedException {
         // System.out.println(allumageOk);
         // System.out.println(!allumageOk);
         if (!Donnees.serveurAllumee) {
@@ -79,7 +81,7 @@ public class ControleurServeur {
             btnDemarrer.setText("Eteindre");
             Donnees.serveurAllumee = true;
             // serveurPartage.preparerServeur();
-            ReceptionFichier();
+            envoiDonneesInitiale();
         } else {
             System.out.println("Au revoir");
             serveurPartage.fermetureServeur();
@@ -89,32 +91,50 @@ public class ControleurServeur {
         }
     }
 
+    /** TODO comment method role
+     * @throws IOException 
+     * @throws InterruptedException 
+     * 
+     */
+    public void envoiDonneesInitiale() throws IOException, InterruptedException {
+        String msgG = "";
+        String msgP = "";
+        int p;
+        int g;
+        p = DiffieHellman.genererModulo();
+        g = DiffieHellman.genererGenerateur();
+        msgP = Integer.toString(p);
+        msgG = Integer.toString(g);
+        System.out.println("Le serveur a envoyé : p et g)");
+        serveurPartage.envoyerMessage((msgG.getBytes()));
+        Thread.sleep(500);
+        serveurPartage.envoyerMessage((msgP.getBytes()));
+    }
+    
     /**
      * Partage un fichier
      */
-    public void ReceptionFichier() {
+   /* public void ReceptionFichier() {
         try {
             serveurPartage.accepterConnexion();
-            String cle = "";
             String recu = "";
             while (recu.isEmpty()) {
                 System.out.print("Génération et envoi du générateur g " 
                         + " et du modulo p");
                 try {
-                    cle = Serveur.genererCle();
-                    System.out.println("Le serveur a envoyé : p et g)");
-                    serveurPartage.envoyerMessage(cle.getBytes());
-                } catch (IOException e) {
+                    System.out.println("Le serveur a envoyé la puissance x");
+                    serveurPartage.envoyerMessage((msgX.getBytes()));
+                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
                 // recu = Serveur.recevoirMessage(FICHIER_RECEPTION, cle);
-            }
+            } 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
+      //}
+    } */
 
     /*
      * try { message = Client.construireMessage(fichierATraiter);

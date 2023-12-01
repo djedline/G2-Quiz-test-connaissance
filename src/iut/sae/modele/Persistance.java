@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+/** TODO comment class responsibility (SRP)
+ * @author Nael Briot
+ *
+ */
 public class Persistance {
     
 	/** Contient les questions sur Java */

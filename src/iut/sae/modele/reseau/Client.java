@@ -79,6 +79,33 @@ public class Client {
         }
     }
 
+    /** TODO comment method role
+     * @throws IOException 
+     * @return strRecu l'ensemble des données reçues
+     */
+    public String reception() throws IOException {
+        String strRecu = "";
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(sock.getInputStream(), "UTF-8"));
+        while (reader.ready()) {
+            strRecu += Character.toString(reader.read());
+        }
+        return strRecu;
+    }
+    
+    /** TODO comment method role
+     * @throws IOException 
+     * 
+     */
+    public void recevoirDonneesInitiale() throws IOException {
+        String msgP = "";
+        String msgG = "";
+        int p;
+        int g;
+        msgG = reception();
+        msgP = reception();
+    }
+    
     /**
      * Permet de recevoir la requete du client et de l'analyser pour construire 
      * le contenu de la reponse
@@ -88,10 +115,10 @@ public class Client {
      * @return text : la reponse a la requete
      */
     public String recevoirEtAnalyser(File fichierEnvoyer) {
+        
         String cle = "";
         String fichLu = "";
-
-
+        
         System.out.println("RECEPTION DE LA REPONSE");
         try {
 
@@ -143,6 +170,14 @@ public class Client {
      * @param rep : la reponse a envoyer
      */
     public void envoyerReponse(String rep) {
+        
+        String msgx2 = "";
+        String fichLu = "";
+        
+        int x2;
+        int gx2;
+        int gxe1;
+        
         System.out.println("ENVOI DE LA REPONSE");
         System.out.println("Le serveur est : " + sock.getLocalSocketAddress());
         System.out.println("Le client est : " + sock.getRemoteSocketAddress());
