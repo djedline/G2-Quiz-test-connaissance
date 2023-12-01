@@ -34,7 +34,6 @@ public class DiffieHellman {
 
     private static int MAX_G;
 
-<<<<<<< HEAD
 	/**
 	 * Méthode qui permet de générer aléatoirement le modulo de l'échange
 	 * 
@@ -46,19 +45,7 @@ public class DiffieHellman {
 	        } while(!isPremier(p));
 		MAX_G = p - 1;
 		return p;
-	}
-=======
-    /**
-     * Méthode qui permet de générer aléatoirement le modulo de l'échange
-     * 
-     * @return p le chiffre qui sert de modulo
-     */
-    public static int genererModulo() {
-        p = (int) (Math.random() * MAX_P);
-        MAX_G = p - 1;
-        return p;
     }
->>>>>>> 9e76170f3c30abcb9ceba3a71a4610f0a101ede1
 
     /**
      * Méthode qui permet de générer aléatoirement g
@@ -122,8 +109,6 @@ public class DiffieHellman {
         ArrayList<Integer> valeurGValide = new ArrayList<>();
         /** L'ensemble des valeurs dans ℤ/pℤ */
         ArrayList<Integer> ensembleP = new ArrayList<>();
-
-<<<<<<< HEAD
 		for (int i = 1; i < p - 1; i++) {
 			ensembleP.add(i);
 		}
@@ -149,41 +134,6 @@ public class DiffieHellman {
 				return false;
 			}
 		}
-			return true;
+	return true;
 	}
-=======
-        for (int i = 1; i < p - 1; i++) {
-            ensembleP.add(i);
-        }
-        for (int j = 1; j < p - 1; j++) {
-
-            int valeurValide = (int) ((Math.pow(g, j)) % p);
-            // Vérifie si le chiffre obtenu n'est pas déja présent
-            if (!valeurGValide.contains(valeurValide)) { 
-                valeurGValide.add(valeurValide);
-            }
-        }
-        // Vérifie la taille des 2 ArrayList
-        if (valeurGValide.size() == ensembleP.size()) { 
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Vérifie si le générateur g est un entier premier
-     * 
-     * @param g le générateur à vérifier
-     * @return Vrai ou Faux selon si le nombre est premier ou non
-     */
-    public static boolean isPremier(int g) {
-        for (int i = 2; i < Math.sqrt(g); i++) {
-            if (g % i == 0 && g != 1) {
-                return false;
-            }
-        }
-        return true;
-    }
->>>>>>> 9e76170f3c30abcb9ceba3a71a4610f0a101ede1
-}
+    }       
