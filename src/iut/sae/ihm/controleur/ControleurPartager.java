@@ -123,7 +123,7 @@ public class ControleurPartager {
             clientPartage.envoyer(Donnees.fichierAPartager, cle);
             clientPartage.fermerSocket();
         } catch (Exception e) {
-            e.printStackTrace();
+            new Alert(AlertType.ERROR, e.getMessage()).show();
         }
     }
 

@@ -86,12 +86,17 @@ public class ControleurServeur {
             btnDemarrer.setText("Eteindre");
             Donnees.serveurAllumee = true;
             // serveurPartage.preparerServeur();
-            serveurPartage = new Serveur();
-            serveurPartage.accepterConnexion();
-            int cle = serveurPartage.envoiDonneesInitiale();
-            String message = serveurPartage.receptionFichier(cle);
-            ImportExport.importer(message);
-            serveurPartage.fermetureServeur();
+            try {
+	            serveurPartage = new Serveur();
+	            serveurPartage.accepterConnexion();
+	            int cle = serveurPartage.envoiDonneesInitiale();
+	            String message = serveurPartage.receptionFichier(cle);
+	            ImportExport.importer(message);
+            } catch (Exception e) {
+            	new Alert(AlertType.ERROR, e.getMessage()).show();
+            } finally {
+            	serveurPartage.fermetureServeur();
+            }
         } else {
             System.out.println("Au revoir");
             serveurPartage.fermetureServeur();

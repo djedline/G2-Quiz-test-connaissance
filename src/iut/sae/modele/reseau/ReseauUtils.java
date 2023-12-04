@@ -15,9 +15,11 @@ import java.net.Socket;
  */
 public class ReseauUtils {
 	
+	public static final int RECEIVE_TIMEOUT = 5;
+	
     /** 
      * Lit les données dans une String depuis la socket tant qu'elles 
-     * sont disponibles.
+     * sont disponibles. Bloquant pendant 
      * @param sock 
      * @throws IOException si la lecture est impossible.
      * @return strRecu l'ensemble des données reçues
@@ -26,6 +28,14 @@ public class ReseauUtils {
         String strRecu = "";
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(sock.getInputStream(), "UTF-8"));
+        for (int sec = 0 ; sec < RECEIVE_TIMEOUT && !reader.ready(); sec++) {
+        	System.out.println("En attente...");
+            try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+        }
         while (reader.ready()) {
             strRecu += Character.toString(reader.read());
         }
@@ -46,8 +56,10 @@ public class ReseauUtils {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
                                                                   os, "UTF-8"));
             bw.write(data);
+            bw.close();
             System.out.println("Message envoyé : " + data.toString());
         } catch (IOException e) {
+        	e.printStackTrace();
             throw new IOException("Impossible d'envoyer le message.");
         }
     }

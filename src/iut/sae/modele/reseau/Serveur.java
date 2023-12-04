@@ -59,9 +59,7 @@ public class Serveur {
         int b = DiffieHellman.genererX();
         
         ReseauUtils.envoyerMessage(comm, msgG);
-        Thread.sleep(500);
         ReseauUtils.envoyerMessage(comm, msgP);
-        Thread.sleep(500);
         System.out.println("Le serveur a envoyé : p et g)");
         
         String msgGB = Integer.toString((int) Math.pow(g, b));
@@ -77,7 +75,7 @@ public class Serveur {
     }
     
     /** 
-     * Receptionne un le contenue d'un fichier
+     * Receptionne le contenu d'un fichier
      * @param cle
      * @return f
      * @throws IOException
