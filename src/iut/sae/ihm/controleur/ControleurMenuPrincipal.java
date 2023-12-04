@@ -29,6 +29,9 @@ public class ControleurMenuPrincipal {
     private Button btnQuizStart;
 
     @FXML
+    private Button btnNotice;
+    
+    @FXML
     void clicStart(ActionEvent event) throws Exception {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_CREER_QUESTIONNAIRE);
     }
@@ -43,4 +46,9 @@ public class ControleurMenuPrincipal {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);
     }
 
+    @FXML
+    void clicNotice(ActionEvent event) {
+        EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_NOTICE);
+    }
+    
 }

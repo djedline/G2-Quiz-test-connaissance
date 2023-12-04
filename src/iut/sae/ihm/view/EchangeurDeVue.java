@@ -41,9 +41,10 @@ public class EchangeurDeVue {
     }
 
     /**
-     * TODO comment method role
+     * Change la scène affichée à l'utilisateur par la vue définie la classe 
+     * {@code EnsembleDesVues}
      * 
-     * @param codeVue
+     * @param codeVue le numéro de la vue défini dans {@code EnsembleDesVues}
      */
     public static void echangerAvec(int codeVue) {
         if (sceneCourante == null) {
@@ -72,8 +73,10 @@ public class EchangeurDeVue {
     }
 
     /**
-     * passage en parametre d'une categorie entre scene
-     * @param laCategorie
+     * Change la scène affichée à l'utilisateur par la scène de modification
+     * de catégorie en lui passant la catégorie à modifier en paramètre
+     * 
+     * @param laCategorie la catégorie à modifier
      */
     public static void echangerAvec(Categorie laCategorie) {
         if (sceneCourante == null) {
@@ -97,7 +100,7 @@ public class EchangeurDeVue {
 
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
-         
+
         } catch (IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println(
@@ -107,8 +110,10 @@ public class EchangeurDeVue {
     }
 
     /**
-     * passage en parametre d'une question entre scene 
-     * @param laQuestion
+     * Change la scène affichée à l'utilisateur par la scène de modification
+     * de question en lui passant la question à modifier en paramètre
+     * 
+     * @param laQuestion la question à modifier
      */
     public static void echangerAvec(Question laQuestion) {
         if (sceneCourante == null) {
@@ -132,7 +137,7 @@ public class EchangeurDeVue {
 
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
-          
+
         } catch (IOException erreur) {
             // problème lors de l'accès au fichier décrivant la vue
             System.out.println(
@@ -142,10 +147,11 @@ public class EchangeurDeVue {
     }
 
     /**
-     * Ouvre le menu de sélection des questions à exporter en lui passant en
-     * paramètre le fichier d'exportation.
+     * Change la scène affichée à l'utilisateur par celle du menu de sélection 
+     * des questions à exporter en lui passant en paramètre le fichier d'exportation.
      * 
-     * @param f le fichier d'exportation
+     * @param f le fichier d'exportation dans lequel les questions sélectionnées
+     * seront écrites
      */
     public static void echangerAvec(File f) {
         if (sceneCourante == null) {

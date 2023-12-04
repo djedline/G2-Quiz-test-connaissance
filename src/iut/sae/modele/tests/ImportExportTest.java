@@ -6,8 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import org.junit.Ignore;
+
 import org.junit.jupiter.api.Test;
+
 import iut.sae.modele.Categorie;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.ImportExport;
@@ -40,6 +41,31 @@ class ImportExportTest {
         }
         assertEquals(NB_CAT_JAVA + 1, Donnees.listeCategorie.size());
         assertEquals(NB_QUEST_JAVA, Donnees.listeQuestions.size());
+        
+        // Vérification de la première question
+        Categorie cat = new Categorie("Commentaire");
+        String[] repFausses = new String[] {
+        		"le délimiteur /*",
+        		"le délimiteur //",
+        		"le délimiteur (*"
+        };
+        Question q = new Question("Quel est le délimiteur de début d'un commentaire Javadoc ?", 
+        		cat,"le délimiteur /**", repFausses, "", 1);
+        assertEquals(q, Donnees.listeQuestions.get(0));
+        
+        // Vérification de la 11e question
+        String[] repFausses2 = new String[] {
+        		"Un résumé très bref, pas plus d'une ligne, du rôle du programme ",
+        		"Il n'y a pas de commentaire Javadoc juste avant la ligne \"public class …\"",
+        		"Le nom du fichier contenant le programme"
+        };
+        Question q2 = new Question("Que doit décrire le texte écrit dans le "
+        		+ "commentaire Javadoc situé juste avant la ligne "
+        		+ "\"public class …\" ?", 
+        		cat,"Le rôle du programme, en explicitant de manière précise ce rôle ", 
+        		repFausses2, "Un texte libre laissé à l'appréciation du programmeur", 2);
+        assertEquals(q, Donnees.listeQuestions.get(0));
+        
         Donnees.afficherDonnees();
 
     }
@@ -59,6 +85,15 @@ class ImportExportTest {
 
         assertEquals(NB_CAT_ORTHO + 1, Donnees.listeCategorie.size());
         assertEquals(NB_QUEST_ORTHO, Donnees.listeQuestions.size());
+        
+        // Vérification de la première question
+        Categorie cat = Donnees.listeCategorie.get(0);
+        String[] repFausses = new String[] {
+        		"correct"
+        };
+        Question q = new Question("La panne est dûe à la vétusté de l'appareil.", 
+        		cat,"incorrect", repFausses, "due", 1);
+        assertEquals(q, Donnees.listeQuestions.get(0));
         Donnees.afficherDonnees();
     }
 

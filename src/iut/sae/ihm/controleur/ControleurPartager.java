@@ -14,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -63,7 +65,7 @@ public class ControleurPartager {
      */
     @FXML
     void initialize() {
-        chemineDossier = "src/fichiers_sauvegarde_partage/fichier_csv_stock";
+        chemineDossier = "fichiers_sauvegarde_partage/fichier_csv_stock";
         dossier = new File(chemineDossier);
         listeFichier = dossier.listFiles();
         ipOk = false;
@@ -114,13 +116,13 @@ public class ControleurPartager {
      */
     public void partageFichier() {
         try {
+            int cle;
             System.out.println("INITIALISATION CLIENT");
             clientPartage = new Client(adresseIpServeur.getText(), 6666);
             String reponse = "";
             System.out.println("RECEPTION CLE");
-            reponse = clientPartage.recevoirEtAnalyser(
-                    Donnees.fichierAPartager);
-            clientPartage.envoyerReponse(reponse);
+            cle = clientPartage.echangerDonneesCryptage();
+            clientPartage.envoyer(dossier, cle);
             clientPartage.fermerSocket();
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,6 +137,8 @@ public class ControleurPartager {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("Vous ne pouvez pas partager ça");
             messageErreur.show();
+        } else {
+          Donnees.fichierAPartager  = new File(chemineDossier + "/questionsbasiques.csv");
         }
 
         if (ipOk && !fichierOk) {
@@ -147,6 +151,25 @@ public class ControleurPartager {
         }
     }
 
+    /*
+     * A implémenter
+    @FXML
+    void chercherFichier(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        // Ajout d'un filtre pour ne montrer que certains fichiers
+        ExtensionFilter extFilter =
+                new ExtensionFilter(
+                        "Fichier CSV UTF-8 séparateur point-virgule(*.csv)",
+                        "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialDirectory(
+                new File("fichiers_sauvegarde_partage/"));
+
+        // Afficher la boîte de dialogue de choix de fichier
+        origine = fileChooser.showOpenDialog(Lanceur.getStage());
+        fichierAExporter.setText(origine.getAbsolutePath());
+    }
+    */
     @FXML
     void clicQuitter(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);
