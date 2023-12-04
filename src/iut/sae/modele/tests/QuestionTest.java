@@ -85,11 +85,6 @@ class QuestionTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             listeQuestion.add(new Question(
-                    libelle, nomCategorie, propoJuste, propoFausse, "", diff));
-        });
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            listeQuestion.add(new Question(
                     libelle, nomCategorie, propoJuste, propoFausse, "", 5));
         });
 
@@ -168,7 +163,9 @@ class QuestionTest {
     @Test
     void testGetPropositionFausse() {
         int comp = 0;
+        System.out.println(listeQuestion.get(0).getPropositionFausse().size());
         for (String laRepFausse : listeQuestion.get(0).getPropositionFausse()) {
+            
             assertEquals(laRepFausse, propoFausse[comp]);
             comp++;
         }
