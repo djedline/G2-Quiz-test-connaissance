@@ -61,15 +61,18 @@ public class Serveur {
         String msgG = Integer.toString(g);
         int b = DiffieHellman.genererX();
         
+        System.out.println("Envoi de G : ");
         util.envoyerMessage(msgG);
         Thread.sleep(1000);
+        System.out.println("Envoi de P : ");
         util.envoyerMessage(msgP);
-        System.out.println("Le serveur a envoyé p et g)");
         
         String msgGB = Integer.toString((int) Math.pow(g, b));
         Thread.sleep(1000);
+        System.out.println("Envoi de GB : ");
         util.envoyerMessage(msgGB);
         
+        System.out.println("Réception de GA : ");
         String msgGA = util.reception();
         try {
         	int gA = Integer.parseInt(msgGA);

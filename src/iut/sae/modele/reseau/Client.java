@@ -87,20 +87,28 @@ public class Client {
      * Récupère les données et génère les données
      * @return gA^b
      * @throws IOException
+     * @throws InterruptedException 
      */
-    public int echangerDonneesCryptage() throws IOException {
+    public int echangerDonneesCryptage() throws IOException, InterruptedException {
         try {
+        	System.out.println("Réception de P : ");
         	String msgP = util.reception();
-        	System.out.println("Message P : ");
+            System.out.println("Réception de G : ");
             String msgG = util.reception();
-            System.out.println("Message G : ");
+            
 	        int p = Integer.parseInt(msgP);
 	        int g = Integer.parseInt(msgG);
+	        
+	        System.out.println("Réception de GA : ");
 	        String msgGA = util.reception();
-	        System.out.println("Message GA : ");
 	        int gA = Integer.parseInt(msgGA);
+	        
 	        int b = DiffieHellman.genererX();
-	        util.envoyerMessage(Integer.toString(b));
+	        int gB = (int) Math.pow(g, b);
+	        Thread.sleep(1000);
+	        System.out.println("Envoi de GB : ");
+	        util.envoyerMessage(Integer.toString(gB));
+	        
 	        int cle = (int) Math.pow(gA, b);
 	        System.out.println("Clé générée : " + cle);
 	        return cle;
@@ -119,7 +127,7 @@ public class Client {
     	BufferedReader br = new BufferedReader(new FileReader(fich));
     	String contenuFich = "";
     	while (br.ready()) {
-    		contenuFich += br.readLine();
+    		contenuFich += br.readLine() + "\n";
     	}
     	br.close();
     	

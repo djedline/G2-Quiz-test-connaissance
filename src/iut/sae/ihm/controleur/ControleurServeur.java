@@ -12,7 +12,6 @@ import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.ImportExport;
-import iut.sae.modele.reseau.DiffieHellman;
 import iut.sae.modele.reseau.Serveur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -90,13 +89,17 @@ public class ControleurServeur {
 	            serveurPartage = new Serveur();
 	            serveurPartage.accepterConnexion();
 	            int cle = serveurPartage.envoiDonneesInitiale();
+	            Thread.sleep(1000);
 	            String message = serveurPartage.receptionFichier(cle);
 	            ImportExport.importer(message);
+	            new Alert(AlertType.INFORMATION, 
+	            		"L'import de questions s'est correctement déroulé.")
+	            		.show();
             } catch (Exception e) {
             	new Alert(AlertType.ERROR, e.getMessage()).show();
             } finally {
             	serveurPartage.fermetureServeur();
-            }=
+            }
         } else {
             System.out.println("Au revoir");
             serveurPartage.fermetureServeur();

@@ -129,7 +129,7 @@ class ImportExportTest {
     }
 
     private static final String EXPORT_SPECIAUX = EXPORT_VIDE
-            + "Cat;1;\"\"\"J'aime les vacances\"\" - Molière\";\"JeSuisJuste"
+            + "Cat;1;\"\"\"J'aime les vacances\"\"\n - Molière\";\"JeSuisJuste"
             + "\"\"\"\"\";\"Hello\n\";\"\"\"Hello\"\"\";\" ; Hello\";\"\"\""
             + "Hello\"\"\";Feedback;\n";
 
@@ -140,7 +140,7 @@ class ImportExportTest {
         String[] repFausses = { 
                 "Hello\n", "\"Hello\"", " ; Hello", "\"Hello\"" };
         Question nvQuestion = new Question(
-                "\"J'aime les vacances\" - Molière", nvCategorie, "JeSuisJuste"
+                "\"J'aime les vacances\"\n - Molière", nvCategorie, "JeSuisJuste"
                         + "\"\"",
                 repFausses, "Feedback", 1);
         Donnees.listeQuestions.add(nvQuestion);

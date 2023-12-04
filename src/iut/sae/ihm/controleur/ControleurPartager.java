@@ -120,8 +120,11 @@ public class ControleurPartager {
             clientPartage = new Client(adresseIpServeur.getText(), 6666);
             System.out.println("RECEPTION CLE");
             int cle = clientPartage.echangerDonneesCryptage();
+            Thread.sleep(1000);
             clientPartage.envoyer(Donnees.fichierAPartager, cle);
             clientPartage.fermerSocket();
+            new Alert(AlertType.INFORMATION, 
+            		"Le transfert s'est correctement déroulé.").show();
         } catch (Exception e) {
             new Alert(AlertType.ERROR, e.getMessage()).show();
         }

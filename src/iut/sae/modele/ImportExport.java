@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -173,20 +172,14 @@ public class ImportExport {
         }
 
         BufferedReader bf = new BufferedReader(new FileReader(chemin));
-
-        /*
-         * indice pour les messages d'erreur. Commence à 1 par soucis 
-         * de lisibilité pour l'utilisateur
-         */
-        int noLigne = 1;
+        
+        String texte = "";
         while (bf.ready()) {
-            String ligne = bf.readLine();
-            if (noLigne != 1) {
-                importerLigne(ligne, noLigne); // ignorer l'en-tête
-            }
-            noLigne++;
+            texte += bf.readLine() + NEW_LINE;
         }
         bf.close();
+        
+        importer(texte);
     }
     
     /**
@@ -196,27 +189,26 @@ public class ImportExport {
      * @throws IOException s'il est impossible de l'importer
      */
     public static void importer(String contenuFich) throws IOException {
-        BufferedReader bf = new BufferedReader(new StringReader(contenuFich));
 
         /*
          * indice pour les messages d'erreur. Commence à 1 par soucis 
          * de lisibilité pour l'utilisateur
          */
-        int noLigne = 1;
-        while (bf.ready()) {
-            String ligne = bf.readLine();
-            if (noLigne != 1) {
-                importerLigne(ligne, noLigne); // ignorer l'en-tête
-            }
-            noLigne++;
+    	int noLigne = 1;
+    	
+        String[] lignes = decouperLignes(contenuFich);
+        for (String ligne : lignes) {
+	        if (noLigne != 1) {
+	            importerLigne(ligne, noLigne); // ignorer l'en-tête
+	        }
+	        noLigne++;
         }
-        bf.close();
     }
 
     private static void importerLigne(String ligne, int noLigne) 
             throws FichierMalFormeException {
 
-        String[] colonnes = decouper(ligne);
+        String[] colonnes = decouperColonnes(ligne);
         if (!tousVides(colonnes)) {
             // vérification que la difficulté est bien un nombre entre 1 et 3
             int diff = 0; // soit modifié soit erreur
@@ -290,6 +282,36 @@ public class ImportExport {
         Donnees.listeCategorie.add(bonneCategorie);
         return bonneCategorie;
     }
+    
+    /**
+     * 
+     * @param texte
+     * @return
+     */
+    public static String[] decouperLignes(String texte) {
+    	List<String> lignes = new ArrayList<>();
+    	int nbGuillemets = 0;
+    	String s = "";
+    	for (int i = 0 ; i < texte.length() ; i++){
+    		char courant = texte.charAt(i);
+    		if (courant == GUILLEMET) {
+    			nbGuillemets++;
+    		}
+    		if(courant == NEW_LINE) {
+    			lignes.add(s);
+    			s = "";
+    		} else {
+    			s += courant;
+    		}
+    		
+    		// ajout de la ligne en cas d'absence de retour à la 
+    		// ligne en fin de fichier
+    		if (i == texte.length() - 1) {
+    			lignes.add(s);
+    		}
+    	}
+    	return lignes.toArray(new String[3]);
+    }
 
     /**
      * Méthode qui prend en argument une ligne et la découpe pour récupérer les
@@ -299,7 +321,7 @@ public class ImportExport {
      * @return valeurs l'ensemble des valeurs découpées sur la ligne
      * @throws FichierMalFormeException si la ligne n'existe pas
      */
-    public static String[] decouper(String ligne) 
+    public static String[] decouperColonnes(String ligne) 
             throws FichierMalFormeException {
         int NB_COLONNES = NOM_COLONNE.length;
 

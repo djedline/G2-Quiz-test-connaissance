@@ -68,7 +68,6 @@ public class ReseauUtils {
      * @throws IOException si les données ne sont pas envoyées.
      */
     public void envoyerMessage(String data) throws IOException {
-        System.out.println("ENVOI DES DONNEES");
         try {
             bw.write(data);
             bw.flush();
