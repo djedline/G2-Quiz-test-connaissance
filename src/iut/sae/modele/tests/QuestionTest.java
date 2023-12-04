@@ -79,7 +79,12 @@ class QuestionTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             listeQuestion.add(new Question(
-                    libelle, nomCategorie, propoJuste, propoFausse, "", 5));
+                    libelle, nomCategorie, propoJuste, tableauVide, feedback, 1));
+        });
+        
+        assertThrows(IllegalArgumentException.class, () -> {
+            listeQuestion.add(new Question(
+                    libelle, nomCategorie, propoJuste, propoFausse, feedback, 5));
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -187,7 +192,7 @@ class QuestionTest {
      */
     @Test
     void testGetFeedback() {
-        assertEquals(listeQuestion.get(0).getFeedback(), "Exemple feedBack");
+        assertEquals(listeQuestion.get(0).getFeedback(), " ");
     }
 
     /**
@@ -197,8 +202,8 @@ class QuestionTest {
     @Test
     void testSetFeedback() {
         assertTrue(listeQuestion.get(0).setFeedback("Exemple feedBack"));
-        assertFalse(listeQuestion.get(0).setFeedback(""));
-        assertFalse(listeQuestion.get(0).setFeedback(" "));
+        assertTrue(listeQuestion.get(0).setFeedback(""));
+        assertTrue(listeQuestion.get(0).setFeedback(" "));
     }
 
     /**
