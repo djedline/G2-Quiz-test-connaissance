@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -82,7 +83,6 @@ public class ImportExport {
         fw.write(produireEntete());
         for (Question q : selectionnees) {
             fw.write(exporterQuestion(q));
-            System.out.println(exporterQuestion(q));
         }
         fw.close();
     }
@@ -173,6 +173,30 @@ public class ImportExport {
         }
 
         BufferedReader bf = new BufferedReader(new FileReader(chemin));
+
+        /*
+         * indice pour les messages d'erreur. Commence à 1 par soucis 
+         * de lisibilité pour l'utilisateur
+         */
+        int noLigne = 1;
+        while (bf.ready()) {
+            String ligne = bf.readLine();
+            if (noLigne != 1) {
+                importerLigne(ligne, noLigne); // ignorer l'en-tête
+            }
+            noLigne++;
+        }
+        bf.close();
+    }
+    
+    /**
+     * Récupère l'ensemble des questions contenues dans un fichier CSV.
+     * 
+     * @param chemin le chemin du fichier à importer
+     * @throws IOException s'il est impossible de l'importer
+     */
+    public static void importer(String contenuFich) throws IOException {
+        BufferedReader bf = new BufferedReader(new StringReader(contenuFich));
 
         /*
          * indice pour les messages d'erreur. Commence à 1 par soucis 
@@ -293,11 +317,9 @@ public class ImportExport {
             if (courant == GUILLEMET) {
                 nbGuillemet++;
                 contientCaracteresSpeciaux = true;
-                System.out.println("les guillemet " + nbGuillemet);
             }
 
             if (courant == DELIMITEUR && nbGuillemet % 2 == 0) {
-                System.out.println("les guillemet " + nbGuillemet);
                 nbGuillemet = 0;
                 if (contientCaracteresSpeciaux) {
                     valeurs[colonneARemplir] = 
@@ -309,10 +331,6 @@ public class ImportExport {
                 if (colonneARemplir < NB_COLONNES) {
                     valeurs[colonneARemplir] += courant;
                 } else {
-                    for (String element : valeurs) {
-
-                        System.out.println("l'element " + element);
-                    }
 
                     // Si on veut ajouter dans une colonne inexistante.
                     throw new FichierMalFormeException(

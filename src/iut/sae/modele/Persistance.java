@@ -85,7 +85,6 @@ public class Persistance {
 	    	Persistance.chargerQuestionsParDefaut();
 	        donneesChargees = false;
 	    }
-	    Donnees.afficherDonnees();
 	    return donneesChargees;
 	}
 
@@ -147,7 +146,6 @@ public class Persistance {
 	    if (Donnees.listeQuestions == null || Donnees.listeQuestions.size() == 0) {
 	        donneesChargees = false;
 	    }
-	    Donnees.afficherDonnees();
 	    return donneesChargees;
 	}
 

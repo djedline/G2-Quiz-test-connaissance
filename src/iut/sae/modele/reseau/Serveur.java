@@ -30,20 +30,18 @@ public class Serveur {
     private Socket comm;
 
     /**
-     * prépare le serveur en démarrant la socket conn
-     * 
+     * prépare le serveur en démarrant la socket conn.
+     * @throws IOException si la socket serveur ne peut être crée
      */
-    public Serveur() {
+    public Serveur() throws IOException {
         System.out.println("CREATION DU SERVEUR");
-        try {          
+        try {
             conn = new ServerSocket(6666);
             System.out.println("coucou");
         } catch (UnknownHostException e) {
-            System.err.println("Impossible de trouver l'adresse IP");
-            e.printStackTrace();
+            throw new IOException("Impossible de trouver l'adresse IP.", e);
         } catch (IOException e) {
-            System.err.println("Impossible de créer la Socket serveur.");
-            e.printStackTrace();
+            throw new IOException("Impossible de créer la Socket serveur.", e);
         }
     }
     
@@ -74,7 +72,7 @@ public class Serveur {
         	int gA = Integer.parseInt(msgGA);
             return (int) Math.pow(gA, b);
         } catch (NumberFormatException e) {
-        	throw new IOException("Données corrompues envoyées par le serveur");
+        	throw new IOException("Données corrompues envoyées par le client.");
         }
     }
     
@@ -134,7 +132,12 @@ public class Serveur {
      */
     public void fermetureServeur() {
         try {
-            conn.close();
+        	if (comm != null) {
+        		comm.close();
+        	}
+        	if (conn != null) {
+        		conn.close();
+        	}
         } catch (IOException e) {
             System.err.println("Impossible de fermer la socket serveur.");
             e.printStackTrace();
