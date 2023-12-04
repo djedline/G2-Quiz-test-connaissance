@@ -3,11 +3,8 @@
  */
 package iut.sae.modele.reseau;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -28,22 +25,26 @@ public class Serveur {
 
     /** socket qui permet la communication entre le serveur et le client */
     private Socket comm;
+    
+    /**
+     * Utilitaires réseaux pour envoyer et recevoir facilement les chaînes
+     * de caractères. Lié à la socket.
+     */
+    private ReseauUtils util;
 
     /**
-     * prépare le serveur en démarrant la socket conn
-     * 
+     * prépare le serveur en démarrant la socket conn.
+     * @throws IOException si la socket serveur ne peut être crée
      */
-    public Serveur() {
+    public Serveur() throws IOException {
         System.out.println("CREATION DU SERVEUR");
-        try {          
+        try {
             conn = new ServerSocket(6666);
             System.out.println("coucou");
         } catch (UnknownHostException e) {
-            System.err.println("Impossible de trouver l'adresse IP");
-            e.printStackTrace();
+            throw new IOException("Impossible de trouver l'adresse IP.", e);
         } catch (IOException e) {
-            System.err.println("Impossible de créer la Socket serveur.");
-            e.printStackTrace();
+            throw new IOException("Impossible de créer la Socket serveur.", e);
         }
     }
     
@@ -60,32 +61,37 @@ public class Serveur {
         String msgG = Integer.toString(g);
         int b = DiffieHellman.genererX();
         
-        ReseauUtils.envoyerMessage(comm, msgG);
-        Thread.sleep(500);
-        ReseauUtils.envoyerMessage(comm, msgP);
-        Thread.sleep(500);
-        System.out.println("Le serveur a envoyé : p et g)");
+        System.out.println("Envoi de G : ");
+        util.envoyerMessage(msgG);
+        Thread.sleep(1000);
+        System.out.println("Envoi de P : ");
+        util.envoyerMessage(msgP);
         
         String msgGB = Integer.toString((int) Math.pow(g, b));
-        ReseauUtils.envoyerMessage(comm, msgGB);
+        Thread.sleep(1000);
+        System.out.println("Envoi de GB : ");
+        util.envoyerMessage(msgGB);
         
-        String msgGA = ReseauUtils.reception(comm);
+        System.out.println("Réception de GA : ");
+        String msgGA = util.reception();
         try {
         	int gA = Integer.parseInt(msgGA);
-            return (int) Math.pow(gA, b);
+        	int cle = (int) Math.pow(gA, b);
+        	System.out.println("Clé générée : " + cle);
+            return cle;
         } catch (NumberFormatException e) {
-        	throw new IOException("Données corrompues envoyées par le serveur");
+        	throw new IOException("Données corrompues envoyées par le client.");
         }
     }
     
     /** 
-     * Receptionne un le contenue d'un fichier
+     * Receptionne le contenu d'un fichier
      * @param cle
      * @return f
      * @throws IOException
      */
     public String receptionFichier(int cle) throws IOException {
-    	String contenuFichCrypte = ReseauUtils.reception(comm);
+    	String contenuFichCrypte = util.reception();
     	return Cryptage.dechiffrer(contenuFichCrypte, 
     			Integer.toString(cle));
     }
@@ -134,7 +140,12 @@ public class Serveur {
      */
     public void fermetureServeur() {
         try {
-            conn.close();
+        	if (comm != null) {
+        		comm.close();
+        	}
+        	if (conn != null) {
+        		conn.close();
+        	}
         } catch (IOException e) {
             System.err.println("Impossible de fermer la socket serveur.");
             e.printStackTrace();
@@ -149,6 +160,7 @@ public class Serveur {
         System.out.println("ACCEPTATION");
         try {
             comm = conn.accept();
+            util = new ReseauUtils(comm);
             System.out.println("La inet Adress conn : " 
                                 + conn.getInetAddress());
             System.out.println("La inet Adress comm : " 

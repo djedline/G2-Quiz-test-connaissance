@@ -34,6 +34,12 @@ public class Client {
     
     private static final File FICHIER_RECEPTION = 
             new File("src/iut/sae/modele/reseau/tests/fichierRecu.txt");
+    
+    /**
+     * Utilitaires réseaux pour envoyer et recevoir facilement les chaînes
+     * de caractères. Lié à la socket.
+     */
+    private ReseauUtils util;
 
     /*
      * Méthode de test des sockets.
@@ -63,16 +69,14 @@ public class Client {
         System.out.println("CREATION SOCKET EN COURS");
         try {
             sock = new Socket(host, port);
+            util = new ReseauUtils(sock);
             System.out.println("CREATION DU CLIENT");
         } catch (UnknownHostException e) {
-            e.printStackTrace();
             throw new IOException("Hôte inconnu : " + e.getMessage());
         } catch (ConnectException e) {
-            e.printStackTrace();
             throw new IOException("La connexion a été refusée : " 
             + e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
             throw new IOException(
                     "Erreur lors de la création de la Socket client : " 
             + e.getMessage());
@@ -83,18 +87,31 @@ public class Client {
      * Récupère les données et génère les données
      * @return gA^b
      * @throws IOException
+     * @throws InterruptedException 
      */
-    public int echangerDonneesCryptage() throws IOException {
+    public int echangerDonneesCryptage() throws IOException, InterruptedException {
         try {
-        	String msgP = ReseauUtils.reception(sock);
-            String msgG = ReseauUtils.reception(sock);
+        	System.out.println("Réception de P : ");
+        	String msgP = util.reception();
+            System.out.println("Réception de G : ");
+            String msgG = util.reception();
+            
 	        int p = Integer.parseInt(msgP);
 	        int g = Integer.parseInt(msgG);
-	        String msgGA = ReseauUtils.reception(sock);
+	        
+	        System.out.println("Réception de GA : ");
+	        String msgGA = util.reception();
 	        int gA = Integer.parseInt(msgGA);
+	        
 	        int b = DiffieHellman.genererX();
-	        ReseauUtils.envoyerMessage(sock, Integer.toString(b));
-	        return (int) Math.pow(gA, b);
+	        int gB = (int) Math.pow(g, b);
+	        Thread.sleep(1000);
+	        System.out.println("Envoi de GB : ");
+	        util.envoyerMessage(Integer.toString(gB));
+	        
+	        int cle = (int) Math.pow(gA, b);
+	        System.out.println("Clé générée : " + cle);
+	        return cle;
         } catch (NumberFormatException e) {
         	throw new IOException("Données corrompues envoyées par le serveur.");
         }
@@ -110,12 +127,12 @@ public class Client {
     	BufferedReader br = new BufferedReader(new FileReader(fich));
     	String contenuFich = "";
     	while (br.ready()) {
-    		contenuFich += br.readLine();
+    		contenuFich += br.readLine() + "\n";
     	}
     	br.close();
     	
     	String fichEncode = Cryptage.chiffrer(contenuFich, Integer.toString(cle));
-    	ReseauUtils.envoyerMessage(sock, fichEncode);
+    	util.envoyerMessage(fichEncode);
     }
     
     /**

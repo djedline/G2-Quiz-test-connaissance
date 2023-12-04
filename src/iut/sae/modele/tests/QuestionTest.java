@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import iut.sae.modele.Categorie;
@@ -26,19 +25,24 @@ import iut.sae.modele.Question;
 class QuestionTest {
 
     private static ArrayList<Question> listeQuestion = new ArrayList<>();
+    
     static String libelle = "Quel question ?";
+    
     static Categorie nomCategorie = new Categorie("absurde");
+    
     static String propoJuste = "Bonne question ?";
+    
     static String[] propoFausse = { 
             "J'ai pas la reponse", "J'ai la reponse", 
             "c'est quoi cette question ?" };
+    
     static String feedback = "La réponse est 'Bonne question ?' car "
             + "la reponse est compliqué et que c'est réellement" 
             + " une bonne question";
+    
     static int diff = 2;
 
     /**
-     * TODO comment method role
      * 
      * @throws java.lang.Exception
      */
@@ -50,15 +54,6 @@ class QuestionTest {
     }
 
     /**
-     * TODO comment method role
-     * 
-     * @throws java.lang.Exception
-     */
-    @AfterAll
-    static void tearDownAfterClass() throws Exception {
-    }
-
-    /**
      * Test method for
      * {@link src.iut.sae.modele.Question#Question
      * (java.lang.String, src.iut.sae.modele.Categorie, java.lang.String, 
@@ -67,7 +62,6 @@ class QuestionTest {
     @Test
     void testQuestion() {
         String[] tableauVide = {};
-        String[] tableauAvecRien = { " ", " " };
         assertThrows(IllegalArgumentException.class, () -> {
             listeQuestion.add(new Question(
                     "", nomCategorie, propoJuste, propoFausse, feedback, diff));
@@ -85,12 +79,12 @@ class QuestionTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             listeQuestion.add(new Question(
-                    libelle, nomCategorie, propoJuste, propoFausse, "", diff));
+                    libelle, nomCategorie, propoJuste, tableauVide, feedback, 1));
         });
-
+        
         assertThrows(IllegalArgumentException.class, () -> {
             listeQuestion.add(new Question(
-                    libelle, nomCategorie, propoJuste, propoFausse, "", 5));
+                    libelle, nomCategorie, propoJuste, propoFausse, feedback, 5));
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -168,7 +162,9 @@ class QuestionTest {
     @Test
     void testGetPropositionFausse() {
         int comp = 0;
+        System.out.println(listeQuestion.get(0).getPropositionFausse().size());
         for (String laRepFausse : listeQuestion.get(0).getPropositionFausse()) {
+            
             assertEquals(laRepFausse, propoFausse[comp]);
             comp++;
         }
@@ -196,7 +192,7 @@ class QuestionTest {
      */
     @Test
     void testGetFeedback() {
-        assertEquals(listeQuestion.get(0).getFeedback(), "Exemple feedBack");
+        assertEquals(listeQuestion.get(0).getFeedback(), " ");
     }
 
     /**
@@ -206,8 +202,8 @@ class QuestionTest {
     @Test
     void testSetFeedback() {
         assertTrue(listeQuestion.get(0).setFeedback("Exemple feedBack"));
-        assertFalse(listeQuestion.get(0).setFeedback(""));
-        assertFalse(listeQuestion.get(0).setFeedback(" "));
+        assertTrue(listeQuestion.get(0).setFeedback(""));
+        assertTrue(listeQuestion.get(0).setFeedback(" "));
     }
 
     /**

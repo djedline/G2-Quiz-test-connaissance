@@ -76,12 +76,12 @@ public class ControleurPartager {
             choixFichier.getItems().add("-- Pas de fichier --");
             choixFichier.setValue("-- Pas de fichier --");
         } else {
-            choixFichier.getItems().add("-- selectionner un Fichier --");
+            choixFichier.getItems().add("-- Sélectionner un fichier --");
             for (File fichier : listeFichier) {
                 choixFichier.getItems().add(fichier.getName());
                 System.out.println(fichier);
             }
-            choixFichier.setValue("-- selectionner un Fichier --");
+            choixFichier.setValue("-- Sélectionner un fichier --");
         }
         /* */
 
@@ -101,8 +101,8 @@ public class ControleurPartager {
             ipOk = true;
         } else {
             Alert messageErreur = new Alert(AlertType.ERROR);
-            messageErreur.setContentText("Une adresse ip est constitué de 4 "
-                    + "nombres entre 0 et 255 séparés par des points exemples :"
+            messageErreur.setContentText("Une adresse IP est constitué de 4 "
+                    + "nombres entre 0 et 255 séparés par des points. Exemple : "
                     + "128.15.0.348");
             messageErreur.show();
             adresseIpServeur.setText("");
@@ -116,23 +116,24 @@ public class ControleurPartager {
      */
     public void partageFichier() {
         try {
-            int cle;
             System.out.println("INITIALISATION CLIENT");
             clientPartage = new Client(adresseIpServeur.getText(), 6666);
-            String reponse = "";
             System.out.println("RECEPTION CLE");
-            cle = clientPartage.echangerDonneesCryptage();
-            clientPartage.envoyer(dossier, cle);
+            int cle = clientPartage.echangerDonneesCryptage();
+            Thread.sleep(1000);
+            clientPartage.envoyer(Donnees.fichierAPartager, cle);
             clientPartage.fermerSocket();
+            new Alert(AlertType.INFORMATION, 
+            		"Le transfert s'est correctement déroulé.").show();
         } catch (Exception e) {
-            e.printStackTrace();
+            new Alert(AlertType.ERROR, e.getMessage()).show();
         }
     }
 
     @FXML
     void clicValider(ActionEvent event) {
         fichierOk = choixFichier.getValue().equals("-- Pas de fichier --") ||
-                choixFichier.getValue().equals("-- selectionner un Fichier --");
+                choixFichier.getValue().equals("-- Sélectionner un fichier --");
         if (fichierOk) {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("Vous ne pouvez pas partager ça");
