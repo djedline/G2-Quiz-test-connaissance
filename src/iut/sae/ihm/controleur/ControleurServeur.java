@@ -81,6 +81,7 @@ public class ControleurServeur {
         // System.out.println(allumageOk);
         // System.out.println(!allumageOk);
         if (!Donnees.serveurAllumee) {
+            String contenuFichier;
             System.out.println("Salut");
             btnDemarrer.setText("Eteindre");
             Donnees.serveurAllumee = true;

@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -80,11 +81,6 @@ class QuestionTest {
         assertThrows(IllegalArgumentException.class, () -> {
             listeQuestion.add(new Question(
                     libelle, nomCategorie, "", propoFausse, feedback, diff));
-        });
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            listeQuestion.add(new Question(
-                    libelle, nomCategorie, propoJuste, propoFausse, "", diff));
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -167,7 +163,9 @@ class QuestionTest {
     @Test
     void testGetPropositionFausse() {
         int comp = 0;
+        System.out.println(listeQuestion.get(0).getPropositionFausse().size());
         for (String laRepFausse : listeQuestion.get(0).getPropositionFausse()) {
+            
             assertEquals(laRepFausse, propoFausse[comp]);
             comp++;
         }

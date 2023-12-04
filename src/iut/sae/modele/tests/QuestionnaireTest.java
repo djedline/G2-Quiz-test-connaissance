@@ -24,20 +24,28 @@ class QuestionnaireTest {
 
     public static Categorie categorieSansQuestion = 
             new Categorie("sansQuestion");
+    
     public static Categorie categorieAvecQuestion = 
             new Categorie("avecQuestion");
+    
     public static String[] reponseFausse = { "non", "non" };
+    
     public static Questionnaire leQuestionnaire1;
+    
     public static Questionnaire leQuestionnaire2;
+    
     public static Question question1 = new Question(
             "La question 1 ?", categorieAvecQuestion, "oui", reponseFausse,
             "pas de feedback", 1);
+    
     public static Question question2 = new Question(
             "La question 2 ?", categorieAvecQuestion, "oui", reponseFausse,
             "pas de feedback", 1);
+    
     public static Question question3 = new Question(
             "La question 3 ?", categorieAvecQuestion, "oui", reponseFausse,
             "pas de feedback", 1);
+    
     public static Question question4 = new Question(
             "La question 4 ?", categorieAvecQuestion, "oui", reponseFausse,
             "pas de feedback", 1);

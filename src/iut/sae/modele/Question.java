@@ -213,6 +213,7 @@ public class Question implements Serializable {
             propOk = !propositionFausse[index].isBlank();
         }
         if (propOk) {
+            this.viderPropositionFausse();
             for (String element : propositionFausse) {
                 this.propositionFausse.add(element);
             }

@@ -209,5 +209,4 @@ public class ControleurModifierQuestion {
     void annulerQuestion(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_DONNEES);
     }
-
 }

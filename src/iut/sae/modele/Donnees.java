@@ -167,12 +167,12 @@ public class Donnees {
     }
 
     /**
-     * Suprime la question mis en parametre
+     * Supprime la question mis en paramètre
      * 
      * @param laQuestion
      * @return true si ça marche, false sinon
      */
-    public static boolean suprimerQuestion(Question laQuestion) {
+    public static boolean supprimerQuestion(Question laQuestion) {
         if (listeQuestions.contains(laQuestion)) {
             listeQuestions.remove(laQuestion);
             return true;
@@ -181,7 +181,7 @@ public class Donnees {
     }
 
     /**
-     * Surpime la categorie mis en parametre
+     * Supprime la catégorie mis en paramètre
      * 
      * @param laCategorie
      * @return true si ça marche, false sinon
@@ -190,7 +190,7 @@ public class Donnees {
         if (!isCategorieVide(laCategorie)) {
             for (Question laQuestion : 
                 getQuestionOfCategorie(laCategorie.toString())) {
-                suprimerQuestion(laQuestion);
+                supprimerQuestion(laQuestion);
             }
         }
         if (listeCategorie.contains(laCategorie)) {

@@ -101,8 +101,9 @@ public class ControleurCreerQuestion {
     }
 
     /**
-     * Méthode permettant de répertorier toute les réponses fausses d'une 
-     * question dans un tableau
+     * Méthode permettant de répertorier toute les réponses fausses d'une question
+     * dans un tableau
+     * 
      * @return repFausse La ou les réponses fausses
      */
     public String[] tableauReponseFausse() {
@@ -111,8 +112,7 @@ public class ControleurCreerQuestion {
         boolean repFausseNbValide = false;
 
         for (TextField laZoneTexte : lesTxtFaux) {
-            if (laZoneTexte.getText() != null 
-                    && !laZoneTexte.getText().isBlank()) {
+            if (laZoneTexte.getText() != null && !laZoneTexte.getText().isBlank()) {
                 listeIntermediaire.add(laZoneTexte.getText());
                 repFausseNbValide = true;
             }
@@ -144,8 +144,7 @@ public class ControleurCreerQuestion {
             laDifficulte = 3;
             break;
         default:
-            throw new IllegalArgumentException(
-                    "Mauvaise valeur dans le choiceBox de difficulté");
+            throw new IllegalArgumentException("Mauvaise valeur dans le choiceBox de difficulté");
 
         }
 
@@ -154,13 +153,8 @@ public class ControleurCreerQuestion {
             if (txtFeedback.getText() == null) {
                 txtFeedback.setText("");
             }
-            Question nouvelleQuestion = 
-                    new Question(txtIntitule.getText(), 
-                                 choiceCategorie.getValue(),
-                                 txtRepJuste.getText(),
-                                 tableauReponseFausse(),
-                                 txtFeedback.getText(), 
-                                 laDifficulte);
+            Question nouvelleQuestion = new Question(txtIntitule.getText(), choiceCategorie.getValue(),
+                    txtRepJuste.getText(), tableauReponseFausse(), txtFeedback.getText(), laDifficulte);
 
             if (!Donnees.verifDoubleQuestion(nouvelleQuestion)) {
                 Donnees.listeQuestions.add(nouvelleQuestion);

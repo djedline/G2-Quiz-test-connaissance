@@ -63,13 +63,13 @@ public class ControleurGestionDonnees {
                 : "fx:id=\"treeViewData\" was not injected: " 
                 + "check your FXML file 'GestionDonnees.fxml'.";
 
-        // cree l'eventHandler pour modifier la Categorie
+        // crée l'eventHandler pour modifier la Categorie
         EventHandler<ActionEvent> modifierCat = new EventHandler<ActionEvent>(){
             public void handle(ActionEvent e) {
-                // recupere la categorie qui etait dans le menuitem
+                // récupère la catégorie qui était dans le menuitem
                 Categorie laCategorie = 
                         (Categorie) ((MenuItem) e.getSource()).getUserData();
-                // verifier que la categorie choisi n'est pas general
+                // vérifier que la catégorie choisi n'est pas "general"
                 if (laCategorie != Donnees.listeCategorie.getFirst()) {
                     EchangeurDeVue.echangerAvec(laCategorie);
                 } else {
@@ -81,36 +81,36 @@ public class ControleurGestionDonnees {
 
             }
         };
-        // cree l'eventhandler pour modifier les question
+        // crée l'eventhandler pour modifier les questions
         EventHandler<ActionEvent> modifierQuest =
                 new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                // recupere la question qui est passé en parametre du menuitem
+                // récupère la question qui est passée en paramètre du menuitem
                 Question laQuestion = 
                         (Question) ((MenuItem) e.getSource()).getUserData();
                 EchangeurDeVue.echangerAvec(laQuestion);
             }
         };
-        // cree l'eventhandler pour suprimer les categorie
+        // crée l'eventhandler pour supprimer les catégories
         EventHandler<ActionEvent> suprimerCat = new EventHandler<ActionEvent>(){
             public void handle(ActionEvent e) {
-                // recupere la categorie qui etait dans le menuitem
+                // récupère la catégorie qui était dans le menuitem
                 Categorie laCategorie = 
                         (Categorie) ((MenuItem) e.getSource()).getUserData();
-                // verifie sur la categorie choisi n'est pas general
+                // vérifie que la catégorie choisi n'est pas general
                 if (laCategorie != Donnees.listeCategorie.getFirst()) {
                     if (Donnees.isCategorieVide(laCategorie)) {
                         Donnees.suprimerCategorie(laCategorie);
                     } else {
-                        // affiche l'alert que la categorie n'est pas vide
+                        // affiche l'alert si la catégorie n'est pas vide
                         Alert confirmation = new Alert(AlertType.CONFIRMATION);
                         confirmation.setContentText(
                                 "La categorie contien des question."
                                 + "\nCette action les suprimeras aussi.");
                         Optional<ButtonType> result = 
                                 confirmation.showAndWait();
-                        // si l'utilisateur clique sur ok, 
-                        // les question et la categorie son suprimé
+                        /* si l'utilisateur clique sur ok, 
+                           les questions et la catégorie sont supprimées */
                         if (result.get() == ButtonType.OK) {
                             Donnees.suprimerCategorie(laCategorie);
                         }
@@ -126,14 +126,14 @@ public class ControleurGestionDonnees {
                 }
             }
         };
-        // cree l'eventHandler de supresion question
-        EventHandler<ActionEvent> suprimerQuest =
+        // crée l'eventHandler de suppresion question
+        EventHandler<ActionEvent> supprimerQuest =
                 new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 // recupere la question qui est passé en parametre du menuitem
                 Question laQuestion = 
                         (Question) ((MenuItem) e.getSource()).getUserData();
-                Donnees.suprimerQuestion(laQuestion);
+                Donnees.supprimerQuestion(laQuestion);
                 EchangeurDeVue.echangerAvec(
                         EnsembleDesVues.VUE_GESTION_DONNEES);
             }
@@ -178,7 +178,7 @@ public class ControleurGestionDonnees {
                     menuItemSuprimer.setUserData(laQuestion);
                     // on place les eventHandler
                     menuItemModifier.setOnAction(modifierQuest);
-                    menuItemSuprimer.setOnAction(suprimerQuest);
+                    menuItemSuprimer.setOnAction(supprimerQuest);
                     // on ajoute les menuitem dans le menuButton
                     btnModifierQuestion.getItems().add(menuItemModifier);
                     btnModifierQuestion.getItems().add(menuItemSuprimer);

@@ -72,7 +72,6 @@ public class Cryptage {
      * 
      * @return laCle la clé de cryptage
      */
-
     /*
      * public static String genereCleVigenere() { String laCle = ""; int nombreAlea;
      * final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE -

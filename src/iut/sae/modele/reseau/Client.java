@@ -76,6 +76,11 @@ public class Client {
         }
     }
     
+    /** 
+     * Récupère les données et génère les données
+     * @return gA^b
+     * @throws IOException
+     */
     public int echangerDonneesCryptage() throws IOException {
         try {
         	String msgP = ReseauUtils.reception(sock);
@@ -95,6 +100,12 @@ public class Client {
         }
     }
     
+    /** 
+     * Envoyer le fichier et la clé au serveur
+     * @param fich
+     * @param cle 
+     * @throws IOException
+     */
     public void envoyer(File fich, int cle) throws IOException {
     	BufferedReader br = new BufferedReader(new FileReader(fich));
     	String contenuFich = "";
@@ -167,11 +178,11 @@ public class Client {
     }
     */
     
-    /**
+ /*   /**
      * Permet d'envoyer la reponse au client en retour d'une requete
      * 
      * @param rep : la reponse a envoyer
-     */
+     
     public void envoyerReponse(String rep) {
         
         String msgx2 = "";
@@ -199,7 +210,7 @@ public class Client {
             System.err.println("Impossible de répondre au serveur.");
             e.printStackTrace();
         }
-    }
+    }*/
     
     /**
      * Ferme la socket courante.
