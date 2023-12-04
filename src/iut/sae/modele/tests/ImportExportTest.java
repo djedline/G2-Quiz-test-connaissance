@@ -65,8 +65,6 @@ class ImportExportTest {
         		cat,"Le rôle du programme, en explicitant de manière précise ce rôle ", 
         		repFausses2, "Un texte libre laissé à l'appréciation du programmeur", 2);
         assertEquals(q, Donnees.listeQuestions.get(0));
-        
-        Donnees.afficherDonnees();
 
     }
 
@@ -94,7 +92,6 @@ class ImportExportTest {
         Question q = new Question("La panne est dûe à la vétusté de l'appareil.", 
         		cat,"incorrect", repFausses, "due", 1);
         assertEquals(q, Donnees.listeQuestions.get(0));
-        Donnees.afficherDonnees();
     }
 
     private static final String EXPORT_VIDE = 

@@ -63,7 +63,7 @@ public class ControleurPartager {
      */
     @FXML
     void initialize() {
-        chemineDossier = "src/fichiers_sauvegarde_partage/fichier_csv_stock";
+        chemineDossier = "fichiers_sauvegarde_partage/fichier_csv_stock";
         dossier = new File(chemineDossier);
         listeFichier = dossier.listFiles();
         ipOk = false;
@@ -74,12 +74,12 @@ public class ControleurPartager {
             choixFichier.getItems().add("-- Pas de fichier --");
             choixFichier.setValue("-- Pas de fichier --");
         } else {
-            choixFichier.getItems().add("-- selectionner un Fichier --");
+            choixFichier.getItems().add("-- Sélectionner un fichier --");
             for (File fichier : listeFichier) {
                 choixFichier.getItems().add(fichier.getName());
                 System.out.println(fichier);
             }
-            choixFichier.setValue("-- selectionner un Fichier --");
+            choixFichier.setValue("-- Sélectionner un fichier --");
         }
         /* */
 
@@ -116,11 +116,10 @@ public class ControleurPartager {
         try {
             System.out.println("INITIALISATION CLIENT");
             clientPartage = new Client(adresseIpServeur.getText(), 6666);
-            String reponse = "";
+            int cle;
             System.out.println("RECEPTION CLE");
-            reponse = clientPartage.recevoirEtAnalyser(
-                    Donnees.fichierAPartager);
-            clientPartage.envoyerReponse(reponse);
+            cle = clientPartage.echangerDonneesCryptage();
+            clientPartage.envoyer(Donnees.fichierAPartager, cle);
             clientPartage.fermerSocket();
         } catch (Exception e) {
             e.printStackTrace();

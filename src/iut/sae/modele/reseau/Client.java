@@ -65,14 +65,11 @@ public class Client {
             sock = new Socket(host, port);
             System.out.println("CREATION DU CLIENT");
         } catch (UnknownHostException e) {
-            e.printStackTrace();
             throw new IOException("Hôte inconnu : " + e.getMessage());
         } catch (ConnectException e) {
-            e.printStackTrace();
             throw new IOException("La connexion a été refusée : " 
             + e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
             throw new IOException(
                     "Erreur lors de la création de la Socket client : " 
             + e.getMessage());
@@ -82,10 +79,13 @@ public class Client {
     public int echangerDonneesCryptage() throws IOException {
         try {
         	String msgP = ReseauUtils.reception(sock);
+        	System.out.println("Message P : ");
             String msgG = ReseauUtils.reception(sock);
+            System.out.println("Message G : ");
 	        int p = Integer.parseInt(msgP);
 	        int g = Integer.parseInt(msgG);
 	        String msgGA = ReseauUtils.reception(sock);
+	        System.out.println("Message GA : ");
 	        int gA = Integer.parseInt(msgGA);
 	        int b = DiffieHellman.genererX();
 	        ReseauUtils.envoyerMessage(sock, Integer.toString(b));

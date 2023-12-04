@@ -23,6 +23,7 @@ public class ReseauUtils {
         while (reader.ready()) {
             strRecu += Character.toString(reader.read());
         }
+        System.out.println("Message reçu : " + strRecu);
         return strRecu;
     }
 	
@@ -38,9 +39,9 @@ public class ReseauUtils {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
                                                                   os, "UTF-8"));
             bw.write(data);
-            System.out.println("Le serveur a envoyé : " + data.toString());
+            System.out.println("Message envoyé : " + data.toString());
         } catch (IOException e) {
-            throw new IOException("Impossible d'envoyer le message au client.");
+            throw new IOException("Impossible d'envoyer le message.");
         }
     }
 
