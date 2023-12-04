@@ -104,7 +104,8 @@ public class Question implements Serializable {
         questionOk = !libelle.isBlank() && nomCategorie != null 
                 && !propositionJuste.isBlank() && propOk
                 && propositionFausse != null && feedback != null 
-                && 1 <= difficulte && difficulte <= 3;
+                && 1 <= difficulte && difficulte <= 3
+                && propositionFausse.length != 0;
         return questionOk;
     }
 
@@ -251,7 +252,7 @@ public class Question implements Serializable {
      * @return false
      */
     public boolean setFeedback(String feedback) {
-        boolean feedBackOk = !feedback.isBlank();
+        boolean feedBackOk = feedback != null;
         if (feedBackOk) {
             this.feedback = feedback;
         }
