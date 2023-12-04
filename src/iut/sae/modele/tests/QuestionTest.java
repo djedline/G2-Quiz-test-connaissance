@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import iut.sae.modele.Categorie;
@@ -26,19 +25,24 @@ import iut.sae.modele.Question;
 class QuestionTest {
 
     private static ArrayList<Question> listeQuestion = new ArrayList<>();
+    
     static String libelle = "Quel question ?";
+    
     static Categorie nomCategorie = new Categorie("absurde");
+    
     static String propoJuste = "Bonne question ?";
+    
     static String[] propoFausse = { 
             "J'ai pas la reponse", "J'ai la reponse", 
             "c'est quoi cette question ?" };
+    
     static String feedback = "La réponse est 'Bonne question ?' car "
             + "la reponse est compliqué et que c'est réellement" 
             + " une bonne question";
+    
     static int diff = 2;
 
     /**
-     * TODO comment method role
      * 
      * @throws java.lang.Exception
      */
@@ -50,15 +54,6 @@ class QuestionTest {
     }
 
     /**
-     * TODO comment method role
-     * 
-     * @throws java.lang.Exception
-     */
-    @AfterAll
-    static void tearDownAfterClass() throws Exception {
-    }
-
-    /**
      * Test method for
      * {@link src.iut.sae.modele.Question#Question
      * (java.lang.String, src.iut.sae.modele.Categorie, java.lang.String, 
@@ -67,7 +62,6 @@ class QuestionTest {
     @Test
     void testQuestion() {
         String[] tableauVide = {};
-        String[] tableauAvecRien = { " ", " " };
         assertThrows(IllegalArgumentException.class, () -> {
             listeQuestion.add(new Question(
                     "", nomCategorie, propoJuste, propoFausse, feedback, diff));
