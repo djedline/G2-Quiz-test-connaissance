@@ -3,11 +3,8 @@
  */
 package iut.sae.modele.reseau;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -28,6 +25,12 @@ public class Serveur {
 
     /** socket qui permet la communication entre le serveur et le client */
     private Socket comm;
+    
+    /**
+     * Utilitaires réseaux pour envoyer et recevoir facilement les chaînes
+     * de caractères. Lié à la socket.
+     */
+    private ReseauUtils util;
 
     /**
      * prépare le serveur en démarrant la socket conn.
@@ -58,14 +61,14 @@ public class Serveur {
         String msgG = Integer.toString(g);
         int b = DiffieHellman.genererX();
         
-        ReseauUtils.envoyerMessage(comm, msgG);
-        ReseauUtils.envoyerMessage(comm, msgP);
+        util.envoyerMessage(msgG);
+        util.envoyerMessage(msgP);
         System.out.println("Le serveur a envoyé : p et g)");
         
         String msgGB = Integer.toString((int) Math.pow(g, b));
-        ReseauUtils.envoyerMessage(comm, msgGB);
+        util.envoyerMessage(msgGB);
         
-        String msgGA = ReseauUtils.reception(comm);
+        String msgGA = util.reception();
         try {
         	int gA = Integer.parseInt(msgGA);
             return (int) Math.pow(gA, b);
@@ -81,7 +84,7 @@ public class Serveur {
      * @throws IOException
      */
     public String receptionFichier(int cle) throws IOException {
-    	String contenuFichCrypte = ReseauUtils.reception(comm);
+    	String contenuFichCrypte = util.reception();
     	return Cryptage.dechiffrer(contenuFichCrypte, 
     			Integer.toString(cle));
     }
@@ -150,6 +153,7 @@ public class Serveur {
         System.out.println("ACCEPTATION");
         try {
             comm = conn.accept();
+            util = new ReseauUtils(comm);
             System.out.println("La inet Adress conn : " 
                                 + conn.getInetAddress());
             System.out.println("La inet Adress comm : " 

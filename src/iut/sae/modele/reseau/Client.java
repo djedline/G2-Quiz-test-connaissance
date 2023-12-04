@@ -34,6 +34,12 @@ public class Client {
     
     private static final File FICHIER_RECEPTION = 
             new File("src/iut/sae/modele/reseau/tests/fichierRecu.txt");
+    
+    /**
+     * Utilitaires réseaux pour envoyer et recevoir facilement les chaînes
+     * de caractères. Lié à la socket.
+     */
+    private ReseauUtils util;
 
     /*
      * Méthode de test des sockets.
@@ -63,6 +69,7 @@ public class Client {
         System.out.println("CREATION SOCKET EN COURS");
         try {
             sock = new Socket(host, port);
+            util = new ReseauUtils(sock);
             System.out.println("CREATION DU CLIENT");
         } catch (UnknownHostException e) {
             throw new IOException("Hôte inconnu : " + e.getMessage());
@@ -83,17 +90,17 @@ public class Client {
      */
     public int echangerDonneesCryptage() throws IOException {
         try {
-        	String msgP = ReseauUtils.reception(sock);
+        	String msgP = util.reception();
         	System.out.println("Message P : ");
-            String msgG = ReseauUtils.reception(sock);
+            String msgG = util.reception();
             System.out.println("Message G : ");
 	        int p = Integer.parseInt(msgP);
 	        int g = Integer.parseInt(msgG);
-	        String msgGA = ReseauUtils.reception(sock);
+	        String msgGA = util.reception();
 	        System.out.println("Message GA : ");
 	        int gA = Integer.parseInt(msgGA);
 	        int b = DiffieHellman.genererX();
-	        ReseauUtils.envoyerMessage(sock, Integer.toString(b));
+	        util.envoyerMessage(Integer.toString(b));
 	        return (int) Math.pow(gA, b);
         } catch (NumberFormatException e) {
         	throw new IOException("Données corrompues envoyées par le serveur.");
@@ -115,7 +122,7 @@ public class Client {
     	br.close();
     	
     	String fichEncode = Cryptage.chiffrer(contenuFich, Integer.toString(cle));
-    	ReseauUtils.envoyerMessage(sock, fichEncode);
+    	util.envoyerMessage(fichEncode);
     }
     
     /**

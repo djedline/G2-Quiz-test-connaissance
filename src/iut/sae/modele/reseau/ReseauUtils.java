@@ -3,10 +3,12 @@ package iut.sae.modele.reseau;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.nio.charset.Charset;
 
 /** 
  * Fonction utilitaire qui permette de tout récupére facilement
@@ -14,6 +16,24 @@ import java.net.Socket;
  *
  */
 public class ReseauUtils {
+	private BufferedReader br;
+	private BufferedWriter bw;
+	
+	/**
+	 * Crée les utilitaires réseau pour une socket.
+	 * @param sock la socket qui va envoyer et recevoir des messages.
+	 * @throws IOException si l'utilitaire ne peut être créé
+	 */
+	public ReseauUtils(Socket sock) throws IOException {
+		OutputStream os = sock.getOutputStream();
+		InputStream is = sock.getInputStream();
+		Charset encoding = Charset.forName("UTF-8");
+		
+		this.bw = new BufferedWriter(new OutputStreamWriter(os, encoding));
+		this.br = new BufferedReader(new InputStreamReader(is, encoding));
+	}
+	
+	
 	
 	public static final int RECEIVE_TIMEOUT = 5;
 	
@@ -24,11 +44,9 @@ public class ReseauUtils {
      * @throws IOException si la lecture est impossible.
      * @return strRecu l'ensemble des données reçues
      */
-    public static String reception(Socket sock) throws IOException {
+    public String reception() throws IOException {
         String strRecu = "";
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(sock.getInputStream(), "UTF-8"));
-        for (int sec = 0 ; sec < RECEIVE_TIMEOUT && !reader.ready(); sec++) {
+        for (int sec = 0 ; sec < RECEIVE_TIMEOUT && !br.ready(); sec++) {
         	System.out.println("En attente...");
             try {
 				Thread.sleep(1000);
@@ -36,8 +54,8 @@ public class ReseauUtils {
 				e.printStackTrace();
 			}
         }
-        while (reader.ready()) {
-            strRecu += Character.toString(reader.read());
+        while (br.ready()) {
+            strRecu += Character.toString(br.read());
         }
         System.out.println("Message reçu : " + strRecu);
         return strRecu;
@@ -49,14 +67,11 @@ public class ReseauUtils {
      * @param data les données à envoyer
      * @throws IOException si les données ne sont pas envoyées.
      */
-    public static void envoyerMessage(Socket sock, String data) throws IOException {
+    public void envoyerMessage(String data) throws IOException {
         System.out.println("ENVOI DES DONNEES");
         try {
-            OutputStream os = sock.getOutputStream();
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-                                                                  os, "UTF-8"));
             bw.write(data);
-            bw.close();
+            bw.flush();
             System.out.println("Message envoyé : " + data.toString());
         } catch (IOException e) {
         	e.printStackTrace();
