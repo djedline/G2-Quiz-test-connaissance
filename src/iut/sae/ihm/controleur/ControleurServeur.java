@@ -83,7 +83,7 @@ public class ControleurServeur {
         if (!Donnees.serveurAllumee) {
             String contenuFichier;
             System.out.println("Salut");
-            btnDemarrer.setText("Eteindre");
+            btnDemarrer.setText("Éteindre");
             Donnees.serveurAllumee = true;
             // serveurPartage.preparerServeur();
             try {
@@ -96,7 +96,7 @@ public class ControleurServeur {
             	new Alert(AlertType.ERROR, e.getMessage()).show();
             } finally {
             	serveurPartage.fermetureServeur();
-            }
+            }=
         } else {
             System.out.println("Au revoir");
             serveurPartage.fermetureServeur();

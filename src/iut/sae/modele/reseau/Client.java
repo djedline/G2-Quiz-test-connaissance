@@ -101,7 +101,9 @@ public class Client {
 	        int gA = Integer.parseInt(msgGA);
 	        int b = DiffieHellman.genererX();
 	        util.envoyerMessage(Integer.toString(b));
-	        return (int) Math.pow(gA, b);
+	        int cle = (int) Math.pow(gA, b);
+	        System.out.println("Clé générée : " + cle);
+	        return cle;
         } catch (NumberFormatException e) {
         	throw new IOException("Données corrompues envoyées par le serveur.");
         }

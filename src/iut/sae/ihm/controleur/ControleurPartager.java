@@ -101,8 +101,8 @@ public class ControleurPartager {
             ipOk = true;
         } else {
             Alert messageErreur = new Alert(AlertType.ERROR);
-            messageErreur.setContentText("Une adresse ip est constitué de 4 "
-                    + "nombres entre 0 et 255 séparés par des points exemples :"
+            messageErreur.setContentText("Une adresse IP est constitué de 4 "
+                    + "nombres entre 0 et 255 séparés par des points. Exemple : "
                     + "128.15.0.348");
             messageErreur.show();
             adresseIpServeur.setText("");
@@ -130,7 +130,7 @@ public class ControleurPartager {
     @FXML
     void clicValider(ActionEvent event) {
         fichierOk = choixFichier.getValue().equals("-- Pas de fichier --") ||
-                choixFichier.getValue().equals("-- selectionner un Fichier --");
+                choixFichier.getValue().equals("-- Sélectionner un fichier --");
         if (fichierOk) {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("Vous ne pouvez pas partager ça");

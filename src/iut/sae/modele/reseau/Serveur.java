@@ -62,16 +62,20 @@ public class Serveur {
         int b = DiffieHellman.genererX();
         
         util.envoyerMessage(msgG);
+        Thread.sleep(1000);
         util.envoyerMessage(msgP);
-        System.out.println("Le serveur a envoyé : p et g)");
+        System.out.println("Le serveur a envoyé p et g)");
         
         String msgGB = Integer.toString((int) Math.pow(g, b));
+        Thread.sleep(1000);
         util.envoyerMessage(msgGB);
         
         String msgGA = util.reception();
         try {
         	int gA = Integer.parseInt(msgGA);
-            return (int) Math.pow(gA, b);
+        	int cle = (int) Math.pow(gA, b);
+        	System.out.println("Clé générée : " + cle);
+            return cle;
         } catch (NumberFormatException e) {
         	throw new IOException("Données corrompues envoyées par le client.");
         }
