@@ -36,7 +36,7 @@ public class ReseauUtils {
 
 
     /** TODO comment field role (attribute, association) */
-    public static final int RECEIVE_TIMEOUT = 5;
+    public static final int RECEIVE_TIMEOUT = 10;
 
     /** 
      * Lit les données dans une String depuis la socket tant qu'elles 

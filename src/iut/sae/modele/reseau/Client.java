@@ -5,18 +5,12 @@
 package iut.sae.modele.reseau;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.nio.charset.Charset;
 
 /**
  * Représente le client dans les échanges de données via le réseau.
@@ -104,12 +98,12 @@ public class Client {
 	        int gA = Integer.parseInt(msgGA);
 	        
 	        int b = DiffieHellman.genererX();
-	        int gB = (int) Math.pow(g, b);
+	        int gB = DiffieHellman.calculMisePuissance(g, b, p);
 	        Thread.sleep(1000);
 	        System.out.println("Envoi de GB : ");
 	        util.envoyerMessage(Integer.toString(gB));
 	        
-	        int cle = (int) Math.pow(gA, b);
+	        int cle = DiffieHellman.calculMisePuissance(gA, b, p);
 	        System.out.println("Clé générée : " + cle);
 	        return cle;
         } catch (NumberFormatException e) {

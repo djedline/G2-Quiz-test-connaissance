@@ -56,18 +56,21 @@ public class Serveur {
      */
     public int envoiDonneesInitiale() throws IOException, InterruptedException {
         int p = DiffieHellman.genererModulo();
-        int g = DiffieHellman.genererGenerateur();
         String msgP = Integer.toString(p);
-        String msgG = Integer.toString(g);
-        int b = DiffieHellman.genererX();
-        
-        System.out.println("Envoi de G : ");
-        util.envoyerMessage(msgG);
         Thread.sleep(1000);
         System.out.println("Envoi de P : ");
         util.envoyerMessage(msgP);
         
-        String msgGB = Integer.toString((int) Math.pow(g, b));
+        int g = DiffieHellman.genererGenerateur(p);
+        String msgG = Integer.toString(g);
+        Thread.sleep(1000);
+        System.out.println("Envoi de G : ");
+        util.envoyerMessage(msgG);
+        
+        
+        int b = DiffieHellman.genererX();
+        String msgGB = Integer.toString(
+        		DiffieHellman.calculMisePuissance(g, b, p));
         Thread.sleep(1000);
         System.out.println("Envoi de GB : ");
         util.envoyerMessage(msgGB);
@@ -76,7 +79,7 @@ public class Serveur {
         String msgGA = util.reception();
         try {
         	int gA = Integer.parseInt(msgGA);
-        	int cle = (int) Math.pow(gA, b);
+        	int cle = DiffieHellman.calculMisePuissance(gA, b, p);
         	System.out.println("Clé générée : " + cle);
             return cle;
         } catch (NumberFormatException e) {

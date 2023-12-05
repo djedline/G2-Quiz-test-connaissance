@@ -9,6 +9,8 @@
  */
 package iut.sae.modele.reseau;
 
+import java.util.ArrayList;
+
 /**
  * Classe qui permet le cryptage d'un message grâce à la génération d'une clé
  * puis le décryptage de ce même message
@@ -50,7 +52,8 @@ public class Cryptage {
     public static String genereCleDiffie() {
         String laCle = "";
         int reste;
-        int g = DiffieHellman.genererGenerateur();
+        int p = DiffieHellman.genererModulo();
+        int g = DiffieHellman.genererGenerateur(p);
         int x = DiffieHellman.genererX();
         int x1 = DiffieHellman.genererX();
         int gx = DiffieHellman.calculGX(g, x);
@@ -86,6 +89,30 @@ public class Cryptage {
     }
 
     /**
+	 * Méthode qui permet de crypter un message
+	 * 
+	 * @param aChiffrer le message a crypter
+	 * @param cle       la clé de cryptage
+	 * @return msgCrypte le message crypté grâce à la clé
+	 */
+	public static String chiffrer(String aChiffrer, Integer[] offset) {
+	    String msgCrypte = "";
+	    int indexCle = 0;
+	
+	    for (int c = 0; c < aChiffrer.length(); c++, indexCle++) {
+	        int codeLettre = Character.codePointAt(aChiffrer, c);
+	        int codeCle = offset[indexCle];
+	        if (indexCle == offset.length - 1) {
+	            indexCle = -1;
+	        }
+	        int charCrypte = (codeLettre + codeCle) % TAILLE_ENSEMBLE;
+	        msgCrypte += Character.toString(charCrypte);
+	    }
+	    System.out.println("Message crypté : " + msgCrypte);
+	    return msgCrypte;
+	}
+
+	/**
      * Méthode qui permet de crypter un message
      * 
      * @param aChiffrer le message a crypter
@@ -93,22 +120,36 @@ public class Cryptage {
      * @return msgCrypte le message crypté grâce à la clé
      */
     public static String chiffrer(String aChiffrer, String cle) {
-        String msgCrypte = "";
-        int indexCle = 0;
-
-        for (int c = 0; c < aChiffrer.length(); c++, indexCle++) {
-            int codeLettre = Character.codePointAt(aChiffrer, c);
-            int codeCle = Character.codePointAt(cle, indexCle);
-            if (indexCle == cle.length() - 1) {
-                indexCle = -1;
-            }
-            int charCrypte = (codeLettre + codeCle) % TAILLE_ENSEMBLE;
-            msgCrypte += Character.toString(charCrypte);
-        }
-        System.out.println("Message crypté : " + msgCrypte);
-        return msgCrypte;
+    	Integer[] offset = convertirStringEnOffset(cle);
+        return chiffrer(aChiffrer, offset);
     }
-
+    
+    /**
+     * Récupère l'offset des caractères d'une chaîne.
+     * @param str la chaîne à analyser
+     * @return l'offset des caractères, compris entre 0 et 255
+     */
+	public static Integer[] convertirStringEnOffset(String str) {
+		ArrayList<Integer> offset = new ArrayList<>();
+		for (int i = 0 ; i < str.length() ; i++) {
+			int val = Character.codePointAt(str, i) % TAILLE_ENSEMBLE;
+			offset.add(val);
+		}
+		return offset.toArray(new Integer[0]);
+	}
+	
+	public static Integer[] convertirValeurEnOffset(int entier) {
+		ArrayList<Integer> offset = new ArrayList<>();
+		int reste;
+		int divise = entier;
+		do {
+			reste = divise % TAILLE_ENSEMBLE;
+			offset.add(reste);
+			divise = divise / TAILLE_ENSEMBLE;
+		} while(divise > TAILLE_ENSEMBLE);
+		return offset.toArray(new Integer[0]);
+	}
+    
     /**
      * Méthode qui permet de décrypter un message
      * 
@@ -116,14 +157,14 @@ public class Cryptage {
      * @param cle         la clé de cryptage
      * @return msgDecrypte le message décrypté
      */
-    public static String dechiffrer(String aDechiffrer, String cle) {
+    public static String dechiffrer(String aDechiffrer, Integer[] offset) {
         String msgDecrypte = "";
         int indexCle = 0;
 
         for (int c = 0; c < aDechiffrer.length(); c++, indexCle++) {
             int codeLettre = Character.codePointAt(aDechiffrer, c);
-            int codeCle = Character.codePointAt(cle, indexCle);
-            if (indexCle == cle.length() - 1) {
+            int codeCle = offset[indexCle];
+            if (indexCle == offset.length - 1) {
                 indexCle = -1;
             }
             int charDecrypte = (codeLettre - codeCle) % TAILLE_ENSEMBLE;
@@ -134,5 +175,17 @@ public class Cryptage {
         }
         System.out.println("Message décrypté : " + msgDecrypte);
         return msgDecrypte;
+    }
+
+    /**
+     * Méthode qui permet de décrypter un message
+     * 
+     * @param aDechiffrer le message a décrypter
+     * @param cle         la clé de cryptage
+     * @return msgDecrypte le message décrypté
+     */
+    public static String dechiffrer(String aDechiffrer, String cle) {
+    	Integer[] offset = convertirStringEnOffset(cle);
+        return dechiffrer(aDechiffrer, offset);
     }
 }

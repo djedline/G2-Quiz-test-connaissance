@@ -19,19 +19,19 @@ public class DiffieHellman {
     /*
      * Variable contenant la valeur de p, le modulo pour l'échange de données
      */
-    private static int p;
+    //private static int p;
 
     /*
      * Variable contenant le générateur échangé par le serveur et le client en clair
      */
-    private static int g;
+    //private static int g;
 
     /* Variable contenant le chiffre qui sert de premier exposant */
-    private static int x;
+    //private static int x;
 
-    private static final int MAX_P = 1000000;
+    private static final int MAX_P = 500;
 
-    private static int MAX_G;
+    //private static int MAX_G;
 
     /**
      * Méthode qui permet de générer aléatoirement le modulo de l'échange
@@ -39,22 +39,30 @@ public class DiffieHellman {
      * @return p le chiffre qui sert de modulo
      */
     public static int genererModulo() {
+    	int p;
         do {
             p = (int) (Math.random() * MAX_P);
         } while (!isPremier(p));
-        MAX_G = p - 1;
+        //MAX_G = p - 1;
         return p;
     }
 
     /**
      * Méthode qui permet de générer aléatoirement g
      * 
+     * @param p la modulo auquel on fait le calcul
      * @return g le générateur échangé par le client et le serveur
      */
-    public static int genererGenerateur() {
+    public static int genererGenerateur(int p) {
+    	final int MAX_G = p - 1;
+    	int g;
+    	boolean doublon;
+    	ArrayList<Integer> dejaFaits = new ArrayList<>();
         do {
             g = (int) (1 + Math.random() * MAX_G - 1);
-        } while (!isGenerateur(g) && !isPremier(g));
+            doublon = dejaFaits.contains(g);
+            dejaFaits.contains(g);
+        } while (doublon || !isGenerateur(g, p));
         return g;
     }
 
@@ -64,7 +72,7 @@ public class DiffieHellman {
      * @return x chiffre qui sert d'exposant
      */
     public static int genererX() {
-        x = (int) (1 + Math.random() * MAX_P - 1);
+        int x = (int) (1 + Math.random() * MAX_P - 1);
         return x;
     }
 
@@ -75,11 +83,12 @@ public class DiffieHellman {
      * @param x chiffre qui sert de premier exposant
      * @return ga g à la puissance x
      */
+    /*
     public static int calculGX(int g, int x) {
         int gx;
         gx = (int) Math.pow(g, x) % p;
         return gx;
-    }
+    }*/
 
     /**
      * Méthode qui permet de calculer gXE
@@ -90,11 +99,12 @@ public class DiffieHellman {
      * @return gXE g à la puissance x, à la puissance E (l'élement reçu depuis le
      *         client ou le serveur
      */
+    /*
     public static int calculGXE(int gx, int eltArrivant) {
         int gXE;
         gXE = (int) Math.pow(gx, eltArrivant) % p;
         return gXE;
-    }
+    }*/
 
     /**
      * Méthode qui calcul une mise à la puissance pour un nombre et une puissance
@@ -113,17 +123,20 @@ public class DiffieHellman {
      * Méthode qui permet de déterminer si g est ou non un générateur du groupe
      * multiplicatif ℤ/pℤ
      * 
-     * @param g
+     * @param g le nombre à vérifier
+     * @param p le modulo auquel on effectue les calculs
      * @return True ou False selon si le nombre choisi est un générateur ou non
      */
-    public static boolean isGenerateur(int g) {
+    public static boolean isGenerateur(int g, int p) {
         /** Ensemble des résultats de g modulo p ( g, g², g³, ..., g) */
         ArrayList<Integer> valeurGValide = new ArrayList<>();
         /** L'ensemble des valeurs dans ℤ/pℤ */
+        /*
         ArrayList<Integer> ensembleP = new ArrayList<>();
         for (int i = 1; i < p - 1; i++) {
             ensembleP.add(i);
         }
+        */
         for (int j = 1; j < p - 1; j++) {
             int valeurValide = (int) ((Math.pow(g, j)) % p); // Récupère la valeur (g, g², etc) % p
             if (!valeurGValide.contains(valeurValide)) { // Vérifie si le chiffre obtenu n'est pas déja présent
@@ -132,7 +145,8 @@ public class DiffieHellman {
                 return false;
             }
         }
-        return (valeurGValide.size() == ensembleP.size()); // Vérifie la taille des 2 ArrayList
+        return true;
+        //return (valeurGValide.size() == ensembleP.size()); // Vérifie la taille des 2 ArrayList
     }
 
     /**
