@@ -97,6 +97,19 @@ public class DiffieHellman {
     }
 
     /**
+     * Méthode qui calcul une mise à la puissance pour un nombre et une puissance
+     * donnée
+     * 
+     * @param nombre    le nombre entré par l'utilisateur
+     * @param puissance la puissance entré par l'utilisateur
+     * @param modulo    le modulo entré par l'utilisateur
+     * @return le nombre passé en paramètre à la puissance rentré
+     */
+    public static int calculMisePuissance(int nombre, int puissance, int modulo) {
+        return (int) Math.pow(nombre, puissance) % modulo;
+    }
+
+    /**
      * Méthode qui permet de déterminer si g est ou non un générateur du groupe
      * multiplicatif ℤ/pℤ
      * 
