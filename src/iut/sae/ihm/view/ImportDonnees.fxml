@@ -3,20 +3,39 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurImport">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurImport">
 	<children>
-		<Button fx:id="btnValider" layoutX="77.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicValider" prefHeight="25.0" prefWidth="131.0" text="Valider" />
-		<Label fx:id="idLabelNom" alignment="CENTER" layoutX="12.0" layoutY="137.0" prefHeight="25.0" prefWidth="131.0" text="Fichier à importer  :" />
-		<Label fx:id="idTitre" alignment="CENTER" layoutX="143.0" layoutY="57.0" prefHeight="55.0" prefWidth="164.0" text="Importation">
+		<Button fx:id="btnValider" layoutX="333.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicValider" prefHeight="40.0" prefWidth="300.0" text="Valider">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+		<Label fx:id="idTitre" alignment="CENTER" layoutX="220.0" layoutY="57.0" text="Importation">
 			<font>
-				<Font size="30.0" />
+				<Font size="40.0" />
 			</font>
 		</Label>
-      <Button fx:id="btnQuitter" layoutX="241.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="131.0" text="Annuler" />
-      <Button fx:id="parcourir" layoutX="336.0" layoutY="137.0" mnemonicParsing="false" onAction="#chercherFichier" prefHeight="25.0" prefWidth="72.0" text="Parcourir" />
-      <TextField fx:id="fichierAExporter" layoutX="143.0" layoutY="137.0" prefHeight="25.0" prefWidth="188.0" />
+      <Button fx:id="btnQuitter" layoutX="17.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="40.0" prefWidth="300.0" text="Annuler">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <HBox alignment="CENTER_LEFT" layoutX="113.0" layoutY="230.0" spacing="10.0">
+         <children>
+      		<Label fx:id="idLabelNom" alignment="CENTER" text="Fichier à importer  :">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="fichierAExporter" prefHeight="30.0" prefWidth="195.0" />
+            <Button fx:id="parcourir" mnemonicParsing="false" onAction="#chercherFichier" text="Parcourir">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
 	</children>
 </Pane>

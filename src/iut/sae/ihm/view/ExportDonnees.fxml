@@ -5,32 +5,39 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurExport">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurExport">
 	<children>
-      <VBox alignment="CENTER" prefHeight="292.0" prefWidth="450.0" spacing="10.0">
+		<Label fx:id="idTitre" alignment="CENTER" layoutX="223.0" layoutY="57.0" text="Exportation">
+			<font>
+				<Font size="40.0" />
+			</font>
+		</Label>
+		<Button fx:id="btnValider" alignment="CENTER" layoutX="333.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicSuivant" prefHeight="40.0" prefWidth="300.0" text="Suivant">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnQuitter" layoutX="17.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="40.0" prefWidth="300.0" text="Annuler">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <HBox alignment="CENTER_LEFT" layoutX="114.0" layoutY="230.0" spacing="10.0">
          <children>
-      		<Label fx:id="idTitre" alignment="CENTER" prefHeight="40.0" prefWidth="164.0" text="Exportation">
-      			<font>
-      				<Font size="30.0" />
-      			</font>
-      		</Label>
-            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="450.0" spacing="10.0">
-               <children>
-            		<Label fx:id="idLabelNom" alignment="CENTER" prefHeight="25.0" prefWidth="98.0" text="Fichier à exporter" />
-                  <TextField fx:id="fichierAExporter" prefHeight="25.0" prefWidth="195.0" />
-                  <Button fx:id="parcourir" mnemonicParsing="false" onAction="#chercherFichier" prefHeight="25.0" prefWidth="92.0" text="Parcourir" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="52.0" prefWidth="450.0" spacing="10.0">
-               <children>
-                  <Button fx:id="btnQuitter" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="187.0" text="Annuler" />
-            		<Button fx:id="btnValider" alignment="CENTER" mnemonicParsing="false" onAction="#clicSuivant" prefHeight="25.0" prefWidth="187.0" text="Suivant" />
-               </children>
-            </HBox>
+      		<Label fx:id="idLabelNom" alignment="CENTER" text="Fichier à exporter :">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="fichierAExporter" prefHeight="30.0" prefWidth="195.0" />
+            <Button fx:id="parcourir" mnemonicParsing="false" onAction="#chercherFichier" text="Parcourir">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
          </children>
-      </VBox>
+      </HBox>
 	</children>
 </Pane>

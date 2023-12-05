@@ -1,22 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurPartager">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurPartager">
 	<children>
-		<Button fx:id="btnValider" layoutX="77.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicValider" prefHeight="25.0" prefWidth="131.0" text="Valider" />
-		<Label fx:id="idLabelNom" alignment="CENTER" layoutX="-5.0" layoutY="114.0" prefHeight="25.0" prefWidth="164.0" text="Adresse IP Serveur  :" />
-		<Label fx:id="idTitre" alignment="CENTER" layoutX="134.0" layoutY="55.0" prefHeight="55.0" prefWidth="164.0" text="Partager">
+		<Button fx:id="btnValider" layoutX="333.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicValider" prefHeight="40.0" prefWidth="300.0" text="Valider">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+		<Label fx:id="idTitre" alignment="CENTER" layoutX="251.0" layoutY="57.0" text="Partager">
 			<font>
-				<Font size="30.0" />
+				<Font size="40.0" />
 			</font>
 		</Label>
-      <Button fx:id="btnQuitter" layoutX="241.0" layoutY="202.0" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="25.0" prefWidth="131.0" text="Retour" />
-      <Label fx:id="idLabelNom1" alignment="CENTER" layoutX="6.0" layoutY="146.0" prefHeight="25.0" prefWidth="164.0" text="Choisir fichier :" />
-      <ChoiceBox fx:id="choixFichier" layoutX="159.0" layoutY="146.0" prefHeight="25.0" prefWidth="188.0" />
-      <TextField fx:id="adresseIpServeur" layoutX="159.0" layoutY="114.0" onAction="#verifIp" prefHeight="25.0" prefWidth="188.0" />
+      <Button fx:id="btnQuitter" layoutX="17.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="40.0" prefWidth="300.0" text="Retour">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <VBox layoutX="161.0" layoutY="205.0" spacing="20.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
+               <children>
+            		<Label fx:id="idLabelNom" alignment="CENTER" text="Adresse IP Serveur  :">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="adresseIpServeur" onAction="#verifIp" prefHeight="30.0" prefWidth="188.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="42.0">
+               <children>
+                  <Label fx:id="idLabelNom1" alignment="CENTER" text="Choisir fichier :">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="choixFichier" prefHeight="30.0" prefWidth="188.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
 	</children>
 </Pane>

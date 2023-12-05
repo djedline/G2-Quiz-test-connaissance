@@ -6,39 +6,34 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurEchangeDonnees">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurEchangeDonnees">
 	<children>
-		<Label fx:id="idTitre" alignment="CENTER" layoutX="85.0" layoutY="5.0" prefHeight="41.0" prefWidth="281.0" text="Gérer l’échange des">
+		<Label fx:id="idTitre" alignment="CENTER" layoutX="70.0" layoutY="57.0" text="Gérer l’échange des données" textAlignment="CENTER" wrapText="true">
 			<font>
-				<Font size="30.0" />
+				<Font size="40.0" />
 			</font>
 		</Label>
-      <Label fx:id="idTitre1" alignment="CENTER" layoutX="85.0" layoutY="35.0" prefHeight="45.0" prefWidth="281.0" text="données">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-      <VBox alignment="CENTER" layoutX="125.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0" spacing="10.0">
+      <VBox alignment="CENTER" layoutX="175.0" layoutY="143.0" spacing="20.0">
          <children>
-      		<Button fx:id="btnImpDon" mnemonicParsing="false" onAction="#clicImpDon" prefHeight="30.0" prefWidth="200.0" text="Import de données">
+      		<Button fx:id="btnImpDon" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicImpDon" prefHeight="40.0" prefWidth="300.0" text="Import de données">
                <font>
-                  <Font size="15.0" />
+                  <Font size="20.0" />
                </font></Button>
-            <Button fx:id="btnExpDon" mnemonicParsing="false" onAction="#clicExpDon" prefHeight="30.0" prefWidth="200.0" text="Export de données">
+            <Button fx:id="btnExpDon" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicExpDon" prefHeight="40.0" prefWidth="300.0" text="Export de données">
                <font>
-                  <Font size="15.0" />
+                  <Font size="20.0" />
                </font></Button>
-            <Button fx:id="btnPartDon" mnemonicParsing="false" onAction="#clicPartDon" prefHeight="30.0" prefWidth="200.0" text="Partager des données">
+            <Button fx:id="btnPartDon" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicPartDon" prefHeight="40.0" prefWidth="300.0" text="Partager des données">
                <font>
-                  <Font size="15.0" />
+                  <Font size="20.0" />
                </font></Button>
-            <Button fx:id="btnServeur" mnemonicParsing="false" onAction="#infoServeur" prefHeight="30.0" prefWidth="200.0" text="Information serveur">
+            <Button fx:id="btnServeur" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#infoServeur" prefHeight="40.0" prefWidth="300.0" text="Information serveur">
                <font>
-                  <Font size="15.0" />
+                  <Font size="20.0" />
                </font></Button>
-            <Button fx:id="btnQuitter" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="30.0" prefWidth="200.0" text="Retour">
+            <Button fx:id="btnQuitter" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="40.0" prefWidth="300.0" text="Retour">
                <font>
-                  <Font size="15.0" />
+                  <Font size="20.0" />
                </font></Button>
          </children>
       </VBox>

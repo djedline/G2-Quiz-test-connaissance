@@ -82,7 +82,6 @@ public class ImportExport {
         fw.write(produireEntete());
         for (Question q : selectionnees) {
             fw.write(exporterQuestion(q));
-            System.out.println(exporterQuestion(q));
         }
         fw.close();
     }
@@ -173,26 +172,43 @@ public class ImportExport {
         }
 
         BufferedReader bf = new BufferedReader(new FileReader(chemin));
+        
+        String texte = "";
+        while (bf.ready()) {
+            texte += bf.readLine() + NEW_LINE;
+        }
+        bf.close();
+        
+        importer(texte);
+    }
+    
+    /**
+     * Récupère l'ensemble des questions contenues dans un fichier CSV.
+     * @param contenuFich 
+     * @param chemin le chemin du fichier à importer
+     * @throws IOException s'il est impossible de l'importer
+     */
+    public static void importer(String contenuFich) throws IOException {
 
         /*
          * indice pour les messages d'erreur. Commence à 1 par soucis 
          * de lisibilité pour l'utilisateur
          */
-        int noLigne = 1;
-        while (bf.ready()) {
-            String ligne = bf.readLine();
-            if (noLigne != 1) {
-                importerLigne(ligne, noLigne); // ignorer l'en-tête
-            }
-            noLigne++;
+    	int noLigne = 1;
+    	
+        String[] lignes = decouperLignes(contenuFich);
+        for (String ligne : lignes) {
+	        if (noLigne != 1) {
+	            importerLigne(ligne, noLigne); // ignorer l'en-tête
+	        }
+	        noLigne++;
         }
-        bf.close();
     }
 
     private static void importerLigne(String ligne, int noLigne) 
             throws FichierMalFormeException {
 
-        String[] colonnes = decouper(ligne);
+        String[] colonnes = decouperColonnes(ligne);
         if (!tousVides(colonnes)) {
             // vérification que la difficulté est bien un nombre entre 1 et 3
             int diff = 0; // soit modifié soit erreur
@@ -266,6 +282,36 @@ public class ImportExport {
         Donnees.listeCategorie.add(bonneCategorie);
         return bonneCategorie;
     }
+    
+    /**
+     * 
+     * @param texte
+     * @return les lignes
+     */
+    public static String[] decouperLignes(String texte) {
+    	List<String> lignes = new ArrayList<>();
+    	int nbGuillemets = 0;
+    	String s = "";
+    	for (int i = 0 ; i < texte.length() ; i++){
+    		char courant = texte.charAt(i);
+    		if (courant == GUILLEMET) {
+    			nbGuillemets++;
+    		}
+    		if(courant == NEW_LINE) {
+    			lignes.add(s);
+    			s = "";
+    		} else {
+    			s += courant;
+    		}
+    		
+    		// ajout de la ligne en cas d'absence de retour à la 
+    		// ligne en fin de fichier
+    		if (i == texte.length() - 1) {
+    			lignes.add(s);
+    		}
+    	}
+    	return lignes.toArray(new String[3]);
+    }
 
     /**
      * Méthode qui prend en argument une ligne et la découpe pour récupérer les
@@ -275,7 +321,7 @@ public class ImportExport {
      * @return valeurs l'ensemble des valeurs découpées sur la ligne
      * @throws FichierMalFormeException si la ligne n'existe pas
      */
-    public static String[] decouper(String ligne) 
+    public static String[] decouperColonnes(String ligne) 
             throws FichierMalFormeException {
         int NB_COLONNES = NOM_COLONNE.length;
 
@@ -293,11 +339,9 @@ public class ImportExport {
             if (courant == GUILLEMET) {
                 nbGuillemet++;
                 contientCaracteresSpeciaux = true;
-                System.out.println("les guillemet " + nbGuillemet);
             }
 
             if (courant == DELIMITEUR && nbGuillemet % 2 == 0) {
-                System.out.println("les guillemet " + nbGuillemet);
                 nbGuillemet = 0;
                 if (contientCaracteresSpeciaux) {
                     valeurs[colonneARemplir] = 
@@ -309,10 +353,6 @@ public class ImportExport {
                 if (colonneARemplir < NB_COLONNES) {
                     valeurs[colonneARemplir] += courant;
                 } else {
-                    for (String element : valeurs) {
-
-                        System.out.println("l'element " + element);
-                    }
 
                     // Si on veut ajouter dans une colonne inexistante.
                     throw new FichierMalFormeException(
