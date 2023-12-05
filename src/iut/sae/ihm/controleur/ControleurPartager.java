@@ -14,8 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -32,7 +30,7 @@ public class ControleurPartager {
 
     @FXML
     private Label idLabelNom;
-
+    
     @FXML
     private TextField adresseIpServeur;
 
@@ -50,23 +48,20 @@ public class ControleurPartager {
 
     boolean allumageOk = false;
 
-    private String chemineDossier;
+    private String cheminDossier;
     private File dossier;
     private File[] listeFichier;
     private boolean ipOk;
     private boolean fichierOk;
     private Client clientPartage;
 
-
-
-
     /** 
      * Initialise la liste déroulante
      */
     @FXML
     void initialize() {
-        chemineDossier = "fichiers_sauvegarde_partage/fichier_csv_stock";
-        dossier = new File(chemineDossier);
+        cheminDossier = "fichiers_sauvegarde_partage/fichier_csv_stock";
+        dossier = new File(cheminDossier);
         listeFichier = dossier.listFiles();
         ipOk = false;
         fichierOk = false;
@@ -83,14 +78,13 @@ public class ControleurPartager {
             }
             choixFichier.setValue("-- Sélectionner un fichier --");
         }
-        /* */
-
     }
 
-
+   
+    
     @FXML
     void verifIp (ActionEvent event) {
-        // pour que le nombre soit de 0 à 255
+         // pour que le nombre soit de 0 à 255
         Pattern motif = Pattern.compile(
                 "^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]"
                 + "?).){3}(25[0-5]|2[0-4][0-9]|[0-1]?"
@@ -108,7 +102,6 @@ public class ControleurPartager {
             adresseIpServeur.setText("");
             idLabelNom.setStyle("-fx-text-fil:red;");
         }
-
     }
 
     /** 
@@ -139,7 +132,7 @@ public class ControleurPartager {
             messageErreur.setContentText("Vous ne pouvez pas partager ça");
             messageErreur.show();
         } else {
-          Donnees.fichierAPartager  = new File(chemineDossier + "/questionsbasiques.csv");
+          Donnees.fichierAPartager  = new File(cheminDossier + "/questionsbasiques.csv");
         }
 
         if (ipOk && !fichierOk) {
@@ -147,30 +140,11 @@ public class ControleurPartager {
             partageFichier();
         } else {
             Alert messageErreur = new Alert(AlertType.ERROR);
-            messageErreur.setContentText("Remplissez tous les champs");
+            messageErreur.setContentText("Remplissez les champs et appuyer sur entrée pour valider le champ");
             messageErreur.show();
         }
     }
-
-    /*
-     * A implémenter
-    @FXML
-    void chercherFichier(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        // Ajout d'un filtre pour ne montrer que certains fichiers
-        ExtensionFilter extFilter =
-                new ExtensionFilter(
-                        "Fichier CSV UTF-8 séparateur point-virgule(*.csv)",
-                        "*.csv");
-        fileChooser.getExtensionFilters().add(extFilter);
-        fileChooser.setInitialDirectory(
-                new File("fichiers_sauvegarde_partage/"));
-
-        // Afficher la boîte de dialogue de choix de fichier
-        origine = fileChooser.showOpenDialog(Lanceur.getStage());
-        fichierAExporter.setText(origine.getAbsolutePath());
-    }
-    */
+    
     @FXML
     void clicQuitter(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);

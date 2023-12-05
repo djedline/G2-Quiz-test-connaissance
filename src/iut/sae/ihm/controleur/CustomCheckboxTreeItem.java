@@ -22,9 +22,9 @@ public class CustomCheckboxTreeItem<T> extends CheckBoxTreeItem<T> {
 
     /**
      * Crée un TreeItem avec une checkbox qui stockera une catégorie.
-     * @param item
+     * @param item l'objet stocké par ce treeitem
      */
-    public CustomCheckboxTreeItem(Categorie item) {
+    public CustomCheckboxTreeItem(Object item) {
         this.userData = item;
     }
 

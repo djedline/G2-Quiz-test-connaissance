@@ -77,29 +77,13 @@ public class ControleurServeur {
 
     @FXML
     void clicDemarrer(ActionEvent event) throws IOException, InterruptedException {
-        // System.out.println(allumageOk);
-        // System.out.println(!allumageOk);
         if (!Donnees.serveurAllumee) {
-            String contenuFichier;
             System.out.println("Salut");
-            btnDemarrer.setText("Éteindre");
-            Donnees.serveurAllumee = true;
+            testAlert();
+            //btnDemarrer.setText("Éteindre");
+           // Donnees.serveurAllumee = true;
+            //gestionServeur();
             // serveurPartage.preparerServeur();
-            try {
-	            serveurPartage = new Serveur();
-	            serveurPartage.accepterConnexion();
-	            int cle = serveurPartage.envoiDonneesInitiale();
-	            Thread.sleep(1000);
-	            String message = serveurPartage.receptionFichier(cle);
-	            ImportExport.importer(message);
-	            new Alert(AlertType.INFORMATION, 
-	            		"L'import de questions s'est correctement déroulé.")
-	            		.show();
-            } catch (Exception e) {
-            	new Alert(AlertType.ERROR, e.getMessage()).show();
-            } finally {
-            	serveurPartage.fermetureServeur();
-            }
         } else {
             System.out.println("Au revoir");
             serveurPartage.fermetureServeur();
@@ -110,37 +94,48 @@ public class ControleurServeur {
     }
     
     /**
-     * Partage un fichier
+     * Permet de démarrer le serveur et de receptionner des questions de la part d'un client
+     * Erreur si aucun client trouvé
      */
-   /* public void ReceptionFichier() {
+    public void testAlert() {
+    	Alert alert = new Alert(Alert.AlertType.WARNING);
+    	alert.setTitle("Avertissement");
+    	alert.setHeaderText("Ceci est un avertissement.");
+    	alert.setContentText("Plus de détails peuvent être ajoutés ici.");
+    	alert.showAndWait();
+    }
+    
+    
+    /**
+     * Permet de démarrer le serveur et de receptionner des questions de la part d'un client
+     * Erreur si aucun client trouvé
+     */
+    public void gestionServeur() {
+    	boolean connexionEtablie;
         try {
-            serveurPartage.accepterConnexion();
-            String recu = "";
-            while (recu.isEmpty()) {
-                System.out.print("Génération et envoi du générateur g " 
-                        + " et du modulo p");
-                try {
-                    System.out.println("Le serveur a envoyé la puissance x");
-                    serveurPartage.envoyerMessage((msgX.getBytes()));
-                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+            serveurPartage = new Serveur();
+            serveurPartage.accepterConnexion(10);
+            connexionEtablie = serveurPartage.accepterConnexion(30); // Attendre 30 secondes au maximum
 
-                // recu = Serveur.recevoirMessage(FICHIER_RECEPTION, cle);
-            } 
+            if (connexionEtablie) {
+            	int cle = serveurPartage.envoiDonneesInitiale();
+	            Thread.sleep(1000);
+	            String message = serveurPartage.receptionFichier(cle);
+	            ImportExport.importer(message);
+	            new Alert(AlertType.INFORMATION, 
+	            		"L'import de questions s'est correctement déroulé.")
+	            		.show();
+            } else {
+            	new Alert(AlertType.ERROR, "La connexion n'a pas pu être établie dans le délai spécifié.").show();
+            }
+            
         } catch (Exception e) {
-            e.printStackTrace();
-      //}
-    } */
-
-    /*
-     * try { message = Client.construireMessage(fichierATraiter);
-     * Client.envoyerMessage(message.getBytes()); s = Client.recevoirMessage();
-     * Client.fermerSocket(); } catch (IOException | InterruptedException e) {
-     * System.out.println("Problème avec le fichier"); e.printStackTrace(); }
-     */
-
+        	new Alert(AlertType.ERROR, e.getMessage()).show();
+        } finally {
+        	serveurPartage.fermetureServeur();
+        }
+    }
+    
     @FXML
     void clicQuitter(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);
