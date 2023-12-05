@@ -53,9 +53,10 @@ public class ControleurServeur {
     @FXML
     private Button btnDemarrer;
 
-    //boolean allumageOk = false;
+    private Serveur serveurPartage = new Serveur();
+    // boolean allumageOk = false;
 
-    /** 
+    /**
      * Initialise la liste déroulante
      */
     @FXML
@@ -73,58 +74,59 @@ public class ControleurServeur {
             btnDemarrer.setText("Eteindre");
         }
     }
-    
+
     @FXML
     void clicDemarrer(ActionEvent event) {
-        //System.out.println(allumageOk);
-        //System.out.println(!allumageOk);
+        // System.out.println(allumageOk);
+        // System.out.println(!allumageOk);
         if (!Donnees.serveurAllumee) {
             System.out.println("Salut");
             btnDemarrer.setText("Eteindre");
             Donnees.serveurAllumee = true;
-            Serveur.preparerServeur();
-            Serveur.accepterConnexion();
+            // serveurPartage.preparerServeur();
+            ReceptionFichier();
         } else {
             System.out.println("Au revoir");
-            Serveur.fermetureServeur();
+            serveurPartage.fermetureServeur();
             Donnees.serveurAllumee = false;
             btnDemarrer.setText("Demarrer");
             adresseIpServeur.setText("");
         }
     }
-        /** 
-         * Partage un fichier
-         */
-        public static void ReceptionFichier() {
-            try {
-                Serveur.preparerServeur();
-                Serveur.accepterConnexion();
-                String cle = "";
-                String recu ="";
-                while (recu.isEmpty()) {
-                    System.out.print("Génération et envoi de la clé");
-                    try {
-                        cle = Serveur.genererCle();
-                        System.out.println("Le serveur a envoyé : la cle)");
-                        Serveur.envoyerMessage(cle.getBytes());
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    
-                   // recu = Serveur.recevoirMessage(FICHIER_RECEPTION, cle);
+
+    /**
+     * Partage un fichier
+     */
+    public void ReceptionFichier() {
+        try {
+            serveurPartage.accepterConnexion();
+            String cle = "";
+            String recu = "";
+            while (recu.isEmpty()) {
+                System.out.print("Génération et envoi du générateur g " 
+                        + " et du modulo p");
+                try {
+                    cle = Serveur.genererCle();
+                    System.out.println("Le serveur a envoyé : p et g)");
+                    serveurPartage.envoyerMessage(cle.getBytes());
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+
+                // recu = Serveur.recevoirMessage(FICHIER_RECEPTION, cle);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
-        /*
-         * try { message = Client.construireMessage(fichierATraiter);
-         * Client.envoyerMessage(message.getBytes()); s = Client.recevoirMessage();
-         * Client.fermerSocket(); } catch (IOException | InterruptedException e) {
-         * System.out.println("Problème avec le fichier"); e.printStackTrace(); }
-         */
+    }
+
+    /*
+     * try { message = Client.construireMessage(fichierATraiter);
+     * Client.envoyerMessage(message.getBytes()); s = Client.recevoirMessage();
+     * Client.fermerSocket(); } catch (IOException | InterruptedException e) {
+     * System.out.println("Problème avec le fichier"); e.printStackTrace(); }
+     */
 
     @FXML
     void clicQuitter(ActionEvent event) {

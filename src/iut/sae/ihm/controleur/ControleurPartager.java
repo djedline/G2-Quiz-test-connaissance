@@ -5,8 +5,6 @@
 package iut.sae.ihm.controleur;
 
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,20 +13,14 @@ import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.reseau.Client;
-import iut.sae.modele.reseau.Serveur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Stage;
-import javafx.scene.Node;
 
 /**
  * Classe controleur de la page Partager
@@ -43,7 +35,7 @@ public class ControleurPartager {
     private Label idLabelNom;
 
     @FXML
-    private static TextField adresseIpServeur;
+    private TextField adresseIpServeur;
 
     @FXML
     private Button btnQuitter;
@@ -64,6 +56,7 @@ public class ControleurPartager {
     private File[] listeFichier;
     private boolean ipOk;
     private boolean fichierOk;
+    private Client clientPartage;
 
 
 
@@ -104,7 +97,7 @@ public class ControleurPartager {
                 + "[0-9][0-9]?)$");
         Matcher correct = motif.matcher(adresseIpServeur.getText());
         if (correct.matches()) {
-            System.out.print("C'est bon");
+            System.out.println("C'est bon");
             ipOk = true;
         } else {
             Alert messageErreur = new Alert(AlertType.ERROR);
@@ -121,14 +114,15 @@ public class ControleurPartager {
     /** 
      * Partage un fichier
      */
-    public static void partageFichier() {
+    public void partageFichier() {
         try {
-            Scanner sc = new Scanner(System.in);
-            Client.creerLiaisonServeur(adresseIpServeur.getText(), 6666);
+            System.out.println("INITIALISATION CLIENT");
+            clientPartage = new Client(adresseIpServeur.getText(), 6666);
             String reponse = "";
-            reponse = Client.recevoirEtAnalyser(Donnees.fichierAPartager);
-            Client.envoyerReponse(reponse);
-            Client.fermerSocket();
+            System.out.println("RECEPTION CLE");
+            reponse = clientPartage.recevoirEtAnalyser(Donnees.fichierAPartager);
+            clientPartage.envoyerReponse(reponse);
+            clientPartage.fermerSocket();
         } catch (Exception e) {
             e.printStackTrace();
         }

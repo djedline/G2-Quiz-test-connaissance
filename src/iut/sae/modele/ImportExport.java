@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Utilise le format CSV (séparateur ";", encodage UTF-8) avec la structure
@@ -24,33 +26,35 @@ public class ImportExport {
 
     /** Symbole pour définir une chaine de caractères */
     public static final char GUILLEMET = '"';
-    
+
     /** Ordre des champs dans les fichiers CSV */
     public static final String[] NOM_COLONNE = { "Catégorie", "Niveau", "Libellé", "Vrai", "Faux1", "Faux2", "Faux3",
             "Faux4", "Feedback" };
 
-	/**
-	 * Envoie l'ensemble des questions de l'application dans un fichier.
-	 * @param aEcrire le fichier dans lequel on va écrire
-	 * @throws IOException s'il est impossible d'écrire les données
-	 */
-	public static void exporter(File aEcrire) throws IOException {
+    /**
+     * Envoie l'ensemble des questions de l'application dans un fichier.
+     * 
+     * @param aEcrire le fichier dans lequel on va écrire
+     * @throws IOException s'il est impossible d'écrire les données
+     */
+    public static void exporter(File aEcrire) throws IOException {
 
-		if (!aEcrire.exists()) {
-			aEcrire.createNewFile();
-		}
-		
-		if (!aEcrire.canWrite()) {
-			throw new IOException("Impossible de modifier ce fichier !");
-		}
-		if (aEcrire.isDirectory()) {
-			throw new IOException("Impossible d'écrire dans un dossier !" + "Indiquez un fichier n'existant pas déjà.");
-		}
+        if (!aEcrire.exists()) {
+            aEcrire.createNewFile();
+        }
+
+        if (!aEcrire.canWrite()) {
+            throw new IOException("Impossible de modifier le fichier " + aEcrire.getAbsolutePath() + "!");
+        }
+        if (aEcrire.isDirectory()) {
+            throw new IOException("Impossible d'écrire dans un dossier !" + "Indiquez un fichier.");
+        }
 
         FileWriter fw = new FileWriter(aEcrire);
         fw.write(produireEntete());
         for (Question q : Donnees.listeQuestions) {
             fw.write(exporterQuestion(q));
+            System.out.println(exporterQuestion(q));
         }
         fw.close();
     }
@@ -61,32 +65,55 @@ public class ImportExport {
             s.append(nom);
             s.append(DELIMITEUR);
         }
-        s.append("\n");
-        return s.toString();
-    }
-
-    private static String exporterQuestion(Question q) {
-        StringBuilder s = new StringBuilder();
-        s.append(q.getCategorie());
-        s.append(DELIMITEUR);
-        s.append(q.getDifficulte());
-        s.append(DELIMITEUR);
-        s.append(q.getLibelle());
-        s.append(DELIMITEUR);
-        s.append(q.getPropositionJuste());
-        s.append(DELIMITEUR);
-        for (int i = 0; i < 4; i++) {
-            if (i < q.getPropositionFausse().size()) {
-                s.append(q.getPropositionFausse().get(i));
-            }
-            s.append(DELIMITEUR);
-        }
-        s.append(q.getFeedback());
-        s.append(DELIMITEUR);
         s.append(NEW_LINE);
         return s.toString();
     }
 
+    /**
+     * Met un texte entre guillemets si le contenu de la string comporte des
+     * caractères spéciaux
+     * 
+     * @param s la string à modifier
+     * @return la string formatée
+     */
+    private static String formater(String s) {
+        Pattern pat = Pattern.compile("[" + NEW_LINE + DELIMITEUR + GUILLEMET + "]");
+        Matcher mat = pat.matcher(s);
+        if (mat.find()) {
+            StringBuilder nvString = new StringBuilder();
+            for (char c : s.toCharArray()) {
+                if (c == GUILLEMET) {
+                    nvString.append(c); // dédoubler
+                }
+                nvString.append(c);
+            }
+            return GUILLEMET + nvString.toString() + GUILLEMET;
+        } else {
+            return s;
+        }
+    }
+
+    private static String exporterQuestion(Question q) {
+        StringBuilder s = new StringBuilder();
+        s.append(formater(q.getCategorie().getLibelle()));
+        s.append(DELIMITEUR);
+        s.append(q.getDifficulte());
+        s.append(DELIMITEUR);
+        s.append(formater(q.getLibelle()));
+        s.append(DELIMITEUR);
+        s.append(formater(q.getPropositionJuste()));
+        s.append(DELIMITEUR);
+        for (int i = 0; i < 4; i++) {
+            if (i < q.getPropositionFausse().size()) {
+                s.append(formater(q.getPropositionFausse().get(i)));
+            }
+            s.append(DELIMITEUR);
+        }
+        s.append(formater(q.getFeedback()));
+        s.append(DELIMITEUR);
+        s.append(NEW_LINE);
+        return s.toString();
+    }
 
     /**
      * Récupère l'ensemble des questions contenues dans un fichier CSV.
@@ -97,10 +124,10 @@ public class ImportExport {
     public static void importer(File chemin) throws IOException {
 
         if (!chemin.exists()) {
-            throw new IOException("Ce fichier ne peut être lu car il n'existe pas");
+            throw new IOException("Le fichier " + chemin.getAbsolutePath() + " ne peut être lu car il n'existe pas");
         }
         if (!chemin.canRead()) {
-            throw new IOException("Vous ne disposez pas des droits pour lire ce fichier.");
+            throw new IOException("Vous ne disposez pas des droits pour lire le fichier " + chemin.getAbsolutePath());
         }
         if (chemin.isDirectory()) {
             throw new IOException("Impossible de lire un dossier. Indiquez un fichier.");
@@ -141,7 +168,7 @@ public class ImportExport {
 
             // générer le tableau de réponses fausses
             ArrayList<String> repFausses = new ArrayList<>();
-            for (int i = 5; i < 9; i++) {
+            for (int i = 4; i < 7; i++) {
                 if (!colonnes[i].isBlank()) {
                     repFausses.add(colonnes[i]);
                 }
@@ -154,6 +181,12 @@ public class ImportExport {
         }
     }
 
+    /**
+     * Vérifie que toutes les colonnes d'une ligne sont vides
+     * 
+     * @param colonnes les valeurs à vérifier
+     * @return true si les colonnes sont toutes vides, false sinon
+     */
     private static boolean tousVides(String[] colonnes) {
         boolean tousVides = true;
         for (String valeur : colonnes) {
@@ -161,6 +194,8 @@ public class ImportExport {
         }
         return tousVides;
     }
+
+
 
     private static Categorie analyserCategorieImport(String catImportee) {
         catImportee = catImportee.strip();
@@ -180,7 +215,7 @@ public class ImportExport {
                 }
             }
         }
-        
+
         // création de la nouvelle catégorie
         bonneCategorie = new Categorie(catImportee);
         Donnees.listeCategorie.add(bonneCategorie);
@@ -206,35 +241,63 @@ public class ImportExport {
 
         int colonneARemplir = 0;
         boolean guillemetsOuverts = false;
+        boolean contientCaracteresSpeciaux = false;
+        int nbGuillemet = 0;
         for (int c = 0; c < ligne.length(); c++) {
             char courant = ligne.charAt(c);
-
-            // gestion des guillemets
+            char precedent = c == 0 ? ' ' : ligne.charAt(c - 1);
+            char suivant = c == ligne.length() - 1 ? ' ' : ligne.charAt(c + 1);
+            
             if (courant == GUILLEMET) {
-                char precedent = c == 0 ? ' ' : ligne.charAt(c - 1);
-                char suivant = c == ligne.length() - 2 ? ' ' : ligne.charAt(c + 1);
-                if (precedent == DELIMITEUR || suivant == DELIMITEUR) {
-                    guillemetsOuverts = !guillemetsOuverts;
-                } else if (precedent == GUILLEMET) {
-                    char avantprecedent = c < 1 ? ' ' : ligne.charAt(c - 2);
-                    if (avantprecedent != DELIMITEUR) {
-                        valeurs[colonneARemplir] += courant;
-                    }
-                }
-                // TODO bug : guillemets dédoublés
+                nbGuillemet ++;
+                contientCaracteresSpeciaux = true;
+                System.out.println("les guillemet " + nbGuillemet);
             }
-            if (courant == DELIMITEUR && !guillemetsOuverts) {
+
+            if (courant == DELIMITEUR && nbGuillemet%2==0) {
+                System.out.println("les guillemet " + nbGuillemet);
+                nbGuillemet = 0;
+                if (contientCaracteresSpeciaux) {
+                    valeurs[colonneARemplir] = deformater(valeurs[colonneARemplir]);
+                    contientCaracteresSpeciaux = false;
+                }
                 colonneARemplir++;
             } else {
                 if (colonneARemplir < NB_COLONNES) {
                     valeurs[colonneARemplir] += courant;
                 } else {
+                    for (String element :valeurs) {
+        
+                        System.out.println("l'element " + element);
+                    }
+                    
                     // Si on veut ajouter dans une colonne inexistante.
                     throw new FichierMalFormeException(
-                            "Nombre de colonnes invalides (" + (colonneARemplir + 1) + " plutôt que " + NB_COLONNES);
+                            "Nombre de colonnes invalides (" + (colonneARemplir + 1) 
+                            + " plutôt que " + NB_COLONNES);
                 }
             }
         }
         return valeurs;
+    }
+
+    /**
+     * Enlève le formatage des lignes de textes CSV (notamment dédoublement des
+     * guillemets)
+     * 
+     * @param string la chaine à déformater
+     * @return la chaine de caractère telle qu'elle peut être insérée
+     */
+    private static String deformater(String texte) {
+        texte = texte.substring(1, texte.length() - 1);
+        StringBuilder sb = new StringBuilder();
+        for (int c = 0; c < texte.length(); c++) {
+            char courant = texte.charAt(c);
+            char precedent = c > 1 ? texte.charAt(c - 1) : ' ';
+            if (courant != GUILLEMET || precedent != GUILLEMET) {
+                sb.append(courant);
+            }
+        }
+        return sb.toString();
     }
 }

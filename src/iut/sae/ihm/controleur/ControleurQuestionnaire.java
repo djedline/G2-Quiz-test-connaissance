@@ -11,16 +11,19 @@ import iut.sae.modele.Donnees;
 import iut.sae.modele.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * Classe controlleur de la page Questionnaire
  * 
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
  *         leo.cheikh-boukal
+ * @version 1.0
  */
 public class ControleurQuestionnaire {
 
@@ -86,8 +89,14 @@ public class ControleurQuestionnaire {
 
     @FXML
     void actionValider(ActionEvent event) {
+        try {
         validerReponse();
         chargerQuestionSuivante();
+        }catch(IllegalStateException erreur){
+            Alert messageErreur = new Alert(AlertType.ERROR);
+            messageErreur.setContentText(erreur.getMessage());
+            messageErreur.show();
+        }
     }
 
     /**
@@ -98,12 +107,12 @@ public class ControleurQuestionnaire {
         reinitialiserRadioButton();
         numQuestion ++;
         if (numQuestion >= nbQuestion ) {
-            //TODO : Stub
+            // petit test de verification si les reponses sont bien enregistrés
             for (String laReponse : Donnees.QuestionnaireGénéré.getListeReponseDonnee()) {
                 System.out.println(laReponse);
             } 
-            // petit test de verification si les question sont bien enregistrés
-            EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_PRINCIPALE);
+            
+            EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_RESULTAT_QUESTIONNAIRE);
 
         } else {
             Question laQuestionSuivante = Donnees.QuestionnaireGénéré.getQuestion(numQuestion);
@@ -147,11 +156,11 @@ public class ControleurQuestionnaire {
        } 
        
        // si il y a moins de 5 reponses, je rend le reste des radio button invisible
-       if ( i < 4 ) {
-           for (;i<listeRadioButton.size(); i++) {
-               listeRadioButton.get(i).setVisible(false); 
-           }
+       
+       for (;i<listeRadioButton.size(); i++) {
+           listeRadioButton.get(i).setVisible(false); 
        }
+       
     }
 
     /**
@@ -188,6 +197,10 @@ public class ControleurQuestionnaire {
             }
         }
 
+        if (reponseChoisi.isBlank()) {
+            throw new IllegalStateException(
+                    "Aucune reponse n'a été selectionné.");
+        }
         Donnees.QuestionnaireGénéré.stockerReponse(numQuestion, reponseChoisi);
 
     }

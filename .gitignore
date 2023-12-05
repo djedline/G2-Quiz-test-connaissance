@@ -1,5 +1,6 @@
 /bin/
 .classpath
 .settings/
-donnees/
+*.data
 .metadata/
+.gitignore

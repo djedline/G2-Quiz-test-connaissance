@@ -46,7 +46,7 @@ public class ControleurCreerQuestion {
     private Button btnCreer;
 
     @FXML
-    private TextField txtIntitule;
+    private TextArea txtIntitule;
 
     @FXML
     private TextField txtRepFausse1;
@@ -77,7 +77,6 @@ public class ControleurCreerQuestion {
     @FXML
     private TextArea txtFeedback;
 
-    private ArrayList<String> lesRepFausse;
 
     /**
      * TODO comment method role
