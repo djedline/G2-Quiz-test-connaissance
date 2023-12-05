@@ -16,28 +16,28 @@ import java.nio.charset.Charset;
  *
  */
 public class ReseauUtils {
-	private BufferedReader br;
-	private BufferedWriter bw;
-	
-	/**
-	 * Crée les utilitaires réseau pour une socket.
-	 * @param sock la socket qui va envoyer et recevoir des messages.
-	 * @throws IOException si l'utilitaire ne peut être créé
-	 */
-	public ReseauUtils(Socket sock) throws IOException {
-		OutputStream os = sock.getOutputStream();
-		InputStream is = sock.getInputStream();
-		Charset encoding = Charset.forName("UTF-8");
-		
-		this.bw = new BufferedWriter(new OutputStreamWriter(os, encoding));
-		this.br = new BufferedReader(new InputStreamReader(is, encoding));
-	}
-	
-	
-	
-	/** TODO comment field role (attribute, association) */
-	public static final int RECEIVE_TIMEOUT = 5;
-	
+    private BufferedReader br;
+    private BufferedWriter bw;
+
+    /**
+     * Crée les utilitaires réseau pour une socket.
+     * @param sock la socket qui va envoyer et recevoir des messages.
+     * @throws IOException si l'utilitaire ne peut être créé
+     */
+    public ReseauUtils(Socket sock) throws IOException {
+        OutputStream os = sock.getOutputStream();
+        InputStream is = sock.getInputStream();
+        Charset encoding = Charset.forName("UTF-8");
+
+        this.bw = new BufferedWriter(new OutputStreamWriter(os, encoding));
+        this.br = new BufferedReader(new InputStreamReader(is, encoding));
+    }
+
+
+
+    /** TODO comment field role (attribute, association) */
+    public static final int RECEIVE_TIMEOUT = 5;
+
     /** 
      * Lit les données dans une String depuis la socket tant qu'elles 
      * sont disponibles. Bloquant pendant 
@@ -48,12 +48,12 @@ public class ReseauUtils {
     public String reception() throws IOException {
         String strRecu = "";
         for (int sec = 0 ; sec < RECEIVE_TIMEOUT && !br.ready(); sec++) {
-        	System.out.println("En attente...");
+            System.out.println("En attente...");
             try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         while (br.ready()) {
             strRecu += Character.toString(br.read());
@@ -61,7 +61,7 @@ public class ReseauUtils {
         System.out.println("Message reçu : " + strRecu);
         return strRecu;
     }
-	
+
     /**
      * Envoie les données passées en paramètre dans la socket.
      * @param sock 
@@ -74,7 +74,7 @@ public class ReseauUtils {
             bw.flush();
             System.out.println("Message envoyé : " + data.toString());
         } catch (IOException e) {
-        	e.printStackTrace();
+            e.printStackTrace();
             throw new IOException("Impossible d'envoyer le message.");
         }
     }

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -13,11 +14,15 @@
       <Button fx:id="idValider" layoutX="333.0" layoutY="393.0" mnemonicParsing="false" onAction="#actionValider" prefHeight="40.0" prefWidth="300.0" text="Valider" />
       <VBox layoutX="17.0" layoutY="17.0" spacing="10.0">
          <children>
-            <Label fx:id="idQuestion" alignment="TOP_LEFT" prefHeight="70.0" prefWidth="616.0" text="**Question**" wrapText="true">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="70.0" prefWidth="616.0">
+               <content>
+                  <Label fx:id="idQuestion" alignment="TOP_LEFT" prefWidth="600.0" text="**Question**" wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </content>
+            </ScrollPane>
             <VBox spacing="5.0">
                <children>
                   <RadioButton fx:id="idReponse1" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="50.0" prefWidth="616.0" text="**Reponse 1**" wrapText="true">
