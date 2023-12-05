@@ -1,11 +1,13 @@
 /*
- * Cryptage.java                                    14 nov. 2023
+<<<<<<< HEAD
+ù * Cryptage.java                                    14 nov. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+=======
+ * Cryptage.java                                                    14 nov. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
+>>>>>>> 9e76170f3c30abcb9ceba3a71a4610f0a101ede1
  */
 package iut.sae.modele.reseau;
-
-import java.lang.Math;
-import iut.sae.modele.reseau.DiffieHellman;
 
 /**
  * Classe qui permet le cryptage d'un message grâce à la génération d'une clé
@@ -42,12 +44,12 @@ public class Cryptage {
 
     /**
      * Génère la clé de cryptage grâce à la méthode de Diffie-Hellma
+     * 
      * @return la clé
      */
     public static String genereCleDiffie() {
         String laCle = "";
         int reste;
-        int p = DiffieHellman.genererModulo();
         int g = DiffieHellman.genererGenerateur();
         int x = DiffieHellman.genererX();
         int x1 = DiffieHellman.genererX();
@@ -69,17 +71,19 @@ public class Cryptage {
      * 
      * @return laCle la clé de cryptage
      */
-    /*
-     * public static String genereCleVigenere() { String laCle = ""; int nombreAlea;
-     * final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE -
-     * MIN_LONGUEUR_CLE) + (int) MIN_LONGUEUR_CLE;
-     * 
-     * for (int i = 0; laCle.length() < LONGUEUR_CLE; i++) { nombreAlea = (int)
-     * (TAILLE_ENSEMBLE * Math.random()); if (Character.isValidCodePoint(nombreAlea)
-     * && Character.toString(nombreAlea).length() == 1) { laCle +=
-     * Character.toString(nombreAlea); } } System.out.println("Clé : " + laCle +
-     * " de longueur " + laCle.length()); return laCle; }
-     */
+    public static String genereCleVigenere() {
+        String laCle = "";
+        int nombreAlea;
+        final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE - MIN_LONGUEUR_CLE) + (int) MIN_LONGUEUR_CLE;
+        for (int i = 0; laCle.length() < LONGUEUR_CLE; i++) {
+            nombreAlea = (int) (TAILLE_ENSEMBLE * Math.random());
+            if (Character.isValidCodePoint(nombreAlea) && Character.toString(nombreAlea).length() == 1) {
+                laCle += Character.toString(nombreAlea);
+            }
+        }
+        System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
+        return laCle;
+    }
 
     /**
      * Méthode qui permet de crypter un message

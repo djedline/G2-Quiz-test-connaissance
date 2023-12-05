@@ -98,18 +98,22 @@ public class ControleurCreerQuestionnaire {
                 
         try {
             Questionnaire leQuestionnaire = 
-                    new Questionnaire(laDifficulte,idCategorie.getValue(),Integer.parseInt(idNbQuestion.getValue()));
+                    new Questionnaire(laDifficulte,idCategorie.getValue(),
+                            Integer.parseInt(idNbQuestion.getValue()));
             Donnees.QuestionnaireGénéré = leQuestionnaire;
             EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_QUESTIONNAIRE);
             
         } catch (IllegalArgumentException erreur) {
             Alert messageErreur = new Alert(AlertType.ERROR);
-            messageErreur.setContentText(erreur.getMessage() 
-                    + ", Voulez-vous créer le questionnaire quand meme ?");
+            messageErreur.setContentText(erreur.getMessage());
             Optional<ButtonType> result = messageErreur.showAndWait();
-            if(result.get() == ButtonType.OK) {
-                genererQuestionnaireSansNombreQuestion();
+            if (erreur.getMessage().equals(
+                    Questionnaire.ERREUR_MANQUE_DE_QUESTION)) {
+                if(result.get() == ButtonType.OK) {
+                    genererQuestionnaireSansNombreQuestion();
+                }
             }
+            
         }
     }
 

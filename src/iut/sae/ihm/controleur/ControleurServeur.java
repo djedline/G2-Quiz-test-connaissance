@@ -4,24 +4,23 @@
  */
 package iut.sae.ihm.controleur;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Scanner;
 
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
-import iut.sae.modele.reseau.Client;
+import iut.sae.modele.ImportExport;
 import iut.sae.modele.reseau.Serveur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 /**
  * Classe controleur de la page Serveur
@@ -53,7 +52,7 @@ public class ControleurServeur {
     @FXML
     private Button btnDemarrer;
 
-    private Serveur serveurPartage = new Serveur();
+    private Serveur serveurPartage;
     // boolean allumageOk = false;
 
     /**
@@ -66,9 +65,10 @@ public class ControleurServeur {
             ip = InetAddress.getLocalHost();
             Donnees.adresseIpServeur = ip.getHostAddress();
             adresseIpServeur.setText(Donnees.adresseIpServeur);
+            Donnees.serveurAllumee = false;
         } catch (UnknownHostException e) {
-            System.out.println("Problème à la récupérartion de l'adresse IP");
-            e.printStackTrace();
+            new Alert(AlertType.ERROR, "Problème à la récupérartion de l'adresse IP")
+            		.show();
         }
         if (Donnees.serveurAllumee) {
             btnDemarrer.setText("Eteindre");
@@ -76,50 +76,63 @@ public class ControleurServeur {
     }
 
     @FXML
-    void clicDemarrer(ActionEvent event) {
+    void clicDemarrer(ActionEvent event) throws IOException, InterruptedException {
         // System.out.println(allumageOk);
         // System.out.println(!allumageOk);
         if (!Donnees.serveurAllumee) {
+            String contenuFichier;
             System.out.println("Salut");
-            btnDemarrer.setText("Eteindre");
+            btnDemarrer.setText("Éteindre");
             Donnees.serveurAllumee = true;
             // serveurPartage.preparerServeur();
-            ReceptionFichier();
+            try {
+	            serveurPartage = new Serveur();
+	            serveurPartage.accepterConnexion();
+	            int cle = serveurPartage.envoiDonneesInitiale();
+	            Thread.sleep(1000);
+	            String message = serveurPartage.receptionFichier(cle);
+	            ImportExport.importer(message);
+	            new Alert(AlertType.INFORMATION, 
+	            		"L'import de questions s'est correctement déroulé.")
+	            		.show();
+            } catch (Exception e) {
+            	new Alert(AlertType.ERROR, e.getMessage()).show();
+            } finally {
+            	serveurPartage.fermetureServeur();
+            }
         } else {
             System.out.println("Au revoir");
             serveurPartage.fermetureServeur();
             Donnees.serveurAllumee = false;
-            btnDemarrer.setText("Demarrer");
+            btnDemarrer.setText("Démarrer");
             adresseIpServeur.setText("");
         }
     }
-
+    
     /**
      * Partage un fichier
      */
-    public void ReceptionFichier() {
+   /* public void ReceptionFichier() {
         try {
             serveurPartage.accepterConnexion();
-            String cle = "";
             String recu = "";
             while (recu.isEmpty()) {
                 System.out.print("Génération et envoi du générateur g " 
                         + " et du modulo p");
                 try {
-                    cle = Serveur.genererCle();
-                    System.out.println("Le serveur a envoyé : p et g)");
-                    serveurPartage.envoyerMessage(cle.getBytes());
-                } catch (IOException e) {
+                    System.out.println("Le serveur a envoyé la puissance x");
+                    serveurPartage.envoyerMessage((msgX.getBytes()));
+                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
                 // recu = Serveur.recevoirMessage(FICHIER_RECEPTION, cle);
-            }
+            } 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
+      //}
+    } */
 
     /*
      * try { message = Client.construireMessage(fichierATraiter);

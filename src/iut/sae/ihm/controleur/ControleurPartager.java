@@ -1,14 +1,11 @@
-/*
- * ControleurPartager.java                                    13 nov. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+/* ControleurPartager.java                                          13 nov. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.ihm.controleur;
 
 import java.io.File;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
@@ -17,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -66,7 +65,7 @@ public class ControleurPartager {
      */
     @FXML
     void initialize() {
-        chemineDossier = "src/fichiers_sauvegarde_partage/fichier_csv_stock";
+        chemineDossier = "fichiers_sauvegarde_partage/fichier_csv_stock";
         dossier = new File(chemineDossier);
         listeFichier = dossier.listFiles();
         ipOk = false;
@@ -77,12 +76,12 @@ public class ControleurPartager {
             choixFichier.getItems().add("-- Pas de fichier --");
             choixFichier.setValue("-- Pas de fichier --");
         } else {
-            choixFichier.getItems().add("-- selectionner un Fichier --");
+            choixFichier.getItems().add("-- Sélectionner un fichier --");
             for (File fichier : listeFichier) {
                 choixFichier.getItems().add(fichier.getName());
                 System.out.println(fichier);
             }
-            choixFichier.setValue("-- selectionner un Fichier --");
+            choixFichier.setValue("-- Sélectionner un fichier --");
         }
         /* */
 
@@ -91,8 +90,9 @@ public class ControleurPartager {
 
     @FXML
     void verifIp (ActionEvent event) {
-        //(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?) pour que le nombre soit de 0 à 255
-        Pattern motif = Pattern.compile("^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]"
+        // pour que le nombre soit de 0 à 255
+        Pattern motif = Pattern.compile(
+                "^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]"
                 + "?).){3}(25[0-5]|2[0-4][0-9]|[0-1]?"
                 + "[0-9][0-9]?)$");
         Matcher correct = motif.matcher(adresseIpServeur.getText());
@@ -101,8 +101,8 @@ public class ControleurPartager {
             ipOk = true;
         } else {
             Alert messageErreur = new Alert(AlertType.ERROR);
-            messageErreur.setContentText("Une adresse ip est constitué de 4 "
-                    + "nombres entre 0 et 255 séparés par des points exemples :"
+            messageErreur.setContentText("Une adresse IP est constitué de 4 "
+                    + "nombres entre 0 et 255 séparés par des points. Exemple : "
                     + "128.15.0.348");
             messageErreur.show();
             adresseIpServeur.setText("");
@@ -118,24 +118,28 @@ public class ControleurPartager {
         try {
             System.out.println("INITIALISATION CLIENT");
             clientPartage = new Client(adresseIpServeur.getText(), 6666);
-            String reponse = "";
             System.out.println("RECEPTION CLE");
-            reponse = clientPartage.recevoirEtAnalyser(Donnees.fichierAPartager);
-            clientPartage.envoyerReponse(reponse);
+            int cle = clientPartage.echangerDonneesCryptage();
+            Thread.sleep(1000);
+            clientPartage.envoyer(Donnees.fichierAPartager, cle);
             clientPartage.fermerSocket();
+            new Alert(AlertType.INFORMATION, 
+            		"Le transfert s'est correctement déroulé.").show();
         } catch (Exception e) {
-            e.printStackTrace();
+            new Alert(AlertType.ERROR, e.getMessage()).show();
         }
     }
 
     @FXML
     void clicValider(ActionEvent event) {
         fichierOk = choixFichier.getValue().equals("-- Pas de fichier --") ||
-                choixFichier.getValue().equals("-- selectionner un Fichier --");
+                choixFichier.getValue().equals("-- Sélectionner un fichier --");
         if (fichierOk) {
             Alert messageErreur = new Alert(AlertType.ERROR);
             messageErreur.setContentText("Vous ne pouvez pas partager ça");
             messageErreur.show();
+        } else {
+          Donnees.fichierAPartager  = new File(chemineDossier + "/questionsbasiques.csv");
         }
 
         if (ipOk && !fichierOk) {
@@ -148,6 +152,25 @@ public class ControleurPartager {
         }
     }
 
+    /*
+     * A implémenter
+    @FXML
+    void chercherFichier(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        // Ajout d'un filtre pour ne montrer que certains fichiers
+        ExtensionFilter extFilter =
+                new ExtensionFilter(
+                        "Fichier CSV UTF-8 séparateur point-virgule(*.csv)",
+                        "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialDirectory(
+                new File("fichiers_sauvegarde_partage/"));
+
+        // Afficher la boîte de dialogue de choix de fichier
+        origine = fileChooser.showOpenDialog(Lanceur.getStage());
+        fichierAExporter.setText(origine.getAbsolutePath());
+    }
+    */
     @FXML
     void clicQuitter(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);

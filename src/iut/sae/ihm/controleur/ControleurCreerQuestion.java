@@ -1,5 +1,4 @@
-/*
- * ControleurCreerQuestion.java                                    24 Oct. 2023
+/* ControleurCreerQuestion.java                                    24 Oct. 2023
  * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
  */
 
@@ -77,7 +76,6 @@ public class ControleurCreerQuestion {
     @FXML
     private TextArea txtFeedback;
 
-
     /**
      * TODO comment method role
      * 
@@ -94,7 +92,6 @@ public class ControleurCreerQuestion {
         }
 
         choiceCategorie.setValue(Donnees.listeCategorie.get(0));
-
 
         lesTxtFaux.add(txtRepFausse1);
         lesTxtFaux.add(txtRepFausse2);

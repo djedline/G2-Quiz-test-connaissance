@@ -1,6 +1,6 @@
 /*
- * Question.java                                    17 oct. 2023
- * IUT Rodez, info1 2022-2023, pas de copyright ni "copyleft"
+ * Question.java                                                    17 oct. 2023
+ * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
  */
 package iut.sae.modele;
 
@@ -48,14 +48,18 @@ public class Question implements Serializable {
      * @param propositionJuste  réponse correcte à la question
      * @param propositionFausse ensemble de mauvaise réponse à la question
      * @param feedback          explication de la réponse juste
-     * @param difficulte        niveau de difficulté de la question entre 1 et 3 1
+     * @param difficulte        niveau de difficulté de la question entre 1 et 3
      *                          => facile 2 => moyen 3 => difficile
-     * @throws IllegalArgumentException si les spécificité des questions sont fausse
+     * @throws IllegalArgumentException si les spécificité des questions sont 
+     * fausse
      */
-    public Question(String libelle, Categorie nomCategorie, String propositionJuste, String[] propositionFausse,
-            String feedback, int difficulte) {
+    public Question(String libelle, Categorie nomCategorie, 
+            String propositionJuste, String[] propositionFausse,String feedback,
+            int difficulte) {
         super();
-        if (verifQuestion(libelle, nomCategorie, propositionJuste, propositionFausse, feedback, difficulte)) {
+        if (verifQuestion(
+                libelle, nomCategorie, propositionJuste, propositionFausse, 
+                feedback, difficulte)) {
             this.libelle = libelle;
             this.nomCategorie = nomCategorie;
             this.propositionJuste = propositionJuste;
@@ -68,50 +72,79 @@ public class Question implements Serializable {
         	System.out.println("le libelle" + libelle);
         	System.out.println("la categorie " + nomCategorie);
         	System.out.println("la proposition juste " + propositionJuste);
-        	System.out.println("les proposition fausse " + propositionFausse);
+        	System.out.println("les proposition fausse " 
+        	                 + propositionFausse);
         	System.out.println("le feedback" + feedback);
         	System.out.println("la difficulté " + difficulte);
-            throw new IllegalArgumentException("Les arguments entrées sont incorrectes");
+            throw new IllegalArgumentException(
+                    "Les arguments entrées sont incorrectes");
             
         }
     }
 
-    /** Vérifie que les paramètres d'une question sont correctes */
-    private static boolean verifQuestion(String libelle, Categorie nomCategorie, String propositionJuste,
-            String[] propositionFausse, String feedback, int difficulte) {
+    /** 
+     * Vérifie que les paramètres d'une question sont correctes 
+     * 
+     * @param libelle           libellé de la question
+     * @param nomCategorie      la catégorie
+     * @param propositionJuste  réponse correcte à la question
+     * @param propositionFausse ensemble de mauvaise réponse à la question
+     * @param feedback          explication de la réponse juste
+     * @param difficulte        niveau de difficulté de la question entre 1 et 3
+     *                          => facile 2 => moyen 3 => difficile
+     */
+    private static boolean verifQuestion(String libelle, Categorie nomCategorie,
+            String propositionJuste, String[] propositionFausse, 
+            String feedback, int difficulte) {
         boolean questionOk;
         boolean propOk = true;
         for (int index = 0; index < propositionFausse.length && propOk; index++) {
             propOk = !propositionFausse[index].isBlank();
         }
-        questionOk = !libelle.isBlank() && nomCategorie != null && !propositionJuste.isBlank() && propOk
-                && propositionFausse != null && feedback != null && 1 <= difficulte && difficulte <= 3;
+        questionOk = !libelle.isBlank() && nomCategorie != null 
+                && !propositionJuste.isBlank() && propOk
+                && propositionFausse != null && feedback != null 
+                && 1 <= difficulte && difficulte <= 3
+                && propositionFausse.length != 0;
         return questionOk;
     }
 
-    /** TODO comparer deux Questions */
+    /**
+     * verifie que 
+     * @param o
+     */
     public boolean equals(Object o) {
         if (o == this) {
             return true;
         }
         if (o instanceof Question) {
             Question aComparer = (Question) o;
-            boolean propOk = propositionFausse.size() == aComparer.getPropositionFausse().size();
-            for (int index = 0; index < propositionFausse.size() && propOk; index++) {
+            boolean propOk = propositionFausse.size() == 
+                    aComparer.getPropositionFausse().size();
+            for (int index = 0; 
+                    index < propositionFausse.size() && propOk; index++) {
                 propOk = propositionFausse.get(index).toUpperCase()
-                        .equals(aComparer.getPropositionFausse().get(index).toUpperCase());
+                        .equals(aComparer.getPropositionFausse().get(index)
+                                .toUpperCase());
             }
-            return libelle.toUpperCase().equals(aComparer.getLibelle().toUpperCase())
+            return libelle.toUpperCase().equals(aComparer.getLibelle()
+                    .toUpperCase())
                     && nomCategorie.equals(nomCategorie)
-                    && propositionJuste.toUpperCase().equals(aComparer.getPropositionJuste().toUpperCase()) && propOk
-                    && feedback.toUpperCase().equals(aComparer.feedback.toUpperCase())
+                    && propositionJuste.toUpperCase().equals(
+                            aComparer.getPropositionJuste().toUpperCase()) 
+                    && propOk
+                    && feedback.toUpperCase().equals(aComparer.feedback
+                            .toUpperCase())
                     && difficulte == aComparer.getDifficulte();
         } else {
             return false;
         }
     }
 
-    /** @return valeur de libelle */
+    /** 
+     * getter de libelle
+     * @return valeur de libelle
+     */
     public String getLibelle() {
         return this.libelle;
     }
@@ -181,6 +214,7 @@ public class Question implements Serializable {
             propOk = !propositionFausse[index].isBlank();
         }
         if (propOk) {
+            this.viderPropositionFausse();
             for (String element : propositionFausse) {
                 this.propositionFausse.add(element);
             }
@@ -218,7 +252,7 @@ public class Question implements Serializable {
      * @return false
      */
     public boolean setFeedback(String feedback) {
-        boolean feedBackOk = !feedback.isBlank();
+        boolean feedBackOk = feedback != null;
         if (feedBackOk) {
             this.feedback = feedback;
         }

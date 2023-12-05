@@ -6,28 +6,33 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurMenuPrincipal">
+<Pane fx:id="idPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurMenuPrincipal">
 	<children>
-		<Label fx:id="idTitre" alignment="CENTER" layoutX="63.0" layoutY="49.0" prefHeight="36.0" prefWidth="327.0" text="Quiz de connaissances" textAlignment="CENTER">
+		<Label fx:id="idTitre" alignment="CENTER" layoutX="126.0" layoutY="57.0" prefHeight="36.0" text="Quiz de connaissances" textAlignment="CENTER">
 			<font>
-				<Font size="30.0" />
+				<Font size="40.0" />
 			</font>
 		</Label>
-      <VBox layoutX="135.0" layoutY="104.0" prefHeight="157.0" prefWidth="184.0" spacing="10.0">
+      <VBox layoutX="175.0" layoutY="172.0" spacing="20.0">
          <children>
-      		<Button fx:id="btnQuizStart" mnemonicParsing="false" onAction="#clicStart" prefHeight="30.0" prefWidth="184.0" text="Lancer le quiz">
+      		<Button fx:id="btnQuizStart" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicStart" prefHeight="40.0" prefWidth="300.0" text="Lancer le quiz">
                <font>
-                  <Font size="15.0" />
+                  <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnGestion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicGerer" prefHeight="30.0" prefWidth="184.0" text="Gérer les données">
+            <Button fx:id="btnGestion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicGerer" prefHeight="40.0" prefWidth="300.0" text="Gérer les données">
                <font>
-                  <Font size="15.0" />
+                  <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnDon" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicDon" prefHeight="30.0" prefWidth="184.0" text="Echanger les données">
+            <Button fx:id="btnDon" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicDon" prefHeight="40.0" prefWidth="300.0" text="Echanger les données">
                <font>
-                  <Font size="15.0" />
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnNotice" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicNotice" prefHeight="40.0" prefWidth="300.0" text="Notice d'utilisation">
+               <font>
+                  <Font size="20.0" />
                </font>
             </Button>
          </children>
