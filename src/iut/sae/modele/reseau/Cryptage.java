@@ -23,10 +23,10 @@ public class Cryptage {
     public final static int TAILLE_ENSEMBLE = 255;
 
     /** La longueur max de la clé */
-    // private final static double MAX_LONGUEUR_CLE = 100.0;
+    private final static double MAX_LONGUEUR_CLE = 100.0;
 
     /** La longueur min de la clé */
-    // private final static double MIN_LONGUEUR_CLE = 3.0;
+    private final static double MIN_LONGUEUR_CLE = 3.0;
 
     /**
      * Programme Principal
@@ -58,8 +58,7 @@ public class Cryptage {
         do {
             reste = gxe % TAILLE_ENSEMBLE;
             gxe = (int) gxe / TAILLE_ENSEMBLE;
-            if (Character.isValidCodePoint(reste) && Character.toString(reste)
-                    .length() == 1) {
+            if (Character.isValidCodePoint(reste) && Character.toString(reste).length() == 1) {
                 laCle += Character.toString(reste);
             }
         } while (gxe > TAILLE_ENSEMBLE);
@@ -72,17 +71,19 @@ public class Cryptage {
      * 
      * @return laCle la clé de cryptage
      */
-    /*
-     * public static String genereCleVigenere() { String laCle = ""; int nombreAlea;
-     * final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE -
-     * MIN_LONGUEUR_CLE) + (int) MIN_LONGUEUR_CLE;
-     * 
-     * for (int i = 0; laCle.length() < LONGUEUR_CLE; i++) { nombreAlea = (int)
-     * (TAILLE_ENSEMBLE * Math.random()); if (Character.isValidCodePoint(nombreAlea)
-     * && Character.toString(nombreAlea).length() == 1) { laCle +=
-     * Character.toString(nombreAlea); } } System.out.println("Clé : " + laCle +
-     * " de longueur " + laCle.length()); return laCle; }
-     */
+    public static String genereCleVigenere() {
+        String laCle = "";
+        int nombreAlea;
+        final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE - MIN_LONGUEUR_CLE) + (int) MIN_LONGUEUR_CLE;
+        for (int i = 0; laCle.length() < LONGUEUR_CLE; i++) {
+            nombreAlea = (int) (TAILLE_ENSEMBLE * Math.random());
+            if (Character.isValidCodePoint(nombreAlea) && Character.toString(nombreAlea).length() == 1) {
+                laCle += Character.toString(nombreAlea);
+            }
+        }
+        System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
+        return laCle;
+    }
 
     /**
      * Méthode qui permet de crypter un message
