@@ -70,7 +70,10 @@ public class ControleurChoixQuestionExport {
                     /*
                      * on crée un treeitem de la question et on l'ajoute au treeitem de la catégorie
                      */
-                    checkable.getChildren().add(new CheckBoxTreeItem<>(laQuestion));
+                	CustomCheckboxTreeItem<Object> checkableQuestion = 
+                			new CustomCheckboxTreeItem<Object>(laQuestion);
+                	checkableQuestion.setValue(laQuestion);
+                    checkable.getChildren().add(checkableQuestion);
                 }
             }
         }
@@ -130,7 +133,6 @@ public class ControleurChoixQuestionExport {
      */
     void valider(ActionEvent event) {
         List<Question> selectionnees = new ArrayList<>();
-
         for (TreeItem<Object> itemCat : treeViewData.getRoot().getChildren()) {
             CheckBoxTreeItem<Object> convertiCat = (CheckBoxTreeItem<Object>) itemCat;
             if (convertiCat.isSelected()) {
@@ -139,7 +141,8 @@ public class ControleurChoixQuestionExport {
                 selectionnees.addAll(Donnees.getQuestionOfCategorie(nomCat));
             } else if (convertiCat.isIndeterminate()) {
                 for (TreeItem<Object> itemQ : itemCat.getChildren()) {
-                    CustomCheckboxTreeItem<Object> ccti = (CustomCheckboxTreeItem<Object>) itemQ;
+                    CustomCheckboxTreeItem<Object> ccti = 
+                    		(CustomCheckboxTreeItem<Object>) itemQ;
                     if (ccti.isSelected() && ccti.getUserData() != null) {
                         Question q = (Question) ccti.getUserData();
                         selectionnees.add(q);

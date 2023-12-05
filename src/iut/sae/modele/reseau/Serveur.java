@@ -183,7 +183,7 @@ public class Serveur {
 			}).get(timeout, TimeUnit.SECONDS);
 			return true;
 		} catch (Exception e) {
-			System.err.println("La connexion n'a pas pu être établie dans le délai spécifié.");
+			System.err.println("La connexion n'a pas pu être établie dans le délai spécifié.../nFermeture en cours...");
 			//e.printStackTrace();
 			return false;
 		} finally {

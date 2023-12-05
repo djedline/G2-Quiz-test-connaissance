@@ -7,6 +7,8 @@ package iut.sae.modele.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -115,5 +117,13 @@ class PersistanceTest {
             Donnees.listeQuestions.add(nouvelleQuestion);
         }
     }
+    
+    @BeforeClass
+    void tearDown() {
+    	Donnees.reinitialiserDonnees();
+    	Persistance.effacerSauvegarde();
+    }
+    
+    
 
 }

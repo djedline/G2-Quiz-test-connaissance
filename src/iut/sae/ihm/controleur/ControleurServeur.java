@@ -114,7 +114,7 @@ public class ControleurServeur {
     	boolean connexionEtablie;
         try {
             serveurPartage = new Serveur();
-            serveurPartage.accepterConnexion(5);
+            serveurPartage.accepterConnexion(10);
             connexionEtablie = serveurPartage.accepterConnexion(30); // Attendre 30 secondes au maximum
 
             if (connexionEtablie) {

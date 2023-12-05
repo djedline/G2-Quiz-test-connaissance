@@ -222,7 +222,16 @@ public class Donnees {
      */
     public static void reinitialiserDonnees() {
         listeCategorie = new ArrayList<>();
-        listeCategorie.add(new Categorie(NOM_CATEGORIE_DEFAUT));
+        creerCategorieDefaut();
         listeQuestions = new ArrayList<>();
     }
+    
+    /**
+     * Crée la catégorie par défaut.
+     */
+	public static void creerCategorieDefaut() {
+		if (Donnees.listeCategorie.size() < 1) {
+			Donnees.listeCategorie.add(new Categorie(NOM_CATEGORIE_DEFAUT));
+		}
+	}
 }
