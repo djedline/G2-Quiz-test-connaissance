@@ -160,7 +160,8 @@ public class Serveur {
 
 	/**
 	 * attend qu'un client demande une connexion et l'accepte
-	 * @return 
+	 * @param timeout 
+	 * @return un boolean
 	 */
 	public boolean accepterConnexion(int timeout) {
 

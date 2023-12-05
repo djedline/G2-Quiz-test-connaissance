@@ -11,6 +11,10 @@ import javafx.stage.Stage;
 
 import java.util.function.UnaryOperator;
 
+/** TODO comment class responsibility (SRP)
+ * @author catal
+ *
+ */
 public class testText extends Application {
 
     @Override
@@ -47,6 +51,9 @@ public class testText extends Application {
         primaryStage.show();
     }
 
+    /** TODO comment method role
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
