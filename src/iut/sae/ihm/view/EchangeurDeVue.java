@@ -59,7 +59,8 @@ public class EchangeurDeVue {
                     EchangeurDeVue.class.getResource(
                             EnsembleDesVues.getNomVue(codeVue)));
             // ajout de la vue à la table cache
-
+            
+            
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
             // Lanceur.resizeScene(sceneCourante.getWidth(),
@@ -97,7 +98,7 @@ public class EchangeurDeVue {
                     (ControleurModifierCategorie) loader.getController();
 
             controllerRef.setCategorie(laCategorie);
-
+            
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
 
@@ -172,7 +173,7 @@ public class EchangeurDeVue {
                     (ControleurChoixQuestionExport) loader.getController();
 
             controllerRef.setExportFile(f);
-
+ 
             sceneCourante.setRoot(racine);
             Lanceur.resizeScene();
         } catch (IOException erreur) {

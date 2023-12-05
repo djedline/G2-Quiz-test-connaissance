@@ -11,7 +11,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurPartager">
 	<children>
-		<Button fx:id="btnValider" layoutX="333.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicValider" prefHeight="40.0" prefWidth="300.0" text="Valider">
+		<Button fx:id="btnValider" layoutX="333.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicValider" prefHeight="40.0" prefWidth="300.0" styleClass="btnValide" text="Valider">
          <font>
             <Font size="20.0" />
          </font></Button>
@@ -20,7 +20,7 @@
 				<Font size="40.0" />
 			</font>
 		</Label>
-      <Button fx:id="btnQuitter" layoutX="17.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="40.0" prefWidth="300.0" text="Retour">
+      <Button fx:id="btnQuitter" layoutX="17.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clicQuitter" prefHeight="40.0" prefWidth="300.0" styleClass="btnRetour" text="Retour">
          <font>
             <Font size="20.0" />
          </font></Button>

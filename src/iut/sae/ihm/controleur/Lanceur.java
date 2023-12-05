@@ -78,7 +78,14 @@ public class Lanceur extends Application {
             }
         });
 
+        String cssUrl = new File(
+                "src/iut/sae/ihm/view/style.css").toURI()
+                .toURL().toExternalForm();
+        
+        
+        
         Scene scene = new Scene(parent);
+        scene.getStylesheets().add(cssUrl);
         EchangeurDeVue.setSceneCourante(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
