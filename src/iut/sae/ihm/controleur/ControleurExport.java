@@ -69,8 +69,11 @@ public class ControleurExport {
 		fileChooser.getExtensionFilters().add(extFilter);
 
 		// Afficher la boîte de dialogue de sauvegarde de fichier
-		destination = fileChooser.showSaveDialog(Lanceur.getStage());
-		fichierAExporter.setText(destination.getAbsolutePath());
+		File fichierChoisi = fileChooser.showSaveDialog(Lanceur.getStage());
+		if (fichierChoisi != null) {
+			destination = fichierChoisi;
+			fichierAExporter.setText(destination.getAbsolutePath());
+		}
 	}
 
 	@FXML
