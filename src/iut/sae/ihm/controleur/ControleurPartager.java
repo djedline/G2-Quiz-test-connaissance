@@ -12,6 +12,7 @@ import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.reseau.Client;
+import iut.sae.modele.reseau.Cryptage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -121,7 +122,8 @@ public class ControleurPartager {
             System.out.println("RECEPTION CLE");
             int cle = clientPartage.echangerDonneesCryptage();
             Thread.sleep(1000);
-            clientPartage.envoyer(Donnees.fichierAPartager, cle);
+            Integer[] offset = Cryptage.convertirValeurEnOffset(cle);
+            clientPartage.envoyer(Donnees.fichierAPartager, offset);
             clientPartage.fermerSocket();
             new Alert(AlertType.INFORMATION, 
             		"Le transfert s'est correctement déroulé.").show();

@@ -236,4 +236,16 @@ public class Client {
             throw new IOException("Impossible de fermer la Socket client.");
         }
     }
+
+	public void envoyer(File fich, Integer[] offset) throws IOException {
+    	BufferedReader br = new BufferedReader(new FileReader(fich));
+    	String contenuFich = "";
+    	while (br.ready()) {
+    		contenuFich += br.readLine() + "\n";
+    	}
+    	br.close();
+    	
+    	String fichEncode = Cryptage.chiffrer(contenuFich, offset);
+    	util.envoyerMessage(fichEncode);
+	}
 }

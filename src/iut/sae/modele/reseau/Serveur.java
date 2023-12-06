@@ -173,6 +173,12 @@ public class Serveur {
             e.printStackTrace();
         }
     }
+
+	public String receptionFichier(Integer[] offset) throws IOException {
+    	String contenuFichCrypte = util.reception();
+    	return Cryptage.dechiffrer(contenuFichCrypte, 
+    			offset);
+	}
     
 
 }

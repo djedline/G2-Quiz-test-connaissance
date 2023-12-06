@@ -12,6 +12,7 @@ import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.ImportExport;
+import iut.sae.modele.reseau.Cryptage;
 import iut.sae.modele.reseau.Serveur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -90,7 +91,8 @@ public class ControleurServeur {
 	            serveurPartage.accepterConnexion();
 	            int cle = serveurPartage.envoiDonneesInitiale();
 	            Thread.sleep(1000);
-	            String message = serveurPartage.receptionFichier(cle);
+	            Integer[] offset = Cryptage.convertirValeurEnOffset(cle);
+	            String message = serveurPartage.receptionFichier(offset);
 	            ImportExport.importer(message);
 	            new Alert(AlertType.INFORMATION, 
 	            		"L'import de questions s'est correctement déroulé.")
