@@ -1,0 +1,213 @@
+
+/* 
+    Document   : controlStyle2
+*/
+
+.root{
+    -fx-background-color : rgb(50, 50, 50);
+}
+
+.label{
+	-fx-text-fill: white;
+}
+
+.choice-box{
+	-fx-background-color: rgb(80, 80, 80);
+}
+
+.choice-box:hover{
+	-fx-background-color: rgb(58, 187, 202);
+	-fx-scale-y: 1.01;
+    -fx-scale-x: 1.01;
+}
+
+.choice-box:hover .label{
+	-fx-text-fill: black;
+}
+
+.choice-box .context-menu { 
+	-fx-background-color: rgb(80, 80, 80);
+}
+
+.choice-box .menu-item:focused { 
+	-fx-background-color: rgb(58, 187, 202);
+}
+
+.choice-box .menu-item > .label { 
+	-fx-text-fill: white;
+}
+
+.choice-box .menu-item:focused > .label { 
+	-fx-text-fill: black;
+}
+
+.button{
+	-fx-background-color: rgb(80, 80, 80);
+	-fx-text-fill: white;
+    -fx-background-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: rgb(58, 187, 202);
+	-fx-text-fill: black;
+    -fx-scale-y: 1.01;
+    -fx-scale-x: 1.01;
+}
+
+.tree-view, .tree-cell {
+    -fx-background-color: rgb(60,60,60) ;
+}
+
+
+.tree-cell:expanded {
+    -fx-background-color: #404040 ;
+    -fx-font-weight: bold ;
+}
+
+.tree-cell:hover {
+    -fx-background-color: rgb(58, 187, 202) ;  
+}
+
+.tree-cell:hover .labelTreeItem{
+	-fx-text-fill: black ;
+}
+
+.tree-cell > .tree-disclosure-node > .arrow  {
+    -fx-background-color: white;
+}
+
+.tree-cell:hover > .tree-disclosure-node > .arrow  {
+    -fx-background-color: rgb(60,60,60);
+}
+
+.menu-button{
+	-fx-background-color: rgb(80, 80, 80);
+	-fx-text-fill: white;
+}
+
+.menu-button .context-menu { 
+	-fx-background-color: rgb(80, 80, 80);
+}
+
+.menu-button .menu-item:focused { 
+	-fx-background-color: rgb(58, 187, 202);
+}
+
+.menu-button .menu-item > .label { 
+	-fx-text-fill: white;
+}
+
+.menu-button .menu-item:focused > .label { 
+	-fx-text-fill: black;
+}
+
+.btnValide{
+	-fx-border-color: rgb(51,196,56);
+	-fx-text-fill: rgb(51,196,56);
+	-fx-border-radius: 5;
+	-fx-background-radius: 5;
+}
+
+.btnValide:hover{
+	-fx-background-color: rgb(51,196,56);
+	-fx-text-fill: black;
+	-fx-border-radius: 5;
+	-fx-background-radius: 5;
+}
+
+.btnRetour{
+	-fx-border-color: rgb(191,45,45);
+	-fx-text-fill: rgb(191,45,45);
+	-fx-border-radius: 5;
+	-fx-background-radius: 5;
+}
+
+.btnRetour:hover{
+	-fx-background-color: rgb(191,45,45);
+	-fx-text-fill: black;
+	-fx-border-radius: 5;
+	-fx-background-radius: 5;
+}
+
+.text-field{
+	-fx-background-color: rgb(80, 80, 80);
+	-fx-text-fill: white;
+}
+
+.text-area, .text-area .content{
+	-fx-background-color: rgb(80, 80, 80);
+	-fx-text-fill: white;
+	-fx-border-radius: 5;
+	-fx-background-radius: 5;
+	-fx-background-insets: 0;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+.scroll-pane, .scroll-pane .content, .scroll-pane .viewport{
+	-fx-background-insets: 0;
+	-fx-background-color : rgb(50, 50, 50);
+	-fx-border-color: rgb(50, 50, 50);
+}
+
+.radio-button {
+    -fx-text-fill: white;
+    
+}
+
+.radio-button .radio {
+	-fx-background-color: white;
+}
+
+.text-id { 
+ 	-fx-fill: white;
+}
+
+.tab-header-area .tab-header-background {
+ 	-fx-background-color: rgb(58, 187, 202);
+}
+
+.tab .tab-label { 
+ 	-fx-alignment: CENTER;
+	-fx-text-fill: black;
+	-fx-font-weight: bold;
+	-fx-padding: 0 10 0 10;
+}
+
+.tab:selected .tab-label { 
+ 	-fx-text-fill: white;
+}
+
+.tab-pane .tab:selected {
+	-fx-background-color: rgb(50, 50, 50);
+	-fx-background-insets: 0 0 0 0;
+
+}
+
+.tab-pane:top *.tab-header-area {
+	-fx-padding: 5 0 0 0;
+	
+}
+
+.tab-pane {
+	-fx-background-color: transparent;
+
+}
+
+.tab-pane .tab {
+	-fx-background-color: transparent;
+}
+
+.tab-pane:focused .tab-header-area .headers-region .tab:selected .focus-indicator {
+ 	-fx-border-width: 0;
+	-fx-border-insets: 5 0 0 0;
+	-fx-border-radius: 5;
+}

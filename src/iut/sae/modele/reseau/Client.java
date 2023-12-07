@@ -107,7 +107,7 @@ public class Client {
 	        System.out.println("Clé générée : " + cle);
 	        return cle;
         } catch (NumberFormatException e) {
-        	throw new IOException("Données corrompues envoyées par le serveur.");
+        	throw new IOException("Les données envoyées par le serveur sont vides ou incorrectes. Réessayez.");
         }
     }
     

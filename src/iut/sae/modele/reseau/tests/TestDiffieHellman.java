@@ -13,45 +13,10 @@ package iut.sae.modele.reseau.tests;
  */
 public class TestDiffieHellman {
     
-    private int valeurX = 5;
-    
-    private int valeurP;
-    
-    private int valeurG;
-    
     /**
      * Tests de la classe genererModule
      */
     public void testGenererModule() {
         
     }
-    
-    /**
-     * Tests de la classe genererGenerateur
-     */
-    public void testGenererGenerateur() {
-        
-    }
-    
-    /**
-     * Tests de la classe genererX
-     */
-    public void testGenererX() {
-        
-    }
-    
-    /** 
-     * Tests de la classe CalculGX
-     */
-    public void testCalculGX() {
-        
-    }
-    
-    /** 
-     * Tests de la classe CalculGXE
-     */
-    public void testCalculGXE() {
-        
-    }
-    
 }

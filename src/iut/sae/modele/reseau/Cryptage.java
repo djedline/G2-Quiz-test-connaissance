@@ -39,7 +39,7 @@ public class Cryptage {
         String message = "Le cryptage c'est compliqué.";
         System.out.println("Message : " + message);
         String cle = genereCleDiffie();
-
+        
         String crypte = chiffrer(message, cle);
         dechiffrer(crypte, cle);
     }
@@ -50,21 +50,13 @@ public class Cryptage {
      * @return la clé
      */
     public static String genereCleDiffie() {
-        String laCle = "";
-        int reste;
         int p = DiffieHellman.genererModulo();
         int g = DiffieHellman.genererGenerateur(p);
         int x = DiffieHellman.genererX();
         int x1 = DiffieHellman.genererX();
-        int gx = DiffieHellman.calculGX(g, x);
-        int gxe = DiffieHellman.calculGXE(gx, x1);
-        do {
-            reste = gxe % TAILLE_ENSEMBLE;
-            gxe = (int) gxe / TAILLE_ENSEMBLE;
-            if (Character.isValidCodePoint(reste) && Character.toString(reste).length() == 1) {
-                laCle += Character.toString(reste);
-            }
-        } while (gxe > TAILLE_ENSEMBLE);
+        int gx = DiffieHellman.calculMisePuissance(g, x, p);
+        int gxe = DiffieHellman.calculMisePuissance(gx, x1, p);
+        String laCle = convertirValeurEnString(gxe);
         System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
         return laCle;
     }
@@ -136,6 +128,19 @@ public class Cryptage {
 			offset.add(val);
 		}
 		return offset.toArray(new Integer[0]);
+	}
+	
+	public static String convertirValeurEnString(int gxe) {
+		int reste;
+		String laCle = "";
+		do {
+            reste = gxe % TAILLE_ENSEMBLE;
+            gxe = (int) gxe / TAILLE_ENSEMBLE;
+            if (Character.isValidCodePoint(reste) && Character.toString(reste).length() == 1) {
+                laCle += Character.toString(reste);
+            }
+        } while (gxe > TAILLE_ENSEMBLE);
+		return laCle;
 	}
 	
 	public static Integer[] convertirValeurEnOffset(int entier) {

@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Classe qui représente le serveur lors d'un échange d'information
@@ -17,20 +21,22 @@ import java.net.UnknownHostException;
  */
 public class Serveur {
 
-    private static final File FICHIER_A_ENVOYER = 
-            new File("src/iut/sae/modele/reseau/tests/fichEnvoi.txt");
+	private static final File FICHIER_A_ENVOYER = 
+			new File("src/iut/sae/modele/reseau/tests/fichEnvoi.txt");
 
-    /** socket de connexion lors du démarrage du client et serveur */
-    public ServerSocket conn;
+	/** socket de connexion lors du démarrage du client et serveur */
+	public ServerSocket conn;
 
-    /** socket qui permet la communication entre le serveur et le client */
-    private Socket comm;
-    
-    /**
-     * Utilitaires réseaux pour envoyer et recevoir facilement les chaînes
-     * de caractères. Lié à la socket.
-     */
-    private ReseauUtils util;
+	/** socket qui permet la communication entre le serveur et le client */
+	private Socket comm;
+	
+	/**
+	 * Utilitaires réseaux pour envoyer et recevoir facilement les chaînes
+	 * de caractères. Lié à la socket.
+	 */
+	private ReseauUtils util;
+	
+	private ExecutorService executor;
 
     /**
      * prépare le serveur en démarrant la socket conn.
@@ -40,7 +46,6 @@ public class Serveur {
         System.out.println("CREATION DU SERVEUR");
         try {
             conn = new ServerSocket(6666);
-            System.out.println("coucou");
         } catch (UnknownHostException e) {
             throw new IOException("Impossible de trouver l'adresse IP.", e);
         } catch (IOException e) {
@@ -83,27 +88,17 @@ public class Serveur {
         	System.out.println("Clé générée : " + cle);
             return cle;
         } catch (NumberFormatException e) {
-        	throw new IOException("Données corrompues envoyées par le client.");
+        	throw new IOException("Les données envoyées par le client sont vides ou incorrectes. Réessayez.");
         }
     }
-    
-    /** 
-     * Receptionne le contenu d'un fichier
-     * @param cle
-     * @return f
-     * @throws IOException
-     */
-    public String receptionFichier(int cle) throws IOException {
-    	String contenuFichCrypte = util.reception();
-    	return Cryptage.dechiffrer(contenuFichCrypte, 
-    			Integer.toString(cle));
-    }
-    
-    /*
-     * 
-     * @param args
-     * @throws InterruptedException
-     *
+
+	/*
+	 * 
+	 * @param args
+	 * @throws InterruptedException
+	 *
+	 */
+	/*
     public void main(String[] args) throws InterruptedException {
         preparerServeur();
         accepterConnexion(); // bloquante : attend que le client se connecte
@@ -119,7 +114,7 @@ public class Serveur {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            
+
             //recu = recevoirMessage(FICHIER_RECEPTION, cle);
         }
 
@@ -138,47 +133,59 @@ public class Serveur {
     }*/
 
 
-    /**
-     * Ferme le serveur
-     */
-    public void fermetureServeur() {
-        try {
-        	if (comm != null) {
-        		comm.close();
-        	}
-        	if (conn != null) {
-        		conn.close();
-        	}
-        } catch (IOException e) {
-            System.err.println("Impossible de fermer la socket serveur.");
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * attend qu'un client demande une connexion et l'accepte
-     */
-    public void accepterConnexion() {
-
-        System.out.println("ACCEPTATION");
-        try {
-            comm = conn.accept();
-            util = new ReseauUtils(comm);
-            System.out.println("La inet Adress conn : " 
-                                + conn.getInetAddress());
-            System.out.println("La inet Adress comm : " 
-                                + comm.getInetAddress());
-        } catch (IOException e) {
-            System.err.println("Impossible d'accepter la connection.");
-            e.printStackTrace();
-        }
-    }
-
+	/**
+	 * Ferme le serveur
+	 */
+	public void fermetureServeur() {
+		try {
+			if (comm != null) {
+				comm.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
+		} catch (IOException e) {
+			System.err.println("Impossible de fermer la socket serveur.");
+			e.printStackTrace();
+		}
+	}
+	
 	public String receptionFichier(Integer[] offset) throws IOException {
     	String contenuFichCrypte = util.reception();
     	return Cryptage.dechiffrer(contenuFichCrypte, 
     			offset);
 	}
-    
 
+	/**
+	 * attend qu'un client demande une connexion et l'accepte
+	 * @param timeout 
+	 * @return un boolean
+	 */
+	public boolean accepterConnexion(int timeout) {
+		System.out.println("ACCEPTATION");
+		try {
+			executor = Executors.newSingleThreadExecutor();
+
+			executor.submit(() -> {
+				try {
+					comm = conn.accept();
+					util = new ReseauUtils(comm);
+					System.out.println("La inet Adress conn : " 
+							+ conn.getInetAddress());
+					System.out.println("La inet Adress comm : " 
+							+ comm.getInetAddress());
+				} catch (IOException e) {
+					System.err.println("Impossible d'accepter la connection.");
+				}
+			}).get(timeout, TimeUnit.SECONDS);
+			return true;
+		} catch (Exception e) {
+			System.err.println("La connexion n'a pas pu être établie dans le délai spécifié.../nFermeture en cours...");
+			return false;
+		} finally {
+			if (executor != null) {
+				executor.shutdownNow(); // Arrête le thread après l'exécution
+			}
+		}
+	}
 }
