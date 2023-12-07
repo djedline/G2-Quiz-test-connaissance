@@ -37,25 +37,6 @@ public class Client {
      */
     private ReseauUtils util;
 
-    /*
-     * Méthode de test des sockets.
-     * 
-     * @param args
-     *
-    public static void main(String[] args) {
-        try {
-            Scanner sc = new Scanner(System.in);
-            creerLiaisonServeur("10.2.14.31", 6666);
-            String reponse = "";
-            //reponse = recevoirEtAnalyser();
-            envoyerReponse(reponse);
-            fermerSocket();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
-
-
     /**
      * @param host l'adresse ou le nom du serveur
      * @param port le port du serveur
@@ -100,16 +81,17 @@ public class Client {
 	        int gA = Integer.parseInt(msgGA);
 	        
 	        int b = DiffieHellman.genererX();
-	        int gB = (int) Math.pow(g, b);
+	        System.out.println("Valeur de B : " + b);
+	        int gB = DiffieHellman.puissanceModulo(g, b, p);
 	        Thread.sleep(1000);
 	        System.out.println("Envoi de GB : ");
 	        util.envoyerMessage(Integer.toString(gB));
 	        
-	        int cle = (int) Math.pow(gA, b);
+	        int cle = DiffieHellman.puissanceModulo(gA, b, p);
 	        System.out.println("Clé générée : " + cle);
 	        return cle;
         } catch (NumberFormatException e) {
-        	throw new IOException("Données corrompues envoyées par le serveur.");
+        	throw new IOException("Les données envoyées par le serveur sont vides ou incorrectes. Réessayez.");
         }
     }
     
@@ -127,7 +109,8 @@ public class Client {
     	}
     	br.close();
     	
-    	String fichEncode = Cryptage.chiffrer(contenuFich, Integer.toString(cle));
+    	Integer[] offset = Cryptage.convertirValeurEnOffset(cle);
+    	String fichEncode = Cryptage.chiffrer(contenuFich, offset);
     	util.envoyerMessage(fichEncode);
     }
     
@@ -238,4 +221,16 @@ public class Client {
             throw new IOException("Impossible de fermer la Socket client.");
         }
     }
+
+	public void envoyer(File fich, Integer[] offset) throws IOException {
+    	BufferedReader br = new BufferedReader(new FileReader(fich));
+    	String contenuFich = "";
+    	while (br.ready()) {
+    		contenuFich += br.readLine() + "\n";
+    	}
+    	br.close();
+    	
+    	String fichEncode = Cryptage.chiffrer(contenuFich, offset);
+    	util.envoyerMessage(fichEncode);
+	}
 }

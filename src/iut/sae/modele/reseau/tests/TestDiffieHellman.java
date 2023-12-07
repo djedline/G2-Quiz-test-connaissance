@@ -1,8 +1,12 @@
-/*
- * TestDiffieHellman.java                                    23 nov. 2023
- * IUT Rodez, info2 2023-2024, pas de copyright ni "copyleft"
- */
 package iut.sae.modele.reseau.tests;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import static iut.sae.modele.reseau.DiffieHellman.isPremier;
+import static iut.sae.modele.reseau.DiffieHellman.isGenerateur;
+import static iut.sae.modele.reseau.DiffieHellman.puissanceModulo;
 
 /**
  * Utilisation de la classe Diffie-Hellman et test de ses méthodes
@@ -13,47 +17,41 @@ package iut.sae.modele.reseau.tests;
  * @author leo.cheikh-boukal
  * @version 1.0
  */
-public class TestDiffieHellman {
-    
-    private int valeurX = 5;
-    
-    private int valeurP;
-    
-    private int valeurG;
-    
-    /**
-     * Tests de la classe genererModule
-     */
-    public void testGenererModule() {
-        
-    }
-    
-    /**
-     * Tests de la classe genererGenerateur
-     */
-    public void testGenererGenerateur() {
-        
-    }
-    
-    /**
-     * Tests de la classe genererX
-     */
-    public void testGenererX() {
-        
-    }
-    
-    /** 
-     * Tests de la classe CalculGX
-     */
-    public void testCalculGX() {
-        
-    }
-    
-    /** 
-     * Tests de la classe CalculGXE
-     */
-    public void testCalculGXE() {
-        
-    }
-    
+class TestDiffieHellman {
+
+	@Test
+	void testIsPremier() {
+		assertFalse(isPremier(1));
+		assertFalse(isPremier(4));
+		
+		assertTrue(isPremier(71));
+		assertTrue(isPremier(7));
+		assertTrue(isPremier(101));
+	}
+	
+	@Test
+	void testIsGenerateur() {
+		assertFalse(isGenerateur(0, 5));
+		assertFalse(isGenerateur(1, 5));
+		assertTrue(isGenerateur(2, 5));
+		assertTrue(isGenerateur(3, 5));
+		assertFalse(isGenerateur(4, 5));
+		
+		assertFalse(isGenerateur(0, 7));
+		assertFalse(isGenerateur(1, 7));
+		assertFalse(isGenerateur(2, 7));
+		assertTrue(isGenerateur(3, 7));
+		assertFalse(isGenerateur(4, 7));
+		assertTrue(isGenerateur(5, 7));
+		assertFalse(isGenerateur(6, 7));
+		
+		assertTrue(isGenerateur(3, 43));
+	}
+	
+	@Test
+	void testPuissanceModulo() {
+		assertEquals(1, puissanceModulo(20, 0, 30));
+		assertEquals(20, puissanceModulo(20, 1, 30));
+		assertEquals(10, puissanceModulo(20, 2, 30));
+	}
 }

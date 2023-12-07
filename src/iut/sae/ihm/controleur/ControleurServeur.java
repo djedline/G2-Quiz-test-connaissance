@@ -12,6 +12,7 @@ import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
 import iut.sae.modele.ImportExport;
+import iut.sae.modele.reseau.Cryptage;
 import iut.sae.modele.reseau.Serveur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,7 +70,7 @@ public class ControleurServeur {
             adresseIpServeur.setText(Donnees.adresseIpServeur);
             Donnees.serveurAllumee = false;
         } catch (UnknownHostException e) {
-            new Alert(AlertType.ERROR, "Problème à la récupérartion de l'adresse IP")
+            new Alert(AlertType.ERROR, "Problème à la récupérartion de l'adresse IP.")
             		.show();
         }
         if (Donnees.serveurAllumee) {
@@ -81,11 +82,9 @@ public class ControleurServeur {
     void clicDemarrer(ActionEvent event) throws IOException, InterruptedException {
         if (!Donnees.serveurAllumee) {
             System.out.println("Salut");
-            testAlert();
-            //btnDemarrer.setText("Éteindre");
-           // Donnees.serveurAllumee = true;
-            //gestionServeur();
-            // serveurPartage.preparerServeur();
+            btnDemarrer.setText("Éteindre");
+            Donnees.serveurAllumee = true;
+            gestionServeur();
         } else {
             System.out.println("Au revoir");
             serveurPartage.fermetureServeur();
@@ -95,18 +94,6 @@ public class ControleurServeur {
         }
     }
     
-    /**
-     * Permet de démarrer le serveur et de receptionner des questions de la part d'un client
-     * Erreur si aucun client trouvé
-     */
-    public void testAlert() {
-    	Alert alert = new Alert(Alert.AlertType.WARNING);
-    	alert.setTitle("Avertissement");
-    	alert.setHeaderText("Ceci est un avertissement.");
-    	alert.setContentText("Plus de détails peuvent être ajoutés ici.");
-    	alert.showAndWait();
-    }
-    
     
     /**
      * Permet de démarrer le serveur et de receptionner des questions de la part d'un client
@@ -114,27 +101,38 @@ public class ControleurServeur {
      */
     public void gestionServeur() {
     	boolean connexionEtablie;
+    	String message = "";
         try {
             serveurPartage = new Serveur();
-            serveurPartage.accepterConnexion(10);
             connexionEtablie = serveurPartage.accepterConnexion(30); // Attendre 30 secondes au maximum
 
             if (connexionEtablie) {
             	int cle = serveurPartage.envoiDonneesInitiale();
+            	Integer[] offset = Cryptage.convertirValeurEnOffset(cle);
 	            Thread.sleep(1000);
-	            String message = serveurPartage.receptionFichier(cle);
-	            ImportExport.importer(message);
-	            new Alert(AlertType.INFORMATION, 
-	            		"L'import de questions s'est correctement déroulé.")
-	            		.show();
+	            message = serveurPartage.receptionFichier(offset);
             } else {
-            	new Alert(AlertType.ERROR, "La connexion n'a pas pu être établie dans le délai spécifié.").show();
+            	new Alert(AlertType.ERROR, "La connexion n'a pas pu être établie"
+            			+ " dans le délai spécifié.").show();
             }
             
         } catch (Exception e) {
         	new Alert(AlertType.ERROR, e.getMessage()).show();
         } finally {
         	serveurPartage.fermetureServeur();
+        }
+        
+        try {
+	        if (message != null && !message.isBlank()) {
+	        	ImportExport.importer(message);
+	        	new Alert(AlertType.INFORMATION, 
+	            		"L'import de questions s'est correctement déroulé.")
+	            		.show();
+	        }
+        } catch (IOException e) {
+        	new Alert(AlertType.INFORMATION, 
+            		"Impossible d'importer les questions, fichier invalide.")
+            		.show();
         }
     }
     
