@@ -6,6 +6,7 @@ package iut.sae.ihm.controleur;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
@@ -15,9 +16,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
  * Classe controleur de la page Partager
@@ -33,57 +37,69 @@ public class ControleurPartager {
     
     @FXML
     private TextField adresseIpServeur;
+    
+    @FXML
+    private TextField fichier;
+    
+    @FXML
+    private Label messageErreur;
+    
+    @FXML
+    private Label idLabelNom1;
 
     @FXML
     private Button btnQuitter;
-
-    @FXML
-    private ChoiceBox<String> choixFichier;
 
     @FXML
     private Button btnValider;
 
     @FXML
     private Button btnDemarrer;
+    
+    @FXML
+    private Button parcourir;
 
     boolean allumageOk = false;
 
-    private String cheminDossier;
-    private File dossier;
-    private File[] listeFichier;
     private boolean ipOk;
     private boolean fichierOk;
     private Client clientPartage;
 
+    private File origine = new File("fichiers_sauvegarde_partage/");
+    
     /** 
      * Initialise la liste déroulante
      */
     @FXML
     void initialize() {
-        cheminDossier = "fichiers_sauvegarde_partage/fichier_csv_stock";
-        dossier = new File(cheminDossier);
-        listeFichier = dossier.listFiles();
         ipOk = false;
         fichierOk = false;
-        //System.out.println(listeFichier.toString());
-        System.out.println(dossier.isDirectory());
-        if (listeFichier == null) {
-            choixFichier.getItems().add("-- Pas de fichier --");
-            choixFichier.setValue("-- Pas de fichier --");
-        } else {
-            choixFichier.getItems().add("-- Sélectionner un fichier --");
-            for (File fichier : listeFichier) {
-                choixFichier.getItems().add(fichier.getName());
-                System.out.println(fichier);
-            }
-            choixFichier.setValue("-- Sélectionner un fichier --");
-        }
+        fichier.setText("-- Aucun fichier sélectionnée --");
+        
     }
 
-   
+    @FXML
+    void chercherFichier(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        // Ajout d'un filtre pour ne montrer que certains fichiers
+        ExtensionFilter extFilter =
+                new ExtensionFilter(
+                        "Fichier CSV UTF-8 séparateur point-virgule(*.csv)",
+                        "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialDirectory(
+                new File("fichiers_sauvegarde_partage/"));
+
+        // Afficher la boîte de dialogue de choix de fichier
+        File fichierSelectionne = fileChooser.showOpenDialog(Lanceur.getStage());
+        if (fichierSelectionne != null) {
+                origine = fichierSelectionne;
+                fichier.setText(origine.getAbsolutePath());
+        }
+    }
     
     @FXML
-    void verifIp (ActionEvent event) {
+    void verifIp(KeyEvent event) {
          // pour que le nombre soit de 0 à 255
         Pattern motif = Pattern.compile(
                 "^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]"
@@ -93,14 +109,12 @@ public class ControleurPartager {
         if (correct.matches()) {
             System.out.println("C'est bon");
             ipOk = true;
+            messageErreur.setText("");
         } else {
-            Alert messageErreur = new Alert(AlertType.ERROR);
-            messageErreur.setContentText("Une adresse IP est constitué de 4 "
-                    + "nombres entre 0 et 255 séparés par des points. Exemple : "
-                    + "128.15.0.348");
-            messageErreur.show();
-            adresseIpServeur.setText("");
-            idLabelNom.setStyle("-fx-text-fil:red;");
+        	messageErreur.setText("Une adresse IP est constitué de 4 "
+        			+ "nombres entre 0 et 255 séparés par des points. \nExemple :"
+        			+ "128.15.0.348");
+        	messageErreur.setTextFill(Color.web("#ff0000"));
         }
     }
 
@@ -125,22 +139,20 @@ public class ControleurPartager {
 
     @FXML
     void clicValider(ActionEvent event) {
-        fichierOk = choixFichier.getValue().equals("-- Pas de fichier --") ||
-                choixFichier.getValue().equals("-- Sélectionner un fichier --");
+        fichierOk = fichier.getText().equals("-- Aucun fichier sélectionnée --");
         if (fichierOk) {
             Alert messageErreur = new Alert(AlertType.ERROR);
-            messageErreur.setContentText("Vous ne pouvez pas partager ça");
+            messageErreur.setContentText("Vous devez choisir un fichier");
             messageErreur.show();
         } else {
-          Donnees.fichierAPartager  = new File(cheminDossier + "/questionsbasiques.csv");
+          Donnees.fichierAPartager  = new File(fichier.getText());
         }
-
         if (ipOk && !fichierOk) {
             //Client.creerLiaisonServeur(adresseIpServeur.getText(), 6666);
             partageFichier();
         } else {
             Alert messageErreur = new Alert(AlertType.ERROR);
-            messageErreur.setContentText("Remplissez les champs et appuyer sur entrée pour valider le champ");
+            messageErreur.setContentText("Tous les champs ne sont pas valides");
             messageErreur.show();
         }
     }

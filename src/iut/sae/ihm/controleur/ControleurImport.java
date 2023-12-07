@@ -64,8 +64,11 @@ public class ControleurImport {
                 new File("fichiers_sauvegarde_partage/"));
 
         // Afficher la boîte de dialogue de choix de fichier
-        origine = fileChooser.showOpenDialog(Lanceur.getStage());
-        fichierAExporter.setText(origine.getAbsolutePath());
+        File fichierSelectionne = fileChooser.showOpenDialog(Lanceur.getStage());
+        if (fichierSelectionne != null) {
+        	origine = fichierSelectionne;
+        	fichierAExporter.setText(origine.getAbsolutePath());
+        }
     }
 
     @FXML

@@ -75,7 +75,7 @@ public class ControleurGestionDonnees {
                 } else {
                     Alert erreur = new Alert(AlertType.WARNING);
                     erreur.setContentText(
-                            "Vous ne pouvez pas modifier la categorie Général");
+                            "Vous ne pouvez pas modifier la catégorie Général");
                     erreur.showAndWait();
                 }
 
@@ -105,8 +105,8 @@ public class ControleurGestionDonnees {
                         // affiche l'alert si la catégorie n'est pas vide
                         Alert confirmation = new Alert(AlertType.CONFIRMATION);
                         confirmation.setContentText(
-                                "La categorie contien des question."
-                                + "\nCette action les suprimeras aussi.");
+                                "La categorie contient des questions."
+                                + "\nCette action les supprimera aussi.");
                         Optional<ButtonType> result = 
                                 confirmation.showAndWait();
                         /* si l'utilisateur clique sur ok, 
@@ -121,7 +121,7 @@ public class ControleurGestionDonnees {
                 } else {
                     Alert erreur = new Alert(AlertType.WARNING);
                     erreur.setContentText(
-                            "Vous ne pouvez pas suprimer la categorie Général");
+                            "Vous ne pouvez pas supprimer la catégorie Général");
                     erreur.showAndWait();
                 }
             }
@@ -145,7 +145,7 @@ public class ControleurGestionDonnees {
             // creation du menuButton de modification
             MenuButton btnModifierCategorie = new MenuButton("Gérer");
             MenuItem menuItemModifier = new MenuItem("Modifier");
-            MenuItem menuItemSuprimer = new MenuItem("Suprimer");
+            MenuItem menuItemSuprimer = new MenuItem("Supprimer");
 
             // la categorie est mise en parametre des menuItem
             menuItemModifier.setUserData(item);
@@ -172,7 +172,7 @@ public class ControleurGestionDonnees {
                     // ajout du btn de modification de question
                     MenuButton btnModifierQuestion = new MenuButton("Gérer");
                     MenuItem menuItemModifier = new MenuItem("Modifier");
-                    MenuItem menuItemSuprimer = new MenuItem("Suprimer");
+                    MenuItem menuItemSuprimer = new MenuItem("Supprimer");
                     // ajout de la question dans les menuItems
                     menuItemModifier.setUserData(laQuestion);
                     menuItemSuprimer.setUserData(laQuestion);
