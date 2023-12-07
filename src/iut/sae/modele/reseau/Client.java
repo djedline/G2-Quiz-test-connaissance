@@ -79,6 +79,7 @@ public class Client {
 	        int gA = Integer.parseInt(msgGA);
 	        
 	        int b = DiffieHellman.genererX();
+	        System.out.println("Valeur de B : " + b);
 	        int gB = DiffieHellman.calculMisePuissance(g, b, p);
 	        Thread.sleep(1000);
 	        System.out.println("Envoi de GB : ");
@@ -106,7 +107,8 @@ public class Client {
     	}
     	br.close();
     	
-    	String fichEncode = Cryptage.chiffrer(contenuFich, Integer.toString(cle));
+    	Integer[] offset = Cryptage.convertirValeurEnOffset(cle);
+    	String fichEncode = Cryptage.chiffrer(contenuFich, offset);
     	util.envoyerMessage(fichEncode);
     }
     

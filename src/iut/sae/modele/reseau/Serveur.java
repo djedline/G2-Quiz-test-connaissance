@@ -74,6 +74,8 @@ public class Serveur {
         
         
         int b = DiffieHellman.genererX();
+        System.out.println("Valeur de B : " + b);
+        
         String msgGB = Integer.toString(
         		DiffieHellman.calculMisePuissance(g, b, p));
         Thread.sleep(1000);

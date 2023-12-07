@@ -99,6 +99,7 @@ public class ControleurServeur {
      */
     public void gestionServeur() {
     	boolean connexionEtablie;
+    	String message = "";
         try {
             serveurPartage = new Serveur();
             connexionEtablie = serveurPartage.accepterConnexion(30); // Attendre 30 secondes au maximum
@@ -107,21 +108,29 @@ public class ControleurServeur {
             	int cle = serveurPartage.envoiDonneesInitiale();
             	Integer[] offset = Cryptage.convertirValeurEnOffset(cle);
 	            Thread.sleep(1000);
-	            String message = serveurPartage.receptionFichier(offset);
-	            if (message != null && !message.isBlank()) {
-	            	ImportExport.importer(message);
-	            	new Alert(AlertType.INFORMATION, 
-		            		"L'import de questions s'est correctement déroulé.")
-		            		.show();
-	            }
+	            message = serveurPartage.receptionFichier(offset);
             } else {
-            	new Alert(AlertType.ERROR, "La connexion n'a pas pu être établie dans le délai spécifié.").show();
+            	new Alert(AlertType.ERROR, "La connexion n'a pas pu être établie"
+            			+ " dans le délai spécifié.").show();
             }
             
         } catch (Exception e) {
         	new Alert(AlertType.ERROR, e.getMessage()).show();
         } finally {
         	serveurPartage.fermetureServeur();
+        }
+        
+        try {
+	        if (message != null && !message.isBlank()) {
+	        	ImportExport.importer(message);
+	        	new Alert(AlertType.INFORMATION, 
+	            		"L'import de questions s'est correctement déroulé.")
+	            		.show();
+	        }
+        } catch (IOException e) {
+        	new Alert(AlertType.INFORMATION, 
+            		"Impossible d'importer les questions, fichier invalide.")
+            		.show();
         }
     }
     

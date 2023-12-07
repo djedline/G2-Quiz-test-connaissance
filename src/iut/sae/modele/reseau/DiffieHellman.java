@@ -45,7 +45,8 @@ public class DiffieHellman {
     	boolean generateurValide;
     	int nbDoublons = 0;
         do {
-        	dejaFaits.sort((o1, o2) -> (o1.compareTo(o2)));
+        	// range la liste dans l'ordre croissant
+        	dejaFaits.sort((o1, o2) -> (o1.compareTo(o2))); 
         	if(nbDoublons > p / 2) {
         		g = trouverEntierManquant(dejaFaits, MAX_G);
         	} else {
@@ -59,17 +60,19 @@ public class DiffieHellman {
             	dejaFaits.add(g);
                 generateurValide = isGenerateur(g, p);
             }
-            try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
         } while (!generateurValide && g < p);
         return g;
     }
     
-    public static int trouverEntierManquant(ArrayList<Integer> liste, int max) {
+    /**
+     * Cherche les entiers manquants dans une liste allant de 1 à {@code max}
+     * et renvoie le premier dans l'ordre croissant n'apparaissant pas.
+     * @param liste la liste où l'on cherche les valeurs
+     * @param max le nombre maximum où s'arrête la liste
+     * @return renvoie le premier entier absent de la liste 
+     * trouvé dans l'ordre croissant n'apparaissant pas
+     */
+    private static int trouverEntierManquant(ArrayList<Integer> liste, int max) {
     	boolean existe = false;
     	int entier = 0;
     	do {
@@ -99,7 +102,7 @@ public class DiffieHellman {
      * @return le nombre passé en paramètre à la puissance rentré
      */
     public static int calculMisePuissance(int nombre, int puissance, int modulo) {
-        return (int) Math.pow(nombre, puissance) % modulo;
+        return (int) puissanceModulo(nombre, puissance, modulo);
     }
 
     /**
@@ -138,17 +141,24 @@ public class DiffieHellman {
     	} 
     }
     
-    public static int puissanceModulo(int nombreDepart, int puissance, int modulo) {
+    /**
+     * Calcule une puissance avec un modulo
+     * @param nombre le nombre à passer en puissance
+     * @param puissance la puissance à laquelle on veut l'élever
+     * @param modulo le modulo auquel on effectue le calcul
+     * @return nombre, élevé à puissance, au modulo modulo
+     */
+    public static int puissanceModulo(int nombre, int puissance, int modulo) {
     	if (puissance < 0) {
     		throw new IllegalArgumentException("Cette fonction ne prend pas en "
     				+ "charge les valeurs négatives.");
     	} else if (puissance == 0) {
     		return 1;
     	} else if (puissance == 1){
-    		return nombreDepart;
+    		return nombre;
     	} else {
-        	int res = (nombreDepart * nombreDepart) % modulo;
-        	return puissanceModulo(nombreDepart, res, puissance - 1, modulo);
+        	int res = (nombre * nombre) % modulo;
+        	return puissanceModulo(nombre, res, puissance - 1, modulo);
     	} 
     }
 
