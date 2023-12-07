@@ -108,10 +108,12 @@ public class ControleurServeur {
             	Integer[] offset = Cryptage.convertirValeurEnOffset(cle);
 	            Thread.sleep(1000);
 	            String message = serveurPartage.receptionFichier(offset);
-	            ImportExport.importer(message);
-	            new Alert(AlertType.INFORMATION, 
-	            		"L'import de questions s'est correctement déroulé.")
-	            		.show();
+	            if (message != null && !message.isBlank()) {
+	            	ImportExport.importer(message);
+	            	new Alert(AlertType.INFORMATION, 
+		            		"L'import de questions s'est correctement déroulé.")
+		            		.show();
+	            }
             } else {
             	new Alert(AlertType.ERROR, "La connexion n'a pas pu être établie dans le délai spécifié.").show();
             }

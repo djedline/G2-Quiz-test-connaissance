@@ -35,25 +35,6 @@ public class Client {
      */
     private ReseauUtils util;
 
-    /*
-     * Méthode de test des sockets.
-     * 
-     * @param args
-     *
-    public static void main(String[] args) {
-        try {
-            Scanner sc = new Scanner(System.in);
-            creerLiaisonServeur("10.2.14.31", 6666);
-            String reponse = "";
-            //reponse = recevoirEtAnalyser();
-            envoyerReponse(reponse);
-            fermerSocket();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
-
-
     /**
      * @param host l'adresse ou le nom du serveur
      * @param port le port du serveur

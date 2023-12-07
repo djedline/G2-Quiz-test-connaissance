@@ -5,6 +5,7 @@
 package iut.sae.modele.reseau;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Classe qui permet de reproduire un échange de Diffie-Hellman pour générer une
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  */
 public class DiffieHellman {
 
-    private static final int MAX_P = Cryptage.TAILLE_ENSEMBLE * 2;
+    private static final int MAX_P = 109;
 
     /**
      * Méthode qui permet de générer aléatoirement le modulo de l'échange
@@ -41,19 +42,51 @@ public class DiffieHellman {
     public static int genererGenerateur(int p) {
     	ArrayList<Integer> dejaFaits = new ArrayList<>();
     	final int MAX_G = p - 1;
-    	int g;
+    	int g=1;
     	boolean doublon;
-    	int i = 1;
+    	boolean generateurValide;
+    	int nbDoublons = 0;
         do {
-            g = (int) (1 + Math.random() * (MAX_G - 1));
+        	g++;
+        	dejaFaits.sort((o1, o2) -> (o1.compareTo(o2)));
+        	/*
+        	if(nbDoublons > p / 2) {
+        		g = trouverEntierManquant(dejaFaits, MAX_G);
+        	} else {
+        		g = (int) (1 + Math.random() * (MAX_G - 1));
+        	}
+        	*/
             doublon = dejaFaits.contains(g);
-            dejaFaits.add(g);
-            if (dejaFaits.size() > 100) {
-            	g = p - 1;
+            if (doublon) {
+            	generateurValide = false;
+            	nbDoublons++;
+            } else {
+            	dejaFaits.add(g);
+                generateurValide = isGenerateur(g, p);
             }
-            if (doublon) {System.out.println(g + " est doublon");} else {System.out.println(g + " n'est pas doublon");}
-        } while (!isGenerateur(g, p));
+            try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } while (!generateurValide && g < p);
+        System.out.println(g + " est un générateur dans Z/" + p + "Z.");
         return g;
+    }
+    
+    public static int trouverEntierManquant(ArrayList<Integer> liste, int max) {
+    	boolean existe = false;
+    	int entier = 0;
+    	do {
+    		entier++;
+    		existe = liste.contains(entier);
+    	} while (existe && entier < max);
+    	if (entier == max) {
+    		System.out.println("Max atteint modulo " + (max + 1) + ".");
+    	}
+    	System.out.println(entier + " n'a pas été testé modulo " + (max + 1) + ".");
+    	return entier;
     }
 
     /**
@@ -93,9 +126,12 @@ public class DiffieHellman {
         /** L'ensemble des valeurs dans ℤ/pℤ */
         for (int j = 1; j < p - 1; j++) {
             int valeurValide = (int) ((Math.pow(g, j)) % p); // Récupère la valeur (g, g², etc) % p
+            System.out.println(g + "^" + j + " = " + valeurValide);
             if (!valeurGValide.contains(valeurValide)) { // Vérifie si le chiffre obtenu n'est pas déja présent
                 valeurGValide.add(valeurValide);
+                //System.out.println("Je rajoute " + valeurValide);
             } else {
+            	System.out.println("Je sors parce que " + valeurValide + " est un doublon.");
                 return false;
             }
         }
@@ -109,11 +145,16 @@ public class DiffieHellman {
      * @return Vrai ou Faux selon si le nombre est premier ou non
      */
     public static boolean isPremier(int p) {
-        for (int i = 2; i < Math.sqrt(p); i++) {
-            if (p % i == 0 && p != 1) {
+    	if (p == 1) {
+    		return false;
+    	}
+        for (int i = 1; i <= Math.floor(Math.sqrt(p)); i++) {
+            if (p % i == 0 && i != 1) {
+            	System.out.println(p + " n'est pas premier.");
                 return false;
             }
         }
+        System.out.println(p + " est premier.");
         return true;
     }
 }

@@ -50,7 +50,7 @@ public class Cryptage {
      * @return la clé
      */
     public static String genereCleDiffie() {
-        int p = DiffieHellman.genererModulo();
+        int p = 43;
         int g = DiffieHellman.genererGenerateur(p);
         int x = DiffieHellman.genererX();
         int x1 = DiffieHellman.genererX();
