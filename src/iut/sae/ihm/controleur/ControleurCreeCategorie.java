@@ -21,8 +21,11 @@ import static iut.sae.modele.fonctionAffichage.insertionDansString;
 
 /**
  * Controleur de la page creerCategorie
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class ControleurCreeCategorie {

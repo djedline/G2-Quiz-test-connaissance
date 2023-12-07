@@ -10,9 +10,11 @@ import iut.sae.modele.Categorie;
 
 /**
  * Utilisation de la classe Catégorie et test de ses méthodes
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class TestCategorie {
@@ -29,7 +31,7 @@ public class TestCategorie {
          * Test du constructeur en cas d'erreur imprévu du programme
          */
         try {
-            Categorie nouvelleCategorie1 = new Categorie("Java");
+            new Categorie("Java");
             System.out.println("Test 1 OK");
         } catch (IllegalArgumentException erreurProgramme) {
             System.out.print("Le programme a eu une erreur");
@@ -40,7 +42,7 @@ public class TestCategorie {
          * catégorie vide
          */
         try {
-            Categorie nouvelleCategorie2 = new Categorie("");
+            new Categorie("");
             System.out.println("Attention : aucune erreur n'a été renvoyé");
         } catch (IllegalArgumentException erreurLibelle) {
             System.out.println("Test 2 OK");
@@ -51,7 +53,7 @@ public class TestCategorie {
          * catégorie rempli d'espace
          */
         try {
-            Categorie nouvelleCategorie3 = new Categorie("          ");
+            new Categorie("          ");
             System.out.println("Attention : aucune erreur n'a été renvoyé");
         } catch (IllegalArgumentException erreurLibelle) {
             System.out.println("Test 3 OK");
@@ -73,7 +75,6 @@ public class TestCategorie {
 
     /**
      * Programme principal
-     * 
      * @param args argument non utilisé
      */
     public static void main(String[] args) {

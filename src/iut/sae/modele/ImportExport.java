@@ -17,9 +17,11 @@ import java.util.regex.Pattern;
 /**
  * Utilise le format CSV (séparateur ";", encodage UTF-8) avec la structure
  * indiquée par {@code #NOM_COLONNE}
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class ImportExport {
@@ -50,9 +52,11 @@ public class ImportExport {
 
     /**
      * Envoie la listes des questions choisies par l'utilisateur dans un fichier
-     * @param aEcrire
-     * @param selectionnees
-     * @throws IOException
+     * @param aEcrire fichier à remplir
+     * @param selectionnees listes des questions
+     * @throws IOException lorsque le fichier ou dossier n'est pas trouvé
+     * @throws IllegalArgumentException si le fichier référencé est null
+     * 									si la liste de question est null
      */
     public static void exporter(File aEcrire, List<Question> selectionnees) 
             throws IOException {
@@ -86,6 +90,9 @@ public class ImportExport {
         fw.close();
     }
 
+    /**
+     * @return l'en-tête du fichier csv
+     */
     private static String produireEntete() {
         StringBuilder s = new StringBuilder();
         for (String nom : NOM_COLONNE) {
@@ -100,16 +107,16 @@ public class ImportExport {
      * Met un texte entre guillemets si le contenu de la string comporte des
      * caractères spéciaux
      * 
-     * @param s la string à modifier
+     * @param chaine la string à modifier
      * @return la string formatée
      */
-    private static String formater(String s) {
+    private static String formater(String chaine) {
         Pattern pat = Pattern.compile(
                 "[" + NEW_LINE + DELIMITEUR + GUILLEMET + "]");
-        Matcher mat = pat.matcher(s);
+        Matcher mat = pat.matcher(chaine);
         if (mat.find()) {
             StringBuilder nvString = new StringBuilder();
-            for (char c : s.toCharArray()) {
+            for (char c : chaine.toCharArray()) {
                 if (c == GUILLEMET) {
                     nvString.append(c); // dédoubler
                 }
@@ -117,7 +124,7 @@ public class ImportExport {
             }
             return GUILLEMET + nvString.toString() + GUILLEMET;
         } else {
-            return s;
+            return chaine;
         }
     }
 
@@ -150,7 +157,6 @@ public class ImportExport {
 
     /**
      * Récupère l'ensemble des questions contenues dans un fichier CSV.
-     * 
      * @param chemin le chemin du fichier à importer
      * @throws IOException s'il est impossible de l'importer
      */
@@ -245,7 +251,6 @@ public class ImportExport {
 
     /**
      * Vérifie que toutes les colonnes d'une ligne sont vides
-     * 
      * @param colonnes les valeurs à vérifier
      * @return true si les colonnes sont toutes vides, false sinon
      */
@@ -257,6 +262,11 @@ public class ImportExport {
         return tousVides;
     }
 
+    /**
+     * Analyse la catégorie importé et la renvoie
+     * @param catImportee nom de la catégorie
+     * @return la catégorie créé
+     */
     private static Categorie analyserCategorieImport(String catImportee) {
         catImportee = catImportee.strip();
         // ajoute la catégorie si elle existe
@@ -284,8 +294,8 @@ public class ImportExport {
     }
     
     /**
-     * 
-     * @param texte
+     * Texte qui doit être découper en ligne
+     * @param texte que l'on doit découper
      * @return les lignes
      */
     public static String[] decouperLignes(String texte) {

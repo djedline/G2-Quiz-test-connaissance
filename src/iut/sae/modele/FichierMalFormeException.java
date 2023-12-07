@@ -7,10 +7,12 @@ package iut.sae.modele;
 import java.io.IOException;
 
 /**
- * Classe d'exception sur un fichier mal formé
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * Exception qui se lève lorsqu'un fichier est mal formé
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class FichierMalFormeException extends IOException {
@@ -20,11 +22,10 @@ public class FichierMalFormeException extends IOException {
 
     /**
      * Constructeur avec un message d'erreur
-     * 
-     * @param string
+     * @param messageErreur message qui s'affiche lorsque l'erreur est levé
      */
-    public FichierMalFormeException(String string) {
-        super(string);
+    public FichierMalFormeException(String messageErreur) {
+        super(messageErreur);
     }
 
     /**

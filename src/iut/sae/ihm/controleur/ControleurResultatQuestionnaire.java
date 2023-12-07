@@ -15,9 +15,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /** 
- * Controleur de la classe resultat du questionnaire apres l'avoir fait
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * Affiche le resultat du questionnaire remplit
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  */
 public class ControleurResultatQuestionnaire {
 
