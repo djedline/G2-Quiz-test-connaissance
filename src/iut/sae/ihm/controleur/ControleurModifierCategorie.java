@@ -16,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
+import static iut.sae.modele.Donnees.getQuestionOfCategorie;
+
 /**
  * Controleur de la page pour la modification de catégories
  * @author leila.baudroit
@@ -47,6 +49,20 @@ public class ControleurModifierCategorie {
 
     private Categorie laCategorie;
 
+    @FXML
+    private Label labelRetourUtilisateur;
+    
+    private String textRetourUtilisateur = "Votre nom est maintenant :";
+    
+    /**
+     * TODO comment method role
+     * 
+     */
+    @FXML
+    void initialize() {
+        labelRetourUtilisateur.setVisible(false);;
+    }
+    
     /**
      * Méthode permettant de modifier les arguments d'une catégorie
      * 
@@ -64,6 +80,7 @@ public class ControleurModifierCategorie {
             if (!Donnees.verifNomCategorie(idNom.getText())) {
                 laCategorie.setTitreCat(idNom.getText());
                 System.out.println(laCategorie);
+                System.out.println(getQuestionOfCategorie(laCategorie.getLibelle()));
                 EchangeurDeVue.echangerAvec(
                         EnsembleDesVues.VUE_GESTION_DONNEES);
             } else {
