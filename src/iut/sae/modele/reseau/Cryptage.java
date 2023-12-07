@@ -55,8 +55,8 @@ public class Cryptage {
         int g = DiffieHellman.genererGenerateur(p);
         int x = DiffieHellman.genererX();
         int x1 = DiffieHellman.genererX();
-        int gx = DiffieHellman.calculMisePuissance(g, x, p);
-        int gxe = DiffieHellman.calculMisePuissance(gx, x1, p);
+        int gx = DiffieHellman.puissanceModulo(g, x, p);
+        int gxe = DiffieHellman.puissanceModulo(gx, x1, p);
         Integer[] cle = convertirValeurEnOffset(gxe);
         System.out.println("Clé : " + contenuCle(cle) + " de longueur " + cle.length);
         return cle;

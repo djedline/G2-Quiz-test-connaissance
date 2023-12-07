@@ -77,7 +77,7 @@ public class Serveur {
         System.out.println("Valeur de B : " + b);
         
         String msgGB = Integer.toString(
-        		DiffieHellman.calculMisePuissance(g, b, p));
+        		DiffieHellman.puissanceModulo(g, b, p));
         Thread.sleep(1000);
         System.out.println("Envoi de GB : ");
         util.envoyerMessage(msgGB);
@@ -86,7 +86,7 @@ public class Serveur {
         String msgGA = util.reception();
         try {
         	int gA = Integer.parseInt(msgGA);
-        	int cle = DiffieHellman.calculMisePuissance(gA, b, p);
+        	int cle = DiffieHellman.puissanceModulo(gA, b, p);
         	System.out.println("Clé générée : " + cle);
             return cle;
         } catch (NumberFormatException e) {

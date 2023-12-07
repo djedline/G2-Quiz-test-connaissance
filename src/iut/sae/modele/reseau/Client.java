@@ -80,12 +80,12 @@ public class Client {
 	        
 	        int b = DiffieHellman.genererX();
 	        System.out.println("Valeur de B : " + b);
-	        int gB = DiffieHellman.calculMisePuissance(g, b, p);
+	        int gB = DiffieHellman.puissanceModulo(g, b, p);
 	        Thread.sleep(1000);
 	        System.out.println("Envoi de GB : ");
 	        util.envoyerMessage(Integer.toString(gB));
 	        
-	        int cle = DiffieHellman.calculMisePuissance(gA, b, p);
+	        int cle = DiffieHellman.puissanceModulo(gA, b, p);
 	        System.out.println("Clé générée : " + cle);
 	        return cle;
         } catch (NumberFormatException e) {
