@@ -6,12 +6,14 @@
 package iut.sae.ihm.view;
 
 /**
- * Classe outil qui établit la correspondance entre un code de vue (sous la
+ * Outil qui établit la correspondance entre un code de vue (sous la
  * forme d'un entier) et le nom du fichier fxml contenant la vue associée à ce
  * code.
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class EnsembleDesVues {

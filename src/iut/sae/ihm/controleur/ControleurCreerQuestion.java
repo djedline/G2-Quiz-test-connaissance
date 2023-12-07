@@ -23,9 +23,11 @@ import iut.sae.modele.Question;
 
 /**
  * Classe controleur de la page creerQuestion
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  */
 public class ControleurCreerQuestion {
 

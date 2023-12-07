@@ -25,9 +25,11 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
  * Classe controleur de la page Partager
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class ControleurPartager {
@@ -59,16 +61,19 @@ public class ControleurPartager {
     @FXML
     private Button parcourir;
 
-    boolean allumageOk = false;
-
+    /** Permet de vérifier si la chaine entrée dans adresseIpServeur est juste */
     private boolean ipOk;
+    
+    /** Permet de vérifier si un fichier a été sélectionné */
     private boolean fichierOk;
+    
+    /** Crée un client pour le partage */
     private Client clientPartage;
 
     private File origine = new File("fichiers_sauvegarde_partage/");
     
     /** 
-     * Initialise la liste déroulante
+     * Initialise le label et les boolean de confirmation
      */
     @FXML
     void initialize() {
@@ -79,6 +84,11 @@ public class ControleurPartager {
     }
 
     @FXML
+    /**
+     * Ouvre une fenetre qui permet à l'utilisateur de sélectionner un fichier 
+     * depuis l'xplorateur fichier
+     * @param event quand le bouton parcourir est cliqué
+     */
     void chercherFichier(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         // Ajout d'un filtre pour ne montrer que certains fichiers
@@ -99,6 +109,12 @@ public class ControleurPartager {
     }
     
     @FXML
+    /**
+     * Vérifie la chaine entrée 
+     * Affiche un message d'erreur si la chaine n'est pas une adresse Ip
+     * Enlève le message d'erreur quand la chaine est correcte
+     * @param event quand une touche est enfoncé
+     */
     void verifIp(KeyEvent event) {
          // pour que le nombre soit de 0 à 255
         Pattern motif = Pattern.compile(
@@ -138,6 +154,10 @@ public class ControleurPartager {
     }
 
     @FXML
+    /** 
+     * Vérifie si tous les champs sont correctement remplis 
+     * et lance le partage de fichier 
+     */
     void clicValider(ActionEvent event) {
         fichierOk = fichier.getText().equals("-- Aucun fichier sélectionnée --");
         if (fichierOk) {
@@ -158,6 +178,7 @@ public class ControleurPartager {
     }
     
     @FXML
+    /** Retour sur le menu précédent*/
     void clicQuitter(ActionEvent event) {
         EchangeurDeVue.echangerAvec(EnsembleDesVues.VUE_GESTION_IMPEXP);
     }

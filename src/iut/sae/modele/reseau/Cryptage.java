@@ -12,9 +12,11 @@ package iut.sae.modele.reseau;
 /**
  * Classe qui permet le cryptage d'un message grâce à la génération d'une clé
  * puis le décryptage de ce même message
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class Cryptage {

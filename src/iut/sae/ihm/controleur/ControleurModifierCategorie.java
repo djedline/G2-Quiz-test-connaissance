@@ -18,9 +18,11 @@ import javafx.scene.layout.Pane;
 
 /**
  * Controleur de la page pour la modification de catégories
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class ControleurModifierCategorie {

@@ -29,9 +29,11 @@ import javafx.scene.control.TreeView;
 
 /**
  * Controleur de la scène GestionDonnees
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class ControleurGestionDonnees {
