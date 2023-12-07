@@ -56,8 +56,12 @@
 
 .tree-view, .tree-cell {
     -fx-background-color: rgb(60,60,60) ;
+    -fx-text-fill: white;
 }
 
+.tree-cell:hover{
+	-fx-text-fill: black;
+}
 
 .tree-cell:expanded {
     -fx-background-color: #404040 ;
@@ -182,6 +186,15 @@
 	-fx-padding: 0 10 0 10;
 }
 
+.tab-pane .tab:hover{
+	-fx-background-color: rgb(60,60,60);
+	-fx-background-insets: 0 0 0 0;
+}
+
+.tab:hover .tab-label { 
+ 	-fx-text-fill: white;
+}
+
 .tab:selected .tab-label { 
  	-fx-text-fill: white;
 }
@@ -191,6 +204,8 @@
 	-fx-background-insets: 0 0 0 0;
 
 }
+
+
 
 .tab-pane:top *.tab-header-area {
 	-fx-padding: 5 0 0 0;
@@ -210,4 +225,21 @@
  	-fx-border-width: 0;
 	-fx-border-insets: 5 0 0 0;
 	-fx-border-radius: 5;
+}
+
+.check-box{
+	-fx-text-fill: white;
+}
+
+
+.check-box > .box{
+	-fx-background-color: rgb(80, 80, 80);
+}
+
+.check-box:selected > .box > .mark {
+    -fx-background-color: white;
+}
+
+.labelCreation{
+	-fx-text-fill: rgb(51,196,56);
 }

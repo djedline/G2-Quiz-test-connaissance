@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 /**
  * Centralise les données de l'application avec sa persistence.
- * 
- * @author djedline.boyer Centralise les données de l'application.
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class Donnees {

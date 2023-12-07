@@ -29,9 +29,11 @@ import javafx.scene.control.TreeView;
 
 /**
  * Controleur de la scène GestionDonnees
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class ControleurGestionDonnees {
@@ -168,7 +170,7 @@ public class ControleurGestionDonnees {
                 // on recupere la categorie
                 Categorie cat = leTreeItem.getValue().getCategorie();
                 // si la categorie et la categorie de la question sont la meme
-                if (cat.toString().equals(laQuestion.getCategorie().toString())) {
+                if (cat.getLibelle().equals(laQuestion.getCategorie().toString())) {
                     // ajout du btn de modification de question
                     MenuButton btnModifierQuestion = new MenuButton("Gérer");
                     MenuItem menuItemModifier = new MenuItem("Modifier");

@@ -24,10 +24,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 /**
- * Classe controleur de la page Serveur
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * Permet de démarrer un serveur pour recevoir un fichier partager
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class ControleurServeur {
@@ -57,7 +59,7 @@ public class ControleurServeur {
     // boolean allumageOk = false;
 
     /**
-     * Initialise la liste déroulante
+     * Affiche l'adresse ip du serveur
      */
     @FXML
     void initialize() {

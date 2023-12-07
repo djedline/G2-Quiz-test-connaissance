@@ -13,9 +13,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 /**
- * TODO comment class responsibility (SRP)
- * 
- * @author Nael Briot
+ * Permet de garder une trace dans un fichier de toute les opérations effectués
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  *
  */
 public class Persistance {

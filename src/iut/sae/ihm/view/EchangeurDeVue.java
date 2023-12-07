@@ -19,11 +19,12 @@ import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 
 /**
- * Classe permettant l'échange entre les vues affichées par la scène de
- * l'application
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * Permet l'échange entre les vues affichées par la scène de l'application
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class EchangeurDeVue {

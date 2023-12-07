@@ -3,6 +3,9 @@
  */
 package iut.sae.ihm.controleur;
 
+import static iut.sae.modele.fonctionAffichage.btnRetourUtilisateur;
+import static iut.sae.modele.fonctionAffichage.insertionDansString;
+
 import iut.sae.ihm.view.EchangeurDeVue;
 import iut.sae.ihm.view.EnsembleDesVues;
 import iut.sae.modele.Donnees;
@@ -17,9 +20,11 @@ import javafx.scene.layout.Pane;
 
 /**
  * Controleur de la page pour la modification de catégories
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class ControleurModifierNomUtilisateur {
@@ -43,11 +48,27 @@ public class ControleurModifierNomUtilisateur {
     private Label idLabelNom;
 
     @FXML
+    private Label labelRetourUtilisateur;
+    
+    private String textRetourUtilisateur = "Votre nom est maintenant :";
+    
+    /**
+     * TODO comment method role
+     * 
+     */
+    @FXML
+    void initialize() {
+        labelRetourUtilisateur.setVisible(false);;
+    }
+    
+    @FXML
     void clicCreer(ActionEvent event) {
         try {
 
             if (!idNom.getText().isBlank()) {
                 Donnees.setNomUtilisateur(idNom.getText());
+                
+                btnRetourUtilisateur(labelRetourUtilisateur,textRetourUtilisateur + idNom.getText());
                 System.out.println(idNom.getText());
             } else {
                 throw new IllegalArgumentException();

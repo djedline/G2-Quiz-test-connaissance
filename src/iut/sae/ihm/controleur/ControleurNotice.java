@@ -7,8 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
-/** TODO comment class responsibility (SRP)
- * @author catal
+/** 
+ * Permet d'afficher la notice de l'application
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  *
  */
 public class ControleurNotice {

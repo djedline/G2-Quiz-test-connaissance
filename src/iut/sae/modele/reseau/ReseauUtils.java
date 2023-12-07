@@ -11,8 +11,12 @@ import java.net.Socket;
 import java.nio.charset.Charset;
 
 /** 
- * Fonction utilitaire qui permette de tout récupére facilement
+ * Fonction utilitaire qui permette de tout récupérer facilement
+ * @author leila.baudroit
  * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  *
  */
 public class ReseauUtils {

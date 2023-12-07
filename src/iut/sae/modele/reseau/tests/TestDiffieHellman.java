@@ -8,6 +8,15 @@ import static iut.sae.modele.reseau.DiffieHellman.isPremier;
 import static iut.sae.modele.reseau.DiffieHellman.isGenerateur;
 import static iut.sae.modele.reseau.DiffieHellman.puissanceModulo;
 
+/**
+ * Utilisation de la classe Diffie-Hellman et test de ses méthodes
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
+ * @version 1.0
+ */
 class TestDiffieHellman {
 
 	@Test
@@ -45,5 +54,4 @@ class TestDiffieHellman {
 		assertEquals(20, puissanceModulo(20, 1, 30));
 		assertEquals(10, puissanceModulo(20, 2, 30));
 	}
-
 }

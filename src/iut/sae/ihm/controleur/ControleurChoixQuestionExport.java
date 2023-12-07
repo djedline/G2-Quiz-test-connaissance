@@ -29,9 +29,11 @@ import javafx.scene.control.cell.CheckBoxTreeCell;
 
 /**
  * Controleur de la scène ChoixQuestionExport
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class ControleurChoixQuestionExport {
@@ -60,6 +62,7 @@ public class ControleurChoixQuestionExport {
             // crée et ajoute le treeitem de catégorie
             CustomCheckboxTreeItem<Object> checkable = new CustomCheckboxTreeItem<>(item);
             checkable.setValue(item);
+            
             listeTreeItem.add(checkable);
 
             for (Question laQuestion : Donnees.listeQuestions) {

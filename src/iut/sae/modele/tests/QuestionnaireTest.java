@@ -16,9 +16,11 @@ import iut.sae.modele.Questionnaire;
 
 /**
  * Test Unitaire de la Classe Questionnaire.java dans "iut.sae.modele"
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  */
 class QuestionnaireTest {
 
