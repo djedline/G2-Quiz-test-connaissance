@@ -18,22 +18,7 @@ import java.util.ArrayList;
  */
 public class DiffieHellman {
 
-    /*
-     * Variable contenant la valeur de p, le modulo pour l'échange de données
-     */
-    private static int p;
-
-    /*
-     * Variable contenant le générateur échangé par le serveur et le client en clair
-     */
-    private static int g;
-
-    /* Variable contenant le chiffre qui sert de premier exposant */
-    private static int x;
-
-    private static final int MAX_P = 1000000;
-
-    private static int MAX_G;
+    private static final int MAX_P = 5000;
 
     /**
      * Méthode qui permet de générer aléatoirement le modulo de l'échange
@@ -41,23 +26,62 @@ public class DiffieHellman {
      * @return p le chiffre qui sert de modulo
      */
     public static int genererModulo() {
+    	int p;
         do {
-            p = (int) (Math.random() * MAX_P);
+            p = (int) ( 1 + Math.random() * (MAX_P - 1));
         } while (!isPremier(p));
-        MAX_G = p - 1;
         return p;
     }
 
     /**
      * Méthode qui permet de générer aléatoirement g
      * 
+     * @param p la modulo auquel on fait le calcul
      * @return g le générateur échangé par le client et le serveur
      */
-    public static int genererGenerateur() {
+    public static int genererGenerateur(int p) {
+    	ArrayList<Integer> dejaFaits = new ArrayList<>();
+    	final int MAX_G = p - 1;
+    	int g;
+    	boolean doublon;
+    	boolean generateurValide;
+    	int nbDoublons = 0;
         do {
-            g = (int) (1 + Math.random() * MAX_G - 1);
-        } while (!isGenerateur(g) && !isPremier(g));
+        	// range la liste dans l'ordre croissant
+        	dejaFaits.sort((o1, o2) -> (o1.compareTo(o2))); 
+        	if(nbDoublons > p / 2) {
+        		g = trouverEntierManquant(dejaFaits, MAX_G);
+        	} else {
+        		g = (int) (1 + Math.random() * (MAX_G - 1));
+        	}
+            doublon = dejaFaits.contains(g);
+            if (doublon) {
+            	generateurValide = false;
+            	nbDoublons++;
+            } else {
+            	dejaFaits.add(g);
+                generateurValide = isGenerateur(g, p);
+            }
+        } while (!generateurValide && g < p);
         return g;
+    }
+    
+    /**
+     * Cherche les entiers manquants dans une liste allant de 1 à {@code max}
+     * et renvoie le premier dans l'ordre croissant n'apparaissant pas.
+     * @param liste la liste où l'on cherche les valeurs
+     * @param max le nombre maximum où s'arrête la liste
+     * @return renvoie le premier entier absent de la liste 
+     * trouvé dans l'ordre croissant n'apparaissant pas
+     */
+    private static int trouverEntierManquant(ArrayList<Integer> liste, int max) {
+    	boolean existe = false;
+    	int entier = 0;
+    	do {
+    		entier++;
+    		existe = liste.contains(entier);
+    	} while (existe && entier < max);
+    	return entier;
     }
 
     /**
@@ -66,75 +90,65 @@ public class DiffieHellman {
      * @return x chiffre qui sert d'exposant
      */
     public static int genererX() {
-        x = (int) (1 + Math.random() * MAX_P - 1);
+        int x = (int) (1 + Math.random() * MAX_P - 1);
         return x;
-    }
-
-    /**
-     * Méthode qui permet de calculer g à la puissance x
-     * 
-     * @param g le générateur échangé par le client et le serveur
-     * @param x chiffre qui sert de premier exposant
-     * @return ga g à la puissance x
-     */
-    public static int calculGX(int g, int x) {
-        int gx;
-        gx = (int) Math.pow(g, x) % p;
-        return gx;
-    }
-
-    /**
-     * Méthode qui permet de calculer gXE
-     * 
-     * @param gx          résultat de g à la puissance x
-     * @param eltArrivant chiffre qui sert de deuxième exposant reçu depuis le
-     *                    serveur ou le client
-     * @return gXE g à la puissance x, à la puissance E (l'élement reçu depuis le
-     *         client ou le serveur
-     */
-    public static int calculGXE(int gx, int eltArrivant) {
-        int gXE;
-        gXE = (int) Math.pow(gx, eltArrivant) % p;
-        return gXE;
-    }
-
-    /**
-     * Méthode qui calcul une mise à la puissance pour un nombre et une puissance
-     * donnée
-     * 
-     * @param nombre    le nombre entré par l'utilisateur
-     * @param puissance la puissance entré par l'utilisateur
-     * @param modulo    le modulo entré par l'utilisateur
-     * @return le nombre passé en paramètre à la puissance rentré
-     */
-    public static int calculMisePuissance(int nombre, int puissance, int modulo) {
-        return (int) Math.pow(nombre, puissance) % modulo;
     }
 
     /**
      * Méthode qui permet de déterminer si g est ou non un générateur du groupe
      * multiplicatif ℤ/pℤ
      * 
-     * @param g
+     * @param g le nombre à vérifier
+     * @param p le modulo auquel on effectue les calculs
      * @return True ou False selon si le nombre choisi est un générateur ou non
      */
-    public static boolean isGenerateur(int g) {
+    public static boolean isGenerateur(int g, int p) {
         /** Ensemble des résultats de g modulo p ( g, g², g³, ..., g) */
         ArrayList<Integer> valeurGValide = new ArrayList<>();
-        /** L'ensemble des valeurs dans ℤ/pℤ */
-        ArrayList<Integer> ensembleP = new ArrayList<>();
-        for (int i = 1; i < p - 1; i++) {
-            ensembleP.add(i);
-        }
+        
         for (int j = 1; j < p - 1; j++) {
-            int valeurValide = (int) ((Math.pow(g, j)) % p); // Récupère la valeur (g, g², etc) % p
+            int valeurValide = (int) puissanceModulo(g, j, p); // Récupère la valeur (g, g², etc) % p
             if (!valeurGValide.contains(valeurValide)) { // Vérifie si le chiffre obtenu n'est pas déja présent
                 valeurGValide.add(valeurValide);
             } else {
                 return false;
             }
         }
-        return (valeurGValide.size() == ensembleP.size()); // Vérifie la taille des 2 ArrayList
+        return true;
+    }
+    
+    private static int puissanceModulo(int nombreDepart, int dernierePuissance, 
+    		int puissance, int modulo) {
+    	if (puissance < 0) {
+    		throw new IllegalArgumentException("Cette fonction ne prend pas en "
+    				+ "charge les valeurs négatives.");
+    	} else if (puissance == 1){
+    		return dernierePuissance;
+    	} else {
+        	int res = (nombreDepart * dernierePuissance) % modulo;
+        	return puissanceModulo(nombreDepart, res, puissance - 1, modulo);
+    	} 
+    }
+    
+    /**
+     * Calcule une puissance avec un modulo
+     * @param nombre le nombre à passer en puissance
+     * @param puissance la puissance à laquelle on veut l'élever
+     * @param modulo le modulo auquel on effectue le calcul
+     * @return nombre, élevé à puissance, au modulo modulo
+     */
+    public static int puissanceModulo(int nombre, int puissance, int modulo) {
+    	if (puissance < 0) {
+    		throw new IllegalArgumentException("Cette fonction ne prend pas en "
+    				+ "charge les valeurs négatives.");
+    	} else if (puissance == 0) {
+    		return 1;
+    	} else if (puissance == 1){
+    		return nombre;
+    	} else {
+        	int res = (nombre * nombre) % modulo;
+        	return puissanceModulo(nombre, res, puissance - 1, modulo);
+    	} 
     }
 
     /**
@@ -144,8 +158,11 @@ public class DiffieHellman {
      * @return Vrai ou Faux selon si le nombre est premier ou non
      */
     public static boolean isPremier(int p) {
-        for (int i = 2; i < Math.sqrt(p); i++) {
-            if (p % i == 0 && p != 1) {
+    	if (p == 1) {
+    		return false;
+    	}
+        for (int i = 1; i <= Math.floor(Math.sqrt(p)); i++) {
+            if (p % i == 0 && i != 1) {
                 return false;
             }
         }

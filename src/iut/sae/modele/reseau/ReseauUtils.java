@@ -40,7 +40,7 @@ public class ReseauUtils {
 
 
     /** TODO comment field role (attribute, association) */
-    public static final int RECEIVE_TIMEOUT = 5;
+    public static final int RECEIVE_TIMEOUT = 10;
 
     /** 
      * Lit les données dans une String depuis la socket tant qu'elles 
@@ -51,10 +51,10 @@ public class ReseauUtils {
      */
     public String reception() throws IOException {
         String strRecu = "";
-        for (int sec = 0 ; sec < RECEIVE_TIMEOUT && !br.ready(); sec++) {
+        for (int sec = 0 ; sec < RECEIVE_TIMEOUT * 2 && !br.ready(); sec++) {
             System.out.println("En attente...");
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
