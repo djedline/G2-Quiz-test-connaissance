@@ -7,7 +7,9 @@ package iut.sae.ihm.controleur;
 import java.io.File;
 import java.net.URL;
 import iut.sae.ihm.view.EchangeurDeVue;
+import iut.sae.modele.Donnees;
 import iut.sae.modele.Persistance;
+import iut.sae.modele.Question;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -84,6 +86,9 @@ public class Lanceur extends Application {
                 .toURL().toExternalForm();
         
         
+        for (Question laQuestion : Donnees.listeQuestions) {
+            laQuestion.setCategorie(Donnees.listeCategorie.get(Donnees.listeCategorie.indexOf(laQuestion.getCategorie())));
+        }
         
         Scene scene = new Scene(parent);
         scene.getStylesheets().add(cssUrl);

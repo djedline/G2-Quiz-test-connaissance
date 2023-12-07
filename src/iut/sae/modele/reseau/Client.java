@@ -127,8 +127,10 @@ public class Client {
             throw new IOException("Impossible de fermer la Socket client.");
         }
     }
-
-	/** TODO comment method role
+	
+        /**
+	 * Envoie un fichier
+         *
 	 * @param fich
 	 * @param offset
 	 * @throws IOException
