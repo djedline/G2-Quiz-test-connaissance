@@ -42,6 +42,8 @@ public class CustomBtn extends HBox {
         this.boxText.setWrapText(true);
         this.getChildren().add(boxText);
         this.setAlignment(Pos.CENTER_LEFT);
+        
+        boxText.getStyleClass().add("labelTreeItem");
     }
 
     /**
@@ -60,6 +62,8 @@ public class CustomBtn extends HBox {
 
         this.getChildren().addAll(boxText, boxButton);
         this.setAlignment(Pos.CENTER_LEFT);
+        
+        boxText.getStyleClass().add("labelTreeItem");
     }
 
     /**
@@ -77,6 +81,8 @@ public class CustomBtn extends HBox {
 
         this.getChildren().addAll(boxText, boxButton);
         this.setAlignment(Pos.CENTER_LEFT);
+        
+        boxText.getStyleClass().add("labelTreeItem");
     }
 
     /**

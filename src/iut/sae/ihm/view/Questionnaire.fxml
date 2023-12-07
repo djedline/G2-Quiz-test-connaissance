@@ -10,8 +10,14 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.sae.ihm.controleur.ControleurQuestionnaire">
    <children>
-      <Button fx:id="idPasser" layoutX="17.0" layoutY="393.0" mnemonicParsing="false" onAction="#actionPasser" prefHeight="40.0" prefWidth="300.0" text="Passer" />
-      <Button fx:id="idValider" layoutX="333.0" layoutY="393.0" mnemonicParsing="false" onAction="#actionValider" prefHeight="40.0" prefWidth="300.0" text="Valider" />
+      <Button fx:id="idPasser" layoutX="17.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#actionPasser" prefHeight="40.0" prefWidth="300.0" text="Passer">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button fx:id="idValider" layoutX="333.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#actionValider" prefHeight="40.0" prefWidth="300.0" styleClass="btnValide" text="Valider">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
       <VBox layoutX="17.0" layoutY="17.0" spacing="10.0">
          <children>
             <ScrollPane hbarPolicy="NEVER" prefHeight="70.0" prefWidth="616.0">
