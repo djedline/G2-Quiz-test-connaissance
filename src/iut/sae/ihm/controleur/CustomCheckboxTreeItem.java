@@ -7,10 +7,12 @@ import iut.sae.modele.Categorie;
 import javafx.scene.control.CheckBoxTreeItem;
 
 /**
- * 
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * Permet de sauvegarder un objet en paramètre
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @param <T> le type de données de l'item
  */
 public class CustomCheckboxTreeItem<T> extends CheckBoxTreeItem<T> {

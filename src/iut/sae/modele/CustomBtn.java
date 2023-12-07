@@ -11,10 +11,12 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.layout.HBox;
 
 /**
- * Classe permettant la création d'un ensemble bouton et item
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * Permet la création d'un ensemble bouton et item
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class CustomBtn extends HBox {

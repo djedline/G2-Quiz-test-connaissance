@@ -19,10 +19,12 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 /**
- * Lanceur de l'application
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * Démarre l'application et affiche le menu principal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  * @version 1.0
  */
 public class Lanceur extends Application {
@@ -40,7 +42,6 @@ public class Lanceur extends Application {
 
     /**
      * Programme principal
-     * 
      * @param args
      */
     public static void main(String[] args) {

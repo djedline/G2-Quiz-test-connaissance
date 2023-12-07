@@ -4,6 +4,9 @@
 
 package iut.sae.ihm.controleur;
 
+import static iut.sae.modele.fonctionAffichage.btnRetourUtilisateur;
+import static iut.sae.modele.fonctionAffichage.insertionDansString;
+
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,9 +26,11 @@ import iut.sae.modele.Question;
 
 /**
  * Classe controleur de la page creerQuestion
- * 
- * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
- *         leo.cheikh-boukal
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  */
 public class ControleurCreerQuestion {
 
@@ -75,6 +80,11 @@ public class ControleurCreerQuestion {
 
     @FXML
     private TextArea txtFeedback;
+    
+    @FXML
+    private Label labelRetourUtilisateur;
+    
+    private String texteCreation = "La question à était créer";
 
     /**
      * TODO comment method role
@@ -98,7 +108,11 @@ public class ControleurCreerQuestion {
         lesTxtFaux.add(txtRepFausse3);
         lesTxtFaux.add(txtRepFausse4);
 
+        
+        labelRetourUtilisateur.setVisible(false);
     }
+    
+
 
     /**
      * Méthode permettant de répertorier toute les réponses fausses d'une question
@@ -157,6 +171,7 @@ public class ControleurCreerQuestion {
                     txtRepJuste.getText(), tableauReponseFausse(), txtFeedback.getText(), laDifficulte);
 
             if (!Donnees.verifDoubleQuestion(nouvelleQuestion)) {
+                btnRetourUtilisateur(labelRetourUtilisateur,texteCreation);
                 Donnees.listeQuestions.add(nouvelleQuestion);
                 System.out.println(nouvelleQuestion);
             } else {

@@ -14,9 +14,11 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Classe qui représente le serveur lors d'un échange d'information
- * 
- * @author Baudroit Leila, Boyer Djedline, Briot Nael, Catala-Bailly,
- *         Cheikh-Boukal Léo
+ * @author leila.baudroit
+ * @author djedline.boyer
+ * @author nael.briot
+ * @author tany.catala-bailly
+ * @author leo.cheikh-boukal
  */
 public class Serveur {
 
