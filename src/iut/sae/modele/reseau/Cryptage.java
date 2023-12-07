@@ -10,6 +10,7 @@
 package iut.sae.modele.reseau;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Classe qui permet le cryptage d'un message grâce à la génération d'une clé
@@ -38,7 +39,7 @@ public class Cryptage {
     public static void main(String[] args) {
         String message = "Le cryptage c'est compliqué.";
         System.out.println("Message : " + message);
-        String cle = genereCleDiffie();
+        Integer[] cle = genereCleDiffie();
         
         String crypte = chiffrer(message, cle);
         dechiffrer(crypte, cle);
@@ -49,16 +50,16 @@ public class Cryptage {
      * 
      * @return la clé
      */
-    public static String genereCleDiffie() {
-        int p = 43;
+    public static Integer[] genereCleDiffie() {
+        int p = DiffieHellman.genererModulo();
         int g = DiffieHellman.genererGenerateur(p);
         int x = DiffieHellman.genererX();
         int x1 = DiffieHellman.genererX();
         int gx = DiffieHellman.calculMisePuissance(g, x, p);
         int gxe = DiffieHellman.calculMisePuissance(gx, x1, p);
-        String laCle = convertirValeurEnString(gxe);
-        System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
-        return laCle;
+        Integer[] cle = convertirValeurEnOffset(gxe);
+        System.out.println("Clé : " + contenuCle(cle) + " de longueur " + cle.length);
+        return cle;
     }
 
     /**
@@ -66,18 +67,19 @@ public class Cryptage {
      * 
      * @return laCle la clé de cryptage
      */
-    public static String genereCleVigenere() {
-        String laCle = "";
+    public static Integer[] genereCleVigenere() {
+        final int LONGUEUR_CLE = (int) (Math.random() * (MAX_LONGUEUR_CLE - MIN_LONGUEUR_CLE)) 
+        		+ (int) MIN_LONGUEUR_CLE;
+        
         int nombreAlea;
-        final int LONGUEUR_CLE = (int) (Math.random() * MAX_LONGUEUR_CLE - MIN_LONGUEUR_CLE) + (int) MIN_LONGUEUR_CLE;
-        for (int i = 0; laCle.length() < LONGUEUR_CLE; i++) {
+        Integer[] val = new Integer[LONGUEUR_CLE];
+        
+        for (int i = 0; i < LONGUEUR_CLE; i++) {
             nombreAlea = (int) (TAILLE_ENSEMBLE * Math.random());
-            if (Character.isValidCodePoint(nombreAlea) && Character.toString(nombreAlea).length() == 1) {
-                laCle += Character.toString(nombreAlea);
-            }
+            val[i] = nombreAlea;
         }
-        System.out.println("Clé : " + laCle + " de longueur " + laCle.length());
-        return laCle;
+        System.out.println("Clé : " + contenuCle(val) + " de longueur " + val.length);
+        return val;
     }
 
     /**
@@ -103,45 +105,6 @@ public class Cryptage {
 	    System.out.println("Message crypté : " + msgCrypte);
 	    return msgCrypte;
 	}
-
-	/**
-     * Méthode qui permet de crypter un message
-     * 
-     * @param aChiffrer le message a crypter
-     * @param cle       la clé de cryptage
-     * @return msgCrypte le message crypté grâce à la clé
-     */
-    public static String chiffrer(String aChiffrer, String cle) {
-    	Integer[] offset = convertirStringEnOffset(cle);
-        return chiffrer(aChiffrer, offset);
-    }
-    
-    /**
-     * Récupère l'offset des caractères d'une chaîne.
-     * @param str la chaîne à analyser
-     * @return l'offset des caractères, compris entre 0 et 255
-     */
-	public static Integer[] convertirStringEnOffset(String str) {
-		ArrayList<Integer> offset = new ArrayList<>();
-		for (int i = 0 ; i < str.length() ; i++) {
-			int val = Character.codePointAt(str, i) % TAILLE_ENSEMBLE;
-			offset.add(val);
-		}
-		return offset.toArray(new Integer[0]);
-	}
-	
-	public static String convertirValeurEnString(int gxe) {
-		int reste;
-		String laCle = "";
-		do {
-            reste = gxe % TAILLE_ENSEMBLE;
-            gxe = (int) gxe / TAILLE_ENSEMBLE;
-            if (Character.isValidCodePoint(reste) && Character.toString(reste).length() == 1) {
-                laCle += Character.toString(reste);
-            }
-        } while (gxe > TAILLE_ENSEMBLE);
-		return laCle;
-	}
 	
 	public static Integer[] convertirValeurEnOffset(int entier) {
 		ArrayList<Integer> offset = new ArrayList<>();
@@ -151,7 +114,8 @@ public class Cryptage {
 			reste = divise % TAILLE_ENSEMBLE;
 			offset.add(reste);
 			divise = divise / TAILLE_ENSEMBLE;
-		} while(divise > TAILLE_ENSEMBLE);
+		} while (divise > TAILLE_ENSEMBLE);
+		offset.add(divise);
 		return offset.toArray(new Integer[0]);
 	}
     
@@ -182,15 +146,17 @@ public class Cryptage {
         return msgDecrypte;
     }
 
+    
     /**
-     * Méthode qui permet de décrypter un message
-     * 
-     * @param aDechiffrer le message a décrypter
-     * @param cle         la clé de cryptage
-     * @return msgDecrypte le message décrypté
+     * représente les chiffres contenus dans une clé
      */
-    public static String dechiffrer(String aDechiffrer, String cle) {
-    	Integer[] offset = convertirStringEnOffset(cle);
-        return dechiffrer(aDechiffrer, offset);
+    public static String contenuCle(Integer[] offset) {
+    	StringBuilder sb = new StringBuilder();
+    	sb.append("[");
+    	for (Integer chiffre : offset) {
+			sb.append(chiffre).append(", ");
+		}
+    	sb.append("]");
+    	return sb.toString();
     }
 }

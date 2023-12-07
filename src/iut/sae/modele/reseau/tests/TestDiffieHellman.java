@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static iut.sae.modele.reseau.DiffieHellman.isPremier;
 import static iut.sae.modele.reseau.DiffieHellman.isGenerateur;
+import static iut.sae.modele.reseau.DiffieHellman.puissanceModulo;
 
 class TestDiffieHellman {
 
@@ -35,6 +36,14 @@ class TestDiffieHellman {
 		assertTrue(isGenerateur(5, 7));
 		assertFalse(isGenerateur(6, 7));
 		
+		assertTrue(isGenerateur(3, 43));
+	}
+	
+	@Test
+	void testPuissanceModulo() {
+		assertEquals(1, puissanceModulo(20, 0, 30));
+		assertEquals(20, puissanceModulo(20, 1, 30));
+		assertEquals(10, puissanceModulo(20, 2, 30));
 	}
 
 }

@@ -5,7 +5,6 @@
 package iut.sae.modele.reseau;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 /**
  * Classe qui permet de reproduire un échange de Diffie-Hellman pour générer une
@@ -17,7 +16,7 @@ import java.util.Comparator;
  */
 public class DiffieHellman {
 
-    private static final int MAX_P = 109;
+    private static final int MAX_P = 5000;
 
     /**
      * Méthode qui permet de générer aléatoirement le modulo de l'échange
@@ -29,7 +28,6 @@ public class DiffieHellman {
         do {
             p = (int) ( 1 + Math.random() * (MAX_P - 1));
         } while (!isPremier(p));
-        System.out.println("P = " + p);
         return p;
     }
 
@@ -42,20 +40,17 @@ public class DiffieHellman {
     public static int genererGenerateur(int p) {
     	ArrayList<Integer> dejaFaits = new ArrayList<>();
     	final int MAX_G = p - 1;
-    	int g=1;
+    	int g;
     	boolean doublon;
     	boolean generateurValide;
     	int nbDoublons = 0;
         do {
-        	g++;
         	dejaFaits.sort((o1, o2) -> (o1.compareTo(o2)));
-        	/*
         	if(nbDoublons > p / 2) {
         		g = trouverEntierManquant(dejaFaits, MAX_G);
         	} else {
         		g = (int) (1 + Math.random() * (MAX_G - 1));
         	}
-        	*/
             doublon = dejaFaits.contains(g);
             if (doublon) {
             	generateurValide = false;
@@ -71,7 +66,6 @@ public class DiffieHellman {
 				e.printStackTrace();
 			}
         } while (!generateurValide && g < p);
-        System.out.println(g + " est un générateur dans Z/" + p + "Z.");
         return g;
     }
     
@@ -82,10 +76,6 @@ public class DiffieHellman {
     		entier++;
     		existe = liste.contains(entier);
     	} while (existe && entier < max);
-    	if (entier == max) {
-    		System.out.println("Max atteint modulo " + (max + 1) + ".");
-    	}
-    	System.out.println(entier + " n'a pas été testé modulo " + (max + 1) + ".");
     	return entier;
     }
 
@@ -123,19 +113,43 @@ public class DiffieHellman {
     public static boolean isGenerateur(int g, int p) {
         /** Ensemble des résultats de g modulo p ( g, g², g³, ..., g) */
         ArrayList<Integer> valeurGValide = new ArrayList<>();
-        /** L'ensemble des valeurs dans ℤ/pℤ */
+        
         for (int j = 1; j < p - 1; j++) {
-            int valeurValide = (int) ((Math.pow(g, j)) % p); // Récupère la valeur (g, g², etc) % p
-            System.out.println(g + "^" + j + " = " + valeurValide);
+            int valeurValide = (int) puissanceModulo(g, j, p); // Récupère la valeur (g, g², etc) % p
             if (!valeurGValide.contains(valeurValide)) { // Vérifie si le chiffre obtenu n'est pas déja présent
                 valeurGValide.add(valeurValide);
-                //System.out.println("Je rajoute " + valeurValide);
             } else {
-            	System.out.println("Je sors parce que " + valeurValide + " est un doublon.");
                 return false;
             }
         }
         return true;
+    }
+    
+    private static int puissanceModulo(int nombreDepart, int dernierePuissance, 
+    		int puissance, int modulo) {
+    	if (puissance < 0) {
+    		throw new IllegalArgumentException("Cette fonction ne prend pas en "
+    				+ "charge les valeurs négatives.");
+    	} else if (puissance == 1){
+    		return dernierePuissance;
+    	} else {
+        	int res = (nombreDepart * dernierePuissance) % modulo;
+        	return puissanceModulo(nombreDepart, res, puissance - 1, modulo);
+    	} 
+    }
+    
+    public static int puissanceModulo(int nombreDepart, int puissance, int modulo) {
+    	if (puissance < 0) {
+    		throw new IllegalArgumentException("Cette fonction ne prend pas en "
+    				+ "charge les valeurs négatives.");
+    	} else if (puissance == 0) {
+    		return 1;
+    	} else if (puissance == 1){
+    		return nombreDepart;
+    	} else {
+        	int res = (nombreDepart * nombreDepart) % modulo;
+        	return puissanceModulo(nombreDepart, res, puissance - 1, modulo);
+    	} 
     }
 
     /**
@@ -150,11 +164,9 @@ public class DiffieHellman {
     	}
         for (int i = 1; i <= Math.floor(Math.sqrt(p)); i++) {
             if (p % i == 0 && i != 1) {
-            	System.out.println(p + " n'est pas premier.");
                 return false;
             }
         }
-        System.out.println(p + " est premier.");
         return true;
     }
 }
