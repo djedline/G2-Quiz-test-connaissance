@@ -239,3 +239,7 @@
 .check-box:selected > .box > .mark {
     -fx-background-color: white;
 }
+
+.labelCreation{
+	-fx-text-fill: rgb(51,196,56);
+}

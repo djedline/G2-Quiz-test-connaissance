@@ -16,6 +16,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
+import static iut.sae.modele.fonctionAffichage.btnRetourUtilisateur;
+import static iut.sae.modele.fonctionAffichage.insertionDansString;
+
 /**
  * Controleur de la page creerCategorie
  * @author leila.baudroit, djedline.boyer, nael.briot, tany.catala-bailly,
@@ -24,6 +27,8 @@ import javafx.scene.layout.Pane;
  */
 public class ControleurCreeCategorie {
 
+    private String texteCreation = "La categorie  à était créer";
+    
     @FXML
     private Pane idPane;
 
@@ -41,13 +46,26 @@ public class ControleurCreeCategorie {
 
     @FXML
     private Label idLabelNom;
+    
+    @FXML
+    private Label labelRetourUtilisateur;
 
+    /**
+     * TODO comment method role
+     * 
+     */
+    @FXML
+    void initialize() {
+        labelRetourUtilisateur.setVisible(false);;
+    }
+    
     @FXML
     void clicCreer(ActionEvent event) {
         try {
             Categorie nouvelleCategorie = new Categorie(idNom.getText());
             if (!Donnees.verifDoubleCategorie(nouvelleCategorie)) {
                 Donnees.listeCategorie.add(nouvelleCategorie);
+                btnRetourUtilisateur(labelRetourUtilisateur,insertionDansString(texteCreation, idNom.getText(), 13));
                 System.out.println(nouvelleCategorie);
             } else {
                 Alert messageErreur = new Alert(AlertType.ERROR);
