@@ -60,6 +60,7 @@ public class ControleurChoixQuestionExport {
             // crée et ajoute le treeitem de catégorie
             CustomCheckboxTreeItem<Object> checkable = new CustomCheckboxTreeItem<>(item);
             checkable.setValue(item);
+            
             listeTreeItem.add(checkable);
 
             for (Question laQuestion : Donnees.listeQuestions) {
