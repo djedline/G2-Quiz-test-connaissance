@@ -112,101 +112,7 @@ public class Client {
     	Integer[] offset = Cryptage.convertirValeurEnOffset(cle);
     	String fichEncode = Cryptage.chiffrer(contenuFich, offset);
     	util.envoyerMessage(fichEncode);
-    }
-    
-    /**
-     * Permet de recevoir la requete du client et de l'analyser pour construire 
-     * le contenu de la reponse
-     * Crypte le fichier et l'envoie
-     * @param fichierEnvoyer 
-     * 
-     * @return text : la reponse a la requete
-     */
-    /*
-    public String recevoirEtAnalyser(File fichierEnvoyer) {
-        
-        String cle = "";
-        String fichLu = "";
-        
-        System.out.println("RECEPTION DE LA REPONSE");
-        try {
-
-            if (sock != null) {
-                InputStream is = sock.getInputStream();
-                boolean test = true;
-                while (test) {
-                    if (is.available() != 0) {
-                        System.out.println("En attente...");
-                        test = false;
-                    }
-
-                }
-                
-                // lis la clé en UTF-8
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(sock.getInputStream(), "UTF-8"));
-                while (reader.ready()) {
-                    cle += Character.toString(reader.read());
-                }
-                System.out.println("Le serveur a reçu la clé : " + cle);
-
-                System.out.println(fichierEnvoyer.getAbsolutePath());
-                if (!fichierEnvoyer.exists()) {
-                    fichierEnvoyer.createNewFile();
-                }
-
-                FileReader fr = new FileReader(
-                        fichierEnvoyer, Charset.forName("UTF-8"));
-                while (fr.ready()) {
-                    fichLu += Character.toString(fr.read());
-                }
-                System.out.println("Le fichier contient : " + fichLu);
-                fichLu = Cryptage.chiffrer(fichLu, cle);
-                fr.close();
-                System.out.println("le serveur a écrit : " + fichLu);
-            }
-
-        } catch (Exception e) {
-            System.err.println("Impossible de recevoir la requête.");
-            e.printStackTrace();
-        }
-        return fichLu;
-    }
-    */
-    
- /*   /**
-     * Permet d'envoyer la reponse au client en retour d'une requete
-     * 
-     * @param rep : la reponse a envoyer
-     
-    public void envoyerReponse(String rep) {
-        
-        String msgx2 = "";
-        String fichLu = "";
-        
-        int x2;
-        int gx2;
-        int gxe1;
-        
-        System.out.println("ENVOI DE LA REPONSE");
-        System.out.println("Le serveur est : " + sock.getLocalSocketAddress());
-        System.out.println("Le client est : " + sock.getRemoteSocketAddress());
-
-        try {
-            if (sock != null) {
-                OutputStream os = sock.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
-                writer.write(rep);
-                System.out.println("Le client a envoyé " + rep);
-                writer.flush();
-                writer.close();
-            }
-        } catch (Exception e) {
-            System.err.println("Impossible de répondre au serveur.");
-            e.printStackTrace();
-        }
-    }*/
+    }   
     
     /**
      * Ferme la socket courante.
@@ -222,6 +128,11 @@ public class Client {
         }
     }
 
+	/** TODO comment method role
+	 * @param fich
+	 * @param offset
+	 * @throws IOException
+	 */
 	public void envoyer(File fich, Integer[] offset) throws IOException {
     	BufferedReader br = new BufferedReader(new FileReader(fich));
     	String contenuFich = "";

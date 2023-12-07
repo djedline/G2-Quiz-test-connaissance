@@ -30,7 +30,7 @@ import static iut.sae.modele.fonctionAffichage.insertionDansString;
  */
 public class ControleurCreeCategorie {
 
-    private String texteCreation = "La categorie  à était créer";
+    private String texteCreation = "La catégorie à été créée";
     
     @FXML
     private Pane idPane;

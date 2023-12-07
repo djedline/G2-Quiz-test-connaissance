@@ -153,6 +153,13 @@ public class Serveur {
 		}
 	}
 	
+	/** 
+	 * réception et décryptage des données
+	 * 
+	 * @param offset
+	 * @return le fichier reçu décrypté
+	 * @throws IOException
+	 */
 	public String receptionFichier(Integer[] offset) throws IOException {
     	String contenuFichCrypte = util.reception();
     	return Cryptage.dechiffrer(contenuFichCrypte, 
