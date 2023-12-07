@@ -154,6 +154,12 @@ public class Serveur {
 		}
 	}
 	
+	/** 
+	 * Recois le fichier envoyer par le client
+	 * @param offset
+	 * @return le contenue du fichier
+	 * @throws IOException
+	 */
 	public String receptionFichier(Integer[] offset) throws IOException {
     	String contenuFichCrypte = util.reception();
     	return Cryptage.dechiffrer(contenuFichCrypte, 

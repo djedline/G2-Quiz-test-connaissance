@@ -222,6 +222,12 @@ public class Client {
         }
     }
 
+	/**
+	 * Envoie un fichier
+	 * @param fich
+	 * @param offset
+	 * @throws IOException
+	 */
 	public void envoyer(File fich, Integer[] offset) throws IOException {
     	BufferedReader br = new BufferedReader(new FileReader(fich));
     	String contenuFich = "";

@@ -88,6 +88,7 @@ public class Cryptage {
 	 * Méthode qui permet de crypter un message
 	 * 
 	 * @param aChiffrer le message a crypter
+         * @param offset    la clé
 	 * @param cle       la clé de cryptage
 	 * @return msgCrypte le message crypté grâce à la clé
 	 */
@@ -108,6 +109,11 @@ public class Cryptage {
 	    return msgCrypte;
 	}
 	
+	/**
+	 * Prend un entier et renvoie la clé sous forme d'offset
+	 * @param entier
+	 * @return la clé
+	 */
 	public static Integer[] convertirValeurEnOffset(int entier) {
 		ArrayList<Integer> offset = new ArrayList<>();
 		int reste;
@@ -125,7 +131,7 @@ public class Cryptage {
      * Méthode qui permet de décrypter un message
      * 
      * @param aDechiffrer le message a décrypter
-     * @param cle         la clé de cryptage
+     * @param offset      la clé de cryptage
      * @return msgDecrypte le message décrypté
      */
     public static String dechiffrer(String aDechiffrer, Integer[] offset) {
@@ -151,6 +157,8 @@ public class Cryptage {
     
     /**
      * représente les chiffres contenus dans une clé
+     * @param offset 
+     * @return le contenue de la clé
      */
     public static String contenuCle(Integer[] offset) {
     	StringBuilder sb = new StringBuilder();
